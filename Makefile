@@ -1,7 +1,8 @@
 NAME = minishell
 CC = cc
-CFLAG = -Wall -Werror -Wextra -g3 -fsanitize=address
-LIBS = -L./libft/compiled -lft -lprintf -lreadline
+CFLAG += -Wall -Werror -Wextra #-v
+LIBS += -L./libft/compiled -lft -lprintf -lreadline
+DEBUG += -g3 -fsanitize=address
 SRCD = ./src
 UTILSD = ./src/utils
 PARSD = ./src/parsing
@@ -19,7 +20,7 @@ OBJ = $(SRC:.c=.o)
 all: libft $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAG) $(LIBS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAG)  $(OBJ) $(LIBS) -o $(NAME)
 
 libft:
 	@$(MAKE) -C ./libft

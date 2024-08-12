@@ -27,7 +27,7 @@ static bool	checker_command(char *in, char *command)
 		j++;
 	}
 	if (i == ft_strlen(command))
-		return (ft_printf("command: %s\n", command), true);
+		return (printf("command: %s\n", command), true);
 	else
 		return (false);
 }
@@ -53,10 +53,9 @@ static char	*exclude(char *in)
 
 bool	commands(char *in)
 {
-	char	*line ;//= malloc(sizeof(char) + 1);
+	char	*line ;
 
 	line = exclude(in);
-	//ft_printf("%s\n", in);
 	if (!line)
 		return (false);
 	if (checker_command(in, ECHO))

@@ -4,7 +4,7 @@ void    sighandler(int sig)
 {
     if (sig == SIGINT)
     {
-        ft_printf("\n");
+        printf("\n");
         display_prompt();
         signal(SIGINT, sighandler);
     }

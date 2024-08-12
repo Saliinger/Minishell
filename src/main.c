@@ -1,5 +1,4 @@
 #include "../include/minishell.h"
-#include <stdio.h>
 
 static void get_line(char **line)
 {
@@ -42,7 +41,7 @@ int main(int ac, char **av, char **env)
             add_history(line);
             get_command(line);
 			parsing(line);
-			//ft_printf("%s\n", line);
+			//printf("%s\n", line);
         }
     }
     exit_shell(false);

@@ -6,5 +6,5 @@ void display_prompt(void)
     char *path;
 
     path = getcwd(buffer, 4096);
-    ft_printf("%s ", path);
+    printf("%s ", path);
 }

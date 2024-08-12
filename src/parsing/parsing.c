@@ -15,6 +15,6 @@
 void	parsing(char *str)
 {
 	if (commands(str))
-		ft_printf("%s\n", str);
+		printf("%s\n", str);
 }
 

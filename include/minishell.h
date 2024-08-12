@@ -17,6 +17,8 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
+# include <signal.h>
+# include <stdio.h>
 
 // Defines
 # define ECHO "echo"
