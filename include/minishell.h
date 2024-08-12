@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/11 20:41:16 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/08/12 17:11:56 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 typedef struct s_command
 {
 	char				*command;
+	char				*in;
 	char				**arg;
 	struct s_command	*pipe_command;
 }						t_command;
@@ -50,8 +51,9 @@ typedef struct s_minishell
 // Builtins
 void    ft_pwd(void);
 // PARSING
-bool					commands(char *in);
+t_command				*command_init(char *in);
 void					parsing(char *str);
+t_command				*trim(char *in, char *in_command);
 
 // UTILS
 void					display_prompt(char **prompt);

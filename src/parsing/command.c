@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:58 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/11 21:42:37 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/08/12 17:12:06 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,24 @@ static char	*exclude(char *in)
 	return (trimmed);
 }
 
-bool	commands(char *in)
+t_command	*command_init(char *in)
 {
 	char	*line ;
 
 	line = exclude(in);
-    printf("line: %s\n", line);
 	if (!line)
-		return (false);
+		return (NULL);
 	if (checker_command(line, ECHO))
-		return (free(line), true);
+		return (trim(in, ECHO));
 	if (checker_command(line, CD))
-		return (free(line), true);
+		return (trim(in, CD));
 	if (checker_command(line, PWD))
-		return (free(line), ft_pwd(), true);
+		return (trim(in, PWD));
 	if (checker_command(line, EXPORT))
-		return (free(line), true);
+		return (trim(in, EXPORT));
 	if (checker_command(line, UNSET))
-		return (free(line), true);
+		return (trim(in, UNSET));
 	if (checker_command(line, ENV))
-		return (free(line), true);
-	return (free(line), false);
+		return (trim(in, ENV));
+	return (NULL);
 }
