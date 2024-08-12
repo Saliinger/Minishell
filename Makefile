@@ -6,11 +6,13 @@ SRCD = ./src
 UTILSD = ./src/utils
 PARSD = ./src/parsing
 EXED = ./src/exec
+BINS = ./src/builtins
 
 SRC = $(wildcard $(SRCD)/*.c) \
 	  $(wildcard $(UTILSD)/*.c) \
 	  $(wildcard $(PARSD)/*.c) \
-	  $(wildcard $(EXED)/*.c)
+	  $(wildcard $(EXED)/*.c) \
+	  $(wildcard $(BINS)/*.c)
 
 OBJ = $(SRC:.c=.o)
 

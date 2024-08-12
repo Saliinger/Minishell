@@ -64,7 +64,7 @@ bool	commands(char *in)
 	if (checker_command(line, CD))
 		return (free(line), true);
 	if (checker_command(line, PWD))
-		return (free(line), true);
+		return (free(line), ft_pwd(), true);
 	if (checker_command(line, EXPORT))
 		return (free(line), true);
 	if (checker_command(line, UNSET))

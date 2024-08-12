@@ -45,6 +45,9 @@ typedef struct s_minishell
 }						t_minishell;
 
 // EXEC
+
+// Builtins
+void    ft_pwd(void);
 // PARSING
 bool					commands(char *in);
 void					parsing(char *str);
