@@ -1,8 +1,8 @@
 #include "../include/minishell.h"
 
-static void get_line(char **line)
+static void get_line(char **line, char *prompt)
 {
-    *line = readline(NULL);
+    *line = readline(prompt);
 }
 
 //test
@@ -25,12 +25,15 @@ static void get_command(char *line)
 int main(int ac, char **av, char **env)
 {
     char *line;
+    char *prompt;
 
     while (1)
     {
-        display_prompt();
+        display_prompt(&prompt);
         signal(SIGINT,sighandler);
-        get_line(&line);
+        get_line(&line, prompt);
+        free(prompt);
+        using_history();
         if (!line)
         {
             free(line);

@@ -28,6 +28,8 @@
 # define UNSET "unset"
 # define ENV "env"
 # define EXIT "exit"
+# define LS "ls"
+//# define
 
 // Structure
 typedef struct s_command
@@ -48,7 +50,7 @@ bool					commands(char *in);
 void					parsing(char *str);
 
 // UTILS
-void					display_prompt(void);
+void					display_prompt(char **prompt);
 void					sighandler(int sig);
 void					exit_shell(bool fail);
 

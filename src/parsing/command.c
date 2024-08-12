@@ -56,19 +56,20 @@ bool	commands(char *in)
 	char	*line ;
 
 	line = exclude(in);
+    printf("line: %s\n", line);
 	if (!line)
 		return (false);
-	if (checker_command(in, ECHO))
+	if (checker_command(line, ECHO))
 		return (free(line), true);
-	if (checker_command(in, CD))
+	if (checker_command(line, CD))
 		return (free(line), true);
-	if (checker_command(in, PWD))
+	if (checker_command(line, PWD))
 		return (free(line), true);
-	if (checker_command(in, EXPORT))
+	if (checker_command(line, EXPORT))
 		return (free(line), true);
-	if (checker_command(in, UNSET))
+	if (checker_command(line, UNSET))
 		return (free(line), true);
-	if (checker_command(in, ENV))
+	if (checker_command(line, ENV))
 		return (free(line), true);
 	return (free(line), false);
 }
