@@ -1,5 +1,25 @@
 #include "../../include/minishell.h"
 
+bool	checker_command(char *in, char *command)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (in[i])
+	{
+		if (in[i] != command[j])
+			break ;
+		i++;
+		j++;
+	}
+	if (i == ft_strlen(command))
+		return (printf("command: %s\n", command), true);
+	else
+		return (false);
+}
+
 static int nbr_of_line(char **env)
 {
     int i = 0;
