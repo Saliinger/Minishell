@@ -16,5 +16,7 @@ void	parsing(char *str)
 {
 	if (commands(str))
 		printf("%s\n", str);
+    else
+        printf("loli said: bitch it's not a command\n");
 }
 
