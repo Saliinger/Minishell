@@ -26,7 +26,12 @@ int main(int ac, char **av, char **env)
 {
     char *line;
     char *prompt;
+    t_minishell *minishell;
 
+    minishell = (t_minishell *)malloc(sizeof(t_minishell));
+    if (!minishell)
+        return 1;
+    minishell->env = get_env(env);
     while (1)
     {
         display_prompt(&prompt);

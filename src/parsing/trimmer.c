@@ -10,5 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+// trim the *in and put it in the struct t_command for other use
 
+#include "../../include/minishell.h"

@@ -30,6 +30,7 @@
 # define EXIT "exit"
 # define LS "ls"
 //# define
+# define PATH "/bin/"
 
 // Structure
 typedef struct s_command
@@ -56,5 +57,6 @@ void					parsing(char *str);
 void					display_prompt(char **prompt);
 void					sighandler(int sig);
 void					exit_shell(bool fail);
+char                    **get_env(char **env);
 
 #endif
