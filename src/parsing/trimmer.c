@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/12 18:23:28 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/08/12 22:43:42 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->command = ft_strdup(in_command);
 	command->builtin = builtin;
 	command->id = id;
+	ft_print(command->arg);
 	return (command);
 }

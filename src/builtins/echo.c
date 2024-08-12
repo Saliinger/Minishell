@@ -21,7 +21,7 @@ static int	flag(char *str)
 void	ft_echo(t_command *command)
 {
 	if (flag(command->in) > 0)
-		printf("%s\n", command->in);
-	else
 		printf("%s", command->in);
+	else
+		printf("%s\n", command->in);
 }

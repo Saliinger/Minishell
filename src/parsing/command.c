@@ -6,11 +6,33 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:58 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/12 19:14:08 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/08/12 22:06:54 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <stdio.h>
+
+static char	*extract_command(char *line)
+{
+	char	*command;
+	int		i;
+
+	i = 0;
+	while (line[i] && line[i] != ' ' && line[i] != '\t')
+		i++;
+	command = (char *)malloc(sizeof(char) * i);
+	if (!command)
+		return (NULL);
+	i = 0;
+	while (line[i] && line[i] != ' ')
+	{
+		command[i] = line[i];
+		i++;
+	}
+	command[i] = '\0';
+	return (command);
+}
 
 static char	*exclude(char *in)
 {
@@ -41,17 +63,18 @@ t_command	*command_init(char *in)
 		return (NULL);
 	if (checker_command(line, ECHO))
 		return (trim(in, ECHO, true, ECHO_ID));
-	if (checker_command(line, CD))
+	else if (checker_command(line, CD))
 		return (trim(in, CD, true, CD_ID));
-	if (checker_command(line, PWD))
+	else if (checker_command(line, PWD))
 		return (trim(in, PWD, true, PWD_ID));
-	if (checker_command(line, EXPORT))
+	else if (checker_command(line, EXPORT))
 		return (trim(in, EXPORT, true, EXPORT_ID));
-	if (checker_command(line, UNSET))
+	else if (checker_command(line, UNSET))
 		return (trim(in, UNSET, true, UNSET_ID));
-	if (checker_command(line, ENV))
+	else if (checker_command(line, ENV))
 		return (trim(in, ENV, true, ENV_ID));
-	if (checker_command(line, EXIT))
+	else if (checker_command(line, EXIT))
 		return (trim(in, ENV, true, EXIT_ID));
-	return (trim(in, "out", false, -1));
+	else
+		return (trim(in, extract_command(line), false, -1));
 }

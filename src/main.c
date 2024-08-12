@@ -5,25 +5,6 @@ static void	get_line(char **line, char *prompt)
 	*line = readline(prompt);
 }
 
-// // test
-// static void	get_command(char *line)
-// {
-// 	int		i;
-// 	char	*exit;
-
-// 	i = 0;
-// 	exit = "exit";
-// 	while (line[i])
-// 	{
-// 		if (line[i] == exit[i])
-// 			i++;
-// 		else
-// 			return ;
-// 	}
-// 	if (i == ft_strlen(exit) && i == ft_strlen(line))
-// 		exit_shell(false);
-// }
-
 int	main(int ac, char **av, char **env)
 {
 	char		*line;
@@ -49,7 +30,6 @@ int	main(int ac, char **av, char **env)
 		if (*line)
 		{
 			add_history(line);
-			//get_command(line);
 			parsing(line, minishell);
 		}
 	}

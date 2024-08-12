@@ -81,5 +81,9 @@ void					exit_shell(bool fail);
 char					**get_env(char **env);
 bool					checker_command(char *in, char *command);
 void					free_command(t_command *command);
+int						nbr_of_line(char **env);
+
+// Debug
+void ft_print(char **s);
 
 #endif
