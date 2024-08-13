@@ -17,11 +17,20 @@ static void	free_arg(t_command *command)
 
 void	free_command(t_command *command)
 {
-	if (command->in)
-		free(command->in);
-	if (command->arg)
-		free_arg(command);
-	if (command->pipe_command)
-		free_command(command->pipe_command);
+    if (!command)
+        return ;
+	if (command->in) {
+        free(command->in);
+        command->in = NULL;
+    }
+	if (command->arg) {
+        free_arg(command);
+        //command->arg = NULL;
+    }
+	if (command->pipe_command) {
+        free_command(command->pipe_command);
+        command->pipe_command = NULL;
+    }
 	free(command);
+    command = NULL;
 }

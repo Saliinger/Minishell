@@ -19,6 +19,8 @@
 # include <signal.h>
 # include <stdbool.h>
 # include <stdio.h>
+# include <sys/types.h>
+
 
 // Defines
 # define ECHO "echo"

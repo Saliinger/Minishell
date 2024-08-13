@@ -20,5 +20,5 @@ void	parsing(char *str, t_minishell *minishell)
 	if (current)
 		ft_exec(current, minishell);
 	else
-		printf("loli said: bitch it's not a command\n");
+		printf("loli said: bitch it's not working\n");
 }

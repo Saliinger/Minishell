@@ -34,4 +34,5 @@ int	main(int ac, char **av, char **env)
 		}
 	}
 	exit_shell(false);
+    return (0);
 }

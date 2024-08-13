@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAG = -Wall -Werror -Wextra -g3 #-fsanitize=address
+CFLAG = -Wall -Werror -Wextra -g3 -fsanitize=address
 LIBS = -L./libft/compiled -lft -lprintf -lreadline
 SRCD = ./src
 UTILSD = ./src/utils

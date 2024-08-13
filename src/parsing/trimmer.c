@@ -26,6 +26,7 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->command = ft_strdup(in_command);
 	command->builtin = builtin;
 	command->id = id;
-	ft_print(command->arg);
+    //free(in);
+    //free(in_command);
 	return (command);
 }
