@@ -20,6 +20,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <sys/types.h>
+# include <stddef.h>
 
 
 // Defines
@@ -58,6 +59,7 @@ typedef struct s_command
 typedef struct s_minishell
 {
 	char				**env;
+	char				*pwd;
 }						t_minishell;
 
 // EXEC
@@ -84,8 +86,14 @@ char					**get_env(char **env);
 bool					checker_command(char *in, char *command);
 void					free_command(t_command *command);
 int						nbr_of_line(char **env);
+char					**split_element(char const *s, char c);
 
 // Debug
 void ft_print(char **s);
 
 #endif
+
+
+// get current dir si il n'y a pas d'env au debut
+// bien up pwd path 
+//

@@ -22,10 +22,11 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	if (!command)
 		return (NULL);
 	command->in = ft_strdup(in);
-	command->arg = ft_split(in, ' ');
+	command->arg = split_element(in, ' ');
 	command->command = ft_strdup(in_command);
 	command->builtin = builtin;
 	command->id = id;
+	command->pipe_command = NULL;
     //free(in);
     //free(in_command);
 	return (command);

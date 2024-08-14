@@ -24,4 +24,6 @@ void	ft_echo(t_command *command)
 		printf("%s", command->in);
 	else
 		printf("%s\n", command->in);
+	printf("\n");
+	ft_print(command->arg);
 }

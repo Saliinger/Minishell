@@ -8,12 +8,13 @@ void	ft_extern(t_command *command, t_minishell *minishell)
 	pid_t	pid;
 	int		status;
 
-	path = ft_strjoin_frees1(PATH, command->command);
+	path = ft_strjoin(PATH, command->command);
 	pid = fork();
 	if (pid == 0)
 		execve(path, command->arg, minishell->env);
-	//if (command->pipe_command == false)
 
 	waitpid(pid, &status, 0);
+	//if (command->pipe == true)
+	free_command(command);
 	free(path);
 }
