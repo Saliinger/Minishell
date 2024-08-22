@@ -8,9 +8,9 @@ void	builtin_slector(t_command *command, t_minishell *minishell)
 	if (command->id == ECHO_ID)
 		ft_echo(command);
 	else if (command->id == CD_ID)
-		printf("lol");
+		ft_cd(command, minishell);
 	else if (command->id == PWD_ID)
-		ft_pwd();
+		ft_pwd(minishell);
 	else if (command->id == EXPORT_ID)
 		printf("lol");
 	else if (command->id == UNSET_ID)

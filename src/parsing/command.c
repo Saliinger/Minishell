@@ -74,7 +74,7 @@ t_command	*command_init(char *in)
 	else if (checker_command(line, ENV))
 		return (trim(in, ENV, true, ENV_ID));
 	else if (checker_command(line, EXIT))
-		return (trim(in, ENV, true, EXIT_ID));
+		return (trim(in, EXIT, true, EXIT_ID));
 	else
 		return (trim(in, extract_command(line), false, -1));
 }

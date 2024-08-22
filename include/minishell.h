@@ -60,6 +60,7 @@ typedef struct s_minishell
 {
 	char				**env;
 	char				*pwd;
+	char				*old_pwd;
 }						t_minishell;
 
 // EXEC
@@ -69,9 +70,10 @@ void					ft_exec(t_command *command, t_minishell *minishell);
 void					ft_extern(t_command *command, t_minishell *minishell);
 
 // Builtins
-void					ft_pwd(void);
+void					ft_pwd(t_minishell *minishell);
 void					ft_env(t_minishell *minishell);
 void					ft_echo(t_command *command);
+void					ft_cd(t_command *command, t_minishell *minishell);
 
 // PARSING
 t_command				*command_init(char *in);
@@ -79,7 +81,7 @@ void					parsing(char *str, t_minishell *minishell);
 t_command				*trim(char *in, char *in_command, bool builtin, int id);
 
 // UTILS
-void					display_prompt(char **prompt);
+void					display_prompt(char **prompt, t_minishell *minishell);
 void					sighandler(int sig);
 void					exit_shell(bool fail);
 char					**get_env(char **env);

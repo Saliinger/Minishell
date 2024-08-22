@@ -10,14 +10,16 @@ int	main(int ac, char **av, char **env)
 	char		*line;
 	char		*prompt;
 	t_minishell	*minishell;
+	char buffer[4096 + 1];
 
 	minishell = (t_minishell *)malloc(sizeof(t_minishell));
 	if (!minishell)
 		return (1);
-	minishell->env = get_env(env);
+	minishell->env = env;
+	minishell->pwd = getcwd(buffer, 4096);
 	while (1)
 	{
-		display_prompt(&prompt);
+		display_prompt(&prompt, minishell);
 		signal(SIGINT, sighandler);
 		get_line(&line, prompt);
 		free(prompt);

@@ -1,6 +1,7 @@
 // this function is to remove space between arg and not inside arg
 
 #include "../../include/minishell.h"
+#include <stdio.h>
 
 static size_t	ft_countword(const char *s, char c)
 {
@@ -44,13 +45,14 @@ static void	ft_split_write_word(char *dest, const char *src, char c)
 	while (src[i] && src[i] != c)
 	{
 		flag = 0;
-		if (src[i] == '\"' || src[i] == '\'')
+		if (src[i] == 34 || src[i] == 39)
 		{
 			flag = 1;
+			printf("flag %ld\n", flag);
 			while (flag == 1 )
 			{
 				dest[i] = src[i];
-				if (src[i] == '\"' || src[i] == '\'')
+				if (src[i] == 34 || src[i] == 39)
 				{
 					flag = 0;
 					break ;
