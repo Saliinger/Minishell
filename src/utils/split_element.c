@@ -48,7 +48,6 @@ static void	ft_split_write_word(char *dest, const char *src, char c)
 		if (src[i] == 34 || src[i] == 39)
 		{
 			flag = 1;
-			printf("flag %ld\n", flag);
 			while (flag == 1 )
 			{
 				dest[i] = src[i];
