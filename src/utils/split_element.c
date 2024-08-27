@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split_element.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/27 12:24:12 by anoukan           #+#    #+#             */
+/*   Updated: 2024/08/27 12:31:52 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 // this function is to remove space between arg and not inside arg
 
 #include "../../include/minishell.h"
-#include <stdio.h>
 
 static size_t	ft_countword(const char *s, char c)
 {
@@ -13,7 +24,7 @@ static size_t	ft_countword(const char *s, char c)
 	while (s[i])
 	{
 		if ((s[i] == c || s[i] == '\0') == 1 && (s[i + 1] == '\0' || s[i
-					+ 1] == c) == 0)
+				+ 1] == c) == 0)
 		{
 			j++;
 		}
@@ -48,15 +59,13 @@ static void	ft_split_write_word(char *dest, const char *src, char c)
 		if (src[i] == 34 || src[i] == 39)
 		{
 			flag = 1;
-			while (flag == 1 )
+			while (flag == 1)
 			{
 				dest[i] = src[i];
 				if (src[i] == 34 || src[i] == 39)
-				{
 					flag = 0;
-					break ;
-				}
-				i++;
+				if (flag == 1)
+					i++;
 			}
 		}
 		else
@@ -66,16 +75,20 @@ static void	ft_split_write_word(char *dest, const char *src, char c)
 	dest[i] = '\0';
 }
 
+// the issue of the parsing is in this function it needs an update
+// about the condition in the while loop for the flag
 static int	ft_split_write(char **dest, char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
 	size_t	word;
+	size_t	flag;
 
 	word = 0;
 	i = 0;
 	while (s[i])
 	{
+		flag = 0;
 		if ((s[i] == c || s[i] == '\0') == 1)
 			i++;
 		else

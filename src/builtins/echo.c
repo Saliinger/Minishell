@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/27 12:32:35 by anoukan           #+#    #+#             */
+/*   Updated: 2024/08/27 12:32:36 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 // echo command + option -n
 // carefull with space and multiple time the same option
 
@@ -6,9 +18,11 @@
 
 static int	flag(char *str)
 {
-	int i = 0;
-	int flag = 0;
+	int	i;
+	int	flag;
 
+	i = 0;
+	flag = 0;
 	while (str[i])
 	{
 		if (str[i] == '-' && str[i + 1] == 'n')

@@ -6,14 +6,13 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/12 22:43:42 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/08/27 12:29:31 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // trim the *in and put it in the struct t_command for other use
 
 #include "../../include/minishell.h"
-#include <stdio.h>
 
 t_command	*trim(char *in, char *in_command, bool builtin, int id)
 {
@@ -31,7 +30,8 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->builtin = builtin;
 	command->id = id;
 	command->pipe_command = NULL;
-    //free(in);
-    //free(in_command);
 	return (command);
 }
+
+// need to add a pipe checker somewhere
+// cause split element is gonna fucked everything up

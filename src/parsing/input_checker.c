@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   input_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 12:29:52 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/27 12:29:53 by anoukan          ###   ########.fr       */
+/*   Created: 2024/08/27 12:35:28 by anoukan           #+#    #+#             */
+/*   Updated: 2024/08/27 12:35:30 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// display env variable
+// this function need to check if the input syntax is ok to run before alloc
 
-#include "../../include/minishell.h"
+#include "philo.h"
 
-void	ft_env(t_minishell *minishell)
+bool	input_checker(char *in)
 {
-	int	i;
-
-	i = 0;
-	while (minishell->env[i])
-	{
-		printf("%s\n", minishell->env[i]);
-		i++;
-	}
+	if (1)
+		return (true);
+	return (false);
 }

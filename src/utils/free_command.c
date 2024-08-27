@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_command.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/27 12:35:52 by anoukan           #+#    #+#             */
+/*   Updated: 2024/08/27 12:35:53 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 // this function will free command at the end of use
 
 #include "../../include/minishell.h"
@@ -17,20 +29,20 @@ static void	free_arg(t_command *command)
 
 void	free_command(t_command *command)
 {
-    if (!command)
-        return ;
-	if (command->in) {
-        free(command->in);
-        command->in = NULL;
-    }
-	if (command->arg) {
-        free_arg(command);
-        //command->arg = NULL;
-    }
-	if (command->pipe_command) {
-        free_command(command->pipe_command);
-        command->pipe_command = NULL;
-    }
+	if (!command)
+		return ;
+	if (command->in)
+	{
+		free(command->in);
+		command->in = NULL;
+	}
+	if (command->arg)
+		free_arg(command);
+	if (command->pipe_command)
+	{
+		free_command(command->pipe_command);
+		command->pipe_command = NULL;
+	}
 	free(command);
-    command = NULL;
+	command = NULL;
 }

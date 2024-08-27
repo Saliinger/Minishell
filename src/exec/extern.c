@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   extern.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/27 12:34:00 by anoukan           #+#    #+#             */
+/*   Updated: 2024/08/27 12:34:43 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 // execute extern function
 
 #include "../../include/minishell.h"
@@ -12,9 +24,7 @@ void	ft_extern(t_command *command, t_minishell *minishell)
 	pid = fork();
 	if (pid == 0)
 		execve(path, command->arg, minishell->env);
-
 	waitpid(pid, &status, 0);
-	//if (command->pipe == true)
 	free_command(command);
 	free(path);
 }

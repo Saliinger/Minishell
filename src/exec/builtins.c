@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/27 12:33:51 by anoukan           #+#    #+#             */
+/*   Updated: 2024/08/27 12:33:54 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 // execute builtins functions
 
 #include "../../include/minishell.h"
-#include <stdbool.h>
 
 void	builtin_slector(t_command *command, t_minishell *minishell)
 {

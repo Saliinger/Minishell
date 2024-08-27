@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/12 19:08:37 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/08/27 12:36:10 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@
 # include <readline/readline.h>
 # include <signal.h>
 # include <stdbool.h>
+# include <stddef.h>
 # include <stdio.h>
 # include <sys/types.h>
-# include <stddef.h>
-
 
 // Defines
 # define ECHO "echo"
@@ -91,11 +90,10 @@ int						nbr_of_line(char **env);
 char					**split_element(char const *s, char c);
 
 // Debug
-void ft_print(char **s);
+void					ft_print(char **s);
 
 #endif
 
-
 // get current dir si il n'y a pas d'env au debut
-// bien up pwd path 
+// bien up pwd path
 //

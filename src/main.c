@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/27 12:32:10 by anoukan           #+#    #+#             */
+/*   Updated: 2024/08/27 12:32:11 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 static void	get_line(char **line, char *prompt)
@@ -10,7 +22,7 @@ int	main(int ac, char **av, char **env)
 	char		*line;
 	char		*prompt;
 	t_minishell	*minishell;
-	char buffer[4096 + 1];
+	char		buffer[4096 + 1];
 
 	minishell = (t_minishell *)malloc(sizeof(t_minishell));
 	if (!minishell)
@@ -36,5 +48,5 @@ int	main(int ac, char **av, char **env)
 		}
 	}
 	exit_shell(false);
-    return (0);
+	return (0);
 }
