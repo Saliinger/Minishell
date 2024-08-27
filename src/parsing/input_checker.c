@@ -6,13 +6,13 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:28 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/27 12:35:30 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/08/27 15:38:28 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // this function need to check if the input syntax is ok to run before alloc
 
-#include "philo.h"
+#include "../../include/minishell.h"
 
 bool	input_checker(char *in)
 {

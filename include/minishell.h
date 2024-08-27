@@ -21,6 +21,7 @@
 # include <stddef.h>
 # include <stdio.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 
 // Defines
 # define ECHO "echo"
@@ -60,6 +61,7 @@ typedef struct s_minishell
 	char				**env;
 	char				*pwd;
 	char				*old_pwd;
+	int					res_last_command;
 }						t_minishell;
 
 // EXEC

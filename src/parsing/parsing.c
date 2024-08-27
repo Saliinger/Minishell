@@ -22,3 +22,5 @@ void	parsing(char *str, t_minishell *minishell)
 	else
 		printf("loli said: bitch it's not working\n");
 }
+
+// it just create the node for the command and start the exec

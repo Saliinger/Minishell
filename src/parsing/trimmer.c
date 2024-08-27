@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/27 12:29:31 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/08/27 15:39:57 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	if (!command)
 		return (NULL);
 	command->in = ft_strdup(in);
-	printf("\n");
 	command->arg = split_element(in, ' ');
-	printf("\n");
-	ft_print(command->arg);
 	command->command = ft_strdup(in_command);
 	command->builtin = builtin;
 	command->id = id;
@@ -35,3 +32,8 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 
 // need to add a pipe checker somewhere
 // cause split element is gonna fucked everything up
+// to get the pipe command just get the command after the pipe even if there's more than one pipe so we can loop in it
+// ex : 
+// test "test" | grep "test" | grep "t"
+// = test "test" command->pipe_command = grep "test" | grep "t" 
+// same for the next command
