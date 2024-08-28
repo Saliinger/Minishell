@@ -13,6 +13,8 @@
 // cd navigation
 // issue it update the path even with an error
 // need also to fix the env update
+//
+// gonna change everything soon usage of another method
 
 #include "../../include/minishell.h"
 
