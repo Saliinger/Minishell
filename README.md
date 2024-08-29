@@ -1,5 +1,13 @@
-to do
+Ekrebs
+    - execve
+    - pipex
+    - sig
+    - limits
 
-change the env modification into the cpy of env in t_minishell
+Anoukan
+    - parsing
+    - builtins
+    - prompt
+    - structure
+    - exit
 
-change cd it doesn't work well
