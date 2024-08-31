@@ -2,20 +2,20 @@
 
 void	change_pwd(t_minishell *minishell)
 {
-	char *pwd;
-	char *oldpwd;
+	int		pwd_line;
+	int		oldpwd_line;
 	char	cwd[PATH_MAX];
 
-	pwd = get_env_var(minishell, "PWD=");
-	oldpwd = get_env_var(minishell, "OLPDPWD=");
+	pwd_line = get_env_var(minishell, "PWD=");
+	oldpwd_line = get_env_var(minishell, "OLPDPWD=");
 
 	free(minishell->old_pwd);
 	minishell->old_pwd = ft_strdup(minishell->pwd);
 	free(minishell->pwd);
 	getcwd(cwd, sizeof(cwd));
 	minishell->pwd = ft_strjoin("PWD=", cwd);
-	free(pwd);
-	free(oldpwd);
-	pwd = ft_strdup(minishell->pwd);
-	oldpwd = ft_strdup(minishell->old_pwd);
+	free(minishell->env[pwd_line]);
+	minishell->env[pwd_line] = ft_strdup(minishell->pwd);
+	free(minishell->env[oldpwd_line]);
+	minishell->env[oldpwd_line] = ft_strdup(minishell->old_pwd);
 }

@@ -2,7 +2,7 @@
 #include <string.h>
 #include <time.h>
 
-char	*get_env_var(t_minishell *minishell, char *var)
+int	get_env_var(t_minishell *minishell, char *var)
 {
 	int	i;
 
@@ -10,8 +10,8 @@ char	*get_env_var(t_minishell *minishell, char *var)
 	while (minishell->env[i])
 	{
 		if (strncmp(minishell->env[i], var, ft_strlen(var)))
-			return (minishell->env[i]);
+			return (i);
 		i++;
 	}
-	return (NULL);	
+	return (-1);	
 }
