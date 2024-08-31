@@ -90,6 +90,9 @@ bool					checker_command(char *in, char *command);
 void					free_command(t_command *command);
 int						nbr_of_line(char **env);
 char					**split_element(char const *s, char c);
+// ENV_UTILITY
+char					*get_env_var(t_minishell *minishell, char *var);
+void					change_pwd(t_minishell *minishell);
 
 // Debug
 void					ft_print(char **s);
