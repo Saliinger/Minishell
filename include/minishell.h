@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/27 12:36:10 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/01 14:39:46 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int						get_env_var(t_minishell *minishell, char *var, int len);
 void					change_pwd(t_minishell *minishell);
 
 // Debug
-void					ft_print(char **s);
+void					ft_print(char **s, int i);
 
 #endif
 

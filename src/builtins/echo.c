@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:35 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/27 12:32:36 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/01 15:36:43 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,52 @@
 // carefull with space and multiple time the same option
 
 #include "../../include/minishell.h"
-#include <stdio.h>
+#include <stdbool.h>
 
-static int	flag(char *str)
+static bool	flag_endl(char **arg)
+{
+	int i;
+
+	i = 1;
+	while (arg[i])
+	{
+		if (arg[i][0] == '-' && arg[i][1] == 'n' && ft_strlen(arg[i]) == 2)
+			return (true);
+		if (arg[i][0] != '-')
+			return (false);
+		i++;
+	}
+	return (false);
+
+}
+
+static void	ft_print_echo(char **arg, int i)
+{
+	while (arg[i])
+	{
+		printf("%s", arg[i]);
+		if (arg[i + 1])
+			printf(" ");
+		i++;
+	}
+	if (flag_endl(arg) != true)
+		printf("\n");
+}
+
+static int	flag_num(char **arg)
 {
 	int	i;
-	int	flag;
+	int	j;
+	int flag;
 
-	i = 0;
-	flag = 0;
-	while (str[i])
+	flag = 1;
+	i = 1;
+	while (arg[i])
 	{
-		if (str[i] == '-' && str[i + 1] == 'n')
+		if (arg[i][0] == '-')
 			flag++;
+		if (arg[i][0] != '-')
+			return (flag);
 		i++;
 	}
 	return (flag);
@@ -34,10 +67,9 @@ static int	flag(char *str)
 
 void	ft_echo(t_command *command)
 {
-	if (flag(command->in) > 0)
-		printf("%s", command->in);
-	else
-		printf("%s\n", command->in);
-	printf("\n");
-	ft_print(command->arg);
+
+	int flag;
+
+	flag = flag_num(command->arg);
+	ft_print_echo(command->arg, flag);
 }
