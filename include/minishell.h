@@ -91,7 +91,7 @@ void					free_command(t_command *command);
 int						nbr_of_line(char **env);
 char					**split_element(char const *s, char c);
 // ENV_UTILITY
-int						get_env_var(t_minishell *minishell, char *var);
+int						get_env_var(t_minishell *minishell, char *var, int len);
 void					change_pwd(t_minishell *minishell);
 
 // Debug
