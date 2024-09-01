@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:29:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/27 12:31:27 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/01 12:56:46 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,93 +18,69 @@
 
 #include "../../include/minishell.h"
 
-static void	change_env_pwd(t_minishell *minishell)
+static void	dup_home(char *current_home, char *res, int i)
 {
-	int	i;
+	int	j;
 
-	i = 0;
-	while (minishell->env[i])
+	j = 0;
+	while (current_home[i])
 	{
-		if (ft_strncmp(minishell->env[i], "PWD=", 4) == 0)
-		{
-			minishell->env[i] = ft_strjoin("PWD=", minishell->pwd);
-		}
-		else if (ft_strncmp(minishell->env[i], "OLDPWD=", 7) == 0)
-		{
-			minishell->env[i] = ft_strjoin("OLDPWD=", minishell->old_pwd);
-		}
+		res[j] = current_home[i];
 		i++;
+		j++;
 	}
+	res[j] = '\0';
 }
 
-static void	cd_up(t_minishell *minishell)
+static char	*get_home(t_minishell *minishell)
 {
+	int		home_line;
+	char	*current_home;
 	int		i;
-	char	*new_pwd;
+	char	*res;
 
-	i = ft_strlen(minishell->pwd) - 1;
-	while (i > 0 && minishell->pwd[i] != '/')
-		i--;
-	if (i == 0)
-		i = 1;
-	new_pwd = ft_substr(minishell->pwd, 0, i);
-	if (!new_pwd)
-		return ;
-	free(minishell->pwd);
-	minishell->pwd = new_pwd;
-}
-
-static void	adjust_path(char *path, t_minishell *minishell)
-{
-	char	**dirs;
-	char	*new_path;
-	int		i;
-
-	dirs = ft_split(path, '/');
-	if (!dirs)
-		return ;
-	new_path = ft_strdup(minishell->pwd);
-	while (dirs[i])
-	{
-		if (ft_strncmp(dirs[i], "..", 2) == 0)
-			cd_up(minishell);
-		else if (ft_strncmp(dirs[i], ".", 1) != 0)
-		{
-			new_path = ft_strjoin(new_path, "/");
-			new_path = ft_strjoin(new_path, dirs[i]);
-		}
-		i++;
-	}
-	minishell->pwd = new_path;
+	home_line = get_env_var(minishell, "HOME=", 5);
+	if (!minishell->env[home_line])
+		return (NULL);
+	current_home = ft_strdup(minishell->env[home_line]);
 	i = 0;
-	while (dirs[i])
-		free(dirs[i++]);
-	free(dirs);
+	while (current_home[i] && current_home[i] != '=')
+		i++;
+	if (current_home[i] == '=')
+		i++;
+	res = (char *)malloc(sizeof(char) * (ft_strlen(current_home) - i) + 1);
+	if (!res)
+	{
+		free(current_home);
+		return (NULL);
+	}
+	dup_home(current_home, res, i);
+	return (res);
 }
 
 void	ft_cd(t_command *command, t_minishell *minishell)
 {
 	int		error;
 	char	*path;
+	int		home_line;
 
 	if (!command->arg[1] || ft_strncmp(command->arg[1], "~", 1) == 0)
 	{
-		path = minishell->pwd;
+		path = get_home(minishell);
 		if (!path)
-			return (perror("HOME not set"));
+			perror("Home is not set");
+		free(minishell->old_pwd);
+		minishell->old_pwd = ft_strdup(minishell->pwd);
+		free(minishell->pwd);
 		minishell->pwd = ft_strdup(path);
 	}
 	else
-	{
 		path = ft_strdup(command->arg[1]);
-		adjust_path(path, minishell);
-		free(path);
-	}
-	error = chdir(minishell->pwd);
+	error = chdir(path);
 	if (error == 0)
 	{
-		printf("Changed dir to %s\n", minishell->pwd);
-		change_env_pwd(minishell);
+		printf("Changed dir to %s\n", path);
+		change_pwd(minishell);
 	}
 	else
 		perror("Error changing directory");

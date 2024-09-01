@@ -1,21 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   change_pwd.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42mulhouse.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/01 13:01:07 by anoukan           #+#    #+#             */
+/*   Updated: 2024/09/01 13:01:07 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 
 void	change_pwd(t_minishell *minishell)
 {
-	char *pwd;
-	char *oldpwd;
+	int		pwd_line;
+	int		oldpwd_line;
 	char	cwd[PATH_MAX];
 
-	pwd = get_env_var(minishell, "PWD=");
-	oldpwd = get_env_var(minishell, "OLPDPWD=");
-
+	pwd_line = get_env_var(minishell, "PWD=", 4);
+	oldpwd_line = get_env_var(minishell, "OLDPWD=", 7);
+	if (pwd_line == -1 || oldpwd_line == -1)
+		return ;
 	free(minishell->old_pwd);
 	minishell->old_pwd = ft_strdup(minishell->pwd);
 	free(minishell->pwd);
 	getcwd(cwd, sizeof(cwd));
-	minishell->pwd = ft_strjoin("PWD=", cwd);
-	free(pwd);
-	free(oldpwd);
-	pwd = ft_strdup(minishell->pwd);
-	oldpwd = ft_strdup(minishell->old_pwd);
+	minishell->pwd = ft_strdup(cwd);
+	free(minishell->env[pwd_line]);
+	minishell->env[pwd_line] = ft_strjoin("PWD=", cwd);
+	free(minishell->env[oldpwd_line]);
+	minishell->env[oldpwd_line] = ft_strjoin("OLDPWD=", minishell->old_pwd);
 }

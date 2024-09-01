@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include <stdio.h>
 
 static void	get_line(char **line, char *prompt)
 {
@@ -25,7 +26,8 @@ static t_minishell	*init(char **env, char *pwd)
 	if (!minishell)
 		return (NULL);
 	minishell->env = get_env(env);
-	minishell->pwd = pwd;
+	minishell->pwd = ft_strdup(pwd);
+	minishell->old_pwd = ft_strdup(pwd);
 	minishell->res_last_command = 0;
 	return (minishell);
 }

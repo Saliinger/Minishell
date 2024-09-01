@@ -1,17 +1,27 @@
-#include "../../../include/minishell.h"
-#include <string.h>
-#include <time.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_env.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42mulhouse.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/01 13:01:02 by anoukan           #+#    #+#             */
+/*   Updated: 2024/09/01 13:01:02 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char	*get_env_var(t_minishell *minishell, char *var)
+#include "../../../include/minishell.h"
+
+int	get_env_var(t_minishell *minishell, char *var, int len)
 {
 	int	i;
 
 	i = 0;
 	while (minishell->env[i])
 	{
-		if (strncmp(minishell->env[i], var, ft_strlen(var)))
-			return (minishell->env[i]);
+		if (ft_strncmp(minishell->env[i], var, len) == 0)
+			return (i);
 		i++;
 	}
-	return (NULL);	
+	return (-1);
 }
