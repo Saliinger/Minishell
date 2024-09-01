@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:35 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/01 15:36:43 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/01 15:38:56 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 // carefull with space and multiple time the same option
 
 #include "../../include/minishell.h"
-#include <stdbool.h>
 
 static bool	flag_endl(char **arg)
 {
