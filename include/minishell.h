@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/01 14:39:46 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/01 23:14:48 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void					ft_pwd(t_minishell *minishell);
 void					ft_env(t_minishell *minishell);
 void					ft_echo(t_command *command);
 void					ft_cd(t_command *command, t_minishell *minishell);
+void					ft_export(t_command *command, t_minishell *minishell);
 
 // PARSING
 t_command				*command_init(char *in);
@@ -90,6 +91,7 @@ bool					checker_command(char *in, char *command);
 void					free_command(t_command *command);
 int						nbr_of_line(char **env);
 char					**split_element(char const *s, char c);
+void					free_env(char **env);
 // ENV_UTILITY
 int						get_env_var(t_minishell *minishell, char *var, int len);
 void					change_pwd(t_minishell *minishell);

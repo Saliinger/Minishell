@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:33:51 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/27 12:33:54 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/01 23:15:26 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	builtin_slector(t_command *command, t_minishell *minishell)
 	else if (command->id == PWD_ID)
 		ft_pwd(minishell);
 	else if (command->id == EXPORT_ID)
-		printf("lol");
+		ft_export(command, minishell);
 	else if (command->id == UNSET_ID)
 		printf("lol");
 	else if (command->id == ENV_ID)
