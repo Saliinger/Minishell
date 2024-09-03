@@ -69,6 +69,8 @@ void	ft_export(t_command *command, t_minishell *minishell)
 {
 	char	*var;
 
+	if (nbr_of_line(command->arg) == 1)
+		ft_env(minishell);
 	if (nbr_of_line(command->arg) == 2)
 	{
 		var = ft_strdup(command->arg[1]);

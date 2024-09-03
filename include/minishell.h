@@ -59,6 +59,7 @@ typedef struct s_command
 typedef struct s_minishell
 {
 	char				**env;
+	char				**hidden_env;
 	char				*pwd;
 	char				*old_pwd;
 	int					res_last_command;
@@ -76,6 +77,7 @@ void					ft_env(t_minishell *minishell);
 void					ft_echo(t_command *command);
 void					ft_cd(t_command *command, t_minishell *minishell);
 void					ft_export(t_command *command, t_minishell *minishell);
+void					ft_unset(t_command *command, t_minishell *minishell);
 
 // PARSING
 t_command				*command_init(char *in);

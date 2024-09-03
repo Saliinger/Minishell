@@ -12,6 +12,8 @@
 
 // echo command + option -n
 // carefull with space and multiple time the same option
+//
+// need to add the print of env and hidden env
 
 #include "../../include/minishell.h"
 
