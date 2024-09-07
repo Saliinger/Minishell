@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 18:03:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/07 23:33:19 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/07 23:36:28 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ static void	change_value(t_minishell *minishell, char *var)
 	len = 0;
 	while (var[len] != '=' && var[len])
 		len++;
+	if (var[len] != '=')
+	{
+		printf("Error\nForgot to set a value for %s\n", var);
+		return ;
+	}
 	var_line = get_env_var(minishell, var, len);
 	printf("%d\n%d\n", len, var_line);
 	if (var_line == -1)
@@ -69,7 +74,7 @@ void	ft_export(t_command *command, t_minishell *minishell)
 	int	i;
 
 	i = 1;
-	if (nbr_of_line(command->arg) == 2)
+	if (nbr_of_line(command->arg) >= 2)
 	{
 		while (command->arg[i])
 		{
@@ -77,6 +82,4 @@ void	ft_export(t_command *command, t_minishell *minishell)
 			i++;
 		}
 	}
-	else
-		printf("Error\nThere's not enough options\n");
 }
