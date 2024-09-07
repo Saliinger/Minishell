@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 18:03:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/07 23:29:43 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/07 23:33:19 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ static void	change_value(t_minishell *minishell, char *var)
 
 void	ft_export(t_command *command, t_minishell *minishell)
 {
-	int		i;
+	int	i;
 
+	i = 1;
 	if (nbr_of_line(command->arg) == 2)
 	{
 		while (command->arg[i])
