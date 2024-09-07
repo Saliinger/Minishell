@@ -6,12 +6,11 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:35 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/01 15:38:56 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/07 16:15:06 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // echo command + option -n
-// carefull with space and multiple time the same option
 //
 // need to add the print of env and hidden env
 
@@ -19,7 +18,7 @@
 
 static bool	flag_endl(char **arg)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (arg[i])
@@ -31,7 +30,6 @@ static bool	flag_endl(char **arg)
 		i++;
 	}
 	return (false);
-
 }
 
 static void	ft_print_echo(char **arg, int i)
@@ -51,7 +49,7 @@ static int	flag_num(char **arg)
 {
 	int	i;
 	int	j;
-	int flag;
+	int	flag;
 
 	flag = 1;
 	i = 1;
@@ -68,8 +66,7 @@ static int	flag_num(char **arg)
 
 void	ft_echo(t_command *command)
 {
-
-	int flag;
+	int	flag;
 
 	flag = flag_num(command->arg);
 	ft_print_echo(command->arg, flag);

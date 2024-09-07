@@ -1,3 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/07 16:05:44 by anoukan           #+#    #+#             */
+/*   Updated: 2024/09/07 16:06:04 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+// need to handle multiple varr
+
 #include "../../include/minishell.h"
 
 // this function is use to delete existing var in env
@@ -11,7 +25,8 @@ void	ft_unset(t_command *command, t_minishell *minishell)
 	int		i;
 	int		j;
 
-	var_line = get_env_var(minishell, command->arg[1], ft_strlen(command->arg[1]));
+	var_line = get_env_var(minishell, command->arg[1],
+			ft_strlen(command->arg[1]));
 	if (var_line == -1)
 	{
 		perror("Error\nThe var doesn't exist\n");
