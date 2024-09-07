@@ -24,7 +24,8 @@ void	ft_extern(t_command *command, t_minishell *minishell)
 	pid = fork();
 	if (pid == 0)
 		execve(path, command->arg, minishell->env);
-	waitpid(pid, &status, 0);
+	while(wait(NULL) > 0)
+		;
 	free_command(command);
 	free(path);
 }

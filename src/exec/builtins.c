@@ -25,7 +25,7 @@ void	builtin_slector(t_command *command, t_minishell *minishell)
 	else if (command->id == EXPORT_ID)
 		ft_export(command, minishell);
 	else if (command->id == UNSET_ID)
-		printf("lol");
+		ft_unset(command, minishell);
 	else if (command->id == ENV_ID)
 		ft_env(minishell);
 	else if (command->id == EXIT_ID)

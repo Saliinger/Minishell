@@ -13,8 +13,12 @@
 // display path / where i am
 
 #include "../../include/minishell.h"
+#include <unistd.h>
 
 void	ft_pwd(t_minishell *minishell)
 {
-	printf("%s\n", minishell->pwd);
+	char	path[PATH_MAX];
+
+	getcwd(path, sizeof(path));
+	printf("%s\n", path);
 }
