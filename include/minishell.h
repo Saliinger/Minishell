@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/01 23:14:48 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/08 14:36:50 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void					parsing(char *str, t_minishell *minishell);
 t_command				*trim(char *in, char *in_command, bool builtin, int id);
 
 // UTILS
-void					display_prompt(char **prompt, t_minishell *minishell);
+char					*display_prompt(char *prompt, t_minishell *minishell);
 void					sighandler(int sig);
 void					exit_shell(bool fail);
 char					**get_env(char **env);

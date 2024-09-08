@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 16:05:44 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/07 23:49:45 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/08 14:31:50 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 // to add the multiple var i am gonna use a *int to store all the
 // existing var if one of them doesn't exist just return an error
 
-static char	*new_env(char **current_env, int var_line)
+static char	**new_env(char **current_env, int var_line)
 {
 	int		i;
 	int		j;
@@ -51,7 +51,7 @@ static void	delete_value(t_minishell *minishell, char *var, int var_line)
 		perror("Error\nThe var doesn't exist\n");
 		return ;
 	}
-	if (!new_env)
+	if (!&new_env)
 	{
 		perror("Error\nCouldn't create the new env");
 		return ;

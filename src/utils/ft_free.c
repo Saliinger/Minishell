@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:20 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/01 23:10:27 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/08 14:25:56 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_env(char **env)
 	int	i;
 
 	i = 0;
-	while(env[i])
+	while (env[i])
 	{
 		free(env[i]);
 		i++;
