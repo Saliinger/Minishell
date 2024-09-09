@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 // execute extern function
+//
+// need to add the right path and parse the path in the env and check with access
 
 #include "../../include/minishell.h"
 

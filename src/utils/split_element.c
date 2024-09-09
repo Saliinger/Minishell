@@ -13,6 +13,7 @@
 // this function is to remove space between arg and not inside arg
 
 #include "../../include/minishell.h"
+#include <stdio.h>
 
 static size_t	ft_countword(const char *s, char c)
 {
@@ -47,29 +48,15 @@ static int	ft_split_free(char **dest)
 	return (0);
 }
 
-static void	ft_split_write_word(char *dest, const char *src, char c)
+static void	ft_split_write_word(char *dest, const char *src, int start, int end)
 {
-	size_t	i;
-	size_t	flag;
+	int i = 0;
 
-	i = 0;
-	while (src[i] && src[i] != c)
+	printf("start: %d end: %d\n", start, end);
+	while (src[start + i] && i < end)
 	{
-		flag = 0;
-		if (src[i] == 34 || src[i] == 39)
-		{
-			flag = 1;
-			while (flag == 1)
-			{
-				dest[i] = src[i];
-				if (src[i] == 34 || src[i] == 39)
-					flag = 0;
-				if (flag == 1)
-					i++;
-			}
-		}
-		else
-			dest[i] = src[i];
+		printf("%c\n", src[start + i]);
+		dest[i] = src[start + i];
 		i++;
 	}
 	dest[i] = '\0';
@@ -89,18 +76,49 @@ static int	ft_split_write(char **dest, char const *s, char c)
 	while (s[i])
 	{
 		flag = 0;
-		if ((s[i] == c || s[i] == '\0') == 1)
+		if (s[i] && s[i] == c)
 			i++;
 		else
 		{
 			j = 0;
-			while ((s[i + j] == c || s[i + j] == '\0') == 0)
-				j++;
-			dest[word] = (char *)ft_calloc(sizeof(char), (j + 1));
-			if (!dest)
-				return (ft_split_free(dest));
-			ft_split_write_word(dest[word], (char *)(s + i), c);
+			if (s[i] == '\"')
+			{
+				printf("1\n");
+				while (s[i + j] && s[i + j] != '\"')
+				{
+					printf("%c\n", s[i + j]);
+					j++;
+				}
+			}
+			else if (s[i] == '\'')
+			{
+				printf("2\n");
+				while (s[i + j] && s[i + j] != '\'')
+					j++;
+			}
+			else if (s[i] != c)
+			{
+				printf("3\n");
+				while(s[i + j] && s[i + j] != c)
+					j++;
+			}
+			/*else
+			{
+				printf("4\n");
+				while (s[i] && s[i] == c)
+					i++;
+			}*/
+			if (j > 0)
+			{
+				printf("i: %zu j: %zu\n", i, j);
+				dest[word] = (char *)ft_calloc(sizeof(char), (j + 1));
+				if (!dest)
+					return (ft_split_free(dest));
+				ft_split_write_word(dest[word], s, i, j);
+			}
 			i += j;
+			if (s[i] == '\"')
+				i++;
 			word++;
 		}
 	}
@@ -117,5 +135,14 @@ char	**split_element(char const *s, char c)
 	if (!dest)
 		return (NULL);
 	ft_split_write(dest, s, c);
+	ft_print(dest, 0);
 	return (dest);
 }
+
+// method
+// if (str[i] == '"')
+// while (str[i] && str[i] != '"') {
+//  res[j] = str[i];
+//	i++;
+//}
+// same for '
