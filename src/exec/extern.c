@@ -25,7 +25,14 @@ void	ft_extern(t_command *command, t_minishell *minishell)
 	path = ft_strjoin(PATH, command->command);
 	pid = fork();
 	if (pid == 0)
-		execve(path, command->arg, minishell->env);
+	{
+		if(execve(path, command->arg, minishell->env) == -1)
+		{
+			free_command(command);
+			free(path);
+			exit(EXIT_FAILURE);
+		}
+	}
 	while (wait(NULL) > 0)
 		;
 	free_command(command);
