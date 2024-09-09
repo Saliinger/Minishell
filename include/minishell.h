@@ -54,6 +54,7 @@ typedef struct s_command
 	bool				builtin;
 	int					id;
 	bool				pipe;
+	bool				redirection;
 }						t_command;
 
 typedef struct s_minishell
