@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 18:03:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/07 23:36:28 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/08 14:24:51 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // export command can create new env and change the value of others
 // need to handle multiple var
+// need to add if export is alone you need to display env
 
 static void	create_value(t_minishell *minishell, char *var)
 {
@@ -39,6 +40,17 @@ static void	create_value(t_minishell *minishell, char *var)
 	minishell->env = new_env;
 }
 
+static void	add_var(t_minishell *minishell, int var_line, char *var)
+{
+	free(minishell->env[var_line]);
+	minishell->env[var_line] = ft_strdup(var);
+	if (!minishell->env[var_line])
+	{
+		printf("Error\nThe env variable didn't got set (Malloc)\n");
+		return ;
+	}
+}
+
 static void	change_value(t_minishell *minishell, char *var)
 {
 	int	var_line;
@@ -59,13 +71,7 @@ static void	change_value(t_minishell *minishell, char *var)
 		create_value(minishell, var);
 		return ;
 	}
-	free(minishell->env[var_line]);
-	minishell->env[var_line] = ft_strdup(var);
-	if (!minishell->env[var_line])
-	{
-		printf("Error\nThe env variable didn't got set (Malloc)\n");
-		return ;
-	}
+	add_var(minishell, var_line, var);
 	printf("%s\n", minishell->env[var_line]);
 }
 
