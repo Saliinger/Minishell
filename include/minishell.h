@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/08 14:36:50 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/09 15:37:46 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,14 @@ char					**get_env(char **env);
 bool					checker_command(char *in, char *command);
 void					free_command(t_command *command);
 int						nbr_of_line(char **env);
-char					**split_element(char const *s, char c);
+
 void					free_env(char **env);
+// Split Element
+size_t					ft_countword(const char *s, char c);
+int						ft_split_free(char **dest);
+void					ft_split_write_word(char *dest, const char *src,
+							int start, int end);
+char					**split_element(char const *s, char c);
 // ENV_UTILITY
 int						get_env_var(t_minishell *minishell, char *var, int len);
 void					change_pwd(t_minishell *minishell);
