@@ -14,6 +14,7 @@
 
 // export command can create new env and change the value of others
 // need to handle multiple var
+// need to add if export is alone you need to display env
 
 static void	create_value(t_minishell *minishell, char *var)
 {
