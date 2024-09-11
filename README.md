@@ -5,9 +5,10 @@ Ekrebs
     - limits
 
 Anoukan
-    - parsing
+    - parsing (x)
     - builtins
-    - prompt
+    - prompt (x)
     - structure
-    - exit
+    - exit (x)
+    - free structure
 
