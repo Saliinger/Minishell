@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <stdio.h>
 
 static void	get_line(char **line, char *prompt)
 {
@@ -31,6 +30,8 @@ static t_minishell	*init(char **env, char *pwd)
 	minishell->res_last_command = 0;
 	return (minishell);
 }
+
+// need to init the path for the builtins and extern function
 
 static void	main_extend(char *prompt, t_minishell *minishell, char *line)
 {

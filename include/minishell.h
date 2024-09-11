@@ -56,6 +56,8 @@ typedef struct s_command
 	struct s_command	*pipe_command;
 	bool				builtin;
 	bool				pipe;
+	int					pipe_position;
+	bool				redirection;
 	int					pipe_fds[2];	//new 		//init me at -1
 	int					infile_fd; 		//new 		//init me to -1, 	fill me if cmd takes infile
 	int					outfile_fd; 	//new 		//init me to -1, 	fill me if cmd takes outfile
