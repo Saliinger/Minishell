@@ -49,7 +49,6 @@ static char	*cut_first_cmd(char *in, int pipe_position)
 		return (NULL);
 	while (i < pipe_position)
 	{
-		printf("in[i]: %c\n", in[i]);
 		res[i] = in[i];
 		i++;
 	}

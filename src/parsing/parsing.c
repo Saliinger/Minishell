@@ -17,7 +17,6 @@ void	parsing(char *str, t_minishell *minishell)
 	t_command	*current;
 
 	current = command_init(str);
-	printf("pizza\n");
 	if (current)
 		old_ft_exec(current, minishell);
 	else
