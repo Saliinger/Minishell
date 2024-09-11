@@ -89,6 +89,8 @@ typedef struct s_minishell
 {
 	char				**env;
 	char				**hidden_env;
+	char				**hidden_path;
+	// the hidden path is for the no env setup
 	// will this concern me, or is it just a parsing/prompt thing ?
 	// genq (echo and $?)
 	char				**paths;
