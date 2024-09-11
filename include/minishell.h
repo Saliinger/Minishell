@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/10 13:35:30 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/09/11 15:12:06 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "../libft/libft/libft.h"
+# include "errors.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
@@ -22,7 +23,6 @@
 # include <stdio.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include "errors.h"
 
 // Defines
 # define ECHO "echo"
@@ -58,10 +58,15 @@ typedef struct s_command
 	bool				pipe;
 	int					pipe_position;
 	bool				redirection;
-	int					pipe_fds[2];	//new 		//init me at -1
-	int					infile_fd; 		//new 		//init me to -1, 	fill me if cmd takes infile
-	int					outfile_fd; 	//new 		//init me to -1, 	fill me if cmd takes outfile
-	int					pid;			//new		//init me to -1,
+	int					pipe_fds[2];
+	int					pid;
+	// new 		//init me at -1
+	int					infile_fd;
+	int					outfile_fd;
+	// new 		//init me to -1,
+	// fill me if cmd takes infile int outfile_fd;
+	// new 		//init me to -1,
+	// fill me if cmd takes outfile int pid;       // new		//init me to -1,
 }						t_command;
 
 /*
@@ -72,8 +77,10 @@ typedef struct s_command
 	int					cmd_id;
 	struct s_command	*next;
 	int					pipe_fds[2];	//new 		//init me at -1
-	int					infile_fd; 		//new 		//init me to -1, 	fill me if cmd takes infile
-	int					outfile_fd; 	//new 		//init me to -1, 	fill me if cmd takes outfile
+	int					infile_fd; 		//new 		//init me to -1,
+													fill me if cmd takes infile
+	int					outfile_fd; 	//new 		//init me to -1,
+												fill me if cmd takes outfile
 	int					pid;			//new		//init me to -1,
 }						t_command;
 */
@@ -81,29 +88,34 @@ typedef struct s_command
 typedef struct s_minishell
 {
 	char				**env;
-	char				**hidden_env;		//will this concern me, or is it just a parsing/prompt thing ? /genq
-	char				**paths; 						//new	// init me extract me from env (line starting by PATHS), then (split me on token ':')	->needed for exec cmd
-	char				*builtins_paths[NB_BUILTINS];	//new	// init me fill me with the path to each builtin, builtins_paths[id] 					-> needed for exec builtins
+	char				**hidden_env;
+	// will this concern me, or is it just a parsing/prompt thing ?
+	// genq (echo and $?)
+	char				**paths;
+	// new	// init me extract me from env (line starting by PATHS),
+	// then (split me on token ':')
+	//->needed for exec cmd
+	char				*builtins_paths[NB_BUILTINS];
+	// new	// init me fill me with the path to each builtin, builtins_paths[id]
+	//			-> needed for exec builtins
 	char				*pwd;
 	char				*old_pwd;
 	int					res_last_command;
 }						t_minishell;
 
-// FREE 
-void                    free_nullterm_tab(char **tab);
-void                    free_t_command(t_command *cmds);
-void                    free_t_minishell(t_minishell *m);
+// FREE
+void					free_nullterm_tab(char **tab);
+void					free_t_command(t_command *cmds);
+void					free_t_minishell(t_minishell *m);
 
-int                     ft_close_fd(int *fd);
+int						ft_close_fd(int *fd);
 
 // EXEC
-int                     ft_exec(t_command *c, t_minishell *m);
-//transitionning out :
+int						ft_exec(t_command *c, t_minishell *m);
+// transitionning out :
 void					builtin_slector(t_command *cmd, t_minishell *m);
 void					old_ft_exec(t_command *command, t_minishell *minishell);
 void					ft_extern(t_command *command, t_minishell *minishell);
-
-
 
 // Builtins
 void					ft_pwd(t_minishell *minishell);

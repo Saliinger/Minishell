@@ -41,17 +41,20 @@ static int	check_pipe(char *in)
 static char	*cut_first_cmd(char *in, int pipe_position)
 {
 	char *res;
-	int i =0;
-
-	res = (char *)malloc(sizeof(char) * pipe_position - 1);
+	int i = 0;
+	
+	printf("pipe position: %d\n", pipe_position);
+	res = (char *)malloc(sizeof(char) * pipe_position);
 	if (!res)
 		return (NULL);
 	while (i < pipe_position)
 	{
+		printf("in[i]: %c\n", in[i]);
 		res[i] = in[i];
 		i++;
 	}
 	res[i] = '\0';
+	ft_printf("res cut: %s\n",res);
 	return (res);
 }
 
@@ -73,6 +76,7 @@ static char	*remove_first_cmd(char *in, int pipe_position)
 		pipe_position++;
 	}
 	res[i] = '\0';
+	printf("res remove: %s\n",res);
 	return (res);
 }
 
@@ -87,6 +91,7 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	if (!command)
 		return (NULL);
 	command->in = ft_strdup(in);
+	command->pipe_position = check_pipe(in);
 	if (command->pipe_position > 0)
 	{
 		command->pipe = true;
@@ -106,7 +111,7 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->pipe_fds[1] = -1;
 	command->outfile_fd = -1;
 	command->infile_fd = -1;
-	command->pipe_position = check_pipe(in);
+	
 
 	return (command);
 }
