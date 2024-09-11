@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:34:00 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/08 14:25:35 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/11 15:33:25 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 //
 // need to add the right path and parse the path in the env and check with access
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 void	ft_extern(t_command *command, t_minishell *minishell)
 {

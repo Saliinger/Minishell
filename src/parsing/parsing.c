@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/12 18:42:13 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/11 15:31:51 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	parsing(char *str, t_minishell *minishell)
 
 	current = command_init(str);
 	if (current)
-		ft_exec(current, minishell);
+		old_ft_exec(current, minishell);
 	else
 		printf("loli said: bitch it's not working\n");
 }

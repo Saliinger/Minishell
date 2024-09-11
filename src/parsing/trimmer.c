@@ -14,19 +14,104 @@
 
 #include "../../include/minishell.h"
 
+static int	check_pipe(char *in)
+{
+	int i = 0;
+	int flag = 0;
+
+	while (in[i])
+	{
+		if (flag == 0 && in[i] == '|')
+			return (i);
+		if (in[i] == '"')
+		{
+			while (in[i] != '"')
+				i++;
+		}
+		if (in[i] == '\'')
+		{
+			while (in[i] != '\'')
+				i++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+static char	*cut_first_cmd(char *in, int pipe_position)
+{
+	char *res;
+	int i = 0;
+	
+	printf("pipe position: %d\n", pipe_position);
+	res = (char *)malloc(sizeof(char) * pipe_position);
+	if (!res)
+		return (NULL);
+	while (i < pipe_position)
+	{
+		res[i] = in[i];
+		i++;
+	}
+	res[i] = '\0';
+	ft_printf("res cut: %s\n",res);
+	return (res);
+}
+
+static char	*remove_first_cmd(char *in, int pipe_position)
+{
+	char	*res;
+	int		i;
+
+	if (in[pipe_position] == '|')
+		pipe_position++;
+	res = (char *)malloc(sizeof(char) * ft_strlen(in + pipe_position) + 1);
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (in[pipe_position])
+	{
+		res[i] = in[pipe_position];
+		i++;
+		pipe_position++;
+	}
+	res[i] = '\0';
+	printf("res remove: %s\n",res);
+	return (res);
+}
+
+// add a way to remove the first command and send it to the subcommand
+
 t_command	*trim(char *in, char *in_command, bool builtin, int id)
 {
 	t_command	*command;
+	char		*arg_in;
 
 	command = (t_command *)malloc(sizeof(t_command));
 	if (!command)
 		return (NULL);
 	command->in = ft_strdup(in);
-	command->arg = split_element(in, ' ');
+	command->pipe_position = check_pipe(in);
+	if (command->pipe_position > 0)
+	{
+		command->pipe = true;
+		command->arg = split_element(cut_first_cmd(in, command->pipe_position), ' ');
+		command->pipe_command = command_init(remove_first_cmd(in, command->pipe_position));
+	}
+	else
+	{
+		command->pipe_command = NULL;
+		command->arg = split_element(in, ' ');
+	}
 	command->command = ft_strdup(in_command);
 	command->builtin = builtin;
 	command->id = id;
-	command->pipe_command = NULL;
+	command->pid = -1;
+	command->pipe_fds[0] = -1;
+	command->pipe_fds[1] = -1;
+	command->outfile_fd = -1;
+	command->infile_fd = -1;
+	
+
 	return (command);
 }
 
@@ -38,3 +123,5 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 // test "test" | grep "test" | grep "t"
 // = test "test" command->pipe_command = grep "test" | grep "t"
 // same for the next command
+//
+// there's a pipe checker need to trim before split element and send the rest to command without the pipe and space to create the subcommand

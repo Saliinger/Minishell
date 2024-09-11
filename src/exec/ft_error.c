@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
+#include "../../include/minishell.h"
 
 int	ft_error(char *error_msg, int errnum)
 {
 	if (VERBOSE >= 1)
-		ft_printf_fd(STDERR_FILENO, "Error\nErr %d\n\t%s\n", errnum, error_msg);
+		ft_printf("Error\nErr %d\n\t%s\n", errnum, error_msg);
 	return (errnum);
 }
