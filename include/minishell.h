@@ -122,7 +122,7 @@ void					ft_extern(t_command *command, t_minishell *minishell);
 // Builtins
 void					ft_pwd(t_minishell *minishell);
 void					ft_env(t_minishell *minishell);
-void					ft_echo(t_command *command);
+void					ft_echo(t_minishell *minishell, t_command *command);
 void					ft_cd(t_command *command, t_minishell *minishell);
 void					ft_export(t_command *command, t_minishell *minishell);
 void					ft_unset(t_command *command, t_minishell *minishell);
