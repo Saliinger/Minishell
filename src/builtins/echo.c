@@ -23,6 +23,29 @@
 // $PWD display as a word
 // ❯ echo "$PWD"
 // /Users/anoukan/Developer/Minishell display the env var
+//
+static char	*dup_env(char *env)
+{
+	char	*trimmed;
+	int		i = 0;
+	int		j = 0;
+
+	while (env[i] != '=')
+		i++;
+	if (env[i] == '=')
+		i++;
+	trimmed = (char *)malloc(sizeof(char *) * ft_strlen(env) - i + 1);
+	if (!trimmed)
+		return (NULL); // need to add an error message
+	while (env[i])
+	{
+		trimmed[j] = env[i];
+		j++;
+		i++;
+	}
+	trimmed[j] = '\0';
+	return (trimmed);
+}
 
 static char	*env_var(char *current_line, t_minishell *minishell)
 {
@@ -39,6 +62,8 @@ static char	*env_var(char *current_line, t_minishell *minishell)
 	j = 0;
 	while(current_line[i])
 	{
+		if (current_line[0] == '$')
+			break ; 
 		if (flag == 1 && current_line[i] == '$')
 			break ;
 		if (current_line[i] == '\"')
@@ -68,7 +93,7 @@ static char	*env_var(char *current_line, t_minishell *minishell)
 	if (env_line == -1)
 		return ("Error: no var");
 	free(res_env);
-	res_env = ft_strdup(minishell->env[env_line]);
+	res_env = dup_env(minishell->env[env_line]);
 	return (res_env);
 }
 
