@@ -32,6 +32,7 @@
 # define UNSET "unset"
 # define ENV "env"
 # define EXIT "exit"
+# define HD "<<"
 
 // Define path
 # define PATH "/bin/"
@@ -45,6 +46,7 @@
 # define ENV_ID 6
 # define EXIT_ID 7
 # define NB_BUILTINS 8
+# define HD_ID 9
 
 // Structure
 typedef struct s_command
@@ -53,11 +55,12 @@ typedef struct s_command
 	char				*command;
 	char				**arg;
 	int					id;
-	struct s_command	*pipe_command;
+	struct s_command	*subcommand;
 	bool				builtin;
 	bool				pipe;
 	int					pipe_position;
 	bool				redirection;
+	int					redirection_position;
 	int					pipe_fds[2];
 	int					pid;
 	// new 		//init me at -1
@@ -103,6 +106,7 @@ typedef struct s_minishell
 	char				*pwd;
 	char				*old_pwd;
 	int					res_last_command;
+	char				**hd;
 }						t_minishell;
 
 // FREE
@@ -122,15 +126,19 @@ void					ft_extern(t_command *command, t_minishell *minishell);
 // Builtins
 void					ft_pwd(t_minishell *minishell);
 void					ft_env(t_minishell *minishell);
-void					ft_echo(t_command *command);
+void					ft_echo(t_minishell *minishell, t_command *command);
 void					ft_cd(t_command *command, t_minishell *minishell);
 void					ft_export(t_command *command, t_minishell *minishell);
 void					ft_unset(t_command *command, t_minishell *minishell);
+void					ft_heredoc(t_command *command, t_minishell *minishell);
+
 
 // PARSING
 t_command				*command_init(char *in);
 void					parsing(char *str, t_minishell *minishell);
 t_command				*trim(char *in, char *in_command, bool builtin, int id);
+// Divider for parsing
+int						check_pipe(char *in);
 
 // UTILS
 char					*display_prompt(char *prompt, t_minishell *minishell);
@@ -142,12 +150,14 @@ void					free_command(t_command *command);
 int						nbr_of_line(char **env);
 
 void					free_env(char **env);
+
 // Split Element
 size_t					ft_countword(const char *s, char c);
 int						ft_split_free(char **dest);
 void					ft_split_write_word(char *dest, const char *src,
 							int start, int end);
 char					**split_element(char const *s, char c);
+
 // ENV_UTILITY
 int						get_env_var(t_minishell *minishell, char *var, int len);
 void					change_pwd(t_minishell *minishell);

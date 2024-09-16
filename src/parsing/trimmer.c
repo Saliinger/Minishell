@@ -13,37 +13,14 @@
 // trim the *in and put it in the struct t_command for other use
 
 #include "../../include/minishell.h"
+#include <stdbool.h>
 
-static int	check_pipe(char *in)
-{
-	int i = 0;
-	int flag = 0;
-
-	while (in[i])
-	{
-		if (flag == 0 && in[i] == '|')
-			return (i);
-		if (in[i] == '"')
-		{
-			while (in[i] != '"')
-				i++;
-		}
-		if (in[i] == '\'')
-		{
-			while (in[i] != '\'')
-				i++;
-		}
-		i++;
-	}
-	return (0);
-}
 
 static char	*cut_first_cmd(char *in, int pipe_position)
 {
 	char *res;
 	int i = 0;
 	
-	printf("pipe position: %d\n", pipe_position);
 	res = (char *)malloc(sizeof(char) * pipe_position);
 	if (!res)
 		return (NULL);
@@ -53,7 +30,6 @@ static char	*cut_first_cmd(char *in, int pipe_position)
 		i++;
 	}
 	res[i] = '\0';
-	ft_printf("res cut: %s\n",res);
 	return (res);
 }
 
@@ -75,7 +51,6 @@ static char	*remove_first_cmd(char *in, int pipe_position)
 		pipe_position++;
 	}
 	res[i] = '\0';
-	printf("res remove: %s\n",res);
 	return (res);
 }
 
@@ -91,15 +66,25 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 		return (NULL);
 	command->in = ft_strdup(in);
 	command->pipe_position = check_pipe(in);
-	if (command->pipe_position > 0)
+	command->redirection_position = 0; // redirection work in progress
+	if (command->pipe_position > 0 || command->redirection_position)
 	{
-		command->pipe = true;
-		command->arg = split_element(cut_first_cmd(in, command->pipe_position), ' ');
-		command->pipe_command = command_init(remove_first_cmd(in, command->pipe_position));
+		if (command->pipe_position < command->redirection_position)
+		{
+			command->pipe = true;
+			command->arg = split_element(cut_first_cmd(in, command->pipe_position), ' ');
+			command->subcommand = command_init(remove_first_cmd(in, command->pipe_position));
+		}
+		else
+		{
+			command->redirection = true;
+			command->arg = split_element(cut_first_cmd(in, command->redirection_position), ' ');
+			command->subcommand = command_init(remove_first_cmd(in, command->redirection_position));
+		}
 	}
 	else
 	{
-		command->pipe_command = NULL;
+		command->subcommand = NULL;
 		command->arg = split_element(in, ' ');
 	}
 	command->command = ft_strdup(in_command);

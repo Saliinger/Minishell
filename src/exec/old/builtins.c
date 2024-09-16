@@ -17,7 +17,7 @@
 void	builtin_slector(t_command *command, t_minishell *minishell)
 {
 	if (command->id == ECHO_ID)
-		ft_echo(command);
+		ft_echo(minishell, command);
 	else if (command->id == CD_ID)
 		ft_cd(command, minishell);
 	else if (command->id == PWD_ID)

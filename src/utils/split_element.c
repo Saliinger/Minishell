@@ -81,6 +81,5 @@ char	**split_element(char const *s, char c)
 	if (!dest)
 		return (NULL);
 	ft_split_write(dest, s, c);
-	ft_print(dest, 0);
 	return (dest);
 }

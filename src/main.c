@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include <time.h>
 
 static void	get_line(char **line, char *prompt)
 {
@@ -62,6 +63,8 @@ static t_minishell	*init(char **env, char *pwd)
 	minishell->old_pwd = ft_strdup(pwd);
 	minishell->res_last_command = 0;
 	minishell->paths = ft_split(init_path(minishell), ':');
+	minishell->hd = (char **)malloc(sizeof(char *));
+	minishell->hd[0] = NULL;
 	return (minishell);
 }
 
