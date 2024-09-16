@@ -34,7 +34,7 @@ void	free_t_command(t_command *cmds)
 	tmp = cmds;
 	while (cmds)
 	{
-		tmp = cmds->pipe_command;
+		tmp = cmds->subcommand;
 		free_cmds_elems(cmds);
 		free(cmds);
 		cmds = tmp;

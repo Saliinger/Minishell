@@ -38,10 +38,10 @@ void	free_command(t_command *command)
 	}
 	if (command->arg)
 		free_arg(command);
-	if (command->pipe_command)
+	if (command->subcommand)
 	{
-		free_command(command->pipe_command);
-		command->pipe_command = NULL;
+		free_command(command->subcommand);
+		command->subcommand = NULL;
 	}
 	free(command);
 	command = NULL;

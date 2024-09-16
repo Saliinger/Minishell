@@ -53,7 +53,7 @@ static int	child(t_command *c, t_minishell *m)
 		if (dup2(c->outfile_fd, STDOUT_FILENO) == -1)
 			err += -1;
 	}
-	else if (c->pipe_command != NULL)
+	else if (c->subcommand != NULL)
 		if (dup2(c->pipe_fds[OUT], STDOUT_FILENO) == -1) //maybe I should know if I'm last, not to do that
 			err += -1;
 	err += ft_close_fd(&c->infile_fd);
@@ -94,7 +94,7 @@ int	piper(t_command *cmds, t_minishell *m)
 		else
 			if (parent(cmds, pids, pid) == ERR_PARENT) //pids is not yet a linked list
 				return (free_pids(pids), ft_error("parent error\n", ERR_PARENT));
-		cmds = cmds->pipe_command;
+		cmds = cmds->subcommand;
 	}
 	return (parent_waits(cmds, pids, pid));
 }
