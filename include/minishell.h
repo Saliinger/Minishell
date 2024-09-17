@@ -100,7 +100,7 @@ typedef struct s_minishell
 	// new	// init me extract me from env (line starting by PATHS),
 	// then (split me on token ':')
 	//->needed for exec cmd
-	char				*builtins_paths[NB_BUILTINS];
+	//char				*builtins_paths[NB_BUILTINS];
 	// new	// init me fill me with the path to each builtin, builtins_paths[id]
 	//			-> needed for exec builtins
 	char				*pwd;
@@ -110,9 +110,12 @@ typedef struct s_minishell
 }						t_minishell;
 
 // FREE
-void					free_nullterm_tab(char **tab);
-void					free_t_command(t_command *cmds);
-void					free_t_minishell(t_minishell *m);
+//void					free_nullterm_tab(char **tab);
+//void					free_t_command(t_command *cmds);
+//void					free_t_minishell(t_minishell *m);
+void					free_minishell(t_minishell *minishell);
+void					free_command(t_command *command);
+
 
 int						ft_close_fd(int *fd);
 
@@ -131,6 +134,7 @@ void					ft_cd(t_command *command, t_minishell *minishell);
 void					ft_export(t_command *command, t_minishell *minishell);
 void					ft_unset(t_command *command, t_minishell *minishell);
 void					ft_heredoc(t_command *command, t_minishell *minishell);
+void					exit_shell(t_minishell *minishell, bool fail);
 
 
 // PARSING
@@ -143,10 +147,8 @@ int						check_pipe(char *in);
 // UTILS
 char					*display_prompt(char *prompt, t_minishell *minishell);
 void					sighandler(int sig);
-void					exit_shell(bool fail);
 char					**get_env(char **env);
 bool					checker_command(char *in, char *command);
-void					free_command(t_command *command);
 int						nbr_of_line(char **env);
 
 void					free_env(char **env);

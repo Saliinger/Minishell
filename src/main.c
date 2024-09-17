@@ -65,6 +65,8 @@ static t_minishell	*init(char **env, char *pwd)
 	minishell->paths = ft_split(init_path(minishell), ':');
 	minishell->hd = (char **)malloc(sizeof(char *));
 	minishell->hd[0] = NULL;
+	minishell->hidden_path = NULL;
+	minishell->hidden_env = NULL;
 	return (minishell);
 }
 
@@ -103,6 +105,6 @@ int	main(int ac, char **av, char **env)
 	if (!minishell)
 		return (1);
 	main_extend(prompt, minishell, line);
-	exit_shell(false);
+	exit_shell(minishell, false);
 	return (0);
 }

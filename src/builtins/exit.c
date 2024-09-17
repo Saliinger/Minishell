@@ -12,9 +12,10 @@
 
 #include "../../include/minishell.h"
 
-void	exit_shell(bool fail)
+void	exit_shell(t_minishell *minishell, bool fail)
 {
 	printf("Bye Bye Bye\n");
+	free_minishell(minishell);
 	if (fail == true)
 		exit(EXIT_FAILURE);
 	else
