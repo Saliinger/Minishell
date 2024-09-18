@@ -100,7 +100,7 @@ typedef struct s_minishell
 	// new	// init me extract me from env (line starting by PATHS),
 	// then (split me on token ':')
 	//->needed for exec cmd
-	//char				*builtins_paths[NB_BUILTINS];
+	char				*builtins_paths[NB_BUILTINS];
 	// new	// init me fill me with the path to each builtin, builtins_paths[id]
 	//			-> needed for exec builtins
 	char				*pwd;
@@ -110,9 +110,9 @@ typedef struct s_minishell
 }						t_minishell;
 
 // FREE
-//void					free_nullterm_tab(char **tab);
-//void					free_t_command(t_command *cmds);
-//void					free_t_minishell(t_minishell *m);
+void					free_nullterm_tab(char **tab);
+void					free_t_command(t_command *cmds);
+void					free_t_minishell(t_minishell *m);
 void					free_minishell(t_minishell *minishell);
 void					free_command(t_command *command);
 

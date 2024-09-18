@@ -68,6 +68,8 @@ static char	*env_var(char *current_line, t_minishell *minishell)
 			break ;
 		if (current_line[i] == '\"')
 			flag = 1;
+		if (current_line[0] == '\'')
+			return (current_line);
 		i++;
 	}
 	if (i == ft_strlen(current_line))
