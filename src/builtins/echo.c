@@ -60,8 +60,10 @@ static char	*env_var(char *current_line, t_minishell *minishell)
 	i = 0;
 	flag = 0;
 	j = 0;
+	printf("current line: %s\n", current_line);
 	while(current_line[i])
 	{
+		printf("current line [i]: %c\n", current_line[i]);
 		if (current_line[0] == '$')
 			break ; 
 		if (flag == 1 && current_line[i] == '$')
@@ -77,8 +79,19 @@ static char	*env_var(char *current_line, t_minishell *minishell)
 	if (current_line[i] == '$')
 		i++;
 	j = i;
-	while (current_line[i] != '\"')
-		i++;
+	if (flag == 1)
+	{
+		while (current_line[i] && current_line[i] != '\"')
+		{
+			i++;
+			if (current_line[i] == '\"')
+				flag = 0;
+		}
+		if (flag == 1 && i == ft_strlen(current_line))
+			return ("Error syntax: Fuck Off!!\n");
+	}
+	else if (flag == 0)
+		i = ft_strlen(current_line);
 	res_env = (char *)malloc(sizeof(char) * (i - j));
 	if (!res_env)
 		return ("Error: error malloc while getting the env var");
@@ -119,6 +132,7 @@ static void	ft_print_echo(t_minishell *minishell, char **arg, int i)
 {
 	char	*is_env;
 
+	is_env = NULL;
 	while (arg[i])
 	{
 		if (is_env)

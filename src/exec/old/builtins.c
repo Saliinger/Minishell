@@ -30,6 +30,6 @@ void	builtin_slector(t_command *command, t_minishell *minishell)
 		ft_env(minishell);
 	else if (command->id == EXIT_ID)
 		exit_shell(minishell, false);
-	if (command->pipe == false)
-		free_command(command);
+	//if (command->pipe == false)
+	//	free_command(command);
 }
