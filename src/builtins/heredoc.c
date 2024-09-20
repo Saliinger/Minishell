@@ -5,7 +5,7 @@ static bool	check_key(t_command *command, char *line)
 	char	*key;
 
 	key = command->arg[1];
-	if (ft_strncmp(line, command->arg[1], ft_strlen(command->arg[0])) && ft_strlen(line) == ft_strlen(command->arg[0]))
+	if (ft_strncmp(line, command->arg[1], ft_strlen(command->arg[1])) == 0 && ft_strlen(line) == ft_strlen(command->arg[1]))
 		return (true);
 	return (false);
 }
@@ -69,6 +69,8 @@ void	ft_heredoc(t_command *command, t_minishell *minishell)
 	char	*hd;
 
 	flag = 1;
+	hd = (char *)malloc(sizeof(char));
+	hd[0] = '\0';
 	while(flag)
 	{
 		line = readline(">");
