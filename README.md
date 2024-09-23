@@ -12,3 +12,8 @@ Anoukan
     - exit (x)
     - free structure
 
+
+# ISSUE
+```
+need check leak on child + free minishell structure
+```
