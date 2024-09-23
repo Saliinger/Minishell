@@ -33,6 +33,7 @@
 # define ENV "env"
 # define EXIT "exit"
 # define HD "<<"
+# define EXPAND "$"
 
 // Define path
 # define PATH "/bin/"
@@ -47,6 +48,7 @@
 # define EXIT_ID 7
 # define NB_BUILTINS 8
 # define HD_ID 9
+# define EXPAND_ID 10
 
 // Structure
 typedef struct s_command
@@ -135,6 +137,7 @@ void					ft_export(t_command *command, t_minishell *minishell);
 void					ft_unset(t_command *command, t_minishell *minishell);
 void					ft_heredoc(t_command *command, t_minishell *minishell);
 void					exit_shell(t_minishell *minishell, bool fail);
+void					ft_expand(t_command *command, t_minishell *minishell);
 
 
 // PARSING

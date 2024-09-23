@@ -85,3 +85,5 @@ void	ft_cd(t_command *command, t_minishell *minishell)
 	else
 		perror("Error changing directory");
 }
+
+// add lstast for the symlink
