@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extern.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:34:00 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/11 15:33:25 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/22 23:54:38 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,20 @@ void	ft_extern(t_command *command, t_minishell *minishell)
 	pid_t	pid;
 	int		status;
 
+	(void) status;
 	path = ft_strjoin(PATH, command->command);
 	pid = fork();
 	if (pid == 0)
 	{
 		if(execve(path, command->arg, minishell->env) == -1)
 		{
-			free_command(command);
+			free_t_command(&command);
 			free(path);
 			exit(EXIT_FAILURE);
 		}
 	}
 	while (wait(NULL) > 0)
 		;
-	free_command(command);
+	free_t_command(&command);
 	free(path);
 }

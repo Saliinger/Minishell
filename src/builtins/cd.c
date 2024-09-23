@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:29:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/01 12:56:46 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/22 23:01:19 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	ft_cd(t_command *command, t_minishell *minishell)
 	char	*path;
 	int		home_line;
 
+	(void) home_line;
 	if (!command->arg[1] || ft_strncmp(command->arg[1], "~", 1) == 0)
 	{
 		path = get_home(minishell);

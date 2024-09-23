@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:39:03 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/09/09 22:36:07 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/09/23 03:24:35 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,30 @@ static char	*get_command(char **paths, char *cmd)
 	return (NULL);
 }
 
+int	exec_builtin(t_command *c, t_minishell *m)
+{
+	int	exit_status;
+
+	exit_status = 0;
+	if (c->id == ECHO_ID)
+		ft_echo(m, c);
+	else if (c->id == CD_ID)
+		ft_cd(c, m);
+	else if (c->id == PWD_ID)
+		ft_pwd(m);
+	else if (c->id == EXPORT_ID)
+		ft_export(c, m);
+	else if (c->id == UNSET_ID)
+		ft_unset(c, m);
+	else if (c->id == ENV_ID)
+		ft_env(m);
+	else if (c->id == EXIT_ID)
+		exit_shell(false);
+	return (exit_status);
+}
+
 /**
- * brief : will exec the command,makes it work wheter the cmd is a builtin (identified with c->id, args c->arg, path located in m->builtins[c->id]),
+ * brief : will exec the command, makes it work wheter the cmd is a builtin (identified with c->id, args c->arg, path located in m->builtins[c->id]),
  * or if it is a cmdpath (cmd located in c->command, arngs c->arg, paths located in m->paths) 
  * 
  */
@@ -52,7 +74,7 @@ static int	execve_builtin_or_cmdpath(t_command *c, t_minishell *m)
 	err = 0;
 	if (c->id)
 	{
-		err = execve(m->builtins_paths[c->id], c->arg, m->env);
+		exec_builtin(c, m);
 	}
 	else
 	{
@@ -63,24 +85,26 @@ static int	execve_builtin_or_cmdpath(t_command *c, t_minishell *m)
 			ft_putstr_fd(msg, STDERR_FILENO);
 			return (free(msg), ft_error("error cmd\n", ERR_CMD));
 		}
-		err = execve(c->command, c->arg, m->env);
+		err = execve(c->command, c->arg, m->env);	
+		perror(NULL);																														
 	}
 	return (err);
 }
 
 /**
  * brief : will exec the command
- * 
+ * note : children either get execve'd here or get exit(-1) for failure to execve
  */
-int	execve_command(t_command *c, t_minishell *m)
+void	execve_command(t_command *c, t_minishell *m, t_pids *pids)
 {
 	int		err;
 
 	err = execve_builtin_or_cmdpath(c, m);
-	if (err == -1)
-	{
-		free_t_command(c); //do I know all c or should I use head + iterator ?  //free m ?
-		exit(ft_error("error execve\n", -1)); //check me later to avoid exiting if possible
-	}
-	return (0);
+	
+	free_t_command(&c);
+	free_t_minishell(&m);
+	free_pids(pids);
+	if (err)
+		exit(err);
+	exit(0);
 }

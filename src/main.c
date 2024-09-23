@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:10 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/08 14:36:18 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/23 01:45:06 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	main_extend(char *prompt, t_minishell *minishell, char *line)
 		using_history();
 		if (!line)
 		{
-			free(line);
+			free(line); // || !line[0]
 			continue ;
 		}
 		if (*line)

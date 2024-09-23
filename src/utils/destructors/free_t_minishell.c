@@ -6,11 +6,11 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 20:33:54 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/09/10 01:43:32 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/09/23 00:05:27 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/exec.h"
+#include "../../../include/minishell.h"
 
 /**
  * brief : frees the n elements of the tab
@@ -62,12 +62,17 @@ static void	free_mini_elems(t_minishell *m)
 }
 
 /**
+ * in : ms is &m, where m is a t_minishell *m
  * brief : frees the elements of the t_minishell then frees the t_minishell;
- *
+ * sets the m to NULL
+ * 
  */
-void	free_t_minishell(t_minishell *m)
+void	free_t_minishell(t_minishell **ms)
 {
+	t_minishell *m;
+
+	m = *ms;
 	free_mini_elems(m);
-	m = NULL;
-	free(m);
+	free (m);
+	*ms = NULL;
 }

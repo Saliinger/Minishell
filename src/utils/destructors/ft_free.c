@@ -3,19 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:20 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/08 14:25:56 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/23 00:06:14 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-void	free_env(char **env)
+/**
+ * in : e is &end, where env is a char **env
+ * brief : frees char * in env, then env,
+ * then sets env to NULL
+ * 
+ */
+void	free_env(char ***e)
 {
+	char **env;
 	int	i;
 
+	env = *e;
 	i = 0;
 	while (env[i])
 	{
@@ -23,4 +31,5 @@ void	free_env(char **env)
 		i++;
 	}
 	free(env);
+	*e = NULL;
 }

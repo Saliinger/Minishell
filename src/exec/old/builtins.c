@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:33:51 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/11 15:33:08 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/22 23:54:31 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	builtin_slector(t_command *command, t_minishell *minishell)
 	else if (command->id == EXIT_ID)
 		exit_shell(false);
 	if (command->pipe == false)
-		free_command(command);
+		free_t_command(&command);
 }

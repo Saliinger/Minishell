@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/11 15:12:06 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/22 23:58:55 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,6 @@ typedef struct s_minishell
 	char				**hd;
 }						t_minishell;
 
-// FREE
-void					free_nullterm_tab(char **tab);
-void					free_t_command(t_command *cmds);
-void					free_t_minishell(t_minishell *m);
-
-int						ft_close_fd(int *fd);
 
 // EXEC
 int						ft_exec(t_command *c, t_minishell *m);
@@ -146,10 +140,15 @@ void					sighandler(int sig);
 void					exit_shell(bool fail);
 char					**get_env(char **env);
 bool					checker_command(char *in, char *command);
-void					free_command(t_command *command);
 int						nbr_of_line(char **env);
 
-void					free_env(char **env);
+//destructors
+void					free_env(char ***env);
+int						ft_close_fd(int *fd);
+void					free_nullterm_tab(char **tab);
+void					free_t_command(t_command **c);
+void					free_t_minishell(t_minishell **m);
+
 
 // Split Element
 size_t					ft_countword(const char *s, char c);

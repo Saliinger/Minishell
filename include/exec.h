@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 20:13:52 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/09/11 15:02:26 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/22 22:58:21 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ int					pids_size(t_pids *pids);
 
 // FUNCTIONS LOCALISED TO EXEC
 int					exec(t_command *c, t_minishell *m);
-int					parent_waits(t_command *c, t_pids *pids,
-						pid_t last_child_pid);
-int					execve_command(t_command *c, t_minishell *m);
+int					parent_waits(t_pids *pids, pid_t last_child_pid);
+int					execve_command(t_command *c, t_minishell *m, t_pids *pids);
 int					piper(t_command *cmds, t_minishell *m);
 
 #endif

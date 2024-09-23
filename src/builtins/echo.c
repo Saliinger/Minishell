@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:35 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/07 16:15:06 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/23 01:39:46 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static char	*env_var(char *current_line, t_minishell *minishell)
 	if (current_line[i] == '$')
 		i++;
 	j = i;
-	while (current_line[i] != '\"')
+	while (current_line[i] != '\"')  // sometimes, I segfault here ex : echo $PWD, or echo $PATH // shouldn't you aso be looking for '\0' or maybe '\n' ? /genq
 		i++;
 	res_env = (char *)malloc(sizeof(char) * (i - j));
 	if (!res_env)
@@ -115,8 +115,9 @@ static bool	flag_endl(char **arg)
 
 static void	ft_print_echo(t_minishell *minishell, char **arg, int i)
 {
-	char	*is_env;
+	char	*is_env; // NULL ini me
 
+	is_env = NULL; // fixed
 	while (arg[i])
 	{
 		if (is_env)

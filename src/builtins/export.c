@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 18:03:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/08 14:24:51 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/22 23:59:41 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	create_value(t_minishell *minishell, char *var)
 	new_env[i] = ft_strdup(var);
 	i++;
 	new_env[i] = NULL;
-	free_env(minishell->env);
+	free_env(&minishell->env);
 	minishell->env = new_env;
 }
 

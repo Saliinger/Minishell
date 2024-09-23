@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 16:05:44 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/08 14:31:50 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/09/22 23:59:50 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	delete_value(t_minishell *minishell, char *var, int var_line)
 		perror("Error\nCouldn't create the new env");
 		return ;
 	}
-	free_env(minishell->env);
+	free_env(&(minishell->env));
 	minishell->env = new_env(minishell->env, var_line);
 }
 
