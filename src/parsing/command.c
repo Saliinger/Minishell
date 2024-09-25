@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <stdio.h>
 
 static char	*extract_command(char *line)
 {

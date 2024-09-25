@@ -13,7 +13,6 @@
 // trim the *in and put it in the struct t_command for other use
 
 #include "../../include/minishell.h"
-#include <stdbool.h>
 
 
 static char	*cut_first_cmd(char *in, int pipe_position)
@@ -67,7 +66,7 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->in = ft_strdup(in);
 	command->pipe_position = check_pipe(in);
 	command->redirection_position = 0; // redirection work in progress
-	if (command->pipe_position > 0 || command->redirection_position)
+	if (command->pipe_position > 0 || command->redirection_position > 0)
 	{
 		if (command->pipe_position < command->redirection_position)
 		{
