@@ -33,7 +33,7 @@ void	builtin_slector(t_command *command, t_minishell *minishell)
 	else if (command->id == HD_ID)
 		ft_heredoc(command, minishell);
 	else if (command->id == EXPAND_ID)
-		ft_heredoc(command, minishell);
+		ft_expand(command, minishell);
 	//if (command->pipe == false)
 	//	free_command(command);
 }

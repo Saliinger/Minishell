@@ -94,8 +94,6 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->pipe_fds[1] = -1;
 	command->outfile_fd = -1;
 	command->infile_fd = -1;
-	
-	ft_print(command->arg, 0);
 	return (command);
 }
 
