@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42mulhouse.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 16:26:14 by anoukan           #+#    #+#             */
+/*   Updated: 2024/09/26 16:26:24 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 // need to print the env var
@@ -15,7 +27,7 @@ void	ft_expand(t_command *command, t_minishell *minishell)
 	line  = get_env_var(minishell, arg, len - 1);
 	if (line >= 0)
 	{
-				g = 0;
+		g = 0;
 		while(minishell->env[line][g] != '=')
 			g++;
 		g++;
