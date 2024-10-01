@@ -136,7 +136,7 @@ void					ft_cd(t_command *command, t_minishell *minishell);
 void					ft_export(t_command *command, t_minishell *minishell);
 void					ft_unset(t_command *command, t_minishell *minishell);
 void					ft_heredoc(t_command *command, t_minishell *minishell);
-void					exit_shell(t_minishell *minishell, bool fail);
+void					exit_shell(t_minishell *minishell, t_command *command, bool fail);
 void					ft_expand(t_command *command, t_minishell *minishell);
 
 
@@ -144,6 +144,7 @@ void					ft_expand(t_command *command, t_minishell *minishell);
 t_command				*command_init(char *in);
 void					parsing(char *str, t_minishell *minishell);
 t_command				*trim(char *in, char *in_command, bool builtin, int id);
+bool					input_checker(char *in);
 // Divider for parsing
 int						check_pipe(char *in);
 

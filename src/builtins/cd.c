@@ -68,7 +68,10 @@ void	ft_cd(t_command *command, t_minishell *minishell)
 	{
 		path = get_home(minishell);
 		if (!path)
+		{
 			perror("Home is not set");
+			return ;
+		}
 		free(minishell->old_pwd);
 		minishell->old_pwd = ft_strdup(minishell->pwd);
 		free(minishell->pwd);
