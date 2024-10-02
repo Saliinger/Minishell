@@ -104,6 +104,5 @@ int	main(int ac, char **av, char **env)
 	if (!minishell)
 		return (1);
 	main_extend(prompt, minishell, line);
-	exit_shell(minishell, false);
 	return (0);
 }
