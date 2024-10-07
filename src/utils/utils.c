@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <stdio.h>
 
 bool	checker_command(char *in, char *command)
 {
@@ -46,14 +47,16 @@ char	**get_env(char **env)
 {
 	int		i;
 	char	**res;
+	int		nbr_lines;
 
 	i = 0;
+	nbr_lines = nbr_of_line(env);
 	if (!env)
 		return (NULL);
-	res = (char **)malloc(sizeof(char *) * nbr_of_line(env) + 1);
+	res = (char **)malloc(sizeof(char *) * (nbr_lines + 1));
 	if (!res)
 		return (NULL);
-	while (env[i])
+	while (i < nbr_lines)
 	{
 		res[i] = ft_strdup(env[i]);
 		i++;
