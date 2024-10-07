@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structure.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/07 23:06:50 by anoukan           #+#    #+#             */
+/*   Updated: 2024/10/07 23:06:51 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
-
 
 // Defines
 # define ECHO "echo"
@@ -41,7 +52,7 @@ typedef struct s_command
 	bool				builtin;
 	bool				pipe;
 	int					pipe_position;
-	//bool				redirection;
+	// bool				redirection;
 	int					redirection_position;
 	int					pipe_fds[2];
 	int					pid;

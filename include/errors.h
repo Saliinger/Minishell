@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 20:16:09 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/09/09 20:16:45 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/10/07 23:07:43 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #  define VERBOSE 0
 # endif
 
-enum e_errors
+enum	e_errors
 {
 	ERR_MALLOC = 42,
 	ERR_ARGS,
@@ -26,7 +26,7 @@ enum e_errors
 	ERR_PARSE,
 };
 
-enum e_primitive_errors
+enum	e_primitive_errors
 {
 	ERR_OUTFILE = 2,
 	ERR_OPEN,
@@ -38,5 +38,5 @@ enum e_primitive_errors
 	ERR_ACCESS
 };
 
-int     ft_error(char *error_msg, int errnum);
+int		ft_error(char *error_msg, int errnum);
 #endif
