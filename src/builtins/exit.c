@@ -12,10 +12,17 @@
 
 #include "../../include/minishell.h"
 
-void	exit_shell(bool fail)
+void	exit_shell(t_minishell *minishell, t_command *command, bool fail)
 {
 	printf("Bye Bye Bye\n");
-	if (fail == true)
+	free_minishell(minishell);
+	if (nbr_of_line(command->arg) > 2)
+		return;
+	else if (command->arg[1])
+	{
+		exit(atoi(command->arg[1]) % 256);
+	}
+	else if (fail == true)
 		exit(EXIT_FAILURE);
 	else
 		exit(EXIT_SUCCESS);

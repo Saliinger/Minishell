@@ -29,7 +29,11 @@ void	builtin_slector(t_command *command, t_minishell *minishell)
 	else if (command->id == ENV_ID)
 		ft_env(minishell);
 	else if (command->id == EXIT_ID)
-		exit_shell(false);
-	if (command->pipe == false)
-		free_command(command);
+		exit_shell(minishell, command, false);
+	else if (command->id == HD_ID)
+		ft_heredoc(command, minishell);
+	else if (command->id == EXPAND_ID)
+		ft_expand(command, minishell);
+	//if (command->pipe == false)
+	//	free_command(command);
 }
