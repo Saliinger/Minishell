@@ -46,6 +46,7 @@ static char	**new_env(char **current_env, int var_line)
 
 static void	delete_value(t_minishell *minishell, char *var, int var_line)
 {
+	(void)var;
 	if (var_line == -1)
 	{
 		perror("Error\nThe var doesn't exist\n");

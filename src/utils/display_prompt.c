@@ -14,10 +14,10 @@
 
 char	*display_prompt(char *prompt, t_minishell *minishell)
 {
-	char	buffer[4096 + 1];
+	//char	buffer[4096 + 1];
 	char	*path;
 	char	*usr;
-	char	*pc;
+	//char	*pc;
 	char	*res;
 
 	if (prompt)

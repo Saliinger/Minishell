@@ -15,7 +15,6 @@
 // need to add the print of env and hidden env
 
 #include "../../include/minishell.h"
-#include <time.h>
 
 // add of env
 // special case with simple and double quote
@@ -50,10 +49,9 @@ static char	*dup_env(char *env)
 static char	*env_var(char *current_line, t_minishell *minishell)
 {
 	char	*res_env;
-	int		i;
+	size_t	i;
 	int		flag;
-	char	*var;
-	int		j;
+	size_t		j;
 	int		env_line;
 	int		k;
 
@@ -155,7 +153,6 @@ static void	ft_print_echo(t_minishell *minishell, char **arg, int i)
 static int	flag_num(char **arg)
 {
 	int	i;
-	int	j;
 	int	flag;
 
 	flag = 1;

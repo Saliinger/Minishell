@@ -58,27 +58,19 @@ static char	*remove_first_cmd(char *in, int pipe_position)
 t_command	*trim(char *in, char *in_command, bool builtin, int id)
 {
 	t_command	*command;
-	char		*arg_in;
 
 	command = (t_command *)malloc(sizeof(t_command));
 	if (!command)
 		return (NULL);
 	command->in = ft_strdup(in);
 	command->pipe_position = check_pipe(in);
-	command->redirection_position = 0; // redirection work in progress
-	if (command->pipe_position > 0 || command->redirection_position > 0)
+	if (command->pipe_position > 0)
 	{
 		if (command->pipe_position < command->redirection_position)
 		{
 			command->pipe = true;
 			command->arg = split_element(cut_first_cmd(in, command->pipe_position), ' ');
 			command->subcommand = command_init(remove_first_cmd(in, command->pipe_position));
-		}
-		else
-		{
-			command->redirection = true;
-			command->arg = split_element(cut_first_cmd(in, command->redirection_position), ' ');
-			command->subcommand = command_init(remove_first_cmd(in, command->redirection_position));
 		}
 	}
 	else

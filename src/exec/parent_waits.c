@@ -41,6 +41,7 @@ static int	wait_get_child_err(pid_t last_child_pid, int *err_child)
  */
 static int	wait_children (t_command *c, t_pids *pids, pid_t last_child_pid)
 {
+	(void)c; //for the warning
 	int	err;
 	int	err_last_child;
 	int	nb_children;

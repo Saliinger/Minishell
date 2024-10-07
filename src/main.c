@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include <time.h>
 
 static void	get_line(char **line, char *prompt)
 {
@@ -94,11 +95,15 @@ static void	main_extend(char *prompt, t_minishell *minishell, char *line)
 
 int	main(int ac, char **av, char **env)
 {
+	(void)ac;
+	(void)av;
+
 	char		*line;
 	char		*prompt;
 	t_minishell	*minishell;
 	char		buffer[4096 + 1];
 
+	line = NULL;
 	prompt = NULL;
 	minishell = init(env, getcwd(buffer, 4096));
 	if (!minishell)

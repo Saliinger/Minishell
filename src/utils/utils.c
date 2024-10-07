@@ -14,8 +14,8 @@
 
 bool	checker_command(char *in, char *command)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;

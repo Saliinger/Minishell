@@ -41,10 +41,11 @@ typedef struct s_command
 	bool				builtin;
 	bool				pipe;
 	int					pipe_position;
-	bool				redirection;
+	//bool				redirection;
 	int					redirection_position;
 	int					pipe_fds[2];
 	int					pid;
+	char				**redirection;
 	// new 		//init me at -1
 	int					infile_fd;
 	int					outfile_fd;

@@ -66,6 +66,7 @@ bool	divider_checker(char *in, char c)
 //
 bool	extend_forbiden_checker(char *in, char c, char q, int *i)
 {
+	(void)c;
 	while (in[*i] && in[*i] != q)
 	{
 		if (in[*i] == q)

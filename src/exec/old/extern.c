@@ -20,7 +20,6 @@ void	ft_extern(t_command *command, t_minishell *minishell)
 {
 	char	*path;
 	pid_t	pid;
-	int		status;
 
 	path = ft_strjoin(PATH, command->command);
 	pid = fork();
