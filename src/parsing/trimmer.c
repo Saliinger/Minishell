@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/08 14:25:49 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/07 22:34:57 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 #include "../../include/minishell.h"
 
-
 static char	*cut_first_cmd(char *in, int pipe_position)
 {
-	char *res;
-	int i = 0;
-	
+	char	*res;
+	int		i;
+
+	i = 0;
 	res = (char *)malloc(sizeof(char) * pipe_position);
 	if (!res)
 		return (NULL);
@@ -66,17 +66,17 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->pipe_position = check_pipe(in);
 	if (command->pipe_position > 0)
 	{
-		if (command->pipe_position < command->redirection_position)
-		{
-			command->pipe = true;
-			command->arg = split_element(cut_first_cmd(in, command->pipe_position), ' ');
-			command->subcommand = command_init(remove_first_cmd(in, command->pipe_position));
-		}
+		command->pipe = true;
+		command->arg = split_element(cut_first_cmd(in, command->pipe_position),
+				' ');
+		command->subcommand = command_init(remove_first_cmd(in,
+					command->pipe_position));
 	}
 	else
 	{
 		command->subcommand = NULL;
 		command->arg = split_element(in, ' ');
+		ft_print(command->arg, 0);
 	}
 	command->command = ft_strdup(in_command);
 	command->builtin = builtin;

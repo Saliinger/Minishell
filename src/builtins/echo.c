@@ -155,10 +155,11 @@ static int	flag_num(char **arg)
 	int	i;
 	int	flag;
 
-	flag = 1;
+	flag = 0;
 	i = 1;
 	while (arg[i])
 	{
+		printf("arg[%d]: %s", i, arg[i]);
 		if (arg[i][0] == '-')
 			flag++;
 		if (arg[i][0] != '-')

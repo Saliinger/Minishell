@@ -2,9 +2,11 @@
 
 int	check_pipe(char *in)
 {
-	int i = 0;
-	int flag = 0;
+	int	i;
+	int	flag;
 
+	i = 0;
+	flag = 0;
 	while (in[i])
 	{
 		if (flag == 0 && in[i] == '|')
@@ -27,9 +29,11 @@ int	check_pipe(char *in)
 // redirection work in progress
 int	check_redirection(char *in)
 {
-	int i = 0;
-	int flag = 0;
+	int	i;
+	int	flag;
 
+	i = 0;
+	flag = 0;
 	while (in[i])
 	{
 		if (flag == 0 && in[i] == '<' && in[i + 1] == '<')
@@ -38,7 +42,7 @@ int	check_redirection(char *in)
 				i++;
 			return (i - 1);
 		}
-				if (in[i] == '"')
+		if (in[i] == '"')
 		{
 			while (in[i] != '"')
 				i++;
@@ -51,5 +55,4 @@ int	check_redirection(char *in)
 		i++;
 	}
 	return (0);
-
 }

@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   move_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 19:58:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/07 22:33:21 by anoukan          ###   ########.fr       */
+/*   Created: 2024/10/07 22:36:35 by anoukan           #+#    #+#             */
+/*   Updated: 2024/10/07 22:40:23 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	parsing(char *str, t_minishell *minishell)
+static int	count_redir(char *in)
 {
-	t_command	*current;
+	int	i;
+	int	res;
 
-	// printf("str: %s\n", str);
-	// if (!input_checker(str))
-	//	return ;
-	current = command_init(str);
-	// ft_print(current->arg, 0);
-	// if (current->subcommand)
-	// 	ft_print(current->subcommand->arg, 0);
-	if (current)
-		old_ft_exec(current, minishell);
-	else
-		printf("loli said: bitch it's not working\n");
+	i = 0;
+	res = 0;
+	while (in[i])
+	{
+		if (in[i] == '<' || in[i] == '>')
+		{
+		}
+	}
+	return (res);
 }
 
-// it just create the node for the command and start the exec
+char	**set_redir(char *in)
+{
+	char	**res;
+}
