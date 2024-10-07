@@ -16,9 +16,9 @@ void	parsing(char *str, t_minishell *minishell)
 {
 	t_command	*current;
 
-	printf("str: %s\n", str);
-	if (!input_checker(str))
-		return;
+	//printf("str: %s\n", str);
+	//if (!input_checker(str))
+	//	return;
 	current = command_init(str);
 	if (current )
 		old_ft_exec(current, minishell);
