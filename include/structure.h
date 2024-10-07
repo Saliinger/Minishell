@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:50 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/07 23:14:34 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/08 01:15:19 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@
 # include "imports.h"
 
 // Structure
-
 typedef struct s_redir
 {
-	e_redir				type;
-	char				*redit;
+	t_enum_redir		type;
+	char				*redir;
+	struct s_redir		*next;
 }						t_redir;
 
 typedef struct s_command
@@ -59,10 +59,9 @@ typedef struct s_command
 	bool				builtin;
 	bool				pipe;
 	int					pipe_position;
-	int					redirection_position;
 	int					pipe_fds[2];
 	int					pid;
-	t_redir				*redirection; // ajout d'une struct pour creer le tableau de redir
+	t_redir				*redirection;
 	int					infile_fd;
 	int					outfile_fd;
 }						t_command;

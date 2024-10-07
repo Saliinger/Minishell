@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/07 23:07:32 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/08 01:25:45 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_command	*command_init(char *in);
 void		parsing(char *str, t_minishell *minishell);
 t_command	*trim(char *in, char *in_command, bool builtin, int id);
 bool		input_checker(char *in);
+t_redir		*extract_redir(char **in);
 // Divider for parsing
 int			check_pipe(char *in);
 
@@ -64,6 +65,7 @@ void		change_pwd(t_minishell *minishell);
 
 // Debug
 void		ft_print(char **s, int i);
+void		ft_print_redir(t_redir *list);
 
 #endif
 

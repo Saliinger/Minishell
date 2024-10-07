@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:23:53 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/07 22:27:11 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/08 01:25:30 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	**get_env(char **env)
 
 void	ft_print(char **s, int i)
 {
-	if (!s) // Check if the pointer array is NULL
+	if (!s)
 	{
 		printf("Error: NULL pointer passed to ft_print.\n");
 		return ;
@@ -76,5 +76,18 @@ void	ft_print(char **s, int i)
 	{
 		printf("%s\n", s[i]);
 		i++;
+	}
+}
+
+void	ft_print_redir(t_redir *list)
+{
+	int	i;
+
+	i = 0;
+	while (list)
+	{
+		printf("node %d: %s\n", i, list->redir);
+		i++;
+		list = list->next;
 	}
 }
