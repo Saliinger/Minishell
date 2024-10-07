@@ -20,7 +20,7 @@ static char	*extract_command(char *line)
 	i = 0;
 	while (line[i] && line[i] != ' ' && line[i] != '\t')
 		i++;
-	command = (char *)malloc(sizeof(char) * i);
+	command = (char *)malloc(sizeof(char) * (i + 1));
 	if (!command)
 		return (NULL);
 	i = 0;
