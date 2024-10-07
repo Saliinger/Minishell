@@ -20,7 +20,6 @@
 //just when they're not in a flag
 
 #include "../../include/minishell.h"
-#include <stdbool.h>
 
 bool	quote_checker(char *in, char c)
 {
@@ -54,9 +53,9 @@ bool	divider_checker(char *in, char c)
 		if (in[i] == c)
 		{
 			if (in[i + 1] == c && c == '|')
-				return (printf("Error syntax: too many %c. Are really trying\n", c), false);
+				return (printf("Error syntax: too many %c. Are you really trying ?\n", c), false);
 			if (in[i + 1] == c && in[i + 2] == c && (c == '<' || c == '>'))
-				return (printf("Error syntax: too many %c. Are really trying\n", c), false);			
+				return (printf("Error syntax: too many %c. Are you really trying ?\n", c), false);			
 		}
 		i++;
 	}
@@ -71,7 +70,7 @@ bool	extend_forbiden_checker(char *in, char c, char q, int *i)
 	{
 		if (in[*i] == q)
 			return true;
-		i++;
+		*i = *i + 1;
 	}
 	return false;
 }
@@ -81,13 +80,14 @@ bool	forbiden_checker(char *in, char c)
 
 	while (in[i])
 	{
+		printf("%c\n", in[i]);
 		if (in[i] == '\"' && extend_forbiden_checker(in, c,'\"', &i) == false)
 			continue;
 		else
 			return false;
 		if (in[i] == '\'' && extend_forbiden_checker(in, c,'\'', &i) == false)
 			continue;
-		else
+		else if (in[i] == c)
 			return false;
 		i++;
 	}
@@ -96,8 +96,8 @@ bool	forbiden_checker(char *in, char c)
 
 bool	input_checker(char *in)
 {
-	if (divider_checker(in, '<') && quote_checker(in, '\'') && divider_checker(in, '>') && divider_checker(in, '|') && quote_checker(in, '"' && forbiden_checker(in, ';')))
-		return (printf("true"),true);
+	if (divider_checker(in, '<') && quote_checker(in, '\'') && divider_checker(in, '>') && divider_checker(in, '|') && quote_checker(in, '\"') && forbiden_checker(in, ';'))
+		return (printf("true\n"),true);
 	else
 		return (false);
 }
