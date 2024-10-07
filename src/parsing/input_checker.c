@@ -20,6 +20,7 @@
 //just when they're not in a flag
 
 #include "../../include/minishell.h"
+#include <stdbool.h>
 
 bool	quote_checker(char *in, char c)
 {
@@ -62,15 +63,41 @@ bool	divider_checker(char *in, char c)
 	return (true);
 }
 
+// need to check only outside quote for forbiden char
+//
+bool	extend_forbiden_checker(char *in, char c, char q, int *i)
+{
+	while (in[*i] && in[*i] != q)
+	{
+		if (in[*i] == q)
+			return true;
+		i++;
+	}
+	return false;
+}
 bool	forbiden_checker(char *in, char c)
 {
-	return false;
+	int i = 0;
+
+	while (in[i])
+	{
+		if (in[i] == '\"' && extend_forbiden_checker(in, c,'\"', &i) == false)
+			continue;
+		else
+			return false;
+		if (in[i] == '\'' && extend_forbiden_checker(in, c,'\'', &i) == false)
+			continue;
+		else
+			return false;
+		i++;
+	}
+	return true;
 }
 
 bool	input_checker(char *in)
 {
-	if (divider_checker(in, '<') && quote_checker(in, '\'') && divider_checker(in, '>') && divider_checker(in, '|') && quote_checker(in, '"'))
-		return (true);
+	if (divider_checker(in, '<') && quote_checker(in, '\'') && divider_checker(in, '>') && divider_checker(in, '|') && quote_checker(in, '"' && forbiden_checker(in, ';')))
+		return (printf("true"),true);
 	else
 		return (false);
 }
