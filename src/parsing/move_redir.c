@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:36:35 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/08 01:22:51 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/08 03:39:13 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	add_node(t_enum_redir type, char *str, t_redir **head)
 	new = (t_redir *)malloc(sizeof(t_redir));
 	if (!new)
 		return ;
-	new->redir = ft_strdup(str);
+	new->redir = ft_strdup(str); // Save either the symbol or target as it is
 	new->type = type;
 	new->next = NULL;
 	if (!*head)
@@ -53,23 +53,28 @@ static t_enum_redir	get_redir_type(char *str)
 t_redir	*extract_redir(char **in)
 {
 	int				i;
-	t_enum_redir	type;
 	t_redir			*redir_list;
+	t_enum_redir	type;
+	char			*input;
 
 	redir_list = NULL;
 	i = 0;
 	while (in[i])
 	{
-		if (!ft_strncmp(in[i], ">", 1) || !ft_strncmp(in[i], "<", 1))
+		type = get_redir_type(in[i]);
+		if (type != R_INVALID && in[i + 1])
 		{
-			type = get_redir_type(in[i]);
-			if (type != R_INVALID && in[i + 1])
-			{
-				add_node(type, in[i + 1], &redir_list);
-				i++;
-			}
+			if (ft_strlen(in[i]) <= 2)
+				input = ft_strjoin(in[i], in[i + 1]);
+			else
+				input = ft_strdup(in[i]);
+			if (!input)
+				return (NULL);
+			add_node(type, input, &redir_list);
+			free(input);
 		}
 		i++;
 	}
 	return (redir_list);
 }
+// need to add a free after the null return if (!input)
