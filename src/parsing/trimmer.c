@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/08 01:26:01 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/08 04:07:49 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*cut_first_cmd(char *in, int pipe_position)
 	int		i;
 
 	i = 0;
-	res = (char *)malloc(sizeof(char) * pipe_position);
+	res = (char *)malloc(sizeof(char) * (pipe_position + 1));
 	if (!res)
 		return (NULL);
 	while (i < pipe_position)
@@ -39,7 +39,7 @@ static char	*remove_first_cmd(char *in, int pipe_position)
 
 	if (in[pipe_position] == '|')
 		pipe_position++;
-	res = (char *)malloc(sizeof(char) * ft_strlen(in + pipe_position) + 1);
+	res = (char *)malloc(sizeof(char) * (ft_strlen(in + pipe_position) + 1));
 	if (!res)
 		return (NULL);
 	i = 0;
@@ -62,6 +62,8 @@ static void	init_command_arg(t_command *command, char *in)
 		command->pipe = true;
 		command->arg = split_element(cut_first_cmd(in, command->pipe_position),
 				' ');
+		printf("command arg : \n");
+		ft_print(command->arg, 0);
 		command->subcommand = command_init(remove_first_cmd(in,
 					command->pipe_position));
 	}
@@ -77,14 +79,18 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 {
 	t_command	*command;
 
+	printf("in: %s\n", in);
 	command = (t_command *)malloc(sizeof(t_command));
 	if (!command)
 		return (NULL);
-	init_command_arg(command, in);
 	command->in = ft_strdup(in);
 	command->pipe_position = check_pipe(in);
+	init_command_arg(command, in);
 	command->redirection = extract_redir(command->arg);
-	command->command = ft_strdup(in_command);
+	if (builtin == true)
+		command->command = ft_strdup(in_command);
+	else
+		command->command = NULL;
 	command->builtin = builtin;
 	command->id = id;
 	command->pid = -1;
