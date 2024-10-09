@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:34:56 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/08 14:37:14 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:52:24 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 char	*display_prompt(char *prompt, t_minishell *minishell)
 {
-	//char	buffer[4096 + 1];
 	char	*path;
 	char	*usr;
-	//char	*pc;
 	char	*res;
 
 	if (prompt)

@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:33:51 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/11 15:33:08 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:49:06 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,4 @@ void	builtin_slector(t_command *command, t_minishell *minishell)
 		ft_heredoc(command, minishell);
 	else if (command->id == EXPAND_ID)
 		ft_expand(command, minishell);
-	//if (command->pipe == false)
-	//	free_command(command);
 }

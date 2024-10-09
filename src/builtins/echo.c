@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:35 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/07 16:15:06 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:49:15 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@
 static char	*dup_env(char *env)
 {
 	char	*trimmed;
-	int		i = 0;
-	int		j = 0;
+	int		i;
+	int		j;
 
+	i = 0;
+	j = 0;
 	while (env[i] != '=')
 		i++;
 	if (env[i] == '=')
@@ -51,7 +53,7 @@ static char	*env_var(char *current_line, t_minishell *minishell)
 	char	*res_env;
 	size_t	i;
 	int		flag;
-	size_t		j;
+	size_t	j;
 	int		env_line;
 	int		k;
 
@@ -59,11 +61,11 @@ static char	*env_var(char *current_line, t_minishell *minishell)
 	flag = 0;
 	j = 0;
 	printf("current line: %s\n", current_line);
-	while(current_line[i])
+	while (current_line[i])
 	{
 		printf("current line [i]: %c\n", current_line[i]);
 		if (current_line[0] == '$')
-			break ; 
+			break ;
 		if (flag == 1 && current_line[i] == '$')
 			break ;
 		if (current_line[i] == '\"')
@@ -94,7 +96,7 @@ static char	*env_var(char *current_line, t_minishell *minishell)
 	if (!res_env)
 		return ("Error: error malloc while getting the env var");
 	k = 0;
-	while(current_line[j] && j < i)
+	while (current_line[j] && j < i)
 	{
 		res_env[k] = current_line[j];
 		j++;

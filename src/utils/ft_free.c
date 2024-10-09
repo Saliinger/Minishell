@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:20 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/08 14:25:56 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:55:41 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 void	free_env(char **env)
 {
-	int	i;
-	static int o = 0;
+	int			i;
+	static int	o = 0;
 
 	o++;
-	printf("%d\n", o);
-	//ft_print(env, 0);
-
 	i = 0;
 	while (env[i])
 	{
@@ -49,10 +46,11 @@ void	free_minishell(t_minishell *minishell)
 		free_env(minishell->hidden_path);
 	if (minishell->hd)
 		free_env(minishell->hd);
-	//if (minishell->pwd)
-	//	printf("pwd: %s\n", minishell->pwd);
-		//free(minishell->pwd);
-	//if (minishell->old_pwd)
-//		free(minishell->old_pwd);
 	minishell = NULL;
 }
+
+// if (minishell->pwd)
+//	printf("pwd: %s\n", minishell->pwd);
+// free(minishell->pwd);
+// if (minishell->old_pwd)
+//		free(minishell->old_pwd);
