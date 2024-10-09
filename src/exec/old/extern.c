@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:34:00 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/11 15:33:25 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:30:24 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ void	ft_extern(t_command *command, t_minishell *minishell)
 	pid = fork();
 	if (pid == 0)
 	{
-		if(execve(path, command->arg, minishell->env) == -1)
+		if (execve(path, command->arg, minishell->env) == -1)
 		{
-			free_command(command);
+			//free_command(command);
 			free(path);
 			exit(EXIT_FAILURE);
 		}
 	}
 	while (wait(NULL) > 0)
 		;
-	free_command(command);
+	// free_command(command);
 	free(path);
 }

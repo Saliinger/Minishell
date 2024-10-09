@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:50 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/08 01:15:19 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:14:36 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_command
 	char				*in;
 	char				*command;
 	char				**arg;
+	char				**clean_arg;
 	int					id;
 	struct s_command	*subcommand;
 	bool				builtin;

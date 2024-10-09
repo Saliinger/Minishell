@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/08 04:07:49 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:40:06 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ static void	init_command_arg(t_command *command, char *in)
 		command->pipe = true;
 		command->arg = split_element(cut_first_cmd(in, command->pipe_position),
 				' ');
-		printf("command arg : \n");
-		ft_print(command->arg, 0);
 		command->subcommand = command_init(remove_first_cmd(in,
 					command->pipe_position));
 	}
@@ -71,7 +69,6 @@ static void	init_command_arg(t_command *command, char *in)
 	{
 		command->subcommand = NULL;
 		command->arg = split_element(in, ' ');
-		ft_print(command->arg, 0);
 	}
 }
 
@@ -79,7 +76,6 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 {
 	t_command	*command;
 
-	printf("in: %s\n", in);
 	command = (t_command *)malloc(sizeof(t_command));
 	if (!command)
 		return (NULL);
@@ -91,6 +87,7 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 		command->command = ft_strdup(in_command);
 	else
 		command->command = NULL;
+	command->clean_arg = clean_arg(command->arg);
 	command->builtin = builtin;
 	command->id = id;
 	command->pid = -1;
@@ -98,7 +95,6 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->pipe_fds[1] = -1;
 	command->outfile_fd = -1;
 	command->infile_fd = -1;
-	ft_print_redir(command->redirection);
 	return (command);
 }
 
