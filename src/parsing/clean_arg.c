@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:13:49 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:47:18 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/10 18:31:12 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	add_expand(char **clean_arg, t_minishell *minishell)
 		{
 			var_len = ft_strlen(clean_arg[i]);
 			var = get_env_var(minishell, clean_arg[i], var_len);
+			(void)var;
 			free(clean_arg[i]);
 			printf("ENV TO DUP: %s\n", minishell->env[1]);
 			clean_arg[i] = ft_strdup("test");
@@ -74,13 +75,15 @@ char	**clean_arg(char **arg, t_minishell *minishell)
 	{
 		if (!is_redirection(arg[i]) && (i == 0 || !is_redirection(arg[i - 1])))
 		{
+			printf("arg[%d] : %s\n", i, arg[i]);
 			res[j] = ft_strdup(arg[i]);
 			j++;
 		}
 		i++;
 	}
 	res[j] = NULL;
-	add_expand(res, minishell);
+	(void)minishell;
+	// add_expand(res, minishell);
 	return (res);
 }
 

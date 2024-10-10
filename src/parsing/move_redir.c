@@ -5,14 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 22:36:35 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/08 03:39:13 by anoukan          ###   ########.fr       */
+/*   Created: 2024/10/10 18:50:21 by anoukan           #+#    #+#             */
+/*   Updated: 2024/10/10 18:50:22 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// Helper function to add a new node to the redirection list
+static bool	is_redirection(char *arg)
+{
+	return (!ft_strncmp(arg, "<", 1) || !ft_strncmp(arg, ">", 1)
+		|| !ft_strncmp(arg, "<<", 2) || !ft_strncmp(arg, ">>", 2));
+}
+
 static void	add_node(t_enum_redir type, char *str, t_redir **head)
 {
 	t_redir	*new;
@@ -21,7 +26,7 @@ static void	add_node(t_enum_redir type, char *str, t_redir **head)
 	new = (t_redir *)malloc(sizeof(t_redir));
 	if (!new)
 		return ;
-	new->redir = ft_strdup(str); // Save either the symbol or target as it is
+	new->redir = ft_strdup(str);
 	new->type = type;
 	new->next = NULL;
 	if (!*head)
@@ -35,7 +40,6 @@ static void	add_node(t_enum_redir type, char *str, t_redir **head)
 	}
 }
 
-// Function to identify the type of redirection based on symbols
 static t_enum_redir	get_redir_type(char *str)
 {
 	if (!ft_strncmp(str, ">>", 2))
@@ -49,32 +53,26 @@ static t_enum_redir	get_redir_type(char *str)
 	return (R_INVALID);
 }
 
-// Function to extract redirection symbols and targets from the input
 t_redir	*extract_redir(char **in)
 {
 	int				i;
 	t_redir			*redir_list;
 	t_enum_redir	type;
-	char			*input;
 
 	redir_list = NULL;
 	i = 0;
 	while (in[i])
 	{
 		type = get_redir_type(in[i]);
-		if (type != R_INVALID && in[i + 1])
+		if (type != R_INVALID)
 		{
-			if (ft_strlen(in[i]) <= 2)
-				input = ft_strjoin(in[i], in[i + 1]);
-			else
-				input = ft_strdup(in[i]);
-			if (!input)
-				return (NULL);
-			add_node(type, input, &redir_list);
-			free(input);
+			add_node(type, in[i], &redir_list);
+			if (in[i + 1] && !is_redirection(in[i + 1]))
+			{
+				add_node(type, in[i + 1], &redir_list);
+			}
 		}
 		i++;
 	}
 	return (redir_list);
 }
-// need to add a free after the null return if (!input)

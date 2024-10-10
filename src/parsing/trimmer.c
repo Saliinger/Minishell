@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:40:06 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/10 15:39:43 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->pipe_fds[1] = -1;
 	command->outfile_fd = -1;
 	command->infile_fd = -1;
+	command->clean_arg = NULL;
 	return (command);
 }
 
