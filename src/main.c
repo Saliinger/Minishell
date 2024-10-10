@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <time.h>
 
 static void	get_line(char **line, char *prompt)
 {

@@ -87,7 +87,6 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 		command->command = ft_strdup(in_command);
 	else
 		command->command = NULL;
-	command->clean_arg = clean_arg(command->arg);
 	command->builtin = builtin;
 	command->id = id;
 	command->pid = -1;

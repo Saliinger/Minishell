@@ -23,6 +23,7 @@ void	parsing(char *str, t_minishell *minishell)
 	// ft_print(current->arg, 0);
 	// if (current->subcommand)
 	// 	ft_print(current->subcommand->arg, 0);
+	current->clean_arg = clean_arg(current->arg, minishell);
 	if (current)
 		old_ft_exec(current, minishell);
 	else

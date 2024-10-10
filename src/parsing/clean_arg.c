@@ -34,7 +34,30 @@ static int	count_line(char **arg)
 	return (nbr_line);
 }
 
-char	**clean_arg(char **arg)
+void	add_expand(char **clean_arg, t_minishell *minishell)
+{
+	int	i;
+	int	var;
+	int	var_len;
+
+	i = 0;
+	while (clean_arg[i])
+	{
+		var = 0;
+		var_len = 0;
+		if (clean_arg[i][0] == '$')
+		{
+			var_len = ft_strlen(clean_arg[i]);
+			var = get_env_var(minishell, clean_arg[i], var_len);
+			free(clean_arg[i]);
+			printf("ENV TO DUP: %s\n", minishell->env[1]);
+			clean_arg[i] = ft_strdup("test");
+		}
+		i++;
+	}
+}
+
+char	**clean_arg(char **arg, t_minishell *minishell)
 {
 	char	**res;
 	int		i;
@@ -57,6 +80,7 @@ char	**clean_arg(char **arg)
 		i++;
 	}
 	res[j] = NULL;
+	add_expand(res, minishell);
 	return (res);
 }
 

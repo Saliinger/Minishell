@@ -40,7 +40,7 @@ void		parsing(char *str, t_minishell *minishell);
 t_command	*trim(char *in, char *in_command, bool builtin, int id);
 bool		input_checker(char *in);
 t_redir		*extract_redir(char **in);
-char		**clean_arg(char **arg);
+char		**clean_arg(char **arg, t_minishell *minishell);
 // Divider for parsing
 int			check_pipe(char *in);
 
