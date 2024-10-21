@@ -35,13 +35,14 @@
 
 static char	**add_line(char **in, char *to_add)
 {
-	printf("char to add: %s\n", to_add);
 	char **dup;
 	int	lines;
 	int	i;
 
-	lines = nbr_of_line(in);
-	printf("lines: %d\n", lines);
+	if (in)
+		lines = nbr_of_line(in);
+	else
+		lines = 0;
 	dup = (char **)malloc(sizeof(char *) * (lines + 2));
 	if (!dup)
 		return (NULL);
@@ -49,36 +50,30 @@ static char	**add_line(char **in, char *to_add)
 	while (i < lines)
 	{
 		dup[i] = ft_strdup(in[i]);
-		printf("dup[%d]: %s\n",i, dup[i]);
 		i++;
 	}
 	if (to_add)
 	{
 		dup[i]  = ft_strdup(to_add);
-		printf("to_add: %s\n", to_add);
 		i++;
 	}
 	dup[i] = NULL;
-	printf("this is dup:\n");
-	ft_print(dup, 0);
 	return (dup);
 }
 
 char	**relexer(char **in)
 {
+	ft_print(in, 0);
 	char **res;
 	char *line;
 	int	i;
 	int	j;
 	int	k;
 
-	if (!in || !*in)
-		res = NULL;
+	res = NULL;
 	i = 0;
 	while (in[i])
 	{
-		printf("nbr lines res: %d\n", nbr_of_line(res));
-
 		j = 0;
 		if (in[i][j] == '<' || in[i][j] == '>')
 		{
@@ -88,7 +83,7 @@ char	**relexer(char **in)
 				line = ft_strjoin_frees1(line, in[i]);
 				j++;
 			}
-						add_line(res, line);
+			add_line(res, line);
 			free(line);
 			line = (char *)malloc(sizeof(char *) * (ft_strlen(in[i]) - j + 1));
 			if (!line)
