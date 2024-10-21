@@ -60,15 +60,15 @@ static void	init_command_arg(t_command *command, char *in)
 	if (command->pipe_position > 0)
 	{
 		command->pipe = true;
-		command->arg = split_element(cut_first_cmd(in, command->pipe_position),
-				' ');
+		command->arg = relexer(split_element(cut_first_cmd(in, command->pipe_position),
+				' '));
 		command->subcommand = command_init(remove_first_cmd(in,
 					command->pipe_position));
 	}
 	else
 	{
 		command->subcommand = NULL;
-		command->arg = split_element(in, ' ');
+		command->arg = relexer(split_element(in, ' '));
 	}
 }
 

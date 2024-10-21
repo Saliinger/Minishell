@@ -38,6 +38,8 @@ int	nbr_of_line(char **env)
 	int	i;
 
 	i = 0;
+	if (!env)
+		return (0);
 	while (env[i])
 		i++;
 	return (i);

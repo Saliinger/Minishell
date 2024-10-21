@@ -76,7 +76,7 @@ static void	main_extend(char *prompt, t_minishell *minishell, char *line)
 	while (1)
 	{
 		prompt = display_prompt(prompt, minishell);
-		signal(SIGINT, sighandler);
+		//signal(SIGINT, sighandler);
 		get_line(&line, prompt);
 		using_history();
 		if (!line)
