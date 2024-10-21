@@ -67,7 +67,7 @@ t_redir	*extract_redir(char **in)
 		if (type != R_INVALID)
 		{
 			add_node(type, in[i], &redir_list);
-			if (in[i + 1] && !is_redirection(in[i + 1]))
+			if (in[i + 1] && !is_redirection(in[i - 1]))
 			{
 				add_node(type, in[i + 1], &redir_list);
 			}
