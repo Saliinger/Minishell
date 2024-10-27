@@ -6,17 +6,17 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:50:21 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/10 18:50:22 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/23 14:05:39 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static bool	is_redirection(char *arg)
-{
-	return (!ft_strncmp(arg, "<", 1) || !ft_strncmp(arg, ">", 1)
-		|| !ft_strncmp(arg, "<<", 2) || !ft_strncmp(arg, ">>", 2));
-}
+// static bool	is_redirection(char *arg)
+// {
+// 	return (!ft_strncmp(arg, "<", 1) || !ft_strncmp(arg, ">", 1)
+// 		|| !ft_strncmp(arg, "<<", 2) || !ft_strncmp(arg, ">>", 2));
+// }
 
 static void	add_node(t_enum_redir type, char *str, t_redir **head)
 {
@@ -66,11 +66,8 @@ t_redir	*extract_redir(char **in)
 		type = get_redir_type(in[i]);
 		if (type != R_INVALID)
 		{
-			add_node(type, in[i], &redir_list);
-			if (in[i + 1] && !is_redirection(in[i - 1]))
-			{
+			if (in[i + 1])
 				add_node(type, in[i + 1], &redir_list);
-			}
 		}
 		i++;
 	}

@@ -1,43 +1,22 @@
-// the lexer will be use to make every line uniform with char and special char 
-// exemple output: 
-// <<
-// lol
-// >
-// test
-// cmd1
-// -opt1
-// arg1
-// |
-// <<
-// yolo
-// cmd2
-// -opt2
-// arg2
-//
-// exemple input:
-// <<lol
-// >
-// test
-// cmd1
-// -opt1
-// arg1
-// |
-// <<yolo
-// cmd2
-// -opt2
-// arg2
-
-// issue:
-// <<|yolo
-// need to cut it like that
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/23 09:51:50 by anoukan           #+#    #+#             */
+/*   Updated: 2024/10/23 13:56:53 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 static char	**add_line(char **in, char *to_add)
 {
-	char **dup;
-	int	lines;
-	int	i;
+	char	**dup;
+	int		lines;
+	int		i;
 
 	if (in)
 		lines = nbr_of_line(in);
@@ -54,55 +33,93 @@ static char	**add_line(char **in, char *to_add)
 	}
 	if (to_add)
 	{
-		dup[i]  = ft_strdup(to_add);
+		dup[i] = ft_strdup(to_add);
 		i++;
 	}
 	dup[i] = NULL;
 	return (dup);
 }
 
+static char	*get_part(char *in, int start, int len)
+{
+	char	*res;
+	int		i;
+
+	printf("in: %s\n", in);
+	res = (char *)malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (i < len && in[start + i])
+	{
+		res[i] = in[start + i];
+		printf("res[%d]: %c\n", i, res[i]);
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
+}
+
+static char	**get_redir(char *in)
+{
+	int		k;
+	int		car;
+	char	*line;
+	char	**redir;
+
+	k = 0;
+	redir = NULL;
+	while (in[k])
+	{
+		car = 0;
+		while (in[k + car] && (in[k + car] == '<' || in[k + car] == '>'))
+			car++;
+		if (car > 0)
+		{
+			line = get_part(in, k, car);
+			redir = add_line(redir, line);
+			free(line);
+			k += car;
+		}
+		car = 0;
+		while (in[k + car] && (in[k + car] != '<' && in[k + car] != '>'))
+			car++;
+		if (car > 0)
+		{
+			line = get_part(in, k, car);
+			redir = add_line(redir, line);
+			free(line);
+			k += car;
+		}
+	}
+	return (redir);
+}
+
 char	**relexer(char **in)
 {
-	ft_print(in, 0);
-	char **res;
-	char *line;
-	int	i;
-	int	j;
-	int	k;
+	char	**res;
+	char	**line;
+	int		i;
+	int		k;
 
 	res = NULL;
+	ft_print(in, 0);
 	i = 0;
 	while (in[i])
 	{
-		j = 0;
-		if (in[i][j] == '<' || in[i][j] == '>')
+		k = 0;
+		if (in[i][0] == '<' || in[i][0] == '>')
 		{
-			k = 0;
-			while (in[i][j] && (in[i][j] == '<' || in[i][j] == '>'))
+			line = get_redir(in[i]);
+			while (line[k])
 			{
-				line = ft_strjoin_frees1(line, in[i]);
-				j++;
-			}
-			add_line(res, line);
-			free(line);
-			line = (char *)malloc(sizeof(char *) * (ft_strlen(in[i]) - j + 1));
-			if (!line)
-				return (NULL);
-			while(in[i][j])
-			{
-				line[k] = in[i][j];
+				res = add_line(res, line[k]);
 				k++;
-				j++;
 			}
-			line[k] = '\0';
-			add_line(res, line);
-			free(line);
 		}
 		else
-			add_line(res, in[i]);
+			res = add_line(res, in[i]);
 		i++;
-	}	
-	printf("lexer out:\n");
-	ft_print(res, 0);
+	}
 	return (res);
 }
