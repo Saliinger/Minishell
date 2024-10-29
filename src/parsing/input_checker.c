@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:28 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/27 15:38:28 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/27 13:21:38 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 //
 // check for single and double quote open
 // check for multiple pipe ||
-// check for redirection <<< 
+// check for redirection <<<
 //
-//add a check for forbiden char like ; or others
-//just when they're not in a flag
+// add a check for forbiden char like ; or others
+// just when they're not in a flag
 
 #include "../../include/minishell.h"
 
 bool	quote_checker(char *in, char c)
 {
-	int	i = 0;
-	int	flag = 0;
+	int	i;
+	int	flag;
 
-	while(in[i])
+	i = 0;
+	flag = 0;
+	while (in[i])
 	{
 		if (in[i] == c)
 		{
@@ -40,22 +42,33 @@ bool	quote_checker(char *in, char c)
 		i++;
 	}
 	if (flag == 1)
-		return (printf("Error syntax: the %c is not closed. Go fuck yourself\n", c), false);
+		return (printf("Error syntax: the %c is not closed. Go fuck yourself\n",
+				c), false);
 	return (true);
 }
+
 // fix the quote_checker issue when a quote is inside a quote arg
 bool	divider_checker(char *in, char c)
 {
-	int i = 0;
+	int	i;
 
-	while(in[i])
+	i = 0;
+	while (in[i])
 	{
 		if (in[i] == c)
 		{
 			if (in[i + 1] == c && c == '|')
-				return (printf("Error syntax: too many %c. Are you really trying ?\n", c), false);
+			{
+				printf("Error syntax: too many %c. Are you really trying ?\n",
+					c);
+				return (false);
+			}
 			if (in[i + 1] == c && in[i + 2] == c && (c == '<' || c == '>'))
-				return (printf("Error syntax: too many %c. Are you really trying ?\n", c), false);			
+			{
+				printf("Error syntax: too many %c. Are you really trying ?\n",
+					c);
+				return (false);
+			}
 		}
 		i++;
 	}
@@ -66,38 +79,42 @@ bool	divider_checker(char *in, char c)
 //
 bool	extend_forbiden_checker(char *in, char c, char q, int *i)
 {
+	(void)c;
 	while (in[*i] && in[*i] != q)
 	{
 		if (in[*i] == q)
-			return true;
+			return (true);
 		*i = *i + 1;
 	}
-	return false;
+	return (false);
 }
+
 bool	forbiden_checker(char *in, char c)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (in[i])
 	{
-		printf("%c\n", in[i]);
-		if (in[i] == '\"' && extend_forbiden_checker(in, c,'\"', &i) == false)
-			continue;
+		if (in[i] == '\"' && extend_forbiden_checker(in, c, '\"', &i) == false)
+			continue ;
 		else
-			return false;
-		if (in[i] == '\'' && extend_forbiden_checker(in, c,'\'', &i) == false)
-			continue;
+			return (false);
+		if (in[i] == '\'' && extend_forbiden_checker(in, c, '\'', &i) == false)
+			continue ;
 		else if (in[i] == c)
-			return false;
+			return (false);
 		i++;
 	}
-	return true;
+	return (true);
 }
 
 bool	input_checker(char *in)
 {
-	if (divider_checker(in, '<') && quote_checker(in, '\'') && divider_checker(in, '>') && divider_checker(in, '|') && quote_checker(in, '\"') && forbiden_checker(in, ';'))
-		return (printf("true\n"),true);
+	if (divider_checker(in, '<') && quote_checker(in, '\'')
+			&& divider_checker(in, '>') && divider_checker(in, '|')
+			&& quote_checker(in, '\"') && forbiden_checker(in, ';'))
+		return (printf("true\n"), true);
 	else
 		return (false);
 }

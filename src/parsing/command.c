@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:58 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/12 22:06:54 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/27 12:31:29 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*extract_command(char *line)
 	i = 0;
 	while (line[i] && line[i] != ' ' && line[i] != '\t')
 		i++;
-	command = (char *)malloc(sizeof(char) * i);
+	command = (char *)malloc(sizeof(char) * (i + 1));
 	if (!command)
 		return (NULL);
 	i = 0;
@@ -74,8 +74,6 @@ t_command	*command_init(char *in)
 		return (trim(in, ENV, true, ENV_ID));
 	else if (checker_command(line, EXIT))
 		return (trim(in, EXIT, true, EXIT_ID));
-	else if (checker_command(line, HD))
-		return (trim(in, HD, true, HD_ID));
 	else if (checker_command(line, EXPAND))
 		return (trim(in, EXPAND, true, EXPAND_ID));
 	else

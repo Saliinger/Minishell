@@ -27,6 +27,24 @@ static void	free_arg(t_command *command)
 	free(command->arg);
 }
 
+void	free_redir(t_redir *head)
+{
+	t_redir	*next;
+
+	next = head;
+	while (head)
+	{
+		free(head->redir);
+		free(head);
+		head = next;
+	}
+	if (next)
+	{
+		free(next->redir);
+		free(next);
+	}
+}
+
 void	free_command(t_command *command)
 {
 	if (!command)

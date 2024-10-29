@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structure.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/07 23:06:50 by anoukan           #+#    #+#             */
+/*   Updated: 2024/10/09 15:14:36 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
-
 
 // Defines
 # define ECHO "echo"
@@ -31,27 +42,29 @@
 # include "imports.h"
 
 // Structure
+typedef struct s_redir
+{
+	t_enum_redir		type;
+	char				*redir;
+	struct s_redir		*next;
+}						t_redir;
+
 typedef struct s_command
 {
 	char				*in;
 	char				*command;
 	char				**arg;
+	char				**clean_arg;
 	int					id;
 	struct s_command	*subcommand;
 	bool				builtin;
 	bool				pipe;
 	int					pipe_position;
-	bool				redirection;
-	int					redirection_position;
 	int					pipe_fds[2];
 	int					pid;
-	// new 		//init me at -1
+	t_redir				*redirection;
 	int					infile_fd;
 	int					outfile_fd;
-	// new 		//init me to -1,
-	// fill me if cmd takes infile int outfile_fd;
-	// new 		//init me to -1,
-	// fill me if cmd takes outfile int pid;       // new		//init me to -1,
 }						t_command;
 
 /*

@@ -76,7 +76,7 @@ static void	main_extend(char *prompt, t_minishell *minishell, char *line)
 	while (1)
 	{
 		prompt = display_prompt(prompt, minishell);
-		signal(SIGINT, sighandler);
+		//signal(SIGINT, sighandler);
 		get_line(&line, prompt);
 		using_history();
 		if (!line)
@@ -94,11 +94,15 @@ static void	main_extend(char *prompt, t_minishell *minishell, char *line)
 
 int	main(int ac, char **av, char **env)
 {
+	(void)ac;
+	(void)av;
+
 	char		*line;
 	char		*prompt;
 	t_minishell	*minishell;
 	char		buffer[4096 + 1];
 
+	line = NULL;
 	prompt = NULL;
 	minishell = init(env, getcwd(buffer, 4096));
 	if (!minishell)

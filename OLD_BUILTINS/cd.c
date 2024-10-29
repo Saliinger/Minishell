@@ -62,7 +62,6 @@ void	ft_cd(t_command *command, t_minishell *minishell)
 {
 	int		error;
 	char	*path;
-	int		home_line;
 
 	if (!command->arg[1] || ft_strncmp(command->arg[1], "~", 1) == 0)
 	{

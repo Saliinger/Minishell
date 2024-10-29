@@ -1,19 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/09 15:51:26 by anoukan           #+#    #+#             */
+/*   Updated: 2024/10/09 15:52:02 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 static bool	check_key(t_command *command, char *line)
 {
-	char	*key;
-
-	key = command->arg[1];
-	if (ft_strncmp(line, command->arg[1], ft_strlen(command->arg[1])) == 0 && ft_strlen(line) == ft_strlen(command->arg[1]))
+	if (ft_strncmp(line, command->arg[1], ft_strlen(command->arg[1])) == 0
+		&& ft_strlen(line) == ft_strlen(command->arg[1]))
 		return (true);
 	return (false);
 }
 
 static char	**dup_current_hd(t_minishell *minishell, char *new_line)
 {
-	char **new_hd;
-	int	i;
+	char	**new_hd;
+	int		i;
 
 	i = 0;
 	while (minishell->hd[i])
@@ -38,7 +48,7 @@ static void	free_hd(char **hd)
 	int	i;
 
 	i = 0;
-	while(hd[i])
+	while (hd[i])
 	{
 		free(hd[i]);
 		i++;
@@ -52,11 +62,7 @@ static void	add_to_hd(t_minishell *minishell, char *hd)
 
 	new_hd = dup_current_hd(minishell, hd);
 	if (!new_hd)
-	{
-		// add error for hd
 		return ;
-	}
-	// free old minishell hd and put the new one
 	if (minishell->hd)
 		free_hd(minishell->hd);
 	minishell->hd = new_hd;
@@ -71,7 +77,7 @@ void	ft_heredoc(t_command *command, t_minishell *minishell)
 	flag = 1;
 	hd = (char *)malloc(sizeof(char));
 	hd[0] = '\0';
-	while(flag)
+	while (flag)
 	{
 		line = readline(">");
 		if (!line)
@@ -84,11 +90,10 @@ void	ft_heredoc(t_command *command, t_minishell *minishell)
 			if (check_key(command, line) == true)
 				flag = 0;
 			else
-			{
-				// add line to hd in minishell and
 				hd = ft_strjoin_frees1(hd, line);
-			}
 		}
 	}
 	add_to_hd(minishell, hd);
 }
+
+// add error for hd line 66

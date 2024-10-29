@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42mulhouse.fr>    +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 13:01:02 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/01 13:01:02 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/27 14:34:20 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	get_env_var(t_minishell *minishell, char *var, int len)
 	int	i;
 
 	i = 0;
+	len--;
+	var++;
 	while (minishell->env[i])
 	{
 		if (ft_strncmp(minishell->env[i], var, len) == 0)

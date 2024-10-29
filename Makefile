@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAG = -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 LIBS = -L./libft/compiled -lft -lprintf -lreadline
 SRCD = ./src
 UTILSD = ./src/utils
@@ -14,7 +14,7 @@ SRC = $(wildcard $(SRCD)/*.c) \
 	  $(wildcard $(EXED)/*.c) \
 	  $(wildcard $(EXED)/old/*.c) \
 	  $(wildcard $(EXED)/t_pids/*.c) \
-	  $(wildcard $(BINS)/*.c) \
+	  $(wildcard $(BINS)/*/*.c) \
 	  $(wildcard $(UTILSD)/env_utility/*.c)
 
 
@@ -25,7 +25,7 @@ OBJ = $(SRC:.c=.o)
 all: libft $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAG) $(OBJ) $(LIBS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 
 libft:
 	@$(MAKE) -C ./libft

@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 16:05:44 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/08 14:31:50 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:49:41 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static char	**new_env(char **current_env, int var_line)
 
 static void	delete_value(t_minishell *minishell, char *var, int var_line)
 {
+	(void)var;
 	if (var_line == -1)
 	{
 		perror("Error\nThe var doesn't exist\n");

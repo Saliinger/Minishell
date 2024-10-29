@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:24:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/09 15:37:54 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/07 22:29:32 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static int	ft_split_write(char **dest, char const *s, char c)
 			word++;
 		}
 	}
+	dest[word] = NULL;
 	return (0);
 }
 

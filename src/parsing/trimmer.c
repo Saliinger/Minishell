@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/08 14:25:49 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/27 13:18:02 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 #include "../../include/minishell.h"
 
-
 static char	*cut_first_cmd(char *in, int pipe_position)
 {
-	char *res;
-	int i = 0;
-	
-	res = (char *)malloc(sizeof(char) * pipe_position);
+	char	*res;
+	int		i;
+
+	i = 0;
+	res = (char *)malloc(sizeof(char) * (pipe_position + 1));
 	if (!res)
 		return (NULL);
 	while (i < pipe_position)
@@ -39,7 +39,7 @@ static char	*remove_first_cmd(char *in, int pipe_position)
 
 	if (in[pipe_position] == '|')
 		pipe_position++;
-	res = (char *)malloc(sizeof(char) * ft_strlen(in + pipe_position) + 1);
+	res = (char *)malloc(sizeof(char) * (ft_strlen(in + pipe_position) + 1));
 	if (!res)
 		return (NULL);
 	i = 0;
@@ -55,38 +55,38 @@ static char	*remove_first_cmd(char *in, int pipe_position)
 
 // add a way to remove the first command and send it to the subcommand
 
+static void	init_command_arg(t_command *command, char *in)
+{
+	if (command->pipe_position > 0)
+	{
+		command->pipe = true;
+		command->arg = relexer(split_element(cut_first_cmd(in,
+						command->pipe_position), ' '));
+		command->subcommand = command_init(remove_first_cmd(in,
+					command->pipe_position));
+	}
+	else
+	{
+		command->subcommand = NULL;
+		command->arg = relexer(split_element(in, ' '));
+	}
+}
+
 t_command	*trim(char *in, char *in_command, bool builtin, int id)
 {
 	t_command	*command;
-	char		*arg_in;
 
 	command = (t_command *)malloc(sizeof(t_command));
 	if (!command)
 		return (NULL);
 	command->in = ft_strdup(in);
 	command->pipe_position = check_pipe(in);
-	command->redirection_position = 0; // redirection work in progress
-	if (command->pipe_position > 0 || command->redirection_position > 0)
-	{
-		if (command->pipe_position < command->redirection_position)
-		{
-			command->pipe = true;
-			command->arg = split_element(cut_first_cmd(in, command->pipe_position), ' ');
-			command->subcommand = command_init(remove_first_cmd(in, command->pipe_position));
-		}
-		else
-		{
-			command->redirection = true;
-			command->arg = split_element(cut_first_cmd(in, command->redirection_position), ' ');
-			command->subcommand = command_init(remove_first_cmd(in, command->redirection_position));
-		}
-	}
+	init_command_arg(command, in);
+	command->redirection = extract_redir(command->arg);
+	if (builtin == true)
+		command->command = ft_strdup(in_command);
 	else
-	{
-		command->subcommand = NULL;
-		command->arg = split_element(in, ' ');
-	}
-	command->command = ft_strdup(in_command);
+		command->command = NULL;
 	command->builtin = builtin;
 	command->id = id;
 	command->pid = -1;
@@ -94,6 +94,7 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->pipe_fds[1] = -1;
 	command->outfile_fd = -1;
 	command->infile_fd = -1;
+	command->clean_arg = NULL;
 	return (command);
 }
 

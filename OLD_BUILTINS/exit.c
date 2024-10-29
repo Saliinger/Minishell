@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_prompt.c                                   :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 12:34:56 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:52:24 by anoukan          ###   ########.fr       */
+/*   Created: 2024/08/27 12:33:14 by anoukan           #+#    #+#             */
+/*   Updated: 2024/10/09 15:49:28 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*display_prompt(char *prompt, t_minishell *minishell)
+void	exit_shell(t_minishell *minishell, t_command *command, bool fail)
 {
-	char	*path;
-	char	*usr;
-	char	*res;
-
-	if (prompt)
-		free(prompt);
-	path = minishell->pwd;
-	usr = getenv("LOGNAME");
-	res = ft_strjoin(usr, "@");
-	res = ft_strjoin_frees1(res, "Femboys");
-	res = ft_strjoin_frees1(res, ":~");
-	res = ft_strjoin_frees1(res, path);
-	res = ft_strjoin_frees1(res, " ");
-	return (res);
+	printf("Bye Bye Bye\n");
+	free_minishell(minishell);
+	if (nbr_of_line(command->arg) > 2)
+		return ;
+	else if (command->arg[1])
+	{
+		exit(atoi(command->arg[1]) % 256);
+	}
+	else if (fail == true)
+		exit(EXIT_FAILURE);
+	else
+		exit(EXIT_SUCCESS);
 }

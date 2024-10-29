@@ -1,10 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   divider.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 13:21:21 by anoukan           #+#    #+#             */
+/*   Updated: 2024/10/27 13:21:22 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 int	check_pipe(char *in)
 {
-	int i = 0;
-	int flag = 0;
+	int	i;
+	int	flag;
 
+	i = 0;
+	flag = 0;
 	while (in[i])
 	{
 		if (flag == 0 && in[i] == '|')
@@ -22,34 +36,4 @@ int	check_pipe(char *in)
 		i++;
 	}
 	return (0);
-}
-
-// redirection work in progress
-int	check_redirection(char *in)
-{
-	int i = 0;
-	int flag = 0;
-
-	while (in[i])
-	{
-		if (flag == 0 && in[i] == '<' && in[i + 1] == '<')
-		{
-			while (in[i] && in[i] != ' ')
-				i++;
-			return (i - 1);
-		}
-				if (in[i] == '"')
-		{
-			while (in[i] != '"')
-				i++;
-		}
-		if (in[i] == '\'')
-		{
-			while (in[i] != '\'')
-				i++;
-		}
-		i++;
-	}
-	return (0);
-
 }
