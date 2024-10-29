@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:28 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/08 01:42:46 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/27 13:21:38 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ bool	forbiden_checker(char *in, char c)
 	i = 0;
 	while (in[i])
 	{
-		printf("%c\n", in[i]);
 		if (in[i] == '\"' && extend_forbiden_checker(in, c, '\"', &i) == false)
 			continue ;
 		else

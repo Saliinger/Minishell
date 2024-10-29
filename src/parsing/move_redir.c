@@ -6,17 +6,11 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:50:21 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/23 14:05:39 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/27 13:26:54 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-// static bool	is_redirection(char *arg)
-// {
-// 	return (!ft_strncmp(arg, "<", 1) || !ft_strncmp(arg, ">", 1)
-// 		|| !ft_strncmp(arg, "<<", 2) || !ft_strncmp(arg, ">>", 2));
-// }
 
 static void	add_node(t_enum_redir type, char *str, t_redir **head)
 {

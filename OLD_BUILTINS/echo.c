@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:35 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:49:15 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/27 13:23:12 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ static int	flag_num(char **arg)
 	i = 1;
 	while (arg[i])
 	{
-		printf("arg[%d]: %s", i, arg[i]);
 		if (arg[i][0] == '-')
 			flag++;
 		if (arg[i][0] != '-')

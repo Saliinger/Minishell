@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:51:50 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/23 13:56:53 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/27 14:26:45 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static char	*get_part(char *in, int start, int len)
 	char	*res;
 	int		i;
 
-	printf("in: %s\n", in);
 	res = (char *)malloc(sizeof(char) * (len + 1));
 	if (!res)
 		return (NULL);
@@ -53,7 +52,6 @@ static char	*get_part(char *in, int start, int len)
 	while (i < len && in[start + i])
 	{
 		res[i] = in[start + i];
-		printf("res[%d]: %c\n", i, res[i]);
 		i++;
 	}
 	res[i] = '\0';
@@ -103,7 +101,6 @@ char	**relexer(char **in)
 	int		k;
 
 	res = NULL;
-	ft_print(in, 0);
 	i = 0;
 	while (in[i])
 	{

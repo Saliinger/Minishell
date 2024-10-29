@@ -14,7 +14,7 @@ SRC = $(wildcard $(SRCD)/*.c) \
 	  $(wildcard $(EXED)/*.c) \
 	  $(wildcard $(EXED)/old/*.c) \
 	  $(wildcard $(EXED)/t_pids/*.c) \
-	  $(wildcard $(BINS)/*.c) \
+	  $(wildcard $(BINS)/*/*.c) \
 	  $(wildcard $(UTILSD)/env_utility/*.c)
 
 
