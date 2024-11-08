@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   get_home.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 09:54:22 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/08 15:24:33 by anoukan          ###   ########.fr       */
+/*   Created: 2024/11/07 11:37:23 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/07 13:54:15 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	ft_pwd(t_minishell *minishell)
+char	*get_home(t_minishell *minishell)
 {
-	char	path[PATH_MAX];
+	int		home_line;
+	char	*home;
+	char	*temp;
+	int		i;
 
-	(void)minishell;
-	getcwd(path, sizeof(path));
-	printf("%s\n", path);
-	return (0);
+	home_line = (minishell, "HOME", 4);
+	if (home_line < 0)
+		return (NULL);
+	temp = ft_strdup(minishell->env[home_line]);
+	i = 0;
+	while (temp[i] && temp[i] != '=')
+		i++;
+	if (temp[i] == '=')
+		i++;
+	home = ft_strdup(temp + i);
+	free(temp);
+	return (home);
 }

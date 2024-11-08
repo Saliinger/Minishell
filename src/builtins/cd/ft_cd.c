@@ -3,24 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42mulhouse.fr>    +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 09:53:53 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/30 10:19:13 by anoukan          ###   ########.fr       */
+/*   Created: 2024/08/27 12:29:59 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/07 17:25:50 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
 
-int	ft_cd(t_minishell *minishell, t_command *command)
+int	ft_cd(t_command *command, t_minishell *minishell)
 {
-	char *path;
+	int		error;
+	char	*path;
 
-	if (!command->clean_arg[1] || command->clean_arg[1][0])
+	path = get_path(command->arg[1], minishell);
+	if (!path)
+		return (1);
+	error = chdir(path);
+	if (error == 0)
 	{
-		path = 
+		printf("Changed dir to %s\n", path);
+		change_pwd(minishell);
 	}
-	chdir(command->clean_arg[1]);
-
+	else
+		printf("Error changing directory");
+	if (path)
+		free(path);
 	return (0);
 }
