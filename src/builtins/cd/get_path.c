@@ -6,17 +6,17 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:13 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/08 12:40:34 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/11 15:57:16 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 char	*get_path(char *in, t_minishell *minishell)
 {
 	char	*res;
 
-	if (!in || in[0] == '~')
+	if (!in)
 	{
 		res = get_home(minishell);
 		if (!res)
@@ -24,7 +24,7 @@ char	*get_path(char *in, t_minishell *minishell)
 		return (res);
 	}
 	if (is_symlink(in))
-		res = path_constructor(in);
+		res = path_constructor(minishell, in);
 	else
 		res = ft_strdup(in);
 	return (res);

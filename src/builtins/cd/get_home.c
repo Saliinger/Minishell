@@ -6,11 +6,11 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:37:23 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/07 13:54:15 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/11 11:46:50 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 char	*get_home(t_minishell *minishell)
 {
@@ -19,7 +19,7 @@ char	*get_home(t_minishell *minishell)
 	char	*temp;
 	int		i;
 
-	home_line = (minishell, "HOME", 4);
+	home_line = get_env_var(minishell, "HOME", 4);
 	if (home_line < 0)
 		return (NULL);
 	temp = ft_strdup(minishell->env[home_line]);

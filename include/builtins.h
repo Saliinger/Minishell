@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/08 15:28:28 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/11 16:24:01 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int		ft_cd(t_command *command, t_minishell *minishell);
 int		is_symlink(const char *path);
 char	*get_path(char *in, t_minishell *minishell);
 char	*get_home(t_minishell *minishell);
-char	*path_constructor(char *in);
+char	*path_constructor(t_minishell *minishell, char *in);
+char	*get_current_path(t_minishell *minishell);
+int		change_pwd(t_minishell *minishell, char *in);
 
 // ECHO
 int		ft_echo(t_minishell *minishell, t_command *command);
@@ -31,6 +33,7 @@ int		ft_echo(t_minishell *minishell, t_command *command);
 int		ft_env(t_minishell *minishell);
 
 // EXIT
+void	ft_exit(t_minishell *minishell, t_command *command, bool fail);
 
 // EXPAND
 
@@ -40,5 +43,8 @@ int		ft_env(t_minishell *minishell);
 int		ft_pwd(t_minishell *minishell);
 
 // UNSET
+
+// EXPORT
+int		ft_export(t_command *command, t_minishell *minishell);
 
 #endif

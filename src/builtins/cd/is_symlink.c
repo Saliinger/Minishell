@@ -6,11 +6,11 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:21:16 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/07 13:52:23 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/11 11:47:39 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 int	is_symlink(const char *path)
 {
