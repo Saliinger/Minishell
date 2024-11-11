@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   check_flag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 12:33:14 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:49:28 by anoukan          ###   ########.fr       */
+/*   Created: 2024/11/08 15:28:37 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/08 15:31:47 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	exit_shell(t_minishell *minishell, t_command *command, bool fail)
+int	check_flag(char **arg)
 {
-	printf("Bye Bye Bye\n");
-	free_minishell(minishell);
-	if (nbr_of_line(command->arg) > 2)
-		return ;
-	else if (command->arg[1])
+	int	n;
+	int	i;
+	int	j;
+
+	n = 0;
+	i = 1;
+	while (arg[i])
 	{
-		exit(atoi(command->arg[1]) % 256);
+		j = 0;
+		while (arg[i][j])
+		{
+			if (arg[i][j] == '-')
+				j++;
+			else
+				return (n);
+		}
+		i++;
 	}
-	else if (fail == true)
-		exit(EXIT_FAILURE);
-	else
-		exit(EXIT_SUCCESS);
+	return (n);
 }
