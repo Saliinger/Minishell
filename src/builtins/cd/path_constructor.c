@@ -45,18 +45,22 @@ char	*path_constructor(t_minishell *minishell, char *in)
 	if (*in_cut[0] == '~')
 	{
 		temp = get_home(minishell);
+		ft_strlcpy(current_path, temp, ft_strlen(temp));
+		free(temp);
 		i = 1;
 	}
 	else
 	{
 		temp = get_current_path(minishell);
+		ft_strlcpy(current_path, temp, ft_strlen(temp));
+		free(temp);
 		i = 0;
 	}
 	while (in[i])
 	{
 		if (in[i] == '.' && in[i + 1] == '.' && in[i + 2] == '/')
 		{
-			current_path = remove_path(current_path);
+			remove_path(current_path, current_path);
 			i += 3;
 		}
 		else if (in[i] == '.' && in[i + 1] == '/')
