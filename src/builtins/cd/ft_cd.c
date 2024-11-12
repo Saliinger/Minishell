@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:29:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/11 11:47:04 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/12 11:13:40 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_cd(t_command *command, t_minishell *minishell)
 	if (error == 0)
 	{
 		printf("Changed dir to %s\n", path);
-		change_pwd(minishell);
+		change_pwd(minishell, path);
 	}
 	else
 		printf("Error changing directory");
