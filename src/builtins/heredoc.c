@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:51:26 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:52:02 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/25 16:39:29 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool	check_key(t_command *command, char *line)
 {
 	if (ft_strncmp(line, command->arg[1], ft_strlen(command->arg[1])) == 0
-		&& ft_strlen(line) == ft_strlen(command->arg[1]))
+		&& ft_strlen(line) == ft_strlen(command->arg[1])) //WTF ? this is not a n ):
 		return (true);
 	return (false);
 }

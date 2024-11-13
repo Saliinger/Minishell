@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:10 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/08 14:36:18 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/12 23:36:08 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ static t_minishell	*init(char **env, char *pwd)
 	return (minishell);
 }
 
+static void process_input_line(char *line, t_minishell *m)
+{
+	int			exit_status;
+	t_command	*c;
+
+	add_history(line);
+	c = parsing(line, m);
+	exit_status = ft_exec(&c, m); 
+	free_t_command(&c);
+	(void)	exit_status;
+}
+
 // need to init the path for the builtins and extern function
 
 static void	main_extend(char *prompt, t_minishell *minishell, char *line)
@@ -76,7 +88,7 @@ static void	main_extend(char *prompt, t_minishell *minishell, char *line)
 	while (1)
 	{
 		prompt = display_prompt(prompt, minishell);
-		signal(SIGINT, sighandler);
+		//signal(SIGINT, sighandler);
 		get_line(&line, prompt);
 		using_history();
 		if (!line)
@@ -86,9 +98,9 @@ static void	main_extend(char *prompt, t_minishell *minishell, char *line)
 		}
 		if (*line)
 		{
-			add_history(line);
-			parsing(line, minishell);
+			process_input_line(line, minishell);
 		}
+		break ; //KILLME
 	}
 }
 
@@ -108,5 +120,6 @@ int	main(int ac, char **av, char **env)
 	if (!minishell)
 		return (1);
 	main_extend(prompt, minishell, line);
-	return (0);
+	free_t_minishell(&minishell);
+	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:13:49 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/10 18:31:12 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/21 22:05:35 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	**clean_arg(char **arg, t_minishell *minishell)
 	{
 		if (!is_redirection(arg[i]) && (i == 0 || !is_redirection(arg[i - 1])))
 		{
-			printf("arg[%d] : %s\n", i, arg[i]);
+			//printf("arg[%d] : %s\n", i, arg[i]);
 			res[j] = ft_strdup(arg[i]);
 			j++;
 		}

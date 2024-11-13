@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_pids.c                                        :+:      :+:    :+:   */
+/*   print_std_fds.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 21:20:26 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/09/10 00:12:35 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/10/31 22:32:43 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/11/02 04:57:05 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/exec.h"
+#include "../../../../include/exec.h"
 
-/**
- * brief : frees the nodes of a t_pids list
- * 
- */
-void	free_pids(t_pids *pids)
+void	print_std_fds(int *fds, char *display_name)
 {
-	t_pids	*tmp;
+	int	i;
 
-	while (pids)
+	if (!fds)
+		return ;
+	i = 0;
+	printf("\t#- %s -#", display_name);
+	printf("\n\tstd_fds\n");
+	while(i < 2)
 	{
-		tmp = pids;
-		pids = NULL;
-		free(pids);
-		pids = tmp->next;
+		printf("\t\t[%d] %d\n", i, fds[i]);
+		i++;
 	}
 }

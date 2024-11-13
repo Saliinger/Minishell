@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   set_signals.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 18:46:27 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/09/09 19:36:49 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/10/02 19:19:49 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/10/20 16:43:45 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/exec.h"
-#include "../../include/minishell.h"
+#include "../../include/signals.h"
 
-int	ft_error(char *error_msg, int errnum)
+/**
+ * set the followong signals actions to :
+ * 
+ * 
+ */
+int set_signals_to_default()
 {
-	if (VERBOSE >= 1)
-		ft_printf("Error\nErr %d\n\t%s\n", errnum, error_msg);
-	return (errnum);
+    //sigaction(SIGINT, );
+
+    //sigaction_t 
+    return (EXIT_SUCCESS);
+}
+
+/**
+ * set the followong signals actions back to default : 
+ * 
+ * 
+ */
+int set_signals_to_minishell()
+{
+
+    return (EXIT_SUCCESS);
 }

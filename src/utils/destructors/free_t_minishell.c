@@ -6,45 +6,33 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 20:33:54 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/09/10 01:43:32 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/10/22 23:12:35 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/exec.h"
+#include "../../../include/minishell.h"
+
 
 /**
- * brief : frees the n elements of the tab
+ * brief : frees the elements of the NULL terminated 2D char tab, then frees the tab, and sets it's address to NULL;
  * 
  */
-void	free_tab_elems(char **tab, int nb)
+void	ft_free_nullterm_tab(char ***ptab)
 {
+	char **tab;
 	int	i;
 
-	i = 0;
-	while (i < nb)
-	{
-		free(tab[i]);
-	}
-}
-
-/**
- * brief : frees the elements of the NULL terminated 2D char tab, then frees the tab;
- * 
- */
-void	free_nullterm_tab(char **tab)
-{
-	int	i;
-
-	if (!tab)
+	if (!ptab || !*ptab)
 		return ;
+	tab = *ptab;
 	i = 0;
 	while (tab[i])
 	{
 		free(tab[i]);
 		i++;
 	}
-	tab = NULL;
 	free(tab);
+	*ptab = NULL;
 }
 
 /**
@@ -53,21 +41,29 @@ void	free_nullterm_tab(char **tab)
  */
 static void	free_mini_elems(t_minishell *m)
 {
-	free_nullterm_tab(m->env);
-	free_nullterm_tab(m->hidden_env);
-	free_nullterm_tab(m->paths);
-	free_tab_elems(m->builtins_paths, NB_BUILTINS);
-	free(m->pwd);
-	free(m->old_pwd);
+	ft_free_nullterm_tab(&m->env);
+	ft_free_nullterm_tab(&m->hidden_env);
+	ft_free_nullterm_tab(&m->hidden_path);
+	ft_free_nullterm_tab(&m->paths);
+	ft_free((void **) &m->pwd);
+	ft_free((void **) &m->old_pwd);
+	ft_free_nullterm_tab(&m->hd);
 }
 
 /**
+ * in : ms is &m, where m is a t_minishell *m
  * brief : frees the elements of the t_minishell then frees the t_minishell;
- *
+ * sets the m to NULL
+ * 
  */
-void	free_t_minishell(t_minishell *m)
+void	free_t_minishell(t_minishell **ms)
 {
+	t_minishell *m;
+
+	if (!ms || !*ms)
+		return ;
+	m = *ms;
 	free_mini_elems(m);
-	m = NULL;
-	free(m);
+	free (m);
+	*ms = NULL;
 }

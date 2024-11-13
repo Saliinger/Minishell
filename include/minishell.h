@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:32:47 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:21:22 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,21 @@
 # include "imports.h"
 # include "parsing.h"
 # include "structure.h"
+# include "signals.h"
+# include "enum.h"
 
 // FREE
-void		free_nullterm_tab(char **tab);
-void		free_t_command(t_command *cmds);
-void		free_t_minishell(t_minishell *m);
 void		free_minishell(t_minishell *minishell);
 void		free_command(t_command *command);
 
-int			ft_close_fd(int *fd);
+void		ft_free(void **address);
+int			ft_close(int *fd);
+void		ft_free_nullterm_tab(char ***ptab);
+void		free_t_command(t_command **c);
+void		free_t_minishell(t_minishell **m);
 
 // EXEC
-int			ft_exec(t_command *c, t_minishell *m);
+int			ft_exec(t_command **old, t_minishell *m);
 // transitionning out :
 void		builtin_slector(t_command *cmd, t_minishell *m);
 void		old_ft_exec(t_command *command, t_minishell *minishell);
@@ -36,7 +39,7 @@ void		ft_extern(t_command *command, t_minishell *minishell);
 
 // PARSING
 t_command	*command_init(char *in);
-void		parsing(char *str, t_minishell *minishell);
+t_command	*parsing(char *str, t_minishell *minishell);
 t_command	*trim(char *in, char *in_command, bool builtin, int id);
 bool		input_checker(char *in);
 t_redir		*extract_redir(char **in);

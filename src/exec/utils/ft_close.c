@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enum.h                                             :+:      :+:    :+:   */
+/*   ft_close.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 23:07:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/12 23:30:38 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/09/09 18:45:50 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/10/21 19:35:41 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENUM_H
-# define ENUM_H
+#include "../../../include/exec.h"
 
-typedef enum e_redir
+/**
+ * brief : Close the file descriptor FD.
+ * 
+ */
+int	ft_close(int *fd)
 {
-	R_IN_FILE = 1,
-	R_IN_HD,
-	R_OUT_FILE,
-	R_OUT_APPEND,
-	R_INVALID
-}	t_enum_redir;
-
-#endif
+	if (*fd == -1 || *fd == HEREDOC)
+		return (EXIT_SUCCESS);
+	if (close(*fd) == -1)
+		return (perror("minishell"), ft_error("error close\n", ERR_PRIM));
+	*fd = -1;
+	return (EXIT_SUCCESS);
+}

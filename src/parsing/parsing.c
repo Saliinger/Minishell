@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/10 15:47:47 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:16:12 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	parsing(char *str, t_minishell *minishell)
+t_command	*parsing(char *str, t_minishell *minishell)
 {
 	t_command	*current;
 	t_command	*temp;
@@ -31,9 +31,12 @@ void	parsing(char *str, t_minishell *minishell)
 		temp = temp->subcommand;
 	}
 	if (current)
-		old_ft_exec(current, minishell);
+		return (current);
 	else
+	{
 		printf("loli said: bitch it's not working\n");
+		return (NULL);
+	}
 }
 
 // it just create the node for the command and start the exec

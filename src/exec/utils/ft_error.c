@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_handler.c                                   :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 12:35:07 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/27 12:35:08 by anoukan          ###   ########.fr       */
+/*   Created: 2024/09/09 18:46:27 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/10/21 19:05:26 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/exec.h"
+#include "../../../include/minishell.h"
 
-void	sighandler(int sig)
+int	ft_error(char *error_msg, int errnum)
 {
-	if (sig == SIGINT)
-	{
-		printf("\n");
-		signal(SIGINT, sighandler);
-	}
+	if (VERBOSE >= 1)
+		ft_printf("Error\nErr %d\n\t%s\n", errnum, error_msg);
+	return (errnum);
 }

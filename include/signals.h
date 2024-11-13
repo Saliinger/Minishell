@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pids_size.c                                        :+:      :+:    :+:   */
+/*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 22:19:07 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/09/09 22:38:53 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/10/02 19:22:20 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/10/20 22:03:22 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/exec.h"
+#ifndef SIGNALS_H
+# define SIGNALS_H
 
-int	pids_size(t_pids *pids)
-{
-	t_pids	*tmp;
-	int		i;
+# include "minishell.h"
 
-	i = 0;
-	tmp = pids;
-	while (tmp)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	return (i);
-}
+int set_signals_to_minishell();
+int set_signals_to_default();
+
+#endif

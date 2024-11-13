@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enum.h                                             :+:      :+:    :+:   */
+/*   pids_size.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 23:07:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/12 23:30:38 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/09/09 22:19:07 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/10/21 20:37:32 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENUM_H
-# define ENUM_H
+#include "../../../../include/exec.h"
 
-typedef enum e_redir
+int	pids_size(t_pids *pids)
 {
-	R_IN_FILE = 1,
-	R_IN_HD,
-	R_OUT_FILE,
-	R_OUT_APPEND,
-	R_INVALID
-}	t_enum_redir;
+	t_pids	*tmp;
+	int		i;
 
-#endif
+	i = 0;
+	tmp = pids;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
