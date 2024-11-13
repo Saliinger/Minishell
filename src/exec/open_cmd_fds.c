@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:53 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/13 15:03:35 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:11:13 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	open_as_last_redir_in(t_redir *rd, int *fds_last_redir, t_command_exe
 		//c->last_heredoc_str = rd->redir; //fixme behbeh
 	}
 	else
-		return (perror("minishell"), fprintf(STDERR_FILENO,"minishell: in %s, %s: erreur redir in:\n\t rd->redir= `%s` \n\t rd->type=  `%d`\n", __FILE__, __FUNCTION__, rd->redir, rd->type), ERR);
+		return (perror("minishell"), dprintf(STDERR_FILENO,"minishell: in %s, %s: erreur redir in:\n\t rd->redir= `%s` \n\t rd->type=  `%d`\n", __FILE__, __FUNCTION__, rd->redir, rd->type), ERR);
 	return (EXIT_SUCCESS);
 }
 
@@ -75,7 +75,7 @@ static int	open_as_last_redir_out(t_redir *rd, int *fds_last_redir)
 			return (perror("minishell"), ERR_PRIM);
 	}
 	else
-		return (fprintf(STDERR_FILENO,"minishell: in %s, %s: erreur parsing redir out\n", __FILE__, __FUNCTION__), ERR);
+		return (dprintf(STDERR_FILENO,"minishell: in %s, %s: erreur parsing redir out\n", __FILE__, __FUNCTION__), ERR);
 	return (EXIT_SUCCESS);
 }
 
@@ -106,7 +106,7 @@ static int	open_cmd_fd(t_command_exec *c, t_redir *rd, int *fds_last_redir, t_mi
 			return (ERR_PRIM);
 	}
 	else
-		return (fprintf(STDERR_FILENO,"minishell: in %s, %s: erreur parsing opening fd\n", __FILE__, __FUNCTION__), ERR);
+		return (dprintf(STDERR_FILENO,"minishell: in %s, %s: erreur parsing opening fd\n", __FILE__, __FUNCTION__), ERR);
 	return (EXIT_SUCCESS);
 }
 
@@ -131,6 +131,6 @@ int	open_cmd_fds(t_command_exec *cmd, int *fds_last_redir, t_minishell *m)
 		rd = rd->next;
 	}
 	if (err)
-		return (fprintf(STDERR_FILENO,"minishell: in %s, %s: erreur parsing opening cmd fds\n", __FILE__, __FUNCTION__), ERR);
+		return (dprintf(STDERR_FILENO,"minishell: in %s, %s: erreur parsing opening cmd fds\n", __FILE__, __FUNCTION__), ERR);
 	return (EXIT_SUCCESS);
 }

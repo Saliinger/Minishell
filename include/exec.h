@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 20:13:52 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/13 00:01:58 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 15:34:51 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_redir
 }						t_redir;
  */
 
-//reparse after parsing for simpler datastruct to gdb ?  -- maybe 
 typedef struct s_command_exec
 {
 	int						cmd_id;				//init me to 0,		//fill me if builtin with the builtin id, else 0 if not builtin

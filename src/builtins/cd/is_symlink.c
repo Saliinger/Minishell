@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   divider.c                                          :+:      :+:    :+:   */
+/*   is_symlink.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 13:21:21 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/27 13:21:22 by anoukan          ###   ########.fr       */
+/*   Created: 2024/11/07 13:21:16 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/11 11:47:39 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-int	check_pipe(char *in)
+int	is_symlink(const char *path)
 {
-	int	i;
-	int	flag;
+	struct stat	path_stat;
 
-	i = 0;
-	flag = 0;
-	while (in[i])
-	{
-		if (flag == 0 && in[i] == '|')
-			return (i);
-		if (in[i] == '"')
-		{
-			while (in[i] != '"')
-				i++;
-		}
-		if (in[i] == '\'')
-		{
-			while (in[i] != '\'')
-				i++;
-		}
-		i++;
-	}
-	return (0);
+	if (lstat(path, &path_stat) == -1)
+		perror("lstat");
+	return (-1);
+	if (S_ISLNK(path_stat.st_mode))
+		return (1);
+	else
+		return (0);
 }

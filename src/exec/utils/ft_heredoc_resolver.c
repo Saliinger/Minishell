@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 06:28:29 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/12 17:15:33 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:30:20 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char *expand_str(char *str, t_minishell *m)
 	//resolve the " " & ' ' ?
 	//get expand_key after the $ 
 	//expand the expand_key 
+	return (NULL);
 }
 
 

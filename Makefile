@@ -66,6 +66,25 @@ exec_re:
 	clear
 	make $(NAME)
 
+utils_re:
+	rm -f $(UTILSD)/*.o
+	rm -f $(UTILSD)/*/*.o
+	rm -f $(NAME)
+	clear
+	make $(NAME)
+
+parsing_re:
+	rm -f $(PARSD)/*.o
+	rm -f $(NAME)
+	clear
+	make $(NAME)
+
+builtins_re:
+	rm -f $(BINS)/*/*.o
+	rm -f $(NAME)
+	clear
+	make $(NAME)
+
 test: project_re
 	clear
 	./$(NAME) || lldb $(NAME)

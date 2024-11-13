@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/22 23:21:22 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 16:01:22 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ char		**split_element(char const *s, char c);
 
 // ENV_UTILITY
 int			get_env_var(t_minishell *minishell, char *var, int len);
-void		change_pwd(t_minishell *minishell);
 
 // Debug
 void		ft_print(char **s, int i);

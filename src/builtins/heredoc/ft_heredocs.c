@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   ft_heredocs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 15:51:26 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/25 16:39:29 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/10/29 09:54:19 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/11 01:42:32 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool	check_key(t_command *command, char *line)
 {
 	if (ft_strncmp(line, command->arg[1], ft_strlen(command->arg[1])) == 0
-		&& ft_strlen(line) == ft_strlen(command->arg[1])) //WTF ? this is not a n ):
+		&& ft_strlen(line) == ft_strlen(command->arg[1]))
 		return (true);
 	return (false);
 }
@@ -68,7 +68,7 @@ static void	add_to_hd(t_minishell *minishell, char *hd)
 	minishell->hd = new_hd;
 }
 
-void	ft_heredoc(t_command *command, t_minishell *minishell)
+int	ft_heredoc(t_command *command, t_minishell *minishell)
 {
 	int		flag;
 	char	*line;
@@ -94,6 +94,7 @@ void	ft_heredoc(t_command *command, t_minishell *minishell)
 		}
 	}
 	add_to_hd(minishell, hd);
+	return (0);
 }
 
 // add error for hd line 66

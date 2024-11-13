@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 12:33:14 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:49:28 by anoukan          ###   ########.fr       */
+/*   Created: 2024/10/29 09:54:22 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/08 15:24:33 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	exit_shell(t_minishell *minishell, t_command *command, bool fail)
+int	ft_pwd(t_minishell *minishell)
 {
-	printf("Bye Bye Bye\n");
-	free_minishell(minishell);
-	if (nbr_of_line(command->arg) > 2)
-		return ;
-	else if (command->arg[1])
-	{
-		exit(atoi(command->arg[1]) % 256);
-	}
-	else if (fail == true)
-		exit(EXIT_FAILURE);
-	else
-		exit(EXIT_SUCCESS);
+	char	path[PATH_MAX];
+
+	(void)minishell;
+	getcwd(path, sizeof(path));
+	printf("%s\n", path);
+	return (0);
 }

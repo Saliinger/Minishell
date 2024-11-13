@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:50 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/23 21:24:30 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 15:32:26 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,6 @@ typedef struct s_command
 	int					infile_fd;
 	int					outfile_fd;
 }						t_command;
-
-/*
-typedef struct s_command
-{
-	char				*cmd;
-	char				**cmd_args;
-	int					cmd_id;
-	struct s_command	*next;
-	int					pipe_fds[2];	//new 		//init me at -1
-	int					infile_fd; 		//new 		//init me to -1,
-													fill me if cmd takes infile
-	int					outfile_fd; 	//new 		//init me to -1,
-												fill me if cmd takes outfile
-	int					pid;			//new		//init me to -1,
-}						t_command;
-*/
 
 typedef struct s_minishell
 {

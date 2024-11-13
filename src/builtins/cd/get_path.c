@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   divider.c                                          :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 13:21:21 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/27 13:21:22 by anoukan          ###   ########.fr       */
+/*   Created: 2024/11/07 13:49:13 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/11 15:57:16 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-int	check_pipe(char *in)
+char	*get_path(char *in, t_minishell *minishell)
 {
-	int	i;
-	int	flag;
+	char	*res;
 
-	i = 0;
-	flag = 0;
-	while (in[i])
+	if (!in)
 	{
-		if (flag == 0 && in[i] == '|')
-			return (i);
-		if (in[i] == '"')
-		{
-			while (in[i] != '"')
-				i++;
-		}
-		if (in[i] == '\'')
-		{
-			while (in[i] != '\'')
-				i++;
-		}
-		i++;
+		res = get_home(minishell);
+		if (!res)
+			printf("Error: Home is not set\n");
+		return (res);
 	}
-	return (0);
+	if (is_symlink(in))
+		res = path_constructor(minishell, in);
+	else
+		res = ft_strdup(in);
+	return (res);
 }
+
+// if !path || ~ => go to home
+// else use comand->arg[1] + check if symlink

@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_env.c                                          :+:      :+:    :+:   */
+/*   change_exit_code.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/01 13:01:02 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/27 14:34:20 by anoukan          ###   ########.fr       */
+/*   Created: 2024/10/29 09:55:03 by anoukan           #+#    #+#             */
+/*   Updated: 2024/10/29 09:56:21 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int	get_env_var(t_minishell *minishell, char *var, int len)
+void	change_exit_code(t_minishell *minishell, int exit_code)
 {
-	int	i;
 
-	i = 0;
-	len--;
-	var++;
-	while (minishell->env[i])
-	{
-		if (ft_strncmp(minishell->env[i], var, len) == 0)
-			return (i);
-		i++;
-	}
-	return (-1);
 }

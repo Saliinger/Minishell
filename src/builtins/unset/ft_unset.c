@@ -1,16 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/07 16:05:44 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:49:41 by anoukan          ###   ########.fr       */
+/*   Created: 2024/10/29 09:54:26 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/11 01:43:53 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// need to handle multiple varr
 
 #include "../../include/minishell.h"
 
@@ -61,7 +59,7 @@ static void	delete_value(t_minishell *minishell, char *var, int var_line)
 	minishell->env = new_env(minishell->env, var_line);
 }
 
-void	ft_unset(t_command *command, t_minishell *minishell)
+int	ft_unset(t_command *command, t_minishell *minishell)
 {
 	int	i;
 
@@ -78,6 +76,10 @@ void	ft_unset(t_command *command, t_minishell *minishell)
 	if (!minishell->env)
 	{
 		perror("Error\nThe new env is messed up!\n");
-		return ;
+		return (1);
 	}
+	return (0);
 }
+
+// add check for the value that has been unset
+// on line 71 add if 

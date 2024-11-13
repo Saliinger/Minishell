@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/01 18:03:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:49:34 by anoukan          ###   ########.fr       */
+/*   Created: 2024/10/29 09:54:16 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/11 11:41:23 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	change_value(t_minishell *minishell, char *var)
 	printf("%s\n", minishell->env[var_line]);
 }
 
-void	ft_export(t_command *command, t_minishell *minishell)
+int	ft_export(t_command *command, t_minishell *minishell)
 {
 	int	i;
 
@@ -88,4 +88,7 @@ void	ft_export(t_command *command, t_minishell *minishell)
 			i++;
 		}
 	}
+	return (0);
 }
+
+// add the check condition on line 87 for the error handling

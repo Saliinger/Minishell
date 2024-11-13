@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/07 23:07:00 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/13 15:37:05 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,36 @@
 
 # include "imports.h"
 # include "structure.h"
+# include <sys/stat.h>
 
-// Builtins
-void	ft_pwd(t_minishell *minishell);
-void	ft_env(t_minishell *minishell);
-void	ft_echo(t_minishell *minishell, t_command *command);
-void	ft_cd(t_command *command, t_minishell *minishell);
-void	ft_export(t_command *command, t_minishell *minishell);
-void	ft_unset(t_command *command, t_minishell *minishell);
-void	ft_heredoc(t_command *command, t_minishell *minishell);
-void	exit_shell(t_minishell *minishell, t_command *command, bool fail);
-void	ft_expand(t_command *command, t_minishell *minishell);
+// CD
+int		ft_cd(t_command *command, t_minishell *minishell);
+int		is_symlink(const char *path);
+char	*get_path(char *in, t_minishell *minishell);
+char	*get_home(t_minishell *minishell);
+char	*path_constructor(t_minishell *minishell, char *in);
+char	*get_current_path(t_minishell *minishell);
+int		change_pwd(t_minishell *minishell, char *in);
+
+// ECHO
+int		ft_echo(t_minishell *minishell, t_command *command);
+
+// ENV
+int		ft_env(t_minishell *minishell);
+
+// EXIT
+int		ft_exit(t_minishell *minishell, t_command *command, bool fail);
+
+// EXPAND
+
+// HEREDOC
+
+// PWD
+int		ft_pwd(t_minishell *minishell);
+
+// UNSET
+
+// EXPORT
+int		ft_export(t_command *command, t_minishell *minishell);
 
 #endif

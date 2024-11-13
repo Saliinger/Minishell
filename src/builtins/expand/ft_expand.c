@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.c                                           :+:      :+:    :+:   */
+/*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 16:26:14 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:49:30 by anoukan          ###   ########.fr       */
+/*   Created: 2024/10/29 09:54:13 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/11 01:44:17 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // need to print the env var
 
-void	ft_expand(t_command *command, t_minishell *minishell)
+int	ft_expand(t_command *command, t_minishell *minishell)
 {
 	char	*arg;
 	int		g;
@@ -38,6 +38,5 @@ void	ft_expand(t_command *command, t_minishell *minishell)
 		}
 	}
 	ft_putchar_fd('\n', 1);
+	return (0);
 }
-
-// only display the first path

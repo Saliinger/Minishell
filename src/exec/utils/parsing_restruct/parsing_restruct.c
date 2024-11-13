@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 19:54:27 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/13 15:03:41 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:11:16 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@
 int	parsing_restruct(t_command **old, t_command_exec **new)
 {
 	if (restruct_stealing_from_old(old, new) <= -1)
-		return (fprintf(STDERR_FILENO,"minishell: %s: %s: %d: error.\n", __FILE__, __FUNCTION__, __LINE__), ERR);
+		return (dprintf(STDERR_FILENO,"minishell: %s: %s: %d: error.\n", __FILE__, __FUNCTION__, __LINE__), ERR);
 	restruct_discarding_old(old);
 	print_cmd_nodes(*new, "before parsing restruct");
 	if (reparse_redir_files_llist(*new) <= -1)
-		return (fprintf(STDERR_FILENO,"minishell: %s: %s: %d: error.\n", __FILE__, __FUNCTION__, __LINE__), ERR);
+		return (dprintf(STDERR_FILENO,"minishell: %s: %s: %d: error.\n", __FILE__, __FUNCTION__, __LINE__), ERR);
 	print_cmd_nodes(*new, "after parsing restruct");
 	printf("\n\n\n\n\n\n\t\t_____________\n\t\t_____________\n\n\n\n\n\n\n\n\n\n");
 	return (EXIT_SUCCESS);

@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_in.c                                        :+:      :+:    :+:   */
+/*   get_current_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 15:50:02 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:50:03 by anoukan          ###   ########.fr       */
+/*   Created: 2024/11/11 11:39:03 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/11 11:46:15 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// it's gonna expand in the command
-//
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-char	*expand_in(char *in)
+char	*get_current_path(t_minishell *minishell)
 {
+	char	*current_path;
+	char	*temp;
 	char	*res;
+	int		line;
 
-	(void)in;
-	res = NULL;
+	line = get_env_var(minishell, "PWD", 3);
+	if (line < 0)
+		return (NULL);
+	current_path = ft_strdup(minishell->env[line]);
+	if (!current_path)
+		return (NULL);
+	temp = current_path;
+	while (*temp && *temp != '=')
+		temp++;
+	if (*temp == '=')
+		temp++;
+	res = ft_strdup(temp);
+	free(current_path);
 	return (res);
 }

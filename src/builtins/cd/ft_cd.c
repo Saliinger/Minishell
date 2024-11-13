@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   divider.c                                          :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 13:21:21 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/27 13:21:22 by anoukan          ###   ########.fr       */
+/*   Created: 2024/08/27 12:29:59 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/12 11:13:40 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-int	check_pipe(char *in)
+int	ft_cd(t_command *command, t_minishell *minishell)
 {
-	int	i;
-	int	flag;
+	int		error;
+	char	*path;
 
-	i = 0;
-	flag = 0;
-	while (in[i])
+	path = get_path(command->arg[1], minishell);
+	if (!path)
+		return (1);
+	error = chdir(path);
+	if (error == 0)
 	{
-		if (flag == 0 && in[i] == '|')
-			return (i);
-		if (in[i] == '"')
-		{
-			while (in[i] != '"')
-				i++;
-		}
-		if (in[i] == '\'')
-		{
-			while (in[i] != '\'')
-				i++;
-		}
-		i++;
+		printf("Changed dir to %s\n", path);
+		change_pwd(minishell, path);
 	}
+	else
+		printf("Error changing directory");
+	if (path)
+		free(path);
 	return (0);
 }

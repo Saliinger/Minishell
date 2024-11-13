@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:20 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/22 13:43:34 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:25:05 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	free_minishell(t_minishell *minishell)
 		free_env(minishell->paths);
 	if (minishell->hidden_env)
 		free_env(minishell->hidden_env);
-	if (minishell->hidden_path)
-		free_env(minishell->hidden_path);
+	if (minishell->hidden_env)
+		free_env(minishell->hidden_env);
 	if (minishell->hd)
 		free_env(minishell->hd);
 	minishell = NULL;

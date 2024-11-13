@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:33:57 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/13 15:03:32 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:11:09 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int	ft_exec(t_command **old_t_cmd, t_minishell *m)
 	std_fds[1] = -1;
 	new_t_cmd = NULL;
 	if (!old_t_cmd || !m)
-		return (fprintf(STDERR_FILENO,"minishell: %s: %s: parsing failure\n", __FILE__, __FUNCTION__), ERR);
+		return (dprintf(STDERR_FILENO,"minishell: %s: %s: parsing failure\n", __FILE__, __FUNCTION__), ERR);
 	if (parsing_restruct(old_t_cmd, &new_t_cmd) <= -1)
-		return (fprintf(STDERR_FILENO,"minishell: %s: %s: parsing_restruct failure\n", __FILE__, __FUNCTION__), ERR);
+		return (dprintf(STDERR_FILENO,"minishell: %s: %s: parsing_restruct failure\n", __FILE__, __FUNCTION__), ERR);
 	if (save_std_fds(std_fds) == -1)
 		return (ERR_PRIM);
 	// if (set_signals_to_default() == -1)

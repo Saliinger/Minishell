@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   divider.c                                          :+:      :+:    :+:   */
+/*   get_home.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 13:21:21 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/27 13:21:22 by anoukan          ###   ########.fr       */
+/*   Created: 2024/11/07 11:37:23 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/11 11:46:50 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-int	check_pipe(char *in)
+char	*get_home(t_minishell *minishell)
 {
-	int	i;
-	int	flag;
+	int		home_line;
+	char	*home;
+	char	*temp;
+	int		i;
 
+	home_line = get_env_var(minishell, "HOME", 4);
+	if (home_line < 0)
+		return (NULL);
+	temp = ft_strdup(minishell->env[home_line]);
 	i = 0;
-	flag = 0;
-	while (in[i])
-	{
-		if (flag == 0 && in[i] == '|')
-			return (i);
-		if (in[i] == '"')
-		{
-			while (in[i] != '"')
-				i++;
-		}
-		if (in[i] == '\'')
-		{
-			while (in[i] != '\'')
-				i++;
-		}
+	while (temp[i] && temp[i] != '=')
 		i++;
-	}
-	return (0);
+	if (temp[i] == '=')
+		i++;
+	home = ft_strdup(temp + i);
+	free(temp);
+	return (home);
 }

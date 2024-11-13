@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 13:44:15 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/12 15:31:51 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:28:13 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ static int  apply_pipe_redirs(t_command_exec *cmd, bool *am_first_cmd)
     int err;
 
 	//ssi je ne suis pas le premier ?
+    err = 0;
 	if (*am_first_cmd != 0)
 	{
-    	err = 0;
 		err += ft_dup2(cmd->pipe_fds[IN], STDIN_FILENO); //input from previous cmd (pipe IN)
 		err += ft_close(&cmd->pipe_fds[IN]);
 	}

@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/10 15:39:43 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/27 13:18:02 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ static void	init_command_arg(t_command *command, char *in)
 	if (command->pipe_position > 0)
 	{
 		command->pipe = true;
-		command->arg = split_element(cut_first_cmd(in, command->pipe_position),
-				' ');
+		command->arg = relexer(split_element(cut_first_cmd(in,
+						command->pipe_position), ' '));
 		command->subcommand = command_init(remove_first_cmd(in,
 					command->pipe_position));
 	}
 	else
 	{
 		command->subcommand = NULL;
-		command->arg = split_element(in, ' ');
+		command->arg = relexer(split_element(in, ' '));
 	}
 }
 
