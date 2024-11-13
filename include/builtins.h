@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/11 16:24:01 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/13 13:34:47 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_echo(t_minishell *minishell, t_command *command);
 int		ft_env(t_minishell *minishell);
 
 // EXIT
-void	ft_exit(t_minishell *minishell, t_command *command, bool fail);
+int		ft_exit(t_minishell *minishell, t_command *command, bool fail);
 
 // EXPAND
 
