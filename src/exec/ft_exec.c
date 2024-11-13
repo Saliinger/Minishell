@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:33:57 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/13 17:11:09 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:45:24 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	ft_exec(t_command **old_t_cmd, t_minishell *m)
 	if (restore_std_fds(std_fds) == -1)
 		return (ERR_PRIM);
 	free_t_command_exec(&new_t_cmd);
-	printf("\nThe deed is done.\n\texit status : %d\n", cmd_exit_status);
+	dprintf(STDERR_FILENO, "\nThe deed is done. Leaving ft_exec.\n\texit status : %d\n", cmd_exit_status);
 	print_std_fds(std_fds, "at closing time");
 	return (cmd_exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 15:08:59 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/12 17:18:26 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:46:30 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	trim_malformed_str(t_redir *rd)
 	rd->redir = ft_strtrim(rd->redir, "<>");
 	free(tmp);
 	if (!rd->redir)
-		return (printf("%s, in %s at %d : error.", __FILE__, __FUNCTION__, __LINE__ ), ERR);
+		return (dprintf(STDERR_FILENO, "%s, in %s at %d : error.", __FILE__, __FUNCTION__, __LINE__ ), ERR);
 	return (EXIT_SUCCESS);
 }
 
@@ -93,7 +93,7 @@ int	reparse_redir_files_llist(t_command_exec *c)
 	{
 		err = trim_redirs(c->redir_files_llist);
 		if (err)
-			return (printf("%s, in %s at %d : error.", __FILE__, __FUNCTION__, __LINE__ ), ERR);
+			return (dprintf(STDERR_FILENO, "%s, in %s at %d : error.", __FILE__, __FUNCTION__, __LINE__ ), ERR);
 		c = c->next;
 	}
 	return (EXIT_SUCCESS);

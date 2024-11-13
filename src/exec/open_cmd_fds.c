@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:53 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/13 17:11:13 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:45:31 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,13 @@ static int	open_cmd_fd(t_command_exec *c, t_redir *rd, int *fds_last_redir, t_mi
 	type = rd->type;
 	if (type == R_IN_FILE || type == R_IN_HD)
 	{
-		printf("beep");
+		dprintf(STDERR_FILENO, "beep");
 		if (open_as_last_redir_in(rd, fds_last_redir, c, m) == -1)
 			return (ERR_PRIM);
 	}
 	else if (type == R_OUT_FILE || type == R_OUT_APPEND)
 	{
-		printf("boop");
+		dprintf(STDERR_FILENO, "boop");
 		if(open_as_last_redir_out(rd, fds_last_redir) == -1)
 			return (ERR_PRIM);
 	}

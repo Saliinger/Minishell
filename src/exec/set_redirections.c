@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 13:44:15 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/13 17:28:13 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:45:41 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	set_redirections(t_command_exec *cmd, t_minishell *m, int *std_fds, bool *am
 	if (pipe(cmd->pipe_fds) == -1)
 		return (perror("minishell"), ERR_PRIM);
 	if (restore_std_fds(std_fds) == -1)
-		return (printf("oups\n"), ERR_PRIM);
+		return (dprintf(STDERR_FILENO, "oups\n"), ERR_PRIM);
 	if (apply_redirections(cmd, fds_redir, am_first_cmd) == -1)
 		return (ERR_PRIM);
 	return (EXIT_SUCCESS);

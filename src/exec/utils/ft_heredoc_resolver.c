@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 06:28:29 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/13 17:30:20 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:45:51 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int check_key(char *str_to_check, char *key)
 	size_t i;
 
 	if (!str_to_check || !key || !str_to_check[0] || !key[0])
-		return (printf("\n %s, %s:%d heredoc failed\n", __FILE__, __FUNCTION__, __LINE__), ERR);
+		return (dprintf(STDERR_FILENO, "\n %s, %s:%d heredoc failed\n", __FILE__, __FUNCTION__, __LINE__), ERR);
 	if (ft_strlen(str_to_check) != ft_strlen(key))
 		return (false);
 	i = 0;
@@ -85,7 +85,7 @@ char *ft_resolve_heredoc(char *key, t_minishell *m)
 		new_line = readline("> ");
 		done = check_key(new_line, key);
 		if (!new_line || done == ERR || !heredoc_str)
-			return (printf("\n %s, %s:%d heredoc failed\n", __FILE__, __FUNCTION__, __LINE__), free(heredoc_str), NULL);
+			return (dprintf(STDERR_FILENO, "\n %s, %s:%d heredoc failed\n", __FILE__, __FUNCTION__, __LINE__), free(heredoc_str), NULL);
 		if (done)
 			break;
 		heredoc_str = ft_strjoin_frees1(heredoc_str, "\n");
