@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:27:58 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/10/31 14:50:45 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 15:03:30 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ pid_t	exec_extern(t_command_exec *cmds, t_minishell *m, t_pids_info *p, t_cmd_ty
 	if (pid == 0)
 	{
 		if (child(cmds, m, p->pids_list) == ERR)
-			return (free_pids(p->pids_list), ft_printf("in %s: %s: at line %s child error:\n", __FILE__, __FUNCTION__, __LINE__ ), ERR_CHILD);
+			return (free_pids(p->pids_list), fprintf(STDERR_FILENO,"in %s: %s: at line %s child error:\n", __FILE__, __FUNCTION__, __LINE__ ), ERR_CHILD);
 	}
 	else
 		if (parent(cmds, p, pid) == ERR)
-			return (free_pids(p->pids_list), ft_printf("in %s: %s: at line %s parent error:\n", __FILE__, __FUNCTION__, __LINE__ ), ERR_PARENT);
+			return (free_pids(p->pids_list), fprintf(STDERR_FILENO,"in %s: %s: at line %s parent error:\n", __FILE__, __FUNCTION__, __LINE__ ), ERR_PARENT);
 	return (pid);
 }

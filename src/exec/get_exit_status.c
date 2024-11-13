@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 15:38:41 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/10/20 22:16:21 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/13 15:03:34 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	get_exit_status(t_cmd_type last_cmd_type, t_pids_info externs_pids_infos, in
 		exit_status = parent_waits(externs_pids_infos);
 	}
 	else
-		return(ft_printf("minishell: %s: %s: exec failure", __FILE__, __FUNCTION__), ERR_ARGS);
+		return(fprintf(STDERR_FILENO,"minishell: %s: %s: exec failure", __FILE__, __FUNCTION__), ERR_ARGS);
 	return (exit_status);
 }
 
