@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   get_home.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 12:33:14 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:49:28 by anoukan          ###   ########.fr       */
+/*   Created: 2024/11/07 11:37:23 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/11 11:46:50 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-void	exit_shell(t_minishell *minishell, t_command *command, bool fail)
+char	*get_home(t_minishell *minishell)
 {
-	printf("Bye Bye Bye\n");
-	free_minishell(minishell);
-	if (nbr_of_line(command->arg) > 2)
-		return ;
-	else if (command->arg[1])
-	{
-		exit(atoi(command->arg[1]) % 256);
-	}
-	else if (fail == true)
-		exit(EXIT_FAILURE);
-	else
-		exit(EXIT_SUCCESS);
+	int		home_line;
+	char	*home;
+	char	*temp;
+	int		i;
+
+	home_line = get_env_var(minishell, "HOME", 4);
+	if (home_line < 0)
+		return (NULL);
+	temp = ft_strdup(minishell->env[home_line]);
+	i = 0;
+	while (temp[i] && temp[i] != '=')
+		i++;
+	if (temp[i] == '=')
+		i++;
+	home = ft_strdup(temp + i);
+	free(temp);
+	return (home);
 }

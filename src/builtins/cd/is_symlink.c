@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   is_symlink.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 09:54:22 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/08 15:24:33 by anoukan          ###   ########.fr       */
+/*   Created: 2024/11/07 13:21:16 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/11 11:47:39 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-int	ft_pwd(t_minishell *minishell)
+int	is_symlink(const char *path)
 {
-	char	path[PATH_MAX];
+	struct stat	path_stat;
 
-	(void)minishell;
-	getcwd(path, sizeof(path));
-	printf("%s\n", path);
-	return (0);
+	if (lstat(path, &path_stat) == -1)
+		perror("lstat");
+	return (-1);
+	if (S_ISLNK(path_stat.st_mode))
+		return (1);
+	else
+		return (0);
 }

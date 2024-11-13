@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   get_current_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 12:29:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/12 11:13:40 by anoukan          ###   ########.fr       */
+/*   Created: 2024/11/11 11:39:03 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/11 11:46:15 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int	ft_cd(t_command *command, t_minishell *minishell)
+char	*get_current_path(t_minishell *minishell)
 {
-	int		error;
-	char	*path;
+	char	*current_path;
+	char	*temp;
+	char	*res;
+	int		line;
 
-	path = get_path(command->arg[1], minishell);
-	if (!path)
-		return (1);
-	error = chdir(path);
-	if (error == 0)
-	{
-		printf("Changed dir to %s\n", path);
-		change_pwd(minishell, path);
-	}
-	else
-		printf("Error changing directory");
-	if (path)
-		free(path);
-	return (0);
+	line = get_env_var(minishell, "PWD", 3);
+	if (line < 0)
+		return (NULL);
+	current_path = ft_strdup(minishell->env[line]);
+	if (!current_path)
+		return (NULL);
+	temp = current_path;
+	while (*temp && *temp != '=')
+		temp++;
+	if (*temp == '=')
+		temp++;
+	res = ft_strdup(temp);
+	free(current_path);
+	return (res);
 }

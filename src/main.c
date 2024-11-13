@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:10 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/08 14:36:18 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/29 10:40:16 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static t_minishell	*init(char **env, char *pwd)
 	minishell->paths = ft_split(init_path(minishell), ':');
 	minishell->hd = (char **)malloc(sizeof(char *));
 	minishell->hd[0] = NULL;
-	minishell->hidden_path = NULL;
 	minishell->hidden_env = NULL;
 	return (minishell);
 }

@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:50 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:14:36 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/10/29 09:59:27 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,37 +67,12 @@ typedef struct s_command
 	int					outfile_fd;
 }						t_command;
 
-/*
-typedef struct s_command
-{
-	char				*cmd;
-	char				**cmd_args;
-	int					cmd_id;
-	struct s_command	*next;
-	int					pipe_fds[2];	//new 		//init me at -1
-	int					infile_fd; 		//new 		//init me to -1,
-													fill me if cmd takes infile
-	int					outfile_fd; 	//new 		//init me to -1,
-												fill me if cmd takes outfile
-	int					pid;			//new		//init me to -1,
-}						t_command;
-*/
-
 typedef struct s_minishell
 {
 	char				**env;
 	char				**hidden_env;
-	char				**hidden_path;
-	// the hidden path is for the no env setup
-	// will this concern me, or is it just a parsing/prompt thing ?
-	// genq (echo and $?)
 	char				**paths;
-	// new	// init me extract me from env (line starting by PATHS),
-	// then (split me on token ':')
-	//->needed for exec cmd
 	char				*builtins_paths[NB_BUILTINS];
-	// new	// init me fill me with the path to each builtin, builtins_paths[id]
-	//			-> needed for exec builtins
 	char				*pwd;
 	char				*old_pwd;
 	int					res_last_command;

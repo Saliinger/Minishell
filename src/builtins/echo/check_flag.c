@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   check_flag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 12:29:48 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:49:39 by anoukan          ###   ########.fr       */
+/*   Created: 2024/11/08 15:28:37 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/08 15:31:47 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// display path / where i am
-
 #include "../../include/minishell.h"
 
-void	ft_pwd(t_minishell *minishell)
+int	check_flag(char **arg)
 {
-	char	path[PATH_MAX];
+	int	n;
+	int	i;
+	int	j;
 
-	(void)minishell;
-	getcwd(path, sizeof(path));
-	printf("%s\n", path);
+	n = 0;
+	i = 1;
+	while (arg[i])
+	{
+		j = 0;
+		while (arg[i][j])
+		{
+			if (arg[i][j] == '-')
+				j++;
+			else
+				return (n);
+		}
+		i++;
+	}
+	return (n);
 }

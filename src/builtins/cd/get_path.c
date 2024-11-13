@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 09:54:22 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/08 15:24:33 by anoukan          ###   ########.fr       */
+/*   Created: 2024/11/07 13:49:13 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/11 15:57:16 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-int	ft_pwd(t_minishell *minishell)
+char	*get_path(char *in, t_minishell *minishell)
 {
-	char	path[PATH_MAX];
+	char	*res;
 
-	(void)minishell;
-	getcwd(path, sizeof(path));
-	printf("%s\n", path);
-	return (0);
+	if (!in)
+	{
+		res = get_home(minishell);
+		if (!res)
+			printf("Error: Home is not set\n");
+		return (res);
+	}
+	if (is_symlink(in))
+		res = path_constructor(minishell, in);
+	else
+		res = ft_strdup(in);
+	return (res);
 }
+
+// if !path || ~ => go to home
+// else use comand->arg[1] + check if symlink
