@@ -55,7 +55,7 @@ project_re:
 	rm -f $(OBJ)
 	rm -f $(NAME)
 	clear
-	make $(NAME)
+	make $(NAME) -j
 
 exec_re: 
 	rm -f $(EXED)/*.o
@@ -64,26 +64,26 @@ exec_re:
 	rm -f $(EXED)/*/*/*/*.o
 	rm -f $(NAME)
 	clear
-	make $(NAME)
+	make $(NAME) -j
 
 utils_re:
 	rm -f $(UTILSD)/*.o
 	rm -f $(UTILSD)/*/*.o
 	rm -f $(NAME)
 	clear
-	make $(NAME)
+	make $(NAME) -j
 
 parsing_re:
 	rm -f $(PARSD)/*.o
 	rm -f $(NAME)
 	clear
-	make $(NAME)
+	make $(NAME) -j
 
 builtins_re:
 	rm -f $(BINS)/*/*.o
 	rm -f $(NAME)
 	clear
-	make $(NAME)
+	make $(NAME) -j
 
 test: project_re
 	clear
