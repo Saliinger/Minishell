@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:39:03 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/10/23 18:36:23 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/14 01:39:07 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * if the cmdpath is executable, returns it, else continues to search 
  * returns NULL if none found;
  */
-static char	*get_command(char **paths, char *cmd)
+static char	*get_accessible_command_path(char **paths, char *cmd)
 {
 	int		i;
 	char	*tmp;
@@ -39,6 +39,37 @@ static char	*get_command(char **paths, char *cmd)
 	return (NULL);
 }
 
+static int	tab_ind_line_containing(char **tab, char *containing)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i] != NULL && ft_strncmp(containing, tab[i], 4))
+		i++;
+	if (tab[i] == NULL)
+		return (-1);
+	return (i);
+}
+
+static char	**get_paths_from_env(char **env)
+{
+	int		i;
+	char	*line_paths;
+	char	**tab_paths;
+
+	i = tab_ind_line_containing(env, "PATH");
+	if (i == -1)
+		return (NULL);
+	if (i < 0)
+		return (NULL);
+	line_paths = ft_substr(env[i], 5, ft_strlen(env[i]));
+	tab_paths = ft_split(line_paths, ':');
+	free(line_paths);
+	if (tab_paths == NULL)
+		exit(ft_error("ft_split(paths, ':') = NULL\n", ERR_PARSE));
+	return (tab_paths);
+}
+
 /**
  * brief : will exec the command (cmd located in c->cmd_args[0], args c->cmd_args, paths located in m->paths) 
  * 
@@ -46,16 +77,17 @@ static char	*get_command(char **paths, char *cmd)
 static int	execve_cmdpath(t_command_exec *c, t_minishell *m)
 {
 	int		err;
-	char	*msg;
+	char	**paths;
 	char	*cmd_path;
 
 	err = 0;
-	cmd_path = get_command(m->paths, c->cmd_args[0]);
+	paths = get_paths_from_env(m->env);
+	cmd_path = get_accessible_command_path(paths, c->cmd_args[0]);
+	ft_free_nullterm_tab(&paths);
 	if (cmd_path == NULL)
 	{
-		msg = ft_strjoin(c->cmd_args[0], ": command not found\n");
-		ft_putstr_fd(msg, STDERR_FILENO);
-		return (free(msg), ft_error("error cmd\n", ERR_CMD));
+		dprintf(STDERR_FILENO, "%s: command not found\n", c->cmd_args[0]); //fix to printerr
+		return (ERR);
 	}
 	err = execve(cmd_path, c->cmd_args, m->env);
 	perror("minishell");																														
@@ -72,10 +104,12 @@ void	execve_command(t_command_exec *c, t_minishell *m, t_pids *pids)
 	int		err;
 
 	err = execve_cmdpath(c, m);
+	dprintf(STDERR_FILENO, "%s: %d: execve did not occur\n", __FILE__, __LINE__); //killme
 	free_t_command_exec(&c);
 	free_t_minishell(&m);
 	free_pids(pids);
 	if (err)
 		exit(err);
+	dprintf(STDERR_FILENO, "%s: %d: Oh hell no WTF\n", __FILE__, __LINE__); //killme
 	exit(EXIT_SUCCESS);
 }

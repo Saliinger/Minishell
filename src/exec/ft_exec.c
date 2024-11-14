@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:33:57 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/13 17:45:24 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/14 00:12:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	save_std_fds(int *std_fds)
 	print_std_fds(std_fds, "SAVED STD IN(0) & OUT(1)");
 	return (EXIT_SUCCESS);
 }
+
 /**
  * brief : restores the STDIN & STDOUT via dup2 according to those in std_fds
  * 

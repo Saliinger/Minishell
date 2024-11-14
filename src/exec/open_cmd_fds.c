@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:53 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/13 17:45:31 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/14 02:38:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	open_as_last_redir_out(t_redir *rd, int *fds_last_redir)
 			return (perror("minishell"), ERR_PRIM);
 	}
 	else
-		return (dprintf(STDERR_FILENO,"minishell: in %s, %s: erreur parsing redir out\n", __FILE__, __FUNCTION__), ERR);
+		return (perror("minishell"), dprintf(STDERR_FILENO,"minishell: in %s, %s: erreur redir out:\n\t rd->redir= `%s` \n\t rd->type=  `%d`\n", __FILE__, __FUNCTION__, rd->redir, rd->type), ERR);
 	return (EXIT_SUCCESS);
 }
 
@@ -95,13 +95,13 @@ static int	open_cmd_fd(t_command_exec *c, t_redir *rd, int *fds_last_redir, t_mi
 	type = rd->type;
 	if (type == R_IN_FILE || type == R_IN_HD)
 	{
-		dprintf(STDERR_FILENO, "beep");
+		dprintf(STDERR_FILENO, "beep\n");
 		if (open_as_last_redir_in(rd, fds_last_redir, c, m) == -1)
 			return (ERR_PRIM);
 	}
 	else if (type == R_OUT_FILE || type == R_OUT_APPEND)
 	{
-		dprintf(STDERR_FILENO, "boop");
+		dprintf(STDERR_FILENO, "boop\n");
 		if(open_as_last_redir_out(rd, fds_last_redir) == -1)
 			return (ERR_PRIM);
 	}
@@ -121,13 +121,20 @@ static int	open_cmd_fd(t_command_exec *c, t_redir *rd, int *fds_last_redir, t_mi
 int	open_cmd_fds(t_command_exec *cmd, int *fds_last_redir, t_minishell *m)
 {
 	int		err;
+	int		r;
 	t_redir	*rd;
 
 	err = 0;
 	rd = cmd->redir_files_llist;
 	while(rd)
 	{
-		err += open_cmd_fd(cmd, rd, fds_last_redir, m);
+		r = open_cmd_fd(cmd, rd, fds_last_redir, m);
+		if (r)
+		{
+			dprintf(STDERR_FILENO, "error with redir :\n");
+			print_redir(rd);
+		}
+		err += r;
 		rd = rd->next;
 	}
 	if (err)

@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:52:06 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/13 17:46:11 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/14 02:25:14 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	print_redirs(t_redir *redir)
 {
+	dprintf(STDERR_FILENO, "\t\t  p a t h       |          t y p e\n");
 	while (redir)
 	{
-		//dprintf(STDERR_FILENO, "Redirection Node %d:\n", i);
-		dprintf(STDERR_FILENO, "\t%s\t\t-\t", redir->redir);
+		dprintf(STDERR_FILENO, "\t\t%-10s", redir->redir);
+		dprintf(STDERR_FILENO, "\t-   \t");
 		if (redir->type == R_IN_FILE)
 			dprintf(STDERR_FILENO, "R_IN_FILE");
 		else if(redir->type == R_IN_HD)
@@ -29,5 +30,5 @@ void	print_redirs(t_redir *redir)
 		dprintf(STDERR_FILENO, " (%d)\n", redir->type);
 		redir = redir->next;
 	}
-	dprintf(STDERR_FILENO, "\t%p\n", redir);
+	dprintf(STDERR_FILENO, "\t\t%p\n", redir);
 }
