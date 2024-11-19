@@ -28,6 +28,8 @@ int		change_pwd(t_minishell *minishell, char *in);
 
 // ECHO
 int		ft_echo(t_minishell *minishell, t_command *command);
+int     check_flag(char **arg);
+void    echo_print(char **arg, bool eof);
 
 // ENV
 int		ft_env(t_minishell *minishell);

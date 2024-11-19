@@ -13,7 +13,14 @@
 #include "../../../include/minishell.h"
 int	ft_echo(t_minishell *minishell, t_command *command)
 {
-    (void)minishell;
-    (void)command;
+    int i;
+    char **cmd;
+
+    cmd = command->clean_arg + 1;
+    i = check_flag(cmd);
+    if (i > 0)
+        echo_print(cmd + i, false);
+    else
+        echo_print(cmd + i, true);
 	return (0);
 }
