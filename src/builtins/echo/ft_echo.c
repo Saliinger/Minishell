@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-int	ft_echo(t_minishell *minishell, t_command *command)
+int	ft_echo(t_command *command)
 {
     int i;
     char **cmd;
@@ -22,5 +22,5 @@ int	ft_echo(t_minishell *minishell, t_command *command)
         echo_print(cmd + i, false);
     else
         echo_print(cmd + i, true);
-	return (0);
+    return (0);
 }
