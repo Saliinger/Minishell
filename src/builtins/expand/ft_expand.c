@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-
+#include "../../../include/minishell.h"
 // need to print the env var
 
 int	ft_expand(t_command *command, t_minishell *minishell)

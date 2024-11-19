@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-
+#include "../../../include/minishell.h"
 static bool	check_key(t_command *command, char *line)
 {
 	if (ft_strncmp(line, command->arg[1], ft_strlen(command->arg[1])) == 0

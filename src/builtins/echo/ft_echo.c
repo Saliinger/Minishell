@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-
+#include "../../../include/minishell.h"
 int	ft_echo(t_minishell *minishell, t_command *command)
 {
+    (void)minishell;
+    (void)command;
 	return (0);
 }

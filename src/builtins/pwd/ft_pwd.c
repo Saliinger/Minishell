@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-
+#include "../../../include/minishell.h"
 int	ft_pwd(t_minishell *minishell)
 {
 	char	path[PATH_MAX];

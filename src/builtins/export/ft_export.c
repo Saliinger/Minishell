@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-
+#include "../../../include/minishell.h"
 // export command can create new env and change the value of others
 // need to handle multiple var
 // need to add if export is alone you need to display env

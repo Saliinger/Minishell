@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-
+#include "../../../include/minishell.h"
 int	ft_exit(t_minishell *minishell, t_command *command, bool fail)
 {
 	printf("Bye Bye Bye\n");

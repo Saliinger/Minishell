@@ -12,7 +12,7 @@
 
 #include "../../../include/minishell.h"
 
-void	change_exit_code(t_minishell *minishell, int exit_code)
-{
-
-}
+//void	change_exit_code(t_minishell *minishell, int exit_code)
+//{
+//
+//}
