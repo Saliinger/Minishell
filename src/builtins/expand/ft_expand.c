@@ -36,6 +36,7 @@ int	ft_expand(t_command *command, t_minishell *minishell)
 			g++;
 		}
 	}
+
 	ft_putchar_fd('\n', 1);
 	return (0);
 }

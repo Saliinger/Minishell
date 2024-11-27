@@ -38,6 +38,8 @@ int		ft_env(t_minishell *minishell);
 int		ft_exit(t_minishell *minishell, t_command *command, bool fail);
 
 // EXPAND
+// ne gere pas si l'expand est une fonction pour le moment c'est a faire
+int	ft_expand(t_command *command, t_minishell *minishell);
 
 // HEREDOC
 
@@ -45,6 +47,7 @@ int		ft_exit(t_minishell *minishell, t_command *command, bool fail);
 int		ft_pwd(t_minishell *minishell);
 
 // UNSET
+int	ft_unset(t_command *command, t_minishell *minishell);
 
 // EXPORT
 int		ft_export(t_command *command, t_minishell *minishell);
