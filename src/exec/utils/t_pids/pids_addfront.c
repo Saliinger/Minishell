@@ -6,11 +6,11 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 21:20:22 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/09/09 22:39:27 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/10/21 20:37:27 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/exec.h"
+#include "../../../../include/exec.h"
 
 /**
  * brief : adds a node to the front of a t_pid lst, containing pid

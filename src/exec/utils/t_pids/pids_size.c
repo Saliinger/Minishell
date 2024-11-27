@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_close_fd.c                                      :+:      :+:    :+:   */
+/*   pids_size.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 18:45:50 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/09/09 19:32:47 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/09/09 22:19:07 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/10/21 20:37:32 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/exec.h"
+#include "../../../../include/exec.h"
 
-int	ft_close_fd(int *fd)
+int	pids_size(t_pids *pids)
 {
-	if (*fd == -1)
-		return (0);
-	if (close(*fd) == -1)
-		return (ft_error("error close\n", ERR_CLOSE));
-	*fd = -1;
-	return (0);
+	t_pids	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = pids;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
 }

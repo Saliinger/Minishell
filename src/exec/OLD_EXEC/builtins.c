@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:33:51 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/09 15:49:06 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/13 17:29:35 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	builtin_slector(t_command *command, t_minishell *minishell)
 {
-	if (command->id == ECHO_ID)
+	/*if (command->id == ECHO_ID)
 		ft_echo(minishell, command);
 	else if (command->id == CD_ID)
 		ft_cd(command, minishell);
@@ -33,5 +33,7 @@ void	builtin_slector(t_command *command, t_minishell *minishell)
 	else if (command->id == HD_ID)
 		ft_heredoc(command, minishell);
 	else if (command->id == EXPAND_ID)
-		ft_expand(command, minishell);
+		ft_expand(command, minishell);*/
+	(void) command;
+	(void) minishell;
 }

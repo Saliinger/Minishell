@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   print_std_fds.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 20:16:09 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/10/21 17:42:18 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/10/31 22:32:43 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/11/13 17:46:15 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#include "../../../../include/exec.h"
 
-# ifndef VERBOSE
-#  define VERBOSE 0
-# endif
-
-enum e_errors
+void	print_std_fds(int *fds, char *display_name)
 {
-	ERR_MALLOC = -142,
-	ERR_ARGS,
-	ERR_OUT,
-	ERR_CMD,
-	ERR_PARSE,
-	ERR,
-};
+	int	i;
 
-enum e_primitive_errors
-{
-	ERR_OUTFILE = 2,
-	ERR_LAST_CHILD = 127,
-	ERR_PRIM = -1,
-	ERR_OPEN = -242,
-	ERR_CLOSE,
-	ERR_FORK,
-	ERR_CHILD,
-	ERR_PARENT,
-	ERR_ACCESS,
-};
-
-int		ft_error(char *error_msg, int errnum);
-#endif
+	if (!fds)
+		return ;
+	i = 0;
+	dprintf(STDERR_FILENO, "\t#- %s -#", display_name);
+	dprintf(STDERR_FILENO, "\n\tstd_fds\n");
+	while(i < 2)
+	{
+		dprintf(STDERR_FILENO, "\t\t[%d] %d\n", i, fds[i]);
+		i++;
+	}
+}

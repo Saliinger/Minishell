@@ -1,44 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 20:16:09 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/10/21 17:42:18 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/09/09 18:46:27 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/11/13 17:11:15 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#include "../../../include/exec.h"
+#include "../../../include/minishell.h"
 
-# ifndef VERBOSE
-#  define VERBOSE 0
-# endif
-
-enum e_errors
+int	ft_error(char *error_msg, int errnum)
 {
-	ERR_MALLOC = -142,
-	ERR_ARGS,
-	ERR_OUT,
-	ERR_CMD,
-	ERR_PARSE,
-	ERR,
-};
-
-enum e_primitive_errors
-{
-	ERR_OUTFILE = 2,
-	ERR_LAST_CHILD = 127,
-	ERR_PRIM = -1,
-	ERR_OPEN = -242,
-	ERR_CLOSE,
-	ERR_FORK,
-	ERR_CHILD,
-	ERR_PARENT,
-	ERR_ACCESS,
-};
-
-int		ft_error(char *error_msg, int errnum);
-#endif
+	if (VERBOSE >= 1)
+		dprintf(STDERR_FILENO,"Error\nErr %d\n\t%s\n", errnum, error_msg);
+	return (errnum);
+}
