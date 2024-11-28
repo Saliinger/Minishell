@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:50 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/28 04:50:28 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 17:55:50 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,17 @@
 # define HD_ID 9
 # define EXPAND_ID 10
 # define MINISHELL_ID 16
-# define HEREDOC_FILENO -1000
-# define HEREDOC_QUOTES_FILENO -10000
+
+# define HEREDOC_FILENO -42
+# define HEREDOC_QUOTES_FILENO -4242
 
 # include "imports.h"
 
 // Structure
 typedef struct s_redir
 {
-	t_enum_redir		token;
-	char				*args;
+	t_enum_redir		type;
+	char				*redir;
 	struct s_redir		*next;
 }						t_redir;
 

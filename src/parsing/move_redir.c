@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:50:21 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/27 13:26:54 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/28 18:00:43 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static void	add_node(t_enum_redir type, char *str, t_redir **head)
 static t_enum_redir	get_redir_type(char *str)
 {
 	if (!ft_strncmp(str, ">>", 2))
-		return (R_OUT_APPEND);
+		return (R_OUT_FILE_APPEND);
 	else if (!ft_strncmp(str, ">", 1))
-		return (R_OUT_FILE);
+		return (R_OUT_FILE_TRUNC);
 	else if (!ft_strncmp(str, "<<", 2))
-		return (R_IN_HD);
+		return (R_IN_HEREDOC);
 	else if (!ft_strncmp(str, "<", 1))
 		return (R_IN_FILE);
 	return (R_INVALID);

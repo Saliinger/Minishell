@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 02:17:28 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 19:01:43 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static int	resolve_heredoc(t_command_exec *cmd, t_minishell *m, t_redir *rd)
 	bool	does_it_expand;
 
 	err = 0;
-	if (rd->token == REDIR_HEREDOC)
+	if (rd->type == R_IN_HEREDOC)
 		does_it_expand = true;
-	if (rd->token == REDIR_HEREDOC_MODE_IN_QUOTES)
+	if (rd->type == R_IN_HEREDOC_Q)
 		does_it_expand = false;
 	ft_free((void **) &cmd->last_heredoc_str);
-	cmd->last_heredoc_str = heredoc(rd->args, m, does_it_expand, &err);
+	cmd->last_heredoc_str = heredoc(rd->redir, m, does_it_expand, &err);
 	if (err)
 		return (ERR);
 	return (EXIT_SUCCESS);
@@ -46,7 +46,7 @@ static int	resolve_node_heredocs(t_command_exec *cmd, t_minishell *m)
 	err = 0;
 	while(rd)
 	{
-		if (rd->token == REDIR_HEREDOC || rd->token == REDIR_HEREDOC_MODE_IN_QUOTES)
+		if (rd->type == R_IN_HEREDOC || rd->type == R_IN_HEREDOC_Q)
 			err = resolve_heredoc(cmd, m, rd);
 		if (err)
 		{

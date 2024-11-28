@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 13:44:15 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 18:01:58 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static int apply_pipes_redirs(t_command_exec *cmd, t_infos *inf)
  * 
  * 
  */
-int	apply_redirections(t_command_exec *cmd, t_infos *i, int cmd_type)
+int	apply_redirections(t_command_exec *cmd, t_infos *i)
 {
 	int err;
 

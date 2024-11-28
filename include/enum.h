@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:07:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/28 04:45:07 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 18:34:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 typedef enum e_redir
 {
-    REDIR_IN = 1,
-    REDIR_OUT,
-    REDIR_APPENDS_TO_FILE,
-    REDIR_HEREDOC,
-    REDIR_HEREDOC_MODE_IN_QUOTES,
-	R_INVALID
+	R_IN_FILE= 1,
+    R_IN_HEREDOC,
+	R_IN_HEREDOC_Q,
+    R_OUT_FILE_TRUNC,
+	R_OUT_FILE_APPEND,
+	R_INVALID,
 }	t_enum_redir;
 
 typedef enum e_cmd_type
@@ -30,3 +30,4 @@ typedef enum e_cmd_type
 } t_cmd_type;
 
 #endif
+ 

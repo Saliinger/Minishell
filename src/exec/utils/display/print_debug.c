@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:25:40 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 17:14:03 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,20 @@ void	printredir(t_redir *file)
 		{
 			while (file->path && file->path[i])
 			{
-				if (file->token == 0)
+				if (file->type == 0)
 					printerr("\t%d: %s: %s\n", i, "R_IN_F  ", file->path[i]);
-				if (file->token[i] == 1)
+				if (file->type[i] == 1)
 					printerr("\t%d: %s: %s\n", i, "R_OUT_AP", file->path[i]);
-				if (file->token[i] == 2)
+				if (file->type[i] == 2)
 					printerr("\t%d: %s: %s\n", i, "R_OUT_F ", file->path[i]);
-				if (file->token[i] == 3)
+				if (file->type[i] == 3)
 					printerr("\t%d: %s: %s\n", i, "REDIR_HEREDOC ", file->path[i]);
 				i++;
 			}
-            if(file->token[i] == 0)
+            if(file->type[i] == 0)
 			    printerr("\t%d: %p: %p\n",  i, NULL, file->path[i]);
             else
-                printerr("\t%d: ERR - %d: %p\n",  i, file->token[i], file->path[i]);
+                printerr("\t%d: ERR - %d: %p\n",  i, file->type[i], file->path[i]);
 		}
 		else
 			printerr("\t%p\n", NULL);
@@ -69,11 +69,11 @@ void	printparse(t_parse *parse)
 	while (parse)
 	{
 		printerr("\n\n\n_______________cmd_______________\n\n\n");
-		//printerr("cmd:\t%s\n", parse->args[0]);
+		//printerr("cmd:\t%s\n", parse->redir[0]);
 		printerr("REDIRS (int *tokens & char **args):\n");
 		printredir(parse->redir);
 		printerr("ARGS (execve tab):\n");
-		printtabs(parse->args);
+		printtabs(parse->redir);
 		parse = parse->next;
 	}
 }*/

@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 20:13:52 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 05:22:46 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 19:12:30 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		exec_loop(t_command_exec *cmds, t_minishell *m, t_infos *i);
 pid_t	exec_extern(t_command_exec *cmds, t_minishell *m, t_infos *inf);
 void	execve_command(t_command_exec *c, t_minishell *m, t_infos *i);
 int		open_cmds_fds(t_command_exec *cmds, int *fds_last_redir);
-int     apply_redirections(t_command_exec *cmd, t_infos *i, int cmd_type);
+int     apply_redirections(t_command_exec *cmd, t_infos *i);
 int		get_exit_status(t_infos *i, int builtin_exit_status);
 int		open_cmd_fds(t_command_exec *cmd, int *fds_last_redir);
 int		save_std_fds(int *std_fds);
@@ -89,6 +89,6 @@ void	free_pids(t_pids *pids);
 int		pids_size(t_pids *pids);
 
 int		ft_close(int *fd);
-int		ft_dup2(int *fd, int fd2);
+int		ft_dup2(int fd, int fd2);
 int		ft_dup(int fd);
 #endif
