@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 20:43:39 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/13 17:50:54 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 04:42:36 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,15 @@ void	print_args(t_command_exec *c)
 		dprintf(STDERR_FILENO, "%p\n", c->cmd_args);
 }
 
-static void	print_body(t_command_exec *c)
+void	print_body(t_command_exec *c, bool print_all)
 {
 	int len;
 
-	len = dprintf(STDERR_FILENO, "\n________________t_command_exec: %p________________\n", c);
-	dprintf(STDERR_FILENO, "\tCommand:   \t%s\n", c->cmd_args[0]);
+	len = dprintf(STDERR_FILENO, "\n________________t_command_exec %d: %p________________\n", c->index, c);
+	if (c->cmd_args)
+		dprintf(STDERR_FILENO, "\tCommand:   \t%s\n", c->cmd_args[0]);
+	else
+		dprintf(STDERR_FILENO, "\tCommand:   \t%p (c->cmd_args: (nil))\n", c->cmd_args);
 	dprintf(STDERR_FILENO, "\tCommand ID:\t%d", c->cmd_id);
 	if (c->cmd_id == 0)
 		dprintf(STDERR_FILENO, " (extern)\n");
@@ -50,15 +53,20 @@ static void	print_body(t_command_exec *c)
 		print_redirs(c->redir_files_llist);
 	else
 		dprintf(STDERR_FILENO, "\t%p\n", c->redir_files_llist);
+	if (c->last_heredoc_str)
+		dprintf(STDERR_FILENO, "\tlast_heredoc_str: `%s`\n", c->last_heredoc_str);
+	else
+		dprintf(STDERR_FILENO, "\tlast_heredoc_str: %p\n", c->last_heredoc_str);
+	dprintf(STDERR_FILENO, "\tredir_fds:\n\t\t[%d ( IN)]:\t%d\n\t\t[%d (OUT)]:\t%d\n", IN, c->redir_fds[0], OUT, c->redir_fds[1]);
 	dprintf(STDERR_FILENO, "\tnext: %p \n", c->next);
-	if (c->next)	
-		print_body(c->next);
+	if (c->next && print_all)
+		print_body(c->next, true);
 	else
 	{
 		dprintf(STDERR_FILENO, "\n\n");
 		while (--len > 0)
 			dprintf(STDERR_FILENO, "_");
-		dprintf(STDERR_FILENO, "\n");
+		dprintf(STDERR_FILENO, "\n\n");
 	}
 	return ;
 }
@@ -68,6 +76,8 @@ void	print_display_name(char *display_name)
 	int len;
 	int i;
 
+	if (!display_name)
+		return ;
 	len = ft_strlen(display_name) + 8;
 	i = len;
 	while(i--)
@@ -75,12 +85,13 @@ void	print_display_name(char *display_name)
 	dprintf(STDERR_FILENO, "\n#-  %s  -#\n", display_name);
 	while(++i < len)
 		dprintf(STDERR_FILENO, "#");
+	dprintf(STDERR_FILENO, "\n");
 }
 
 void	print_cmd_nodes(t_command_exec *c, char *display_name)
 {
 	dprintf(STDERR_FILENO, "\n\n");
 	print_display_name(display_name);
-	print_body(c);
+	print_body(c, true);
 	return ;
 }

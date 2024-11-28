@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:53:36 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/14 02:24:50 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 04:09:49 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ static void	start(t_command *command)
 	printf("\tInput:        \t %s\n", command->in);
 }
 
-void	print_command(t_command *command)
+void	print_command(t_command *command, char *name)
 {
 	int	i;
 
+	print_display_name(name);
 	i = 0;
-	printf("_____________t_command: %p_______________\n", command);
+	printf("\n_____________t_command: %p_______________\n", command);
 	start(command);
 	if (command->arg)
 	{
@@ -72,5 +73,5 @@ void	print_command(t_command *command)
 	printf("\tSubcommand:");
 	printf("\t%p\n\n", command->subcommand);
 	if (command->subcommand)
-		print_command(command->subcommand);
+		print_command(command->subcommand, NULL);
 }

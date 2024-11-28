@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_signals.c                                      :+:      :+:    :+:   */
+/*   count_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 19:19:49 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/10/20 16:43:45 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/11/25 03:19:46 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/11/28 05:00:11 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/signals.h"
+#include "exec.h"
 
-/**
- * set the followong signals actions to :
- * 
- * 
- */
-int set_signals_to_default()
+void	index_nodes(t_command_exec *c)
 {
-    //sigaction(SIGINT, );
+	int i;
 
-    //sigaction_t 
-    return (EXIT_SUCCESS);
+	i = 0;
+	while (c)
+	{
+		c->index = i;
+		i++;
+		c = c->next;
+	}
 }
 
-/**
- * set the followong signals actions back to default : 
- * 
- * 
- */
-int set_signals_to_minishell()
+int	count_cmds(t_command_exec *cmd)
 {
+	int	i;
 
-    return (EXIT_SUCCESS);
+	i = 0;
+	while (cmd)
+	{
+		i++;
+		cmd = cmd->next;
+	}
+	return (i);
 }

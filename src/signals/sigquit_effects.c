@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enum.h                                             :+:      :+:    :+:   */
+/*   sigquit_effects.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 23:07:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/28 04:45:07 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/11/07 15:16:46 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/11/25 10:50:51 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENUM_H
-# define ENUM_H
+#include "signals.h"
 
-typedef enum e_redir
+/**
+ * brief : Ctrl + \ effect when in mode heredoc
+ *  : does nothing.
+ */
+void	sigeffect_heredoc_sigquit()
 {
-	R_IN_FILE = 1,
-	R_IN_HD,
-	R_OUT_FILE,
-	R_OUT_APPEND,
-	R_INVALID
-}	t_enum_redir;
+	g_sig = SIG_HANDLED;
+}
 
-typedef enum e_cmd_type
+/**
+ * brief : Ctrl + D effect when in mode minishell
+ *  : does nothing.
+ */
+void	sigeffect_minishell_sigquit()
 {
-	CMD_BUILTIN = 1,
-	CMD_EXTERN,
-} t_cmd_type;
-
-#endif
+	g_sig = SIG_HANDLED; 
+}

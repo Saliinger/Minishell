@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/13 17:37:22 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 05:15:21 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 # include "structure.h"
 # include "signals.h"
 # include "enum.h"
+# include "heredoc.h"
+# include "utils.h"
+#include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
 
 // FREE
 void		free_minishell(t_minishell *minishell);
@@ -70,7 +76,7 @@ int			get_env_var(t_minishell *minishell, char *var, int len);
 // Debug
 void		ft_print(char **s, int i);
 void		ft_print_redir(t_redir *list);
-void		print_command(t_command *command);
+void		print_command(t_command *command, char *name);
 
 #endif
 

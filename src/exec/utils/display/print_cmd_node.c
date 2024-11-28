@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enum.h                                             :+:      :+:    :+:   */
+/*   print_cmd_node.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 23:07:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/28 04:45:07 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/11/12 23:41:25 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/11/28 04:41:13 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENUM_H
-# define ENUM_H
+#include "../../../../include/exec.h"
 
-typedef enum e_redir
+void	print_cmd_node(t_command_exec *c, char *display_name)
 {
-	R_IN_FILE = 1,
-	R_IN_HD,
-	R_OUT_FILE,
-	R_OUT_APPEND,
-	R_INVALID
-}	t_enum_redir;
-
-typedef enum e_cmd_type
-{
-	CMD_BUILTIN = 1,
-	CMD_EXTERN,
-} t_cmd_type;
-
-#endif
+	print_display_name(display_name);
+	print_body(c, false);
+}

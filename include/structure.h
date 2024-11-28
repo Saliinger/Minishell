@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:50 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/13 15:32:26 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 04:50:28 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_command
 typedef struct s_minishell
 {
 	char				**env;
+	int					std_fds[2];
 	char				**hidden_env;
 	char				**hidden_path;
 	char				**paths;

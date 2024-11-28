@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/13 21:59:28 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 04:05:37 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_command *parsing(char *str, t_minishell *minishell)
 	}
 	if (current)
 	{
-		print_command(current);
+		print_command(current, "parsing");
 		return(current);
 	}
 	else

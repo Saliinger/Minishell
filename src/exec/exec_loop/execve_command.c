@@ -6,18 +6,20 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:39:03 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/14 01:39:07 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/27 04:16:16 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/exec.h"
+#include "exec.h"
+#include "minishell.h"
+#include "utils.h"
 
 /**
  * brief : for each path in paths, will try to joind path and cmd, to get the cmdpath,
  * if the cmdpath is executable, returns it, else continues to search 
  * returns NULL if none found;
  */
-static char	*get_accessible_command_path(char **paths, char *cmd)
+static char	*get_command(char **paths, char *cmd)
 {
 	int		i;
 	char	*tmp;
@@ -25,11 +27,17 @@ static char	*get_accessible_command_path(char **paths, char *cmd)
 
 	if (!paths || !cmd)
 		return (NULL);
+	if (access(cmd, 0) == 0)
+		return (cmd);
 	i = 0;
 	while (paths[i])
 	{
 		tmp = ft_strjoin(paths[i], "/"); //maybe do only if the last char isnt '/' ?
+		if (!tmp)
+			return (NULL);
 		command = ft_strjoin(tmp, cmd);
+		if (!command)
+			return (free(tmp), NULL);
 		free(tmp);
 		if (access(command, 0) == 0)
 			return (command);
@@ -39,35 +47,21 @@ static char	*get_accessible_command_path(char **paths, char *cmd)
 	return (NULL);
 }
 
-static int	tab_ind_line_containing(char **tab, char *containing)
+/**
+ * brief : returns tab of paths found in the env, 
+ * if fails, returns NULL
+ * 
+ *  */
+static char	**get_env_paths(t_minishell *m)
 {
-	int		i;
-
-	i = 0;
-	while (tab[i] != NULL && ft_strncmp(containing, tab[i], 4))
-		i++;
-	if (tab[i] == NULL)
-		return (-1);
-	return (i);
-}
-
-static char	**get_paths_from_env(char **env)
-{
-	int		i;
 	char	*line_paths;
-	char	**tab_paths;
+	char	**result;
 
-	i = tab_ind_line_containing(env, "PATH");
-	if (i == -1)
+	line_paths = ft_getenv(m->env, "PATH");
+		result = ft_split(line_paths, ':');
+	if (!result)
 		return (NULL);
-	if (i < 0)
-		return (NULL);
-	line_paths = ft_substr(env[i], 5, ft_strlen(env[i]));
-	tab_paths = ft_split(line_paths, ':');
-	free(line_paths);
-	if (tab_paths == NULL)
-		exit(ft_error("ft_split(paths, ':') = NULL\n", ERR_PARSE));
-	return (tab_paths);
+	return (result);
 }
 
 /**
@@ -77,20 +71,35 @@ static char	**get_paths_from_env(char **env)
 static int	execve_cmdpath(t_command_exec *c, t_minishell *m)
 {
 	int		err;
-	char	**paths;
+	char	*msg;
 	char	*cmd_path;
+	char	**env_paths;
 
 	err = 0;
-	paths = get_paths_from_env(m->env);
-	cmd_path = get_accessible_command_path(paths, c->cmd_args[0]);
-	ft_free_nullterm_tab(&paths);
+	if (access(c->cmd_args[0], 0) != 0)
+	{
+		env_paths = get_env_paths(m);
+		cmd_path = get_command(env_paths, c->cmd_args[0]);
+	}
+	else
+		cmd_path = c->cmd_args[0];
 	if (cmd_path == NULL)
 	{
-		dprintf(STDERR_FILENO, "%s: command not found\n", c->cmd_args[0]); //fix to printerr
-		return (ERR);
+		msg = ft_strjoin(c->cmd_args[0], ": command not found\n");
+		if (!msg)
+			return (2);
+		ft_putstr_fd(msg, STDERR_FILENO);
+		return (free(msg), free_tab(env_paths), ft_error("error cmd\n", 127));
 	}
-	err = execve(cmd_path, c->cmd_args, m->env);
-	perror("minishell");																														
+	if (c->cmd_id != MINISHELL_ID)
+	{ // CHANGE ME, pour l'instant : pas d'imbrications.
+		if (set_signals_to_default() == -1)
+			return (ft_print_err("%s: %d: err\n", __FILE__, __LINE__));
+		err = execve(cmd_path, c->cmd_args, m->env->my_env);
+		perror("execve");
+	}
+	else
+		ft_print_err("mini: cannot 'minishell' while in 'minishell'\n"); //-> set imbrication level += 1, set SIGIGNORE until done
 	return (err);
 }
 
@@ -99,17 +108,15 @@ static int	execve_cmdpath(t_command_exec *c, t_minishell *m)
  * note : children either get execve'd here or get exit(-1) for failure to execve
  * if execve fails, frees everything and EXITS
  */
-void	execve_command(t_command_exec *c, t_minishell *m, t_pids *pids)
+void	execve_command(t_command_exec *c, t_minishell *m, t_infos *i)
 {
 	int		err;
 
 	err = execve_cmdpath(c, m);
-	dprintf(STDERR_FILENO, "%s: %d: execve did not occur\n", __FILE__, __LINE__); //killme
 	free_t_command_exec(&c);
 	free_t_minishell(&m);
-	free_pids(pids);
+	free_t_infos(i);
 	if (err)
 		exit(err);
-	dprintf(STDERR_FILENO, "%s: %d: Oh hell no WTF\n", __FILE__, __LINE__); //killme
 	exit(EXIT_SUCCESS);
 }
