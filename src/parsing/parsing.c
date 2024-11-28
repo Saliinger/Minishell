@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	parsing(char *str, t_minishell *minishell)
+t_command 	*parsing(char *str, t_minishell *minishell)
 {
 	t_command	*current;
 	t_command	*temp;
@@ -28,4 +28,5 @@ void	parsing(char *str, t_minishell *minishell)
 		print_command(current);
 	else
 		printf("loli said: bitch it's not working\n");
+    return (current);
 }
