@@ -38,6 +38,7 @@
 # define NB_BUILTINS 8
 # define HD_ID 9
 # define EXPAND_ID 10
+# define MINISHELL_ID 16
 
 # include "imports.h"
 

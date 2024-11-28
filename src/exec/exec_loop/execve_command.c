@@ -57,8 +57,8 @@ static char	**get_env_paths(t_minishell *m)
 	char	*line_paths;
 	char	**result;
 
-	line_paths = ft_getenv(m->env, "PATH");
-		result = ft_split(line_paths, ':');
+	line_paths = ft_strdup(m->env[get_env_var(m, "PATH", 4)]);
+    result = ft_split(line_paths, ':');
 	if (!result)
 		return (NULL);
 	return (result);
