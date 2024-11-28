@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-
+#include "../../include/exec.h"
 /**
  * brief : this version waits for any child to die, if the last child died, returns by pointer it's exit status
  * 

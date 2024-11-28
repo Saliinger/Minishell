@@ -15,6 +15,10 @@
 
 # include "minishell.h"
 
+typedef struct s_minishell t_minishell;
+typedef struct s_command t_command;
+typedef struct s_redir t_redir;
+
 # define IN		0
 # define OUT	1
 

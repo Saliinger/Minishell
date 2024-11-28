@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "../../../include/exec.h"
 
 /**
  * brief : execs the builtin cmd (aka function) and returns its exit status if it posses one, else 0;
@@ -35,9 +35,9 @@ int	exec_builtin(t_command_exec *c, t_minishell *m, t_infos *i)
 	else if (c->cmd_id == UNSET_ID)
 		exit_status = ft_unset(m->env, c);
 	else if (c->cmd_id == ENV_ID)
-		exit_status = ft_env(m->env);
+		exit_status = ft_env(m);
 	else if (c->cmd_id == EXIT_ID)
-		exit_status = ft_exit(m, c);
+		exit_status = ft_exit(m, c, false);
 	if (restore_std_fds(m->std_fds) == -1)
 		printerr("%s: %d: err restore std fds", __FILE__, __LINE__);
 	return (exit_status);

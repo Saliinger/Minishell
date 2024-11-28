@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "minishell.h"
+#include "../../include/exec.h"
+#include "../../include/minishell.h"
 
 int	init_t_infos(t_command_exec *cmds, t_infos *i)
 {

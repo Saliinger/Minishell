@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "structure.h"
-# include "exec.h"
+# include "imports.h"
 
+typedef struct s_command_exec t_command_exec;
+typedef struct s_redir t_redir;
 
 void	print_cmd_node(t_command_exec *c, char *display_name);
 void	print_cmd_nodes(t_command_exec *c, char *display_name);
