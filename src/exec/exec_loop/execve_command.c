@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:39:03 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 16:28:12 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	execve_cmdpath(t_command_exec *c, t_minishell *m)
 		if (!msg)
 			return (2);
 		ft_putstr_fd(msg, STDERR_FILENO);
-		return (free(msg), free_tab(env_paths), ft_error("error cmd\n", 127));
+		return (free(msg), ft_free_tab(env_paths), ft_error("error cmd\n", 127));
 	}
 	if (c->cmd_id != MINISHELL_ID)
 	{ // CHANGE ME, pour l'instant : pas d'imbrications.
