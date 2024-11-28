@@ -10,27 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 int	check_flag(char **arg)
 {
-	int	n;
-	int	i;
-	int	j;
+    int	n;
+    size_t	i;
+    size_t	j;
 
-	n = 0;
-	i = 1;
-	while (arg[i])
-	{
-		j = 0;
-		while (arg[i][j])
-		{
-			if (arg[i][j] == '-')
-				j++;
-			else
-				return (n);
-		}
-		i++;
-	}
-	return (n);
+    n = 0;
+    i = 1;
+    while (arg[i])
+    {
+        j = 0;
+        if (arg[i][j] == '-')
+        {
+            j++;
+            while (arg[i][j] == 'n')
+                j++;
+            if (j != ft_strlen(arg[i]))
+                return (n);
+            else n++;
+        }
+        i++;
+    }
+    return (n);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "../../../include/exec.h"
 
 /**
  * brief : adds the new child to known pids

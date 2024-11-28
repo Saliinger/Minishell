@@ -10,9 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-int	ft_echo(t_minishell *minishell, t_command *command)
+int	ft_echo(t_command_exec *command)
 {
-	return (0);
+    int i;
+    char **cmd;
+
+    cmd = command->cmd_args + 1;
+    i = check_flag(cmd);
+    if (i > 0)
+        echo_print(cmd + i, false);
+    else
+        echo_print(cmd + i, true);
+    return (0);
 }

@@ -18,7 +18,7 @@
 # include <sys/stat.h>
 
 // CD
-int		ft_cd(t_command *command, t_minishell *minishell);
+int		ft_cd(t_command_exec *command, t_minishell *minishell);
 int		is_symlink(const char *path);
 char	*get_path(char *in, t_minishell *minishell);
 char	*get_home(t_minishell *minishell);
@@ -27,13 +27,15 @@ char	*get_current_path(t_minishell *minishell);
 int		change_pwd(t_minishell *minishell, char *in);
 
 // ECHO
-int		ft_echo(t_minishell *minishell, t_command *command);
+int		ft_echo(t_command_exec *command);
+void    echo_print(char **arg, bool eof);
+int     check_flag(char **arg);
 
 // ENV
 int		ft_env(t_minishell *minishell);
 
 // EXIT
-int		ft_exit(t_minishell *minishell, t_command *command, bool fail);
+int		ft_exit(t_minishell *minishell, t_command_exec *command, bool fail);
 
 // EXPAND
 
@@ -43,8 +45,9 @@ int		ft_exit(t_minishell *minishell, t_command *command, bool fail);
 int		ft_pwd(t_minishell *minishell);
 
 // UNSET
+int     ft_unset(t_command_exec *command, t_minishell *minishell);
 
 // EXPORT
-int		ft_export(t_command *command, t_minishell *minishell);
+int		ft_export(t_command_exec *command, t_minishell *minishell);
 
 #endif

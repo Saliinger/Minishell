@@ -12,12 +12,12 @@
 
 #include "../../../include/minishell.h"
 
-int	ft_cd(t_command *command, t_minishell *minishell)
+int	ft_cd(t_command_exec *command, t_minishell *minishell)
 {
 	int		error;
 	char	*path;
 
-	path = get_path(command->arg[1], minishell);
+	path = get_path(command->cmd_args[1], minishell);
 	if (!path)
 		return (1);
 	error = chdir(path);
@@ -28,7 +28,6 @@ int	ft_cd(t_command *command, t_minishell *minishell)
 	}
 	else
 		printf("Error changing directory");
-	if (path)
-		free(path);
+	free(path);
 	return (0);
 }

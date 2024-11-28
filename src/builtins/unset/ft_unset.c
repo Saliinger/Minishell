@@ -10,13 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-
-// this function is use to delete existing var in env
-// it can delete multiple var at the same time
-// (gonna make it after the base works)
-// to add the multiple var i am gonna use a *int to store all the
-// existing var if one of them doesn't exist just return an error
+#include "../../../include/minishell.h"
 
 static char	**new_env(char **current_env, int var_line)
 {
@@ -50,26 +44,21 @@ static void	delete_value(t_minishell *minishell, char *var, int var_line)
 		perror("Error\nThe var doesn't exist\n");
 		return ;
 	}
-	if (!&new_env)
-	{
-		perror("Error\nCouldn't create the new env");
-		return ;
-	}
 	free_env(minishell->env);
 	minishell->env = new_env(minishell->env, var_line);
 }
 
-int	ft_unset(t_command *command, t_minishell *minishell)
+int	ft_unset(t_command_exec *command, t_minishell *minishell)
 {
 	int	i;
 
 	i = 1;
-	if (nbr_of_line(command->arg) >= 2)
+	if (nbr_of_line(command->cmd_args) >= 2)
 	{
-		while (command->arg[i])
+		while (command->cmd_args[i])
 		{
-			delete_value(minishell, command->arg[i], get_env_var(minishell,
-					command->arg[i], ft_strlen(command->arg[i])));
+			delete_value(minishell, command->cmd_args[i], get_env_var(minishell,
+					command->cmd_args[i], ft_strlen(command->cmd_args[i])));
 			i++;
 		}
 	}

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "minishell.h"
-#include "utils.h"
+#include "../../../include/exec.h"
+#include "../../../include/minishell.h"
+#include "../../../include/utils.h"
 
 /**
  * brief : for each path in paths, will try to joind path and cmd, to get the cmdpath,

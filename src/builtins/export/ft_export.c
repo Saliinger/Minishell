@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 // export command can create new env and change the value of others
 // need to handle multiple var
@@ -75,16 +75,16 @@ static void	change_value(t_minishell *minishell, char *var)
 	printf("%s\n", minishell->env[var_line]);
 }
 
-int	ft_export(t_command *command, t_minishell *minishell)
+int	ft_export(t_command_exec *command, t_minishell *minishell)
 {
 	int	i;
 
 	i = 1;
-	if (nbr_of_line(command->arg) >= 2)
+	if (nbr_of_line(command->cmd_args) >= 2)
 	{
-		while (command->arg[i])
+		while (command->cmd_args[i])
 		{
-			change_value(minishell, command->arg[i]);
+			change_value(minishell, command->cmd_args[i]);
 			i++;
 		}
 	}

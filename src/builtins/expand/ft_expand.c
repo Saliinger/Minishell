@@ -10,21 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 // need to print the env var
 
-int	ft_expand(t_command *command, t_minishell *minishell)
+int	ft_expand(t_command_exec *command, t_minishell *minishell)
 {
-	char	*arg;
+	char	*cmd_args;
 	int		g;
 	int		len;
 	int		line;
 
-	arg = command->arg[0];
-	arg++;
-	len = ft_strlen(command->arg[0]);
-	line = get_env_var(minishell, arg, len - 1);
+	cmd_args = command->cmd_args[0];
+	cmd_args++;
+	len = ft_strlen(command->cmd_args[0]);
+	line = get_env_var(minishell, cmd_args, len - 1);
 	if (line >= 0)
 	{
 		g = 0;
