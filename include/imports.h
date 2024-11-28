@@ -24,5 +24,7 @@
 # include <stdio.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include "display.h"
+# include "exec.h"
 
 #endif

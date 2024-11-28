@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signals.h"
-
+#include "../../include/signals.h"
 /**
  * brief : Ctrl + \ effect when in mode heredoc
  *  : does nothing.

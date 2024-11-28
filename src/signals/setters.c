@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signals.h"
-
+#include "../../include/signals.h"
 int	set_signals_to_heredoc(void)
 {
 	int					err;

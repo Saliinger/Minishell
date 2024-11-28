@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signals.h"
+#include "../../include/signals.h"
 
 void	heredoc_signal_handler(int signal)
 {

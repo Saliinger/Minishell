@@ -26,7 +26,7 @@ t_command *parsing(char *str, t_minishell *minishell)
 	}
 	if (current)
 	{
-		print_command(current, "parsing");
+		//print_command(current, "parsing");
 		return(current);
 	}
 	else

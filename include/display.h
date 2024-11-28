@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structure.h"
+# include "structure.h"
+# include "exec.h"
 
-typedef t_command_exec;
 
 void	print_cmd_node(t_command_exec *c, char *display_name);
 void	print_cmd_nodes(t_command_exec *c, char *display_name);

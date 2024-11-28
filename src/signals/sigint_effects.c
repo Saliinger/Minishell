@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signals.h"
-
+#include "../../include/signals.h"
 /**
  * brief : Ctrl + C effect when in mode heredoc
  * will close the STDIN, stopping the readline
