@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sigquit_effects.c                                  :+:      :+:    :+:   */
+/*   ft_string.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 15:16:46 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/25 10:50:51 by ekrebs           ###   ########.fr       */
+/*   Created: 2023/11/14 12:58:29 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/28 15:00:28 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/signals.h"
-/**
- * brief : Ctrl + \ effect when in mode heredoc
- *  : does nothing.
- */
-void	sigeffect_heredoc_sigquit()
-{
-	g_sig = SIG_HANDLED;
-}
+#include "printerr.h"
 
-/**
- * brief : Ctrl + D effect when in mode minishell
- *  : does nothing.
- */
-void	sigeffect_minishell_sigquit()
+int	ft_pr_string(char *str)
 {
-	g_sig = SIG_HANDLED; 
+	if (str)
+		return (ft_pr_putstr(str));
+	else
+		return (ft_pr_putstr("(null)"));
 }

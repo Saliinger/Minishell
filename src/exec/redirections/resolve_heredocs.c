@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 02:17:28 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/27 03:50:05 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	resolve_node_heredocs(t_command_exec *cmd, t_minishell *m)
 			err = resolve_heredoc(cmd, m, rd);
 		if (err)
 		{
-			ft_print_err("failed resolving this heredoc : \n");
+			printerr("failed resolving this heredoc : \n");
 			print_redir(rd);
 			return (ERR);
 		}
@@ -69,7 +69,7 @@ int	resolve_all_heredocs(t_command_exec *cmds, t_minishell *m)
 	int		err;
 
 	if (set_signals_to_heredoc() == -1)
-	 	return (ft_print_err("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
+	 	return (printerr("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
 	while(cmds)
 	{
 		err = resolve_node_heredocs(cmds, m);
@@ -81,6 +81,6 @@ int	resolve_all_heredocs(t_command_exec *cmds, t_minishell *m)
 		cmds = cmds->next;
 	}
 	if (set_signals_to_minishell() == -1)
-	 	return (ft_print_err("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
+	 	return (printerr("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
 	return (EXIT_SUCCESS);
 }

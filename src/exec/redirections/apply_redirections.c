@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 13:44:15 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 02:58:32 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	do_heredoc_redir(t_command_exec *cmd)
 	int	herepipe[2];
 	int	err;
 
-	ft_print_err("%s: %d: :debug: should be sent through the pipe : `%s`\n", __FILE__, __LINE__, cmd->last_heredoc_str);
+	printerr("%s: %d: :debug: should be sent through the pipe : `%s`\n", __FILE__, __LINE__, cmd->last_heredoc_str);
 	err = 0;
 	err = pipe(herepipe);
 	if (err)
-		return (ft_print_err("%s: %d: close pipe herepipe creation failed.\n", __FILE__, __LINE__), perror("pipe herepipe creation"), ERR);
+		return (printerr("%s: %d: close pipe herepipe creation failed.\n", __FILE__, __LINE__), perror("pipe herepipe creation"), ERR);
 	if (cmd->last_heredoc_str)
 		err = write(herepipe[WE], cmd->last_heredoc_str, ft_strlen(cmd->last_heredoc_str));
 	if (err == -1)
@@ -104,7 +104,7 @@ static int apply_pipes_redirs(t_command_exec *cmd, t_infos *inf)
 	}
 	err = 0;
 	if (err)
-		return (ft_print_err("%s: %d: err applying pipes redirs\n", __FILE__, __LINE__), ERR_PRIM);
+		return (printerr("%s: %d: err applying pipes redirs\n", __FILE__, __LINE__), ERR_PRIM);
 	return (EXIT_SUCCESS);
 }
 

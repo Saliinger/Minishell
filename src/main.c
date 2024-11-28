@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:10 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/13 15:28:59 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:02:14 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ static void	main_extend(char *prompt, t_minishell *minishell, char *line)
 		//break; //temporaire si tu veux tester un seul input
 	}
 }
+
+volatile sig_atomic_t g_sig = NO_SIG;
 
 int	main(int ac, char **av, char **env)
 {

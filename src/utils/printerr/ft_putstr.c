@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_fds.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 22:01:55 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
+/*   Created: 2023/11/10 19:46:49 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/28 14:57:43 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/exec.h"
+#include "printerr.h"
 
-void	print_fds(int *fds, char* name, char *display_name)
+int	ft_pr_putstr(char *str)
 {
-	if (!fds)
-		return ;
-	print_display_name(display_name);
-	printerr("\n\t%s\n", name);
-	printerr("\t\t[%d ( IN)(RE)] %d\n", IN, fds[IN]);
-	printerr("\t\t[%d (OUT)(WE)] %d\n", OUT, fds[OUT]);
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		ft_pr_putchar_fd_printf(str[i], STDERR_FILENO);
+		++i;
+	}
+	return (i);
 }

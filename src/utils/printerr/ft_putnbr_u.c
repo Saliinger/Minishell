@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_handler.c                                   :+:      :+:    :+:   */
+/*   ft_putnbr_u.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 12:35:07 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/27 12:35:08 by anoukan          ###   ########.fr       */
+/*   Created: 2023/11/13 14:56:29 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/28 14:57:35 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "printerr.h"
 
-void	sighandler(int sig)
+void	ft_pr_putnbr_u(unsigned long nbr)
 {
-	if (sig == SIGINT)
+	if (nbr <= 9)
+		ft_pr_printchar(nbr + '0');
+	else
 	{
-		printf("\n");
-		signal(SIGINT, sighandler);
+		ft_pr_putnbr_u(nbr / 10);
+		ft_pr_printchar(nbr % 10 + '0');
 	}
 }

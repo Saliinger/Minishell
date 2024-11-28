@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:55:45 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 04:38:15 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int free_pipes(t_infos *i, int cmd_count)
 		err += ft_close(&i->pipes[j][0]);
 		err += ft_close( &i->pipes[j][1]);
 		if (err)
-			return (ft_print_err("%s: %d: err closing in free_t_infos\n", __FILE__, __LINE__), ERR_PRIM);
+			return (printerr("%s: %d: err closing in free_t_infos\n", __FILE__, __LINE__), ERR_PRIM);
 		free(i->pipes[j]);
 		j++;
 	}

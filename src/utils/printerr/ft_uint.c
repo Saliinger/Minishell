@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_fds.c                                        :+:      :+:    :+:   */
+/*   ft_uint.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 22:01:55 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
+/*   Created: 2023/11/13 14:58:15 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/28 15:00:28 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/exec.h"
+#include "printerr.h"
 
-void	print_fds(int *fds, char* name, char *display_name)
+int	ft_pr_uint(int value)
 {
-	if (!fds)
-		return ;
-	print_display_name(display_name);
-	printerr("\n\t%s\n", name);
-	printerr("\t\t[%d ( IN)(RE)] %d\n", IN, fds[IN]);
-	printerr("\t\t[%d (OUT)(WE)] %d\n", OUT, fds[OUT]);
+	unsigned int	unsigned_value;
+
+	if (value < 0)
+		unsigned_value = (unsigned int)value + 4294967296;
+	else
+		unsigned_value = (unsigned int)value;
+	ft_pr_putnbr_u(unsigned_value);
+	return (ft_pr_countdigit_u(unsigned_value));
 }

@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:14:31 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 05:19:25 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ int	ft_exec(t_command **old, t_minishell *m)
 	cmd_exit_status = 0;
 	parsing_restruct(old, &new);
 	if (init_t_infos(new, &i))
-		return (ft_print_err("%s: %d: error: failed reparsing", __FILE__, __LINE__), ERR_PRIM);
+		return (printerr("%s: %d: error: failed reparsing", __FILE__, __LINE__), ERR_PRIM);
 	if (resolve_all_heredocs(new, m) != 0)
-		return (print_cmd_node(new, "err resolving heredocs"), ft_print_err("%s: %d: error resovling the heredocs", __FILE__, __LINE__), ERR);
+		return (print_cmd_node(new, "err resolving heredocs"), printerr("%s: %d: error resovling the heredocs", __FILE__, __LINE__), ERR);
 	//print_cmd_nodes(new, "resolved heredocs");
 	cmd_exit_status = exec_loop(new, m, &i);
 	//free_t_infos(&i);
 	free_t_command_exec(&new);
 	if (set_signals_to_minishell() == -1)
-		return (ft_print_err("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
+		return (printerr("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
 	return (cmd_exit_status);
 }

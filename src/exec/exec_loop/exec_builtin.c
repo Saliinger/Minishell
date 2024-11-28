@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:27:56 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 03:03:57 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exec_builtin(t_command_exec *c, t_minishell *m, t_infos *i)
 
 	i->last_cmd_type = CMD_BUILTIN;
 	if (apply_redirections(c, i))
-		ft_print_err("%s: %d: err applying redir\n", __FILE__, __LINE__);
+		printerr("%s: %d: err applying redir\n", __FILE__, __LINE__);
 	exit_status = 0;
 	if (c->cmd_id == ECHO_ID)
 		exit_status = ft_echo(c->cmd_args);
@@ -39,6 +39,6 @@ int	exec_builtin(t_command_exec *c, t_minishell *m, t_infos *i)
 	else if (c->cmd_id == EXIT_ID)
 		exit_status = ft_exit(m, c);
 	if (restore_std_fds(m->std_fds) == -1)
-		ft_print_err("%s: %d: err restore std fds", __FILE__, __LINE__);
+		printerr("%s: %d: err restore std fds", __FILE__, __LINE__);
 	return (exit_status);
 }

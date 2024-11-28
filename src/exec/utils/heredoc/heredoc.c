@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:32:48 by mlapique          #+#    #+#             */
-/*   Updated: 2024/11/28 05:23:42 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*heredoc(char *key, t_minishell *m, bool expand, int *error)
 			return (free(tmp), free(result), NULL);
 		}
 		if (!tmp)
-			return (ft_print_err("minishell: warning: %s (wanted `%s')", \
+			return (printerr("minishell: warning: %s (wanted `%s')", \
 				"here-document delimited by end-of-file", key), result);
 		if (ft_strcmp(tmp, key) == 0)
 			return (free(tmp), result);

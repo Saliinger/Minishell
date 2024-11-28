@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 20:16:09 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/10/21 17:42:18 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:13:21 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,6 @@ enum e_primitive_errors
 };
 
 int		ft_error(char *error_msg, int errnum);
+int		printerr(const char *format, ...);
+
 #endif

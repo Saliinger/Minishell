@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:39:03 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/27 04:16:16 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,12 @@ static int	execve_cmdpath(t_command_exec *c, t_minishell *m)
 	if (c->cmd_id != MINISHELL_ID)
 	{ // CHANGE ME, pour l'instant : pas d'imbrications.
 		if (set_signals_to_default() == -1)
-			return (ft_print_err("%s: %d: err\n", __FILE__, __LINE__));
+			return (printerr("%s: %d: err\n", __FILE__, __LINE__));
 		err = execve(cmd_path, c->cmd_args, m->env->my_env);
 		perror("execve");
 	}
 	else
-		ft_print_err("mini: cannot 'minishell' while in 'minishell'\n"); //-> set imbrication level += 1, set SIGIGNORE until done
+		printerr("mini: cannot 'minishell' while in 'minishell'\n"); //-> set imbrication level += 1, set SIGIGNORE until done
 	return (err);
 }
 

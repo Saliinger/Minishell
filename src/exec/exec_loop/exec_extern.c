@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:27:58 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 03:01:07 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	parent(t_command_exec *cmd, t_infos *i, pid_t child_pid)
 {
 	if (cmd->cmd_id == MINISHELL_ID)
 		if (set_signals_to_ignore() == -1)
-			return (ft_print_err("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
+			return (printerr("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
 	i->pids_llist = pids_addfront(i->pids_llist, child_pid);
 	if (!i->pids_llist)
 		return (ERR);
@@ -38,13 +38,13 @@ static int	child(t_command_exec *c, t_minishell *m, t_infos *inf)
 	err = 0;
 	err += ft_close_saved_std_fds(m->std_fds);
 	if (err)
-		return(ft_print_err("%s: %d: err closing the std fds\n", __FILE__, __LINE__), ERR);
+		return(printerr("%s: %d: err closing the std fds\n", __FILE__, __LINE__), ERR);
 	err += apply_redirections(c, inf);
 	err += ft_close_pipes(inf->cmd_count -1, &inf->pipes);
 	if (err)
-		return(ft_print_err("%s: %d: err redir\n", __FILE__, __LINE__), ERR);
+		return(printerr("%s: %d: err redir\n", __FILE__, __LINE__), ERR);
 	execve_command(c, m, inf);
-	return (ft_print_err("%s: err What the hell have you done ?\n", __FUNCTION__));
+	return (printerr("%s: err What the hell have you done ?\n", __FUNCTION__));
 }
 
 /**
@@ -66,9 +66,9 @@ pid_t	exec_extern(t_command_exec *cmd, t_minishell *m, t_infos *inf)
 	if (pid == 0)
 	{
 		if (child(cmd, m, inf) == ERR)
-			return (free_pids(inf->pids_llist), ft_print_err("in %s: %s: child error:\n", __FILE__, __FUNCTION__ ), ERR);
+			return (free_pids(inf->pids_llist), printerr("in %s: %s: child error:\n", __FILE__, __FUNCTION__ ), ERR);
 	}
 	else if (parent(cmd, inf, pid) == ERR)
-			return (free_pids(inf->pids_llist), ft_print_err("in %s: %s: parent error:\n", __FILE__, __FUNCTION__ ), ERR);
+			return (free_pids(inf->pids_llist), printerr("in %s: %s: parent error:\n", __FILE__, __FUNCTION__ ), ERR);
 	return (pid);
 }

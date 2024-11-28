@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:22:20 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 04:33:15 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:02:30 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #define NO_SIG 0
 
 extern volatile sig_atomic_t	g_sig;
+
 int		set_signals_to_minishell(void);
 int		set_signals_to_default(void);
 int		set_signals_to_ignore(void);

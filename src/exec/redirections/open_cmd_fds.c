@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:53 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 01:19:56 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	open_as_last_redir_in(t_redir *rd, int *fds_last_redir)
 			fds_last_redir[IN] = HEREDOC_QUOTES_FILENO;
 	}
 	else
-		return (ft_print_err("minishell: in %s, %s: erreur opening redir fds in\n", __FILE__, __FUNCTION__), ERR);
+		return (printerr("minishell: in %s, %s: erreur opening redir fds in\n", __FILE__, __FUNCTION__), ERR);
 	return (EXIT_SUCCESS);
 }
 
@@ -74,7 +74,7 @@ static int	open_as_last_redir_out(t_redir *rd, int *fds_last_redir)
 			return (perror("minishell11"), ERR_PRIM); //kill me later
 	}
 	else
-		return (ft_print_err("minishell: in %s, %s: erreur opening redir fds out\n", __FILE__, __FUNCTION__), ERR);
+		return (printerr("minishell: in %s, %s: erreur opening redir fds out\n", __FILE__, __FUNCTION__), ERR);
 	return (EXIT_SUCCESS);
 }
 
@@ -93,7 +93,7 @@ static int	open_cmd_fd(t_redir *rd, int *fds_last_redir)
 
 	type = rd->token;
 	if (type == ERROR_EXPAND)
-		return (ft_print_err("minishell: %s: ambigious redirect\n", rd->args), 1);
+		return (printerr("minishell: %s: ambigious redirect\n", rd->args), 1);
 	else if (type == REDIR_IN || type == REDIR_HEREDOC || type == REDIR_HEREDOC_MODE_IN_QUOTES)
 	{
 		if (open_as_last_redir_in(rd, fds_last_redir) == -1)
@@ -105,7 +105,7 @@ static int	open_cmd_fd(t_redir *rd, int *fds_last_redir)
 			return (ERR_PRIM);
 	}
 	else
-		return (ft_print_err("minishell: in %s, %s: erreur opening redir fds type\n", __FILE__, __FUNCTION__), ERR);
+		return (printerr("minishell: in %s, %s: erreur opening redir fds type\n", __FILE__, __FUNCTION__), ERR);
 	return (EXIT_SUCCESS);
 }
 
@@ -133,7 +133,7 @@ int	open_cmd_fds(t_command_exec *cmd, int *fds_last_redir)
 		{
 			if (err != 1)
 			{
-				ft_print_err("minishell: ");
+				printerr("minishell: ");
 				perror(rd->args);
 			}
 			return (1);

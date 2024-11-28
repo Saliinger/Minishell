@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:39:30 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 03:39:14 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	exec_loop(t_command_exec *cmds, t_minishell *m, t_infos *i)
 	err = 0;
 	err = create_all_pipes(i->cmd_count, &i->pipes);
 	if (err)
-		return (ft_print_err("%s: %d: err piping.\n", __FILE__, __LINE__));			
+		return (printerr("%s: %d: err piping.\n", __FILE__, __LINE__));			
 	while (cmds)
 	{
 		//print_display_name(ft_itoa(cmds->index));
@@ -43,7 +43,7 @@ int	exec_loop(t_command_exec *cmds, t_minishell *m, t_infos *i)
 			else if(cmds->cmd_id == 0 || cmds->cmd_id == MINISHELL_ID)
 				i->last_pid = exec_extern(cmds, m, i);
 			else
-				ft_print_err("minishell: %s: %d: parsing error : cmd_id = %d (should have been {0,7})\n", __FILE__, __LINE__, cmds->cmd_id);
+				printerr("minishell: %s: %d: parsing error : cmd_id = %d (should have been {0,7})\n", __FILE__, __LINE__, cmds->cmd_id);
 		}
 		cmds = cmds->next;
 	}

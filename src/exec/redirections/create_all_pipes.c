@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 03:09:18 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 02:57:04 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_close_pipes(int pipe_count, int ***pipes_tab_adr)
 			err += ft_close(&pipes[i][1]);
 			ft_free((void **)&pipes[i]);
 			if (err)
-				return (ft_print_err("%s: %d: err closing pipes", __FILE__, __LINE__), ERR);
+				return (printerr("%s: %d: err closing pipes", __FILE__, __LINE__), ERR);
 		}
 		i++;
 	}
