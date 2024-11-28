@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sigquit_effects.c                                  :+:      :+:    :+:   */
+/*   ft_decimal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 15:16:46 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/25 10:50:51 by ekrebs           ###   ########.fr       */
+/*   Created: 2023/11/14 10:54:54 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/28 17:00:12 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/signals.h"
-/**
- * brief : Ctrl + \ effect when in mode heredoc
- *  : does nothing.
- */
-void	sigeffect_heredoc_sigquit()
-{
-	g_sig = 0; //SIG_HANDLED;
-}
+#include "printerr.h"
 
-/**
- * brief : Ctrl + D effect when in mode minishell
- *  : does nothing.
- */
-void	sigeffect_minishell_sigquit()
+int	ft_pr_decimal(int n)
 {
-	g_sig = 0; //SIG_HANDLED;
+	ft_pr_putnbr_fd_printf(n, 1);
+	return (ft_pr_countdigit(n));
 }

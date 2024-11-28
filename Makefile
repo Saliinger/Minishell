@@ -17,13 +17,13 @@ SRC = $(wildcard $(SRCD)/*.c)				\
 	  $(wildcard $(UTILSD)/*.c)				\
 	  $(wildcard $(PARSD)/*.c)				\
 	  $(wildcard $(SIGD)/*.c)				\
-	  $(wildcard $(SIGD)/old/*.c)			\
 	  $(wildcard $(EXED)/*.c)				\
 	  $(wildcard $(EXED)/*/*.c)			    \
       $(wildcard $(EXED)/*/*/*.c)	   		\
 	  $(wildcard $(BINS)/*.c)				\
-	  $(wildcard $(UTILSD)/env_utility/*.c) \
-	  $(wildcard $(UTILSD)/destructors/*.c) \
+	  $(wildcard $(UTILSD)/*.c)				\
+	  $(wildcard $(UTILSD)/*/*.c)			\
+
 
 
 OBJ = $(SRC:.c=.o)

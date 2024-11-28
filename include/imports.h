@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:07:37 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/28 15:13:11 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 17:09:56 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@
 # include <sys/wait.h>
 # include "display.h"
 # include "exec.h"
+
+int	printerr(const char *format, ...);
 
 #endif
