@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "../../../include/exec.h"
 
 /**
  * brief :  resolves this heredoc and puts it in cmd->last_heredoc_str.

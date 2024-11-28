@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "../../../include/exec.h"
 
 /**
  * brief : does the heredoc redir (creates a pipe, writes the heredoc in it's WRITE end, replaces the STDIN with it's READ end)

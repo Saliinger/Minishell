@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "../../../include/exec.h"
 
 /**
  * brief : saves STDIN & STDOUT in std_fds

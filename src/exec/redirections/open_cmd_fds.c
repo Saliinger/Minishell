@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "prompt.h"
+#include "../../../include/exec.h"
+//#include "prompt.h"
 
 /**
  * brief : 
@@ -92,7 +92,7 @@ static int	open_cmd_fd(t_redir *rd, int *fds_last_redir)
 	int	type;
 
 	type = rd->token;
-	if (type == ERROR_EXPAND)
+	if (type == ERR)
 		return (printerr("minishell: %s: ambigious redirect\n", rd->args), 1);
 	else if (type == REDIR_IN || type == REDIR_HEREDOC || type == REDIR_HEREDOC_MODE_IN_QUOTES)
 	{

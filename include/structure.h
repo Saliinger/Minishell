@@ -39,14 +39,16 @@
 # define HD_ID 9
 # define EXPAND_ID 10
 # define MINISHELL_ID 16
+# define HEREDOC_FILENO -1000
+# define HEREDOC_QUOTES_FILENO -10000
 
 # include "imports.h"
 
 // Structure
 typedef struct s_redir
 {
-	t_enum_redir		type;
-	char				*redir;
+	t_enum_redir		token;
+	char				*args;
 	struct s_redir		*next;
 }						t_redir;
 

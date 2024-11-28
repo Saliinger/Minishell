@@ -61,7 +61,7 @@ int		exec_loop(t_command_exec *cmds, t_minishell *m, t_infos *i);
 pid_t	exec_extern(t_command_exec *cmds, t_minishell *m, t_infos *inf);
 void	execve_command(t_command_exec *c, t_minishell *m, t_infos *i);
 int		open_cmds_fds(t_command_exec *cmds, int *fds_last_redir);
-int		apply_redirections(t_command_exec *cmd, t_infos *i);
+int     apply_redirections(t_command_exec *cmd, t_infos *i, int cmd_type);
 int		get_exit_status(t_infos *i, int builtin_exit_status);
 int		open_cmd_fds(t_command_exec *cmd, int *fds_last_redir);
 int		save_std_fds(int *std_fds);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "../../../include/exec.h"
 
 int	ft_close_pipes(int pipe_count, int ***pipes_tab_adr)
 {

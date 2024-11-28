@@ -95,7 +95,7 @@ static int	execve_cmdpath(t_command_exec *c, t_minishell *m)
 	{ // CHANGE ME, pour l'instant : pas d'imbrications.
 		if (set_signals_to_default() == -1)
 			return (printerr("%s: %d: err\n", __FILE__, __LINE__));
-		err = execve(cmd_path, c->cmd_args, m->env->my_env);
+		err = execve(cmd_path, c->cmd_args, m->env);
 		perror("execve");
 	}
 	else
