@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:29:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/12 11:13:40 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:49:49 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_cd(t_command_exec *command, t_minishell *minishell)
 	char	*path;
 
 	path = get_path(command->cmd_args[1], minishell);
-    printerr("path: %s\n", path);
+	printerr("path: %s\n", path);
 	if (!path)
 		return (1);
 	error = chdir(path);

@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:16 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/11 11:41:23 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:50:27 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_export(t_command_exec *command, t_minishell *minishell)
 {
-    (void)command;
-    (void)minishell;
+	(void)command;
+	(void)minishell;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:39:03 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/11 11:46:15 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:49:52 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	*get_current_path(t_minishell *minishell)
 	if (line < 0)
 		return (NULL);
 	current_path = ft_strdup(minishell->env[line]);
-
 	if (!current_path)
 		return (NULL);
 	temp = current_path;

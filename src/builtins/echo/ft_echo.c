@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:00 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/09 11:40:10 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:50:16 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	ft_echo(t_command_exec *command)
 {
-    int i;
-    char **cmd;
+	int		i;
+	char	**cmd;
 
-    cmd = command->cmd_args + 1;
-    i = check_flag(cmd);
-    if (i > 0)
-        echo_print(cmd, false, i);
-    else
-        echo_print(cmd, true, i);
-    return (0);
+	cmd = command->cmd_args + 1;
+	i = check_flag(cmd);
+	if (i > 0)
+		echo_print(cmd, false, i);
+	else
+		echo_print(cmd, true, i);
+	return (0);
 }
