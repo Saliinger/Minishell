@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:10 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 04:42:49 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 21:53:11 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char	*init_path(t_minishell *minishell)
 	return (path_env);
 }
 
-static t_minishell	*init(char **env, char *pwd, int* adr_int)
+static t_minishell	*init(char **env, char *pwd, int *adr_int)
 {
 	t_minishell	*minishell;
 
@@ -66,7 +66,7 @@ static t_minishell	*init(char **env, char *pwd, int* adr_int)
 	return (minishell);
 }
 
-volatile sig_atomic_t g_sig = NO_SIG;
+volatile sig_atomic_t	g_sig = NO_SIG;
 
 int	main(int ac, char **av, char **env)
 {
@@ -79,7 +79,7 @@ int	main(int ac, char **av, char **env)
 		return (printerr("err: case not asked by subject\n."), 1);
 	set_signals_to_minishell();
 	minishell = init(env, getcwd(buffer, 4096), &exit_status);
-    if (!minishell)
+	if (!minishell)
 		return (1);
 	if (save_std_fds(minishell->std_fds) == -1)
 		return (ERR_PRIM);

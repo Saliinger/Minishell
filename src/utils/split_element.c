@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:24:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/07 22:29:32 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:52:53 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void	ft_split_write_extend(size_t *i, size_t *j, const char *s, char c)
 	}
 	else
 	{
-		while (s[*i + *j] && s[*i + *j] != c && s[*i + *j] != '\"' && s[*i + *j] != '\'')
+		while (s[*i + *j] && s[*i + *j] != c && s[*i + *j] != '\"' && s[*i
+				+ *j] != '\'')
 			(*j)++;
 	}
 }
@@ -67,7 +68,6 @@ static int	ft_split_write(char **dest, char const *s, char c)
 	dest[word] = NULL;
 	return (0);
 }
-
 
 char	**split_element(char const *s, char c)
 {

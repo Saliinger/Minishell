@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 03:21:06 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/29 04:24:19 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 21:53:06 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,22 @@ static int	get_line(char **line, char *prompt, t_minishell *m)
 }
 
 /**
- * brief : adds the line to history, parses it, executes it then returns exit status
- * 
+ * brief : adds the line to history, parses it,
+	executes it then returns exit status
+ *
  *  */
-static void process_input_line(char *line, t_minishell *m)
+static void	process_input_line(char *line, t_minishell *m)
 {
 	t_command	*c;
 
 	c = parsing(line, m);
-	m->exit_status[0] = ft_exec(&c, m); 
+	m->exit_status[0] = ft_exec(&c, m);
 }
+
 int	ft_minishell(t_minishell *m)
 {
-	char		*line;
-	char		*prompt;
+	char	*line;
+	char	*prompt;
 
 	line = NULL;
 	prompt = NULL;
@@ -58,7 +60,7 @@ int	ft_minishell(t_minishell *m)
 			process_input_line(line, m);
 		if (restore_std_fds(m->std_fds) == -1)
 			return (ERR);
-		//break; //temporaire si tu veux tester un seul input
+		// break ; //temporaire si tu veux tester un seul input
 	}
 	return (EXIT_SUCCESS);
 }
