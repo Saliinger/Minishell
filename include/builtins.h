@@ -38,6 +38,7 @@ int		ft_env(t_minishell *minishell);
 int		ft_exit(t_minishell *minishell, t_command_exec *command, bool fail);
 
 // EXPAND
+int	ft_expand(t_command_exec *command, t_minishell *minishell)
 
 // HEREDOC
 

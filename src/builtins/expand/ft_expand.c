@@ -16,27 +16,27 @@
 
 int	ft_expand(t_command_exec *command, t_minishell *minishell)
 {
-	char	*cmd_args;
-	int		g;
-	int		len;
-	int		line;
+    int i;
+    char *temp;
+    int temp_len;
+    int line;
 
-	cmd_args = command->cmd_args[0];
-	cmd_args++;
-	len = ft_strlen(command->cmd_args[0]);
-	line = get_env_var(minishell, cmd_args, len - 1);
-	if (line >= 0)
-	{
-		g = 0;
-		while (minishell->env[line][g] != '=')
-			g++;
-		g++;
-		while (minishell->env[line][g])
-		{
-			ft_putchar_fd(minishell->env[line][g], 1);
-			g++;
-		}
-	}
-	ft_putchar_fd('\n', 1);
+    i = 0;
+    while (command->cmd_args[i + 1])
+    {
+        temp = ft_strdup(command->cmd_args[i + 1]);
+        temp_len = ft_strlen(temp);
+        line = get_env_var(minishell, temp, temp_len);
+        if (line == -1)
+            printerr("var doesn't exist");
+        else
+        {
+            printf("%s", minishell->env[line]);
+            if (command->cmd_args[i + 2])
+                printf(" ");
+        }
+        free(temp);
+        i++;
+    }
 	return (0);
 }
