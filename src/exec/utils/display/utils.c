@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.h                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 04:30:06 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 23:44:49 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/11/28 23:18:07 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/11/28 23:23:51 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef HEREDOC_H
-#define HEREDOC_H
-#include "minishell.h"
+#include "../../../../include/exec.h"
 
-char	*heredoc(char *key, t_minishell *m, bool expand, int *error);
-#endif
+int	ft_strcmp(char *s1, char *s2)
+{
+	int			i;
+
+	if (!s1 || !s2)
+		return (-1);
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+	}
+	return (s1[i] - s2[i]);
+}

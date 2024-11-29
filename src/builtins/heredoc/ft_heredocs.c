@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredocs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:19 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/11 01:42:32 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 01:38:39 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 static bool	check_key(t_command *command, char *line)
 {

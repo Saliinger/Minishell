@@ -6,11 +6,11 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:27:56 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 01:18:20 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/exec.h"
+#include "../../../include/minishell.h"
 
 /**
  * brief : execs the builtin cmd (aka function) and returns its exit status if it posses one, else 0;

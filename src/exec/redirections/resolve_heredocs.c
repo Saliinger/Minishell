@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 02:17:28 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 19:01:43 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 00:57:38 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	resolve_node_heredocs(t_command_exec *cmd, t_minishell *m)
 		if (err)
 		{
 			printerr("failed resolving this heredoc : \n");
-			print_redir(rd);
+			//print_redir(rd);
 			return (ERR);
 		}
 		rd = rd->next;

@@ -6,9 +6,11 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:26:16 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 16:26:22 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 23:38:20 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../../include/minishell.h"
 
 void	ft_free_tab(char **tab)
 {

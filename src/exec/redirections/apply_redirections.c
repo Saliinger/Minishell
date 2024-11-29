@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 13:44:15 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 18:01:58 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 23:38:57 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	do_heredoc_redir(t_command_exec *cmd)
 	err = 0;
 	err = pipe(herepipe);
 	if (err)
-		return (printerr("%s: %d: close pipe herepipe creation failed.\n", __FILE__, __LINE__), perror("pipe herepipe creation"), ERR);
+		return (printerr("%s: %d: heredoc pipe creation failed.\n", __FILE__, __LINE__), perror("pipe"), ERR);
 	if (cmd->last_heredoc_str)
 		err = write(herepipe[WE], cmd->last_heredoc_str, ft_strlen(cmd->last_heredoc_str));
 	if (err == -1)
@@ -34,13 +34,10 @@ int	do_heredoc_redir(t_command_exec *cmd)
 	err = ft_close(&herepipe[WE]);
 	if (err)
 		return (perror("herepipe WRITE end"), ft_close(&herepipe[RE]), ERR);
-	if (!err)
-		err = ft_dup2(&herepipe[RE], STDIN_FILENO);
+	err += ft_dup2(herepipe[RE], STDIN_FILENO);
+	err += ft_close(&herepipe[RE]);
 	if (err)
-		return (perror("herepipe dup2 to STDIN"), ft_close(&herepipe[RE]), ERR);
-	err = ft_close(&herepipe[RE]);
-	if (err)
-		return (perror("herepipe READ end"), ERR);
+		return (perror("herepipe READ end dup2 to STDIN then close"), ERR);
 	return (EXIT_SUCCESS);
 }
 
@@ -62,13 +59,13 @@ static int  apply_files_redirs(t_command_exec *cmd, int *fd_redir)
 		}
 		else
 		{
-			err += ft_dup2(&fd_redir[IN], STDIN_FILENO);
+			err += ft_dup2(fd_redir[IN], STDIN_FILENO);
 			err += ft_close(&fd_redir[IN]);
 		}
 	}
 	if (fd_redir[OUT] != -1) // am i redirected out ? 
 	{
-		err += ft_dup2(&fd_redir[OUT], STDOUT_FILENO);
+		err += ft_dup2(fd_redir[OUT], STDOUT_FILENO);
 		err += ft_close(&fd_redir[OUT]);
 	}
     if (err)

@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:32:48 by mlapique          #+#    #+#             */
-/*   Updated: 2024/11/28 15:12:02 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 23:34:56 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 #include "../../../../include/minishell.h"
 
+/*
 static	char	*join_free_null_protected(char *first, \
 char *second, int *error, int hard)
 {
@@ -41,16 +42,20 @@ char *second, int *error, int hard)
 		return (result);
 	return (result);
 }
+*/
 
 char	*heredoc(char *key, t_minishell *m, bool expand, int *error)
 {
 	char	*tmp;
 	char	*result;
 
+	(void) expand;
 	result = NULL;
-	while (1)
+	while (42)
 	{
+		printerr("%s: placeholder for %s\n", __FILE__, __FUNCTION__);
 		tmp = readline(">");
+		printerr("fix me later.\n");
 		if (g_sig == SIGINT)
 		{
 			g_sig = NO_SIG;
@@ -63,14 +68,14 @@ char	*heredoc(char *key, t_minishell *m, bool expand, int *error)
 				"here-document delimited by end-of-file", key), result);
 		if (ft_strcmp(tmp, key) == 0)
 			return (free(tmp), result);
-		if (expand == true && ft_strchr(tmp, '$'))
-			tmp = its_looping_time(&tmp, m, error, true);
-		tmp = join_free_null_protected(tmp, "\n", error, 1);
-		if (!tmp)
-			return (NULL);
-		result = join_free_null_protected(result, tmp, error, 0);
-		if (!result)
-			return (free(tmp), NULL);
+		// if (expand == true && ft_strchr(tmp, '$'))
+		// 	tmp = its_looping_time(&tmp, m, error, true);
+		// tmp = join_free_null_protected(tmp, "\n", error, 1);
+		// if (!tmp)
+		// 	return (NULL);
+		// result = join_free_null_protected(result, tmp, error, 0);
+		// if (!result)
+		// 	return (free(tmp), NULL);
 	}
 	return (result);
 }

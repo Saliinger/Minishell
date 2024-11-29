@@ -1,10 +1,14 @@
-NAME = minishell
-
+NAME 		=	minishell
 CC = cc
 CFLAGS = -Wall -Wextra -g3 #-fsanitize=address
+LIBFT_A		=	libft/libft/libft.a
+PRINTF_A	=	libft/printf/libprintf.a
 LIBS = -L./libft/compiled -lft -lprintf -lreadline
 VALGRIND = valgrind --trace-children=yes --track-fds=yes --leak-check=full --show-leak-kinds=all \
 --gen-suppressions=yes --suppressions="./.valgrind.supp"
+
+GREEN = \033[0;32m
+RESET = \033[0m
 
 SRCD = ./src
 UTILSD = ./src/utils
@@ -13,31 +17,36 @@ SIGD = ./src/signals
 EXED = ./src/exec
 BINS = ./src/builtins
 
-SRC = $(wildcard $(SRCD)/*.c)				\
-	  $(wildcard $(UTILSD)/*.c)				\
-	  $(wildcard $(PARSD)/*.c)				\
-	  $(wildcard $(SIGD)/*.c)				\
-	  $(wildcard $(EXED)/*.c)				\
-	  $(wildcard $(EXED)/*/*.c)			    \
-      $(wildcard $(EXED)/*/*/*.c)	   		\
-	  $(wildcard $(BINS)/*.c)				\
-	  $(wildcard $(UTILSD)/*.c)				\
-	  $(wildcard $(UTILSD)/*/*.c)			\
-
-
+SRC =	$(wildcard $(SRCD)/*.c)				\
+		$(wildcard $(UTILSD)/*.c)			\
+		$(wildcard $(UTILSD)/*/*.c)			\
+		$(wildcard $(PARSD)/*.c)			\
+		$(wildcard $(SIGD)/*.c)				\
+		$(wildcard $(EXED)/*.c)				\
+		$(wildcard $(EXED)/*/*.c)			\
+    	$(wildcard $(EXED)/*/*/*.c)	   		\
+		$(wildcard $(BINS)/*.c)				\
+		$(wildcard $(BINS)/*/*.c)			\
 
 OBJ = $(SRC:.c=.o)
 
 .PHONY: all clean fclean re libft
 
-all: libft $(NAME)
+all: $(LIBFT_A) $(PRINTF_A) $(NAME)
+
 
 $(NAME): $(OBJ) 
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
-	@echo "\n$(CC) $(CFLAGS) \$$(OBJ) $(LIBS) -o $(NAME)\n"
+	@echo "$(CC) $(CFLAGS) \$$(OBJ) $(LIBS) -o $(NAME)\n"
+	@echo "\n$(NAME) $(GREEN)compiled successfully$(RESET)"
 
-libft:
-	@$(MAKE) -C ./libft
+$(LIBFT_A):
+	echo "test"
+	@$(MAKE) all -C ./libft
+
+$(PRINTF_A):
+	echo "test2"
+	@$(MAKE) all -C ./libft
 
 clean:
 	@$(MAKE) -C ./libft clean
