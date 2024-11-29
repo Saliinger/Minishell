@@ -6,12 +6,16 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:07:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 04:02:01 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 05:25:39 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENUM_H
 # define ENUM_H
+
+#define AINSI_BGREEN	"\033[1;32m"
+#define AINSI_BLUE		"\033[1;34m"
+#define AINSI_RESET		"\033[0m"
 
 typedef enum e_redir
 {

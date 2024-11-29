@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 20:43:39 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/29 05:03:11 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 05:18:19 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	print_body(t_command_exec *c)
 		print_body(c->next);
 	else
 	{
-		dprintf(STDERR_FILENO, "");
+		//dprintf(STDERR_FILENO, "");
 		while (--len > 0)
 			dprintf(STDERR_FILENO, "_");
 		dprintf(STDERR_FILENO, "\n");
