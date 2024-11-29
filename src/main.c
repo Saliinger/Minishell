@@ -6,16 +6,11 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:10 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/28 15:02:14 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 03:28:35 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-static void	get_line(char **line, char *prompt)
-{
-	*line = readline(prompt);
-}
 
 static char	*init_path(t_minishell *minishell)
 {
@@ -50,7 +45,7 @@ static char	*init_path(t_minishell *minishell)
 	return (path_env);
 }
 
-static t_minishell	*init(char **env, char *pwd)
+static t_minishell	*init(char **env, char *pwd, int* adr_int)
 {
 	t_minishell	*minishell;
 
@@ -64,65 +59,32 @@ static t_minishell	*init(char **env, char *pwd)
 	minishell->paths = ft_split(init_path(minishell), ':');
 	minishell->hd = (char **)malloc(sizeof(char *));
 	minishell->hd[0] = NULL;
+	minishell->std_fds[0] = -1;
+	minishell->std_fds[1] = -1;
+	minishell->exit_status = adr_int;
 	minishell->hidden_env = NULL;
 	return (minishell);
-}
-
-/**
- * brief : adds the line to history, parses it, executes it then returns exit status
- * 
- *  */
-static void process_input_line(char *line, t_minishell *m)
-{
-	int			exit_status;
-	t_command	*c;
-
-	add_history(line);
-	c = parsing(line, m);
-	exit_status = ft_exec(&c, m); 
-	free_t_command(&c);
-	(void)	exit_status;
-}
-
-static void	main_extend(char *prompt, t_minishell *minishell, char *line)
-{
-	while (1)
-	{
-		prompt = display_prompt(prompt, minishell);
-		//signal(SIGINT, sighandler);
-		get_line(&line, prompt);
-		using_history();
-		if (!line)
-		{
-			free(line);
-			continue ;
-		}
-		if (*line)
-		{
-			process_input_line(line, minishell);
-		}
-		//break; //temporaire si tu veux tester un seul input
-	}
 }
 
 volatile sig_atomic_t g_sig = NO_SIG;
 
 int	main(int ac, char **av, char **env)
 {
-	(void)ac;
-	(void)av;
-
-	char		*line;
-	char		*prompt;
+	int			exit_status;
 	t_minishell	*minishell;
 	char		buffer[4096 + 1];
 
-	line = NULL;
-	prompt = NULL;
-	minishell = init(env, getcwd(buffer, 4096));
+	(void)av;
+	if (ac > 1)
+		return (printerr("err: case not asked by subject\n."), 1);
+	set_signals_to_minishell();
+	minishell = init(env, getcwd(buffer, 4096), &exit_status);
+	if (save_std_fds(minishell->std_fds) == -1)
+		return (ERR_PRIM);
 	if (!minishell)
 		return (1);
-	main_extend(prompt, minishell, line);
+	ft_minishell(minishell);
+	rl_clear_history();
 	free_t_minishell(&minishell);
-	return (0);
+	return (exit_status);
 }

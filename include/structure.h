@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:50 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/28 17:55:50 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 03:31:05 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_minishell
 {
 	char				**env;
 	int					std_fds[2];
+	int					*exit_status;		//don't free me.
 	char				**hidden_env;
 	char				**hidden_path;
 	char				**paths;

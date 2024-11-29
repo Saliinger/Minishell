@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 20:16:09 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 15:13:21 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 03:15:47 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,9 @@
 
 enum e_errors
 {
-	ERR_MALLOC = -142,
-	ERR_ARGS,
-	ERR_OUT,
-	ERR_CMD,
-	ERR_PARSE,
-	ERR,
-};
-
-enum e_primitive_errors
-{
-	ERR_OUTFILE = 2,
-	ERR_LAST_CHILD = 127,
-	ERR_PRIM = -1,
-	ERR_OPEN = -242,
-	ERR_CLOSE,
-	ERR_FORK,
-	ERR_CHILD,
-	ERR_PARENT,
-	ERR_ACCESS,
+	ERR			= 1,
+	EXIT_EOF	= 2,
+	ERR_PRIM	= -1
 };
 
 int		ft_error(char *error_msg, int errnum);

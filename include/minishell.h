@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/28 16:52:44 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 03:29:51 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ int			ft_exec(t_command **old, t_minishell *m);
 void		builtin_slector(t_command *cmd, t_minishell *m);
 void		old_ft_exec(t_command *command, t_minishell *minishell);
 void		ft_extern(t_command *command, t_minishell *minishell);
+
+
+int	ft_minishell(t_minishell *minishell);
+
 
 // PARSING
 t_command	*command_init(char *in);

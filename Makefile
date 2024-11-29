@@ -37,8 +37,8 @@ all: $(LIBFT_A) $(PRINTF_A) $(NAME)
 
 $(NAME): $(OBJ) 
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
-	@echo "$(CC) $(CFLAGS) \$$(OBJ) $(LIBS) -o $(NAME)\n"
-	@echo "\n$(NAME) $(GREEN)compiled successfully$(RESET)"
+	@echo "$(CC) $(CFLAGS) \$$(OBJ) $(LIBS) -o $(NAME)"
+	@echo "\n$(GREEN)\t$(NAME) compiled successfully$(RESET)\n"
 
 $(LIBFT_A):
 	echo "test"
