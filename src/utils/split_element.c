@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// this function is to remove space between arg and not inside arg
-
 #include "../../include/minishell.h"
 
 static void	ft_split_write_extend(size_t *i, size_t *j, const char *s, char c)
@@ -40,8 +38,6 @@ static void	ft_split_write_extend(size_t *i, size_t *j, const char *s, char c)
 	}
 }
 
-// the issue of the parsing is in this function it needs an update
-// about the condition in the while loop for the flag
 static int	ft_split_write(char **dest, char const *s, char c)
 {
 	size_t	i;
@@ -60,8 +56,8 @@ static int	ft_split_write(char **dest, char const *s, char c)
 			if (j > 0)
 			{
 				dest[word] = (char *)ft_calloc(sizeof(char), (j + 1));
-				if (!dest)
-					return (ft_split_free(dest));
+				if (!dest[word])
+					return (ft_split_free(dest), 1);
 				ft_split_write_word(dest[word], s, i, j);
 			}
 			i += j;

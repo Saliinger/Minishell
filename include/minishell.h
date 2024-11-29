@@ -21,9 +21,10 @@
 # include "enum.h"
 # include "heredoc.h"
 # include "utils.h"
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
 
 
 // FREE
@@ -45,18 +46,6 @@ void		ft_extern(t_command *command, t_minishell *minishell);
 
 
 int	ft_minishell(t_minishell *minishell);
-
-
-// PARSING
-t_command	*command_init(char *in);
-t_command	*parsing(char *str, t_minishell *minishell);
-t_command	*trim(char *in, char *in_command, bool builtin, int id);
-bool		input_checker(char *in);
-t_redir		*extract_redir(char **in);
-char		**clean_arg(char **arg, t_minishell *minishell);
-
-// Divider for parsing
-int			check_pipe(char *in);
 
 // UTILS
 char		*display_prompt(char *prompt, t_minishell *minishell);

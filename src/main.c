@@ -79,12 +79,12 @@ int	main(int ac, char **av, char **env)
 		return (printerr("err: case not asked by subject\n."), 1);
 	set_signals_to_minishell();
 	minishell = init(env, getcwd(buffer, 4096), &exit_status);
+    if (!minishell)
+		return (1);
 	if (save_std_fds(minishell->std_fds) == -1)
 		return (ERR_PRIM);
-	if (!minishell)
-		return (1);
 	ft_minishell(minishell);
-	rl_clear_history();
+	clear_history();
 	free_t_minishell(&minishell);
 	return (exit_status);
 }
