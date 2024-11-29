@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 03:21:06 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/29 03:47:10 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 04:24:19 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	ft_minishell(t_minishell *m)
 			return (EXIT_EOF);
 		else if (*line)
 			process_input_line(line, m);
+		if (restore_std_fds(m->std_fds) == -1)
+			return (ERR);
 		//break; //temporaire si tu veux tester un seul input
 	}
 	return (EXIT_SUCCESS);

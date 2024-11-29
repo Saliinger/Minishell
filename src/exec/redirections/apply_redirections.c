@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 13:44:15 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 23:38:57 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 04:28:58 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ static int apply_pipes_redirs(t_command_exec *cmd, t_infos *inf)
 		if (err == -1)
 			perror("pipes dup2 OUT");
 	}
-	err = 0;
 	if (err)
 		return (printerr("%s: %d: err applying pipes redirs\n", __FILE__, __LINE__), ERR_PRIM);
 	return (EXIT_SUCCESS);

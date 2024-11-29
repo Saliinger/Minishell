@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:39:03 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 16:28:12 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 04:40:04 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,25 @@ static char	*get_command(char **paths, char *cmd)
 	return (NULL);
 }
 
+/** 
+ * 
+ * brief: in char **tab : finds the ind of the line containing the char* if success.
+ * -1 if failure.  
+ **/
+static int	tab_ind_line_containing(char **tab, char *containing)
+{
+	int		i;
+
+	i = 0;
+	if (!tab)
+		return (-1);
+	while (tab[i] != NULL && ft_strncmp(containing, tab[i], 4))
+		i++;
+	if (tab[i] == NULL)
+		return (-1);
+	return (i);
+}
+
 /**
  * brief : returns tab of paths found in the env, 
  * if fails, returns NULL
@@ -54,12 +73,17 @@ static char	*get_command(char **paths, char *cmd)
  *  */
 static char	**get_env_paths(t_minishell *m)
 {
+	int		i;
 	char	*line_paths;
 	char	**result;
 
-	line_paths = ft_strdup(m->env[get_env_var(m, "PATH", 4)]);
-    result = ft_split(line_paths, ':');
-	if (!result)
+	i = tab_ind_line_containing(m->env, "PATH");
+	if (i < 0)
+		return (NULL);
+	line_paths = ft_substr(m->env[i], 5, ft_strlen(m->env[i]));
+	result = ft_split(line_paths, ':');
+	free(line_paths);
+	if (result == NULL)
 		return (NULL);
 	return (result);
 }

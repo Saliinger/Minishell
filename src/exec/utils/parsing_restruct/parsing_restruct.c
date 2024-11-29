@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 19:54:27 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/14 01:42:54 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 04:18:02 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	parsing_restruct(t_command **old, t_command_exec **new)
 	if (restruct_stealing_from_old(old, new) <= -1)
 		return (dprintf(STDERR_FILENO,"minishell: %s: %s: %d: error.\n", __FILE__, __FUNCTION__, __LINE__), ERR);
 	restruct_discarding_old(old);
+	index_nodes(*new);
 	print_cmd_nodes(*new, "parsing put to t_command_exec:");
 	/*if (reparse_redir_files_llist(*new) <= -1)
 		return (dprintf(STDERR_FILENO,"minishell: %s: %s: %d: error.\n", __FILE__, __FUNCTION__, __LINE__), ERR);

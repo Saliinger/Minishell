@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:50 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 03:31:05 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 04:03:22 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,16 @@
 # define PATH "/bin/"
 
 // Define ID
-# define ECHO_ID 1
-# define CD_ID 2
-# define PWD_ID 3
-# define EXPORT_ID 4
-# define UNSET_ID 5
-# define ENV_ID 6
-# define EXIT_ID 7
-# define NB_BUILTINS 8
+# define ECHO_ID		1
+# define CD_ID			2
+# define PWD_ID			3
+# define EXPORT_ID		4
+# define UNSET_ID		5
+# define ENV_ID			6
+# define EXIT_ID		7
+# define BUILTIN_ID_MIN	1
+# define BUILTIN_ID_MAX	7
+
 # define HD_ID 9
 # define EXPAND_ID 10
 # define MINISHELL_ID 16
