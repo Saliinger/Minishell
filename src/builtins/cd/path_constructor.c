@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:37:06 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/18 15:36:46 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 11:39:48 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,27 @@ static void	add_path(char *dest, char *to_add)
     dest[j] = '\0';
 }
 
-static void	init_path(char *current_path, char **in_cut, t_minishell *minishell,
-                         int *i)
+static int	init_path(char *current_path, char **in_cut, t_minishell *minishell)
 {
+    size_t  temp_size;
     char	*temp;
 
     if (*in_cut[0] == '~')
     {
         temp = get_home(minishell);
-        ft_strlcpy(current_path, temp, ft_strlen(temp));
+        temp_size = ft_strlen(temp);
+        ft_strlcpy(current_path, temp, temp_size);
         free(temp);
-        *i = 1;
+        return (1);
     }
     else
     {
         temp = get_current_path(minishell);
-        ft_strlcpy(current_path, temp, ft_strlen(temp));
+        temp_size = ft_strlen(temp);
+        ft_strlcpy(current_path, temp, temp_size + 1);
+        fprintf(stderr,  "%s\n", current_path);
         free(temp);
-        *i = 0;
+        return (0);
     }
 }
 
@@ -73,7 +76,7 @@ char	*path_constructor(t_minishell *minishell, char *in)
     char	**in_cut;
 
     in_cut = ft_split(in, '/');
-    init_path(current_path, in_cut, minishell, &i);
+    i = init_path(current_path, in_cut, minishell);
     while (in_cut[i])
     {
         j = 0;

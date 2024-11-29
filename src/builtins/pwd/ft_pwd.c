@@ -14,10 +14,17 @@
 
 int	ft_pwd(t_minishell *minishell)
 {
-	char	path[PATH_MAX];
+    int line;
+    char *pwd;
+    char *temp;
 
-	(void) minishell;
-	getcwd(path, sizeof(path));
-	printf("%s\n", path);
+    line = get_env_var(minishell, "PWD", 3);
+    pwd = ft_strdup(minishell->env[line]);
+    temp = pwd;
+    while (*pwd != '=')
+        pwd++;
+    pwd++;
+	printf("%s\n", pwd);
+    free(temp);
 	return (0);
 }

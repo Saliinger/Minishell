@@ -23,6 +23,7 @@ char	*get_current_path(t_minishell *minishell)
 	if (line < 0)
 		return (NULL);
 	current_path = ft_strdup(minishell->env[line]);
+
 	if (!current_path)
 		return (NULL);
 	temp = current_path;

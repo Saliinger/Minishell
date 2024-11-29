@@ -19,7 +19,7 @@
 
 // CD
 int		ft_cd(t_command_exec *command, t_minishell *minishell);
-int		is_symlink(const char *path);
+bool	is_symlink(const char *path);
 char	*get_path(char *in, t_minishell *minishell);
 char	*get_home(t_minishell *minishell);
 char	*path_constructor(t_minishell *minishell, char *in);
@@ -28,7 +28,7 @@ int		change_pwd(t_minishell *minishell, char *in);
 
 // ECHO
 int		ft_echo(t_command_exec *command);
-void    echo_print(char **arg, bool eof);
+void    echo_print(char **arg, bool eof, int i);
 int     check_flag(char **arg);
 
 // ENV

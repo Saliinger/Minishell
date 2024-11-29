@@ -19,7 +19,7 @@ int	check_flag(char **arg)
     size_t	j;
 
     n = 0;
-    i = 1;
+    i = 0;
     while (arg[i])
     {
         j = 0;
@@ -30,7 +30,8 @@ int	check_flag(char **arg)
                 j++;
             if (j != ft_strlen(arg[i]))
                 return (n);
-            else n++;
+            else
+                n++;
         }
         i++;
     }

@@ -20,7 +20,7 @@ char	*get_path(char *in, t_minishell *minishell)
 	{
 		res = get_home(minishell);
 		if (!res)
-			printf("Error: Home is not set\n");
+			perror("Error: Home is not set\n");
 		return (res);
 	}
 	if (is_symlink(in))

@@ -23,6 +23,7 @@ char	*get_home(t_minishell *minishell)
 	if (home_line < 0)
 		return (NULL);
 	temp = ft_strdup(minishell->env[home_line]);
+    perror(temp);
 	i = 0;
 	while (temp[i] && temp[i] != '=')
 		i++;

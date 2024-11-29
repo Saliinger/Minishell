@@ -20,8 +20,8 @@ int	ft_echo(t_command_exec *command)
     cmd = command->cmd_args + 1;
     i = check_flag(cmd);
     if (i > 0)
-        echo_print(cmd + i, false);
+        echo_print(cmd, false, i);
     else
-        echo_print(cmd + i, true);
+        echo_print(cmd, true, i);
     return (0);
 }

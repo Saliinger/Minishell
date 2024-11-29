@@ -12,15 +12,16 @@
 
 #include "../../../include/minishell.h"
 
-int	is_symlink(const char *path)
+bool	is_symlink(const char *path)
 {
 	struct stat	path_stat;
 
-	if (lstat(path, &path_stat) == -1)
-		perror("lstat");
-	return (-1);
+	if (lstat(path, &path_stat) == -1) {
+        perror("lstat");
+        return (false);
+    }
 	if (S_ISLNK(path_stat.st_mode))
-		return (1);
+		return (true);
 	else
-		return (0);
+		return (false);
 }
