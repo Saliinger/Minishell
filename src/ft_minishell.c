@@ -6,26 +6,26 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 03:21:06 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/29 03:31:58 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 03:47:10 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	get_line(char *line, char *prompt, t_minishell *m)
+static int	get_line(char **line, char *prompt, t_minishell *m)
 {
-	line = readline(prompt);
+	line[0] = readline(prompt);
 	if (g_sig == SIGINT)
 	{
 		g_sig = 0;
 		m->exit_status[0] = 130;
 	}
-	if (line == NULL)
+	if (line[0] == NULL)
 		return (EXIT_EOF);
-	else if (line[0] == '\0')
+	else if (line[0][0] == '\0')
 		m->exit_status[0] = 0;
 	else
-		add_history(line);
+		add_history(line[0]);
 	return (EXIT_SUCCESS);
 }
 
@@ -35,14 +35,10 @@ static int	get_line(char *line, char *prompt, t_minishell *m)
  *  */
 static void process_input_line(char *line, t_minishell *m)
 {
-	int			exit_status;
 	t_command	*c;
 
-	add_history(line);
 	c = parsing(line, m);
-	exit_status = ft_exec(&c, m); 
-	free_t_command(&c);
-	(void)	exit_status;
+	m->exit_status[0] = ft_exec(&c, m); 
 }
 int	ft_minishell(t_minishell *m)
 {
@@ -55,16 +51,11 @@ int	ft_minishell(t_minishell *m)
 	while (1)
 	{
 		prompt = display_prompt(prompt, m);
-		get_line(line, prompt, m);
+		get_line(&line, prompt, m);
 		if (!line)
-		{
-			free(line);
-			continue ;
-		}
-		if (*line)
-		{
+			return (EXIT_EOF);
+		else if (*line)
 			process_input_line(line, m);
-		}
 		//break; //temporaire si tu veux tester un seul input
 	}
 	return (EXIT_SUCCESS);
