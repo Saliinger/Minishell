@@ -19,6 +19,11 @@ int	ft_pwd(t_minishell *minishell)
     char *temp;
 
     line = get_env_var(minishell, "PWD", 3);
+    if (line == -1)
+    {
+        printerr("The PWD is not set\n");
+        return (1);
+    }
     pwd = ft_strdup(minishell->env[line]);
     temp = pwd;
     while (*pwd != '=')
