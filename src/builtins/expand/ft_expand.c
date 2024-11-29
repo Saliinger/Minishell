@@ -31,7 +31,7 @@ int	ft_expand(t_command_exec *command, t_minishell *minishell)
             fprintf(stderr, "var doesn't exist");
         else
         {
-            printf("%s", minishell->env[line]);
+            printf("%s", minishell->env[line] + temp_len + 1);
             if (command->cmd_args[i + 1])
                 printf(" ");
         }
