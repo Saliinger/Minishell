@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 20:43:39 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/29 05:18:19 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 05:55:43 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	print_body(t_command_exec *c)
 		dprintf(STDERR_FILENO, " (error)\n");
 	print_args(c);
 	dprintf(STDERR_FILENO, "\tRedirection:\n");
-	//if (c->redir_files_llist)
-	//	print_redirs(c->redir_files_llist);
-	// else
-	// 	dprintf(STDERR_FILENO, "\t%p\n", c->redir_files_llist);
+	if (c->redir_files_llist)
+		print_redirs(c->redir_files_llist);
+	else
+		dprintf(STDERR_FILENO, "\t%p\n", c->redir_files_llist);
 	if (c->last_heredoc_str)
 		dprintf(STDERR_FILENO, "\tlast_heredoc_str: `%s`\n", c->last_heredoc_str);
 	else
