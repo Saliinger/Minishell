@@ -13,7 +13,10 @@
 #ifndef PARSING_H
 # define PARSING_H
 
+typedef struct s_minishell t_minishell;
+
 
 char		**relexer(char **in);
+char **expand_in(char **arg, t_minishell *minishell);
 
 #endif

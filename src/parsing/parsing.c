@@ -22,13 +22,13 @@ t_command *parsing(char *str, t_minishell *minishell)
 	while (temp)
 	{
 		temp->clean_arg = clean_arg(temp->arg, minishell);
+        temp->clean_arg = expand_in(temp->clean_arg, minishell);
+        if (!temp->clean_arg)
+            return (NULL); // need to add free command
 		temp = temp->subcommand;
 	}
 	if (current)
-	{
-		//print_command(current, "parsing");
-		return(current);
-	}
+        return(current);
 	else
 		printf("loli said: bitch it's not working\n");
 	return (NULL);

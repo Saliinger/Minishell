@@ -14,8 +14,8 @@
 
 int	ft_export(t_command_exec *command, t_minishell *minishell)
 {
-    int i;
-
+    (void)command;
+    (void)minishell;
 	return (0);
 }
 
