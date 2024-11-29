@@ -6,11 +6,9 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/27 13:18:02 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:48:50 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// trim the *in and put it in the struct t_command for other use
 
 #include "../../include/minishell.h"
 
@@ -52,8 +50,6 @@ static char	*remove_first_cmd(char *in, int pipe_position)
 	res[i] = '\0';
 	return (res);
 }
-
-// add a way to remove the first command and send it to the subcommand
 
 static void	init_command_arg(t_command *command, char *in)
 {
@@ -97,14 +93,3 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->clean_arg = NULL;
 	return (command);
 }
-
-// need to add a pipe checker somewhere
-// cause split element is gonna fucked everything up
-// to get the pipe command just get the command
-// after the pipe even if there's more than one pipe so we can loop in it
-// ex :
-// test "test" | grep "test" | grep "t"
-// = test "test" command->pipe_command = grep "test" | grep "t"
-// same for the next command
-//
-// there's a pipe checker need to trim before split element and send the rest to command without the pipe and space to create the subcommand

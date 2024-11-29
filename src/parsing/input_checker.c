@@ -6,18 +6,9 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:28 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/27 13:21:38 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:49:22 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// this function need to check if the input syntax is ok to run before alloc
-//
-// check for single and double quote open
-// check for multiple pipe ||
-// check for redirection <<<
-//
-// add a check for forbiden char like ; or others
-// just when they're not in a flag
 
 #include "../../include/minishell.h"
 
@@ -47,7 +38,6 @@ bool	quote_checker(char *in, char c)
 	return (true);
 }
 
-// fix the quote_checker issue when a quote is inside a quote arg
 bool	divider_checker(char *in, char c)
 {
 	int	i;
@@ -75,8 +65,6 @@ bool	divider_checker(char *in, char c)
 	return (true);
 }
 
-// need to check only outside quote for forbiden char
-//
 bool	extend_forbiden_checker(char *in, char c, char q, int *i)
 {
 	(void)c;
@@ -112,8 +100,8 @@ bool	forbiden_checker(char *in, char c)
 bool	input_checker(char *in)
 {
 	if (divider_checker(in, '<') && quote_checker(in, '\'')
-			&& divider_checker(in, '>') && divider_checker(in, '|')
-			&& quote_checker(in, '\"') && forbiden_checker(in, ';'))
+		&& divider_checker(in, '>') && divider_checker(in, '|')
+		&& quote_checker(in, '\"') && forbiden_checker(in, ';'))
 		return (printf("true\n"), true);
 	else
 		return (false);
