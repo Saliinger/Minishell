@@ -36,7 +36,7 @@
 # define ENV_ID			6
 # define EXIT_ID		7
 # define BUILTIN_ID_MIN	1
-# define BUILTIN_ID_MAX	7
+# define BUILTIN_ID_MAX	10
 
 # define HD_ID 9
 # define EXPAND_ID 10

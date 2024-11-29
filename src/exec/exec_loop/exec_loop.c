@@ -13,8 +13,13 @@
 #include "../../../include/exec.h"
 static bool is_builtin(int id)
 {
-	if (id >= BUILTIN_ID_MIN && id <= BUILTIN_ID_MAX)
-		return (true);
+    if (id >= BUILTIN_ID_MIN) {
+        if (id <= BUILTIN_ID_MAX)
+            return (true);
+    } else {
+        if (0)
+            return (true);
+    }
 	return (false);
 }
 

@@ -22,18 +22,18 @@ int	ft_expand(t_command_exec *command, t_minishell *minishell)
     int line;
 
     i = 0;
-    while (command->cmd_args[i + 1])
+    while (command->cmd_args[i])
     {
-        temp = ft_strdup(command->cmd_args[i + 1]);
+        temp = ft_strdup(command->cmd_args[i] + 1);
         temp_len = ft_strlen(temp);
         line = get_env_var(minishell, temp, temp_len);
         if (line == -1)
-            printerr("var doesn't exist");
+            fprintf(stderr, "var doesn't exist");
         else
         {
-            printf("%s", minishell->env[line]);
-            if (command->cmd_args[i + 2])
-                printf(" ");
+            fprintf(stderr, "%s", minishell->env[line]);
+            if (command->cmd_args[i + 1])
+                fprintf(stderr, " ");
         }
         free(temp);
         i++;
