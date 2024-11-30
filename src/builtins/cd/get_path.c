@@ -23,10 +23,10 @@ char	*get_path(char *in, t_minishell *minishell)
 			perror("Error: Home is not set\n");
 		return (res);
 	}
-	if (is_symlink(in))
+//	if (is_symlink(in))
 		res = path_constructor(minishell, in);
-	else
-		res = ft_strdup(in);
+//	else
+//		res = ft_strdup(in);
 	return (res);
 }
 

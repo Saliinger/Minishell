@@ -14,12 +14,11 @@
 
 int	ft_export(t_command_exec *command, t_minishell *minishell)
 {
-	(void)command;
-	(void)minishell;
-	return (0);
+	if (nbr_of_line(command->cmd_args) > 1)
+    {
+        printf("there's more\n");
+    }
+    else
+        ft_env(minishell);
+    return (0);
 }
-
-// handle multiple var
-// check for valid var with value
-// carefull with ""
-//
