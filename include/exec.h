@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 20:13:52 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 19:12:30 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/30 00:29:04 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	print_t_exec_command(t_command_exec *command);
 
 // t_pids functions
 t_pids	*pids_addfront(t_pids *pids, pid_t pid);
-void	free_pids(t_pids *pids);
+void	free_pids(t_pids **pids_adr);
 int		pids_size(t_pids *pids);
 
 int		ft_close(int *fd);

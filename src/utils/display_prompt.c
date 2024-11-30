@@ -3,59 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   display_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:34:56 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 21:52:35 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/30 00:52:40 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static char	*get_last_path(char *path)
+static char *get_prompt_pwd(char *pwd, char *user)
 {
-	char	*res;
-	int		i;
-	int		j;
+	char *home_prefix;
+	size_t prefix_len;
+	char *simplified_pwd;
 
-	i = ft_strlen(path);
-	while (path[i] != '/')
-		i--;
-	res = (char *)malloc(sizeof(char) * (ft_strlen(path) - i + 1));
-	if (!res)
+	if (!pwd)
 		return (NULL);
-	j = 0;
-	while (path[i])
+    if (!user)
+		return ft_strdup(pwd);
+    prefix_len = ft_strlen("/home/") + ft_strlen(user);
+	home_prefix = ft_strjoin("/home/", user);
+    if (ft_strncmp(home_prefix, pwd, prefix_len) == 0)
 	{
-		res[j] = path[i];
-		j++;
-		i++;
-	}
-	res[j] = '\0';
-	return (res);
+		simplified_pwd = ft_strjoin("~", &pwd[prefix_len]); // Replace prefix with "~"
+        return (free(home_prefix), simplified_pwd);
+    }
+    return (free(home_prefix), ft_strdup(pwd));
 }
 
 char	*display_prompt(char *prompt, t_minishell *minishell)
 {
-	char	*path;
+	char	*pwd;
 	char	*usr;
+	char	*name;
 	char	*res;
 
 	if (prompt)
 		free(prompt);
-	path = get_last_path(minishell->pwd);
 	usr = getenv("LOGNAME");
-	res = ft_strjoin(AINSI_BGREEN, usr);
-	res = ft_strjoin(res, "@");
-	res = ft_strjoin_frees1(res, "Femboys"); // fixme : env NAME=
+	name = getenv("NAME");
+	pwd = get_prompt_pwd(minishell->pwd, usr);
+	if (usr && name)
+	{
+		res = ft_strjoin(AINSI_BGREEN, usr);
+		res = ft_strjoin_frees1(res, "@");
+		res = ft_strjoin_frees1(res, name);
+		res = ft_strjoin_frees1(res, AINSI_RESET);
+		res = ft_strjoin_frees1(res, ":");
+		res = ft_strjoin_frees1(res, AINSI_BLUE);
+		res = ft_strjoin_frees1(res, pwd);
+	}
+	else
+		res = ft_strjoin(AINSI_BLUE, pwd);
 	res = ft_strjoin_frees1(res, AINSI_RESET);
-	res = ft_strjoin_frees1(res, ":");
-	res = ft_strjoin_frees1(res, AINSI_BLUE);
-	res = ft_strjoin_frees1(res, "~");
-	res = ft_strjoin_frees1(res, path); // fixme parcours str, et si /home/$USER
-		-> replace by ~
-	res = ft_strjoin_frees1(res, AINSI_RESET);
-	res = ft_strjoin_frees1(res, " ");
-	free(path);
-	return (res);
+	res = ft_strjoin_frees1(res, "$ ");
+	return (free(pwd), res);
 }

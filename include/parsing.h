@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:07:28 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/13 17:37:04 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 22:37:51 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARSING_H
 
 typedef struct s_minishell t_minishell;
-
+typedef struct s_command t_command;
 
 char		**relexer(char **in);
 char **expand_in(char **arg, t_minishell *minishell);

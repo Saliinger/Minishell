@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:27:56 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/29 01:18:20 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/30 00:31:49 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	exec_builtin(t_command_exec *c, t_minishell *m, t_infos *i)
 	else if (c->cmd_id == EXIT_ID)
 		exit_status = ft_exit(m, c, false);
     else if (c->cmd_id == EXPAND_ID)
-        exit_status = ft_expand(c, m);
+		exit_status = ft_expand(c, m);
 	if (restore_std_fds(m->std_fds) == -1)
 		printerr("%s: %d: err restore std fds", __FILE__, __LINE__);
 	return (exit_status);

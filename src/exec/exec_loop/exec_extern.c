@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:27:58 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/29 04:09:59 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/30 00:30:33 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ pid_t	exec_extern(t_command_exec *cmd, t_minishell *m, t_infos *inf)
 	inf->last_cmd_type = CMD_EXTERN;
 	pid = fork();
 	if (pid == -1)
-		return (free_pids(inf->pids_llist), perror("minishell00"), ERR_PRIM);
+		return (perror("minishell00"), ERR_PRIM);
 	if (pid == 0)
 	{
 		if (child(cmd, m, inf) == ERR)
-			return (free_pids(inf->pids_llist), printerr("in %s: %s: child error:\n", __FILE__, __FUNCTION__ ), ERR);
+			return (printerr("in %s: %s: child error:\n", __FILE__, __FUNCTION__ ), ERR);
 	}
 	else if (parent(cmd, inf, pid) == ERR)
-			return (free_pids(inf->pids_llist), printerr("in %s: %s: parent error:\n", __FILE__, __FUNCTION__ ), ERR);
+			return (printerr("in %s: %s: parent error:\n", __FILE__, __FUNCTION__ ), ERR);
 	return (pid);
 }

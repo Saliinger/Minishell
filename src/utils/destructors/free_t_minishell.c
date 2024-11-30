@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 20:33:54 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/10/22 23:12:35 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/30 00:59:10 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static void	free_mini_elems(t_minishell *m)
 {
 	ft_free_nullterm_tab(&m->env);
 	ft_free_nullterm_tab(&m->hidden_env);
-	ft_free_nullterm_tab(&m->hidden_path);
-	ft_free_nullterm_tab(&m->paths);
+	//ft_free_nullterm_tab(&m->hidden_path); // am I even needed ?
+	//ft_free_nullterm_tab(&m->paths);
 	ft_free((void **) &m->pwd);
 	ft_free((void **) &m->old_pwd);
-	ft_free_nullterm_tab(&m->hd);
+	//ft_free_nullterm_tab(&m->hd);
 }
 
 /**

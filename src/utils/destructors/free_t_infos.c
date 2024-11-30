@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:55:45 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 23:34:30 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/30 00:25:52 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
  */
 void	free_t_infos(t_infos *i)
 {
-	free_pids(i->pids_llist);
+	free_pids(&i->pids_llist);
 	ft_close_pipes(i->cmd_count - 1, &i->pipes);
 	//free_pipes(i, i->cmd_count);
 }

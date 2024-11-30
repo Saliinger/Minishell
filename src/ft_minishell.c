@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 03:21:06 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/29 21:53:06 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/30 00:45:11 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ int	ft_minishell(t_minishell *m)
 		prompt = display_prompt(prompt, m);
 		get_line(&line, prompt, m);
 		if (!line)
-			return (EXIT_EOF);
+			return (free(prompt), EXIT_EOF);
 		else if (*line)
 			process_input_line(line, m);
 		if (restore_std_fds(m->std_fds) == -1)
-			return (ERR);
+			return (free(prompt), ERR);
 		// break ; //temporaire si tu veux tester un seul input
 	}
 	return (EXIT_SUCCESS);
