@@ -59,23 +59,23 @@ t_command	*command_init(char *in)
 
 	line = exclude(in);
 	if (!line)
-		return (NULL);
+		return (free(in), NULL);
 	if (checker_command(line, ECHO))
-		return (trim(in, ECHO, true, ECHO_ID));
+		return (free(line), trim(in, ECHO, true, ECHO_ID));
 	else if (checker_command(line, CD))
-		return (trim(in, CD, true, CD_ID));
+		return (free(line), trim(in, CD, true, CD_ID));
 	else if (checker_command(line, PWD))
-		return (trim(in, PWD, true, PWD_ID));
+		return (free(line), trim(in, PWD, true, PWD_ID));
 	else if (checker_command(line, EXPORT))
-		return (trim(in, EXPORT, true, EXPORT_ID));
+		return (free(line), trim(in, EXPORT, true, EXPORT_ID));
 	else if (checker_command(line, UNSET))
-		return (trim(in, UNSET, true, UNSET_ID));
+		return (free(line), trim(in, UNSET, true, UNSET_ID));
 	else if (checker_command(line, ENV))
-		return (trim(in, ENV, true, ENV_ID));
+		return (free(line), trim(in, ENV, true, ENV_ID));
 	else if (checker_command(line, EXIT))
-		return (trim(in, EXIT, true, EXIT_ID));
+		return (free(line), trim(in, EXIT, true, EXIT_ID));
 	else if (checker_command(line, EXPAND))
-		return (trim(in, EXPAND, true, EXPAND_ID));
+		return (free(line), trim(in, EXPAND, true, EXPAND_ID));
 	else
-		return (trim(in, extract_command(line), false, -1));
+		return (trim(in, extract_command(in), false, -1));
 }

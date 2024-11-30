@@ -1,6 +1,6 @@
 NAME 		=	minishell
 CC = cc
-CFLAGS = -Wall -Wextra -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -g3 #-fsanitize=address
 LIBFT_A		=	libft/libft/libft.a
 PRINTF_A	=	libft/printf/libprintf.a
 LIBS = -L./libft/compiled -lft -lprintf -lreadline

@@ -58,13 +58,19 @@ static void	init_command_arg(t_command *command, char *in)
 		command->pipe = true;
 		command->arg = relexer(split_element(cut_first_cmd(in,
 						command->pipe_position), ' '));
+        if (!command->arg)
+            return (free_t_command(&command));
 		command->subcommand = command_init(remove_first_cmd(in,
 					command->pipe_position));
+        if (!command->subcommand)
+            return (free_t_command(&command));
 	}
 	else
 	{
 		command->subcommand = NULL;
 		command->arg = relexer(split_element(in, ' '));
+        if (!command->arg)
+            return (free_t_command(&command));
 	}
 }
 

@@ -56,9 +56,9 @@ static int	ft_split_write(char **dest, char const *s, char c)
 			ft_split_write_extend(&i, &j, s, c);
 			if (j > 0)
 			{
-				dest[word] = (char *)calloc(sizeof(char), (j + 1));
+				dest[word] = (char *)malloc(sizeof(char) * (j + 1));
 				if (!dest[word])
-					return (ft_split_free(dest), 1);
+					return (dest[word] = NULL, ft_split_free(dest), 1);
 				ft_split_write_word(dest[word], s, i, j);
 				word++;
 			}
@@ -75,9 +75,10 @@ char	**split_element(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	dest = calloc(sizeof(char *), (ft_countword(s, c) + 1));
+	dest = (char **)malloc(sizeof(char *) * (ft_countword(s, c) + 1));
 	if (!dest)
 		return (NULL);
-	ft_split_write(dest, s, c);
+	if (ft_split_write(dest, s, c))
+        return (NULL);
 	return (dest);
 }

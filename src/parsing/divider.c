@@ -25,12 +25,12 @@ int	check_pipe(char *in)
 			return (i);
 		if (in[i] == '"')
 		{
-			while (in[i] != '"')
+			while (in[i] && in[i] != '"')
 				i++;
 		}
 		if (in[i] == '\'')
 		{
-			while (in[i] != '\'')
+			while (in[i] && in[i] != '\'')
 				i++;
 		}
 		i++;
