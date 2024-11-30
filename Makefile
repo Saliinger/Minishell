@@ -1,9 +1,9 @@
 NAME 		=	minishell
 CC = cc
-CFLAGS = -Wall -Wextra -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -g3 -I/opt/homebrew/opt/readline/include
+LIBS = -L/opt/homebrew/opt/readline/lib -lreadline -L./libft/compiled -lft -lprintf
 LIBFT_A		=	libft/libft/libft.a
 PRINTF_A	=	libft/printf/libprintf.a
-LIBS = -L./libft/compiled -lft -lprintf -lreadline
 VALGRIND = valgrind --trace-children=yes --track-fds=yes --leak-check=full --show-leak-kinds=all \
 --gen-suppressions=yes --suppressions="./.valgrind.supp"
 
@@ -35,9 +35,9 @@ OBJ = $(SRC:.c=.o)
 all: $(LIBFT_A) $(PRINTF_A) $(NAME)
 
 
-$(NAME): $(OBJ) 
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
-	@echo "$(CC) $(CFLAGS) \$$(OBJ) $(LIBS) -o $(NAME)"
+$(NAME): $(OBJ)
+	@$(CC) $(CFLAGS) $(OBJ)  -o $(NAME) $(LIBS)
+	@echo "$(CC) $(CFLAGS) \$$(OBJ)  -o $(NAME) $(LIBS)"
 	@echo "\n$(GREEN)\t$(NAME) compiled successfully$(RESET)\n"
 
 $(LIBFT_A):
