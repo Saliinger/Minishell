@@ -70,7 +70,7 @@ static void	init_command_arg(t_command *command, char *in)
 		command->subcommand = NULL;
 		command->arg = relexer(split_element(in, ' '));
         if (!command->arg)
-            return (free_command(command));
+            return ( command->arg = NULL, free_command(command));
 	}
 }
 
@@ -82,7 +82,7 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	if (!command)
 		return (NULL);
 	command->in = ft_strdup(in);
-	command->pipe_position = check_pipe(in);
+    command->pipe_position = check_pipe(in);
 	init_command_arg(command, in);
 	command->redirection = extract_redir(command->arg);
 	if (builtin == true)

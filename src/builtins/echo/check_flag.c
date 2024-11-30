@@ -23,16 +23,18 @@ int	check_flag(char **arg)
 	while (arg[i])
 	{
 		j = 0;
-		if (arg[i][j] == '-')
+		if (arg[i][j] == '-' && arg[i][j + 1] == 'n')
 		{
 			j++;
 			while (arg[i][j] == 'n')
 				j++;
-			if (j != ft_strlen(arg[i]))
-				return (n);
-			else
+			if (j == ft_strlen(arg[i]))
 				n++;
+			else
+                return (n);
 		}
+        else
+            break ;
 		i++;
 	}
 	return (n);

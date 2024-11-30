@@ -22,9 +22,7 @@ void	free_env(char **env)
 		free(env[i]);
 		i++;
 	}
-	if (env)
-		free(env);
-	env = NULL;
+    free(env);
 }
 
 void	free_minishell(t_minishell *minishell)

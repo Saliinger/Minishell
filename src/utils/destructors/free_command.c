@@ -59,6 +59,8 @@ void	free_command(t_command *command)
         free_redir(command->redirection);
     if (command->subcommand)
 		free_command(command->subcommand);
-	free(command);
-	command = NULL;
+    if (command) {
+        free(command);
+        command = NULL;
+    }
 }

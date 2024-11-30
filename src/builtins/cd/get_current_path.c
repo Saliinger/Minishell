@@ -12,6 +12,16 @@
 
 #include "../../../include/minishell.h"
 
+static char *no_pwd(void)
+{
+    char buffer[PATH_MAX];
+    char *temp;
+
+    getcwd(buffer, PATH_MAX);
+    temp = ft_strdup(buffer);
+    return temp;
+}
+
 char	*get_current_path(t_minishell *minishell)
 {
 	char	*current_path;
@@ -20,8 +30,8 @@ char	*get_current_path(t_minishell *minishell)
 	int		line;
 
 	line = get_env_var(minishell, "PWD", 3);
-	if (line < 0)
-		return (NULL);
+	if (line == -1)
+		return (no_pwd());
 	current_path = ft_strdup(minishell->env[line]);
 	if (!current_path)
 		return (NULL);
