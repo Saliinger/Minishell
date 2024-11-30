@@ -36,12 +36,15 @@ int	ft_split_free(char **dest)
 	int	i;
 
 	i = 0;
-	while (dest[i])
-	{
-		free(dest[i]);
-		i++;
-	}
-	free(dest);
+    if (dest)
+    {
+        while (dest[i])
+        {
+            free(dest[i]);
+            i++;
+        }
+        free(dest);
+    }
 	return (0);
 }
 

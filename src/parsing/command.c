@@ -33,49 +33,40 @@ static char	*extract_command(char *line)
 	return (command);
 }
 
-static char	*exclude(char *in)
+static int exclude(char *in)
 {
-	int		i;
 	int		j;
-	char	*trimmed;
 
 	j = 0;
 	while (in[j] && (in[j] == '\n' || in[j] == '\t' || in[j] == ' '
 			|| in[j] == '\"'))
 		j++;
-	trimmed = (char *)malloc(sizeof(char) * ft_strlen(in + j) + 1);
-	if (!trimmed)
-		return (NULL);
-	i = 0;
-	while (in[j])
-		trimmed[i++] = in[j++];
-	trimmed[i] = '\0';
-	return (trimmed);
+	return (j);
 }
 
 t_command	*command_init(char *in)
 {
 	char	*line;
 
-	line = exclude(in);
+	line = in + exclude(in);
 	if (!line)
 		return (free(in), NULL);
 	if (checker_command(line, ECHO))
-		return (free(line), trim(in, ECHO, true, ECHO_ID));
+		return ( trim(in, ECHO, true, ECHO_ID));
 	else if (checker_command(line, CD))
-		return (free(line), trim(in, CD, true, CD_ID));
+		return ( trim(in, CD, true, CD_ID));
 	else if (checker_command(line, PWD))
-		return (free(line), trim(in, PWD, true, PWD_ID));
+		return ( trim(in, PWD, true, PWD_ID));
 	else if (checker_command(line, EXPORT))
-		return (free(line), trim(in, EXPORT, true, EXPORT_ID));
+		return ( trim(in, EXPORT, true, EXPORT_ID));
 	else if (checker_command(line, UNSET))
-		return (free(line), trim(in, UNSET, true, UNSET_ID));
+		return ( trim(in, UNSET, true, UNSET_ID));
 	else if (checker_command(line, ENV))
-		return (free(line), trim(in, ENV, true, ENV_ID));
+		return ( trim(in, ENV, true, ENV_ID));
 	else if (checker_command(line, EXIT))
-		return (free(line), trim(in, EXIT, true, EXIT_ID));
+		return ( trim(in, EXIT, true, EXIT_ID));
 	else if (checker_command(line, EXPAND))
-		return (free(line), trim(in, EXPAND, true, EXPAND_ID));
+		return ( trim(in, EXPAND, true, EXPAND_ID));
 	else
-		return (trim(in, extract_command(in), false, -1));
+		return (trim(in, extract_command(line), false, -1));
 }

@@ -59,18 +59,18 @@ static void	init_command_arg(t_command *command, char *in)
 		command->arg = relexer(split_element(cut_first_cmd(in,
 						command->pipe_position), ' '));
         if (!command->arg)
-            return (free_t_command(&command));
+            return (free_command(command));
 		command->subcommand = command_init(remove_first_cmd(in,
 					command->pipe_position));
         if (!command->subcommand)
-            return (free_t_command(&command));
+            return (free_command(command));
 	}
 	else
 	{
 		command->subcommand = NULL;
 		command->arg = relexer(split_element(in, ' '));
         if (!command->arg)
-            return (free_t_command(&command));
+            return (free_command(command));
 	}
 }
 
@@ -88,7 +88,7 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	if (builtin == true)
 		command->command = ft_strdup(in_command);
 	else
-		command->command = NULL;
+		command->command = in_command;
 	command->builtin = builtin;
 	command->id = id;
 	command->pid = -1;
