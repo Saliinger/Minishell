@@ -1,6 +1,23 @@
 #include "../../../include/minishell.h"
 
-bool check_var(char *in)
+bool check_var_equals(char *in)
+{
+    int nbr = 0;
+    int i = 0;
+
+    while (in[i] != '\"')
+    {
+        if (in[i] == '=')
+            nbr++;
+        i++;
+    }
+    if (nbr > 1)
+        return (false);
+    else
+        return (true);
+}
+
+bool check_var_name(char *in)
 {
     int i = 0;
 
