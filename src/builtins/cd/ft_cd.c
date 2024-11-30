@@ -28,7 +28,7 @@ int	ft_cd(t_command_exec *command, t_minishell *minishell)
 		change_pwd(minishell, path);
 	}
 	else
-		printerr("Error changing directory");
+		printerr("Error changing directory\n");
 	free(path);
 	return (0);
 }

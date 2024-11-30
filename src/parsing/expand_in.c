@@ -19,10 +19,15 @@ static char	*expanded(t_minishell *minishell, char *var, int type)
 	int		line;
 
 	len = ft_strlen(var);
-	line = get_env_var(minishell, var, len - type);
-	if (line == -1)
-		return (NULL);
-	res = ft_strdup(minishell->env[line] + len + 1 - type);
+    if (var[0] == '?' && len == 1 + type)
+        res = ft_itoa(minishell->res_last_command);
+    else
+    {
+        line = get_env_var(minishell, var, len - type);
+        if (line == -1)
+            return (NULL);
+        res = ft_strdup(minishell->env[line] + len + 1 - type);
+    }
 	return (res);
 }
 
