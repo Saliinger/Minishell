@@ -38,17 +38,20 @@ int		ft_env(t_minishell *minishell);
 int		ft_exit(t_minishell *minishell, t_command_exec *command, bool fail);
 
 // EXPAND
-int	ft_expand(t_command_exec *command, t_minishell *minishell);
+int     ft_expand(t_command_exec *command, t_minishell *minishell);
 
 // PWD
 int		ft_pwd(t_minishell *minishell);
 
 // UNSET
 int     ft_unset(t_command_exec *command, t_minishell *minishell);
-int count_var(char **var);
-char **new_env(t_minishell *minishell, int *to_remove, int nbr_of_line);
+int     count_var(char **var);
+char    **new_env(t_minishell *minishell, int *to_remove, int nbr_of_line);
 
 // EXPORT
 int		ft_export(t_command_exec *command, t_minishell *minishell);
+bool    check_var(char *in);
+int     create_var(t_minishell *minishell, char *var);
+int     delete_var(t_minishell *minishell, char *var);
 
 #endif
