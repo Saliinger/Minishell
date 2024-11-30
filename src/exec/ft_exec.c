@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:14:31 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/29 20:55:39 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/30 03:16:47 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,13 @@ int	ft_exec(t_command **old, t_minishell *m)
 	parsing_restruct(old, &new);
 	if (init_t_infos(new, &i))
 		return (printerr("%s: %d: error: failed reparsing", __FILE__, __LINE__), ERR_PRIM);
-	if (resolve_all_heredocs(new, m) != 0)
+	if (resolve_all_heredocs(new, m) != EXIT_SUCCESS)
 		return (print_cmd_node(new, "err resolving heredocs"), printerr("%s: %d: error resovling the heredocs", __FILE__, __LINE__), ERR);
 	//print_cmd_nodes(new, "resolved heredocs");
-	cmd_exit_status = exec_loop(new, m, &i);
-	//free_t_infos(&i);
- 	free_t_command_exec(&new);
+	if (create_all_pipes(i.cmd_count, &i.pipes) != EXIT_SUCCESS)
+		return (printerr("%s: %d: err piping.\n", __FILE__, __LINE__));	
+	cmd_exit_status = exec_loop(&new, m, &i);
+ 	//free_t_command_exec(&new);
 	if (set_signals_to_minishell() == -1)
 		return (printerr("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
 	if (restore_std_fds(m->std_fds) == -1)

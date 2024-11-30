@@ -6,11 +6,12 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:39:30 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/29 04:22:00 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/30 03:37:00 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/exec.h"
+
 static bool is_builtin(int id)
 {
     if (id >= BUILTIN_ID_MIN) {
@@ -30,6 +31,18 @@ static bool is_extern(int id)
 	return (false);
 }
 
+static void exec(t_command_exec *c, t_minishell *m, t_infos *i)
+{
+	if (is_builtin(c->cmd_id))
+		m->exit_status[0] = exec_builtin(c, m, i);
+	else if(is_extern(c->cmd_id))
+		i->last_pid = exec_extern(c, m, i);
+	else
+	{
+		printerr("minishell: %s: %d: parsing err: unknown cmd_id = %d \n", __FILE__, __LINE__, c->cmd_id);
+		m->exit_status[0] = 1;
+	}
+}
 
 /**
  * brief : for each cmd in c,
@@ -39,31 +52,24 @@ static bool is_extern(int id)
  * 
  * allocates & frees t_pids 
  */
-int	exec_loop(t_command_exec *c, t_minishell *m, t_infos *i)
+int	exec_loop(t_command_exec **cmds, t_minishell *m, t_infos *i)
 {
 	int				err;
-	int				exit_status;
+	t_command_exec	*c;
+	t_command_exec	*next;
 
-	err = 0;
-	err = create_all_pipes(i->cmd_count, &i->pipes);
-	if (err)
-		return (printerr("%s: %d: err piping.\n", __FILE__, __LINE__));			
+	c = *cmds;
 	while (c)
 	{
-		//print_cmd_node(c, c->cmd_args[0]);
 		err = open_cmd_fds(c, c->redir_fds);
 		if (err)
 			return (err);
 		if (c->cmd_args && c->cmd_args[0])
-		{
-			if (is_builtin(c->cmd_id))
-				exit_status = exec_builtin(c, m, i);
-			else if(is_extern(c->cmd_id))
-				i->last_pid = exec_extern(c, m, i);
-			else
-				printerr("minishell: %s: %d: parsing err: unknown cmd_id = %d \n", __FILE__, __LINE__, c->cmd_id);
-		}
-		c = c->next;
+			exec(c, m, i);
+		next = c->next;
+		free_t_command_exec_node(&c);
+		c = next;
 	}
-	return (get_exit_status(i, exit_status));
+	cmds = &c;
+	return (get_exit_status(m, i));
 }

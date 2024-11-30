@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 15:38:41 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/30 00:33:55 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/30 03:36:34 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ static int	parent_waits(t_pids **pids_list, pid_t last_pid, int last_cmd_type)
 	{
 		exit_status = wait_children(pids_list[0], last_pid);
 		if (exit_status == -1)
-			return (printerr("%s: %d: err: exit_status =  %d", __FILE__, __LINE__, exit_status), free_pids(pids_list), ERR_PRIM);
+			return (free_pids(pids_list), printerr("%s: %d: err: exit_status =  %d", __FILE__, __LINE__, exit_status), ERR_PRIM);
 		if (exit_status >= 0)
 			return (free_pids(pids_list), exit_status);
 	}
 	else if (last_cmd_type != CMD_BUILTIN)
-		return (printerr("%s: %d: err: last_pid = %d", __FILE__, __LINE__, last_pid), free_pids(pids_list), ERR);
+		return (free_pids(pids_list), printerr("%s: %d: err: last_pid = %d", __FILE__, __LINE__, last_pid), ERR);
 	return (free_pids(pids_list), EXIT_SUCCESS);
 }
 
@@ -103,7 +103,7 @@ static int	parent_waits(t_pids **pids_list, pid_t last_pid, int last_cmd_type)
  * (CMD_BUILTIN) will check if should wait for potential children (p.pids_list), then return the builtin_exit_status 
  * (CMD_EXTREN) should wait for children (p.pids_list), extracting ir from last child created (p.pid_last)
  */
-int	get_exit_status(t_infos *inf, int builtin_exit_status)
+int	get_exit_status(t_minishell *m, t_infos *inf)
 {
 	int	exit_status;
 
@@ -112,14 +112,9 @@ int	get_exit_status(t_infos *inf, int builtin_exit_status)
 	 	return (printerr("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
 	ft_close_pipes(inf->cmd_count - 1, &inf->pipes);
 	if (inf->last_cmd_type == CMD_BUILTIN)
-	{
 		parent_waits(&inf->pids_llist, inf->last_pid, inf->last_cmd_type);
-		exit_status = builtin_exit_status;
-	}
 	else if (inf->last_cmd_type == CMD_EXTERN)
-	{
-		exit_status = parent_waits(&inf->pids_llist, inf->last_pid, inf->last_cmd_type);
-	}
+		m->exit_status[0] = parent_waits(&inf->pids_llist, inf->last_pid, inf->last_cmd_type);
 	else
 		return(free_t_infos(inf), printerr("minishell: %s: %s: exec failure", __FILE__, __FUNCTION__), ERR);
 	return (free_t_infos(inf), exit_status);
