@@ -1,0 +1,137 @@
+eho: command not found
+
+=================================================================
+==1594186==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 176 byte(s) in 2 object(s) allocated from:
+    #0 0x49a2bd in malloc (/home/anoukan/Desktop/Minishell/minishell+0x49a2bd)
+    #1 0x4d4fe6 in trim /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:81:25
+    #2 0x4d208e in command_init /home/anoukan/Desktop/Minishell/src/parsing/command.c:55:12
+    #3 0x4d4d5b in parsing /home/anoukan/Desktop/Minishell/src/parsing/parsing.c:20:12
+    #4 0x4cb97d in process_input_line /home/anoukan/Desktop/Minishell/src/ft_minishell.c:45:6
+    #5 0x4cb50f in ft_minishell /home/anoukan/Desktop/Minishell/src/ft_minishell.c:70:4
+    #6 0x4cbd36 in main /home/anoukan/Desktop/Minishell/src/main.c:52:2
+    #7 0x7ffff7c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+Direct leak of 80 byte(s) in 4 object(s) allocated from:
+    #0 0x49a2bd in malloc (/home/anoukan/Desktop/Minishell/minishell+0x49a2bd)
+    #1 0x4d43b4 in add_line /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:25:17
+    #2 0x4d3fc0 in relexer /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:118:10
+    #3 0x4d5773 in init_command_arg /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:71:18
+    #4 0x4d50a6 in trim /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:86:2
+    #5 0x4d208e in command_init /home/anoukan/Desktop/Minishell/src/parsing/command.c:55:12
+    #6 0x4d4d5b in parsing /home/anoukan/Desktop/Minishell/src/parsing/parsing.c:20:12
+    #7 0x4cb97d in process_input_line /home/anoukan/Desktop/Minishell/src/ft_minishell.c:45:6
+    #8 0x4cb50f in ft_minishell /home/anoukan/Desktop/Minishell/src/ft_minishell.c:70:4
+    #9 0x4cbd36 in main /home/anoukan/Desktop/Minishell/src/main.c:52:2
+    #10 0x7ffff7c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+Direct leak of 72 byte(s) in 3 object(s) allocated from:
+    #0 0x49a2bd in malloc (/home/anoukan/Desktop/Minishell/minishell+0x49a2bd)
+    #1 0x4d43b4 in add_line /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:25:17
+    #2 0x4d3fc0 in relexer /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:118:10
+    #3 0x4d5773 in init_command_arg /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:71:18
+    #4 0x4d50a6 in trim /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:86:2
+    #5 0x4d22dd in command_init /home/anoukan/Desktop/Minishell/src/parsing/command.c:71:11
+    #6 0x4d4d5b in parsing /home/anoukan/Desktop/Minishell/src/parsing/parsing.c:20:12
+    #7 0x4cb97d in process_input_line /home/anoukan/Desktop/Minishell/src/ft_minishell.c:45:6
+    #8 0x4cb50f in ft_minishell /home/anoukan/Desktop/Minishell/src/ft_minishell.c:70:4
+    #9 0x4cbd36 in main /home/anoukan/Desktop/Minishell/src/main.c:52:2
+    #10 0x7ffff7c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+Direct leak of 37 byte(s) in 2 object(s) allocated from:
+    #0 0x49a2bd in malloc (/home/anoukan/Desktop/Minishell/minishell+0x49a2bd)
+    #1 0x7ffff7f86bac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
+
+Indirect leak of 64 byte(s) in 2 object(s) allocated from:
+    #0 0x49a2bd in malloc (/home/anoukan/Desktop/Minishell/minishell+0x49a2bd)
+    #1 0x4d43b4 in add_line /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:25:17
+    #2 0x4d3fc0 in relexer /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:118:10
+    #3 0x4d5773 in init_command_arg /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:71:18
+    #4 0x4d50a6 in trim /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:86:2
+    #5 0x4d208e in command_init /home/anoukan/Desktop/Minishell/src/parsing/command.c:55:12
+    #6 0x4d4d5b in parsing /home/anoukan/Desktop/Minishell/src/parsing/parsing.c:20:12
+    #7 0x4cb97d in process_input_line /home/anoukan/Desktop/Minishell/src/ft_minishell.c:45:6
+    #8 0x4cb50f in ft_minishell /home/anoukan/Desktop/Minishell/src/ft_minishell.c:70:4
+    #9 0x4cbd36 in main /home/anoukan/Desktop/Minishell/src/main.c:52:2
+    #10 0x7ffff7c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+Indirect leak of 38 byte(s) in 6 object(s) allocated from:
+    #0 0x49a2bd in malloc (/home/anoukan/Desktop/Minishell/minishell+0x49a2bd)
+    #1 0x4e34f9 in ft_strdup /home/anoukan/Desktop/Minishell/libft/libft/ft_strdup.c:25:17
+    #2 0x4d4423 in add_line /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:31:12
+    #3 0x4d3fc0 in relexer /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:118:10
+    #4 0x4d5773 in init_command_arg /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:71:18
+    #5 0x4d50a6 in trim /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:86:2
+    #6 0x4d208e in command_init /home/anoukan/Desktop/Minishell/src/parsing/command.c:55:12
+    #7 0x4d4d5b in parsing /home/anoukan/Desktop/Minishell/src/parsing/parsing.c:20:12
+    #8 0x4cb97d in process_input_line /home/anoukan/Desktop/Minishell/src/ft_minishell.c:45:6
+    #9 0x4cb50f in ft_minishell /home/anoukan/Desktop/Minishell/src/ft_minishell.c:70:4
+    #10 0x4cbd36 in main /home/anoukan/Desktop/Minishell/src/main.c:52:2
+    #11 0x7ffff7c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+Indirect leak of 37 byte(s) in 2 object(s) allocated from:
+    #0 0x49a2bd in malloc (/home/anoukan/Desktop/Minishell/minishell+0x49a2bd)
+    #1 0x4e34f9 in ft_strdup /home/anoukan/Desktop/Minishell/libft/libft/ft_strdup.c:25:17
+    #2 0x4d5012 in trim /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:84:16
+    #3 0x4d208e in command_init /home/anoukan/Desktop/Minishell/src/parsing/command.c:55:12
+    #4 0x4d4d5b in parsing /home/anoukan/Desktop/Minishell/src/parsing/parsing.c:20:12
+    #5 0x4cb97d in process_input_line /home/anoukan/Desktop/Minishell/src/ft_minishell.c:45:6
+    #6 0x4cb50f in ft_minishell /home/anoukan/Desktop/Minishell/src/ft_minishell.c:70:4
+    #7 0x4cbd36 in main /home/anoukan/Desktop/Minishell/src/main.c:52:2
+    #8 0x7ffff7c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+Indirect leak of 37 byte(s) in 6 object(s) allocated from:
+    #0 0x49a2bd in malloc (/home/anoukan/Desktop/Minishell/minishell+0x49a2bd)
+    #1 0x4e34f9 in ft_strdup /home/anoukan/Desktop/Minishell/libft/libft/ft_strdup.c:25:17
+    #2 0x4d4481 in add_line /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:36:12
+    #3 0x4d3fc0 in relexer /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:118:10
+    #4 0x4d5773 in init_command_arg /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:71:18
+    #5 0x4d50a6 in trim /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:86:2
+    #6 0x4d208e in command_init /home/anoukan/Desktop/Minishell/src/parsing/command.c:55:12
+    #7 0x4d4d5b in parsing /home/anoukan/Desktop/Minishell/src/parsing/parsing.c:20:12
+    #8 0x4cb97d in process_input_line /home/anoukan/Desktop/Minishell/src/ft_minishell.c:45:6
+    #9 0x4cb50f in ft_minishell /home/anoukan/Desktop/Minishell/src/ft_minishell.c:70:4
+    #10 0x4cbd36 in main /home/anoukan/Desktop/Minishell/src/main.c:52:2
+    #11 0x7ffff7c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+Indirect leak of 11 byte(s) in 3 object(s) allocated from:
+    #0 0x49a2bd in malloc (/home/anoukan/Desktop/Minishell/minishell+0x49a2bd)
+    #1 0x4e34f9 in ft_strdup /home/anoukan/Desktop/Minishell/libft/libft/ft_strdup.c:25:17
+    #2 0x4d4423 in add_line /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:31:12
+    #3 0x4d3fc0 in relexer /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:118:10
+    #4 0x4d5773 in init_command_arg /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:71:18
+    #5 0x4d50a6 in trim /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:86:2
+    #6 0x4d22dd in command_init /home/anoukan/Desktop/Minishell/src/parsing/command.c:71:11
+    #7 0x4d4d5b in parsing /home/anoukan/Desktop/Minishell/src/parsing/parsing.c:20:12
+    #8 0x4cb97d in process_input_line /home/anoukan/Desktop/Minishell/src/ft_minishell.c:45:6
+    #9 0x4cb50f in ft_minishell /home/anoukan/Desktop/Minishell/src/ft_minishell.c:70:4
+    #10 0x4cbd36 in main /home/anoukan/Desktop/Minishell/src/main.c:52:2
+    #11 0x7ffff7c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+Indirect leak of 10 byte(s) in 3 object(s) allocated from:
+    #0 0x49a2bd in malloc (/home/anoukan/Desktop/Minishell/minishell+0x49a2bd)
+    #1 0x4e34f9 in ft_strdup /home/anoukan/Desktop/Minishell/libft/libft/ft_strdup.c:25:17
+    #2 0x4d4481 in add_line /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:36:12
+    #3 0x4d3fc0 in relexer /home/anoukan/Desktop/Minishell/src/parsing/lexer.c:118:10
+    #4 0x4d5773 in init_command_arg /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:71:18
+    #5 0x4d50a6 in trim /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:86:2
+    #6 0x4d22dd in command_init /home/anoukan/Desktop/Minishell/src/parsing/command.c:71:11
+    #7 0x4d4d5b in parsing /home/anoukan/Desktop/Minishell/src/parsing/parsing.c:20:12
+    #8 0x4cb97d in process_input_line /home/anoukan/Desktop/Minishell/src/ft_minishell.c:45:6
+    #9 0x4cb50f in ft_minishell /home/anoukan/Desktop/Minishell/src/ft_minishell.c:70:4
+    #10 0x4cbd36 in main /home/anoukan/Desktop/Minishell/src/main.c:52:2
+    #11 0x7ffff7c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+Indirect leak of 10 byte(s) in 2 object(s) allocated from:
+    #0 0x49a2bd in malloc (/home/anoukan/Desktop/Minishell/minishell+0x49a2bd)
+    #1 0x4e34f9 in ft_strdup /home/anoukan/Desktop/Minishell/libft/libft/ft_strdup.c:25:17
+    #2 0x4d5127 in trim /home/anoukan/Desktop/Minishell/src/parsing/trimmer.c:89:22
+    #3 0x4d208e in command_init /home/anoukan/Desktop/Minishell/src/parsing/command.c:55:12
+    #4 0x4d4d5b in parsing /home/anoukan/Desktop/Minishell/src/parsing/parsing.c:20:12
+    #5 0x4cb97d in process_input_line /home/anoukan/Desktop/Minishell/src/ft_minishell.c:45:6
+    #6 0x4cb50f in ft_minishell /home/anoukan/Desktop/Minishell/src/ft_minishell.c:70:4
+    #7 0x4cbd36 in main /home/anoukan/Desktop/Minishell/src/main.c:52:2
+    #8 0x7ffff7c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: 572 byte(s) leaked in 35 allocation(s).
