@@ -13,6 +13,9 @@
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "imports.h"
 # include "structure.h"
 # include <sys/stat.h>
@@ -52,5 +55,7 @@ char    **new_env(t_minishell *minishell, int *to_remove, int nbr_of_line);
 int		ft_export(t_command_exec *command, t_minishell *minishell);
 int     create_var(t_minishell *minishell, char *var);
 int     delete_var(t_minishell *minishell, char *var);
+bool check_var_equals(char *in);
+bool check_var_name(char *in);
 
 #endif

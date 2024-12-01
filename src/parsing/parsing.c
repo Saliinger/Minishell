@@ -22,12 +22,12 @@ t_command	*parsing(char *str, t_minishell *minishell)
 	while (temp)
 	{
 		temp->clean_arg = clean_arg(temp->arg, minishell);
-		if (temp->id != EXPAND_ID)
-			temp->clean_arg = expand_in(temp->clean_arg, minishell);
+        temp->clean_arg = expand_in(temp->clean_arg, minishell);
 		if (!temp->clean_arg)
 			return (NULL);
 		temp = temp->subcommand;
 	}
+    printf("cmd: %s\n", current->clean_arg[0]);
 	if (current)
 		return (current);
 	else

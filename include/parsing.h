@@ -13,6 +13,10 @@
 #ifndef PARSING_H
 # define PARSING_H
 
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
 typedef struct s_minishell t_minishell;
 typedef struct s_command t_command;
 

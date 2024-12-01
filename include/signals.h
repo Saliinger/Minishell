@@ -13,6 +13,9 @@
 #ifndef SIGNALS_H
 # define SIGNALS_H
 
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <stdlib.h>
 # include "minishell.h"
 # include <signal.h>

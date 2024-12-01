@@ -13,6 +13,9 @@
 #ifndef IMPORTS_H
 # define IMPORTS_H
 
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "../libft/libft/libft.h"
 # include "enum.h"
 # include "errors.h"

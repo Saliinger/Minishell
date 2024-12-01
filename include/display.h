@@ -12,6 +12,10 @@
 
 #ifndef DISPLAY_H
 # define DISPLAY_H
+
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "imports.h"
 
 typedef struct s_command_exec t_command_exec;

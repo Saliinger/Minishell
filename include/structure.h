@@ -45,6 +45,9 @@
 # define HEREDOC_FILENO -42
 # define HEREDOC_QUOTES_FILENO -4242
 
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "imports.h"
 
 // Structure

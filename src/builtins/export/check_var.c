@@ -21,7 +21,7 @@ bool check_var_name(char *in)
 {
     int i = 0;
 
-    if (!ft_isalpha(in[i]) && in[i] != '_')
+    if (!ft_isalpha(in[i]) || in[i] != '_')
         return (false);
     else
         i++;
@@ -35,6 +35,3 @@ bool check_var_name(char *in)
     return (true);
 }
 
-// var need to have =
-// only alpha a-z/A-Z or _ at start for the name
-// whatever in "" after the =

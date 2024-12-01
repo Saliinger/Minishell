@@ -7,6 +7,9 @@ LIBS = -L./libft/compiled -lft -lprintf -lreadline
 VALGRIND = valgrind --trace-children=yes --track-fds=yes --leak-check=full --show-leak-kinds=all \
 --gen-suppressions=yes --suppressions="./.valgrind.supp"
 
+INCLUDE_MAC = -I/opt/homebrew/opt/readline/include
+LIBS_MAC = -L/opt/homebrew/opt/readline/lib -lreadline -L./libft/compiled -lft -lprintf
+
 GREEN = \033[0;32m
 RESET = \033[0m
 
@@ -30,6 +33,13 @@ SRC =	$(wildcard $(SRCD)/*.c)				\
 
 OBJ = $(SRC:.c=.o)
 
+OBJ_MAC = $(SRC:.c=.mac.o)  # macOS-specific object files
+
+
+# Rule to compile macOS-specific .mac.o files
+%.mac.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE_MAC)
+
 .PHONY: all clean fclean re libft
 
 all: $(LIBFT_A) $(PRINTF_A) $(NAME)
@@ -47,6 +57,12 @@ $(LIBFT_A):
 $(PRINTF_A):
 	echo "test2"
 	@$(MAKE) all -C ./libft
+
+mac: $(LIBFT_A) $(PRINTF_A) $(OBJ_MAC)
+	@$(CC) $(CFLAGS_MAC) $(OBJ_MAC) -o $(NAME) $(LIBS_MAC)
+	@echo "$(CC) $(CFLAGS_MAC) \$$(OBJ_MAC) -o $(NAME) $(LIBS_MAC)"
+	@echo "\n$(GREEN)\t$(NAME) compiled successfully on macOS$(RESET)\n"
+
 
 clean:
 	@$(MAKE) -C ./libft clean

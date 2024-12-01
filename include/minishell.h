@@ -13,6 +13,9 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "builtins.h"
 # include "imports.h"
 # include "parsing.h"
@@ -21,9 +24,6 @@
 # include "enum.h"
 # include "heredoc.h"
 # include "utils.h"
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 
 
 
