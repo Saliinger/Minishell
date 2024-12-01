@@ -1,8 +1,8 @@
 NAME 		=	minishell
 CC = cc
-CFLAGS_MAC = -Wall -Wextra -g3 -I/opt/homebrew/opt/readline/include -fsanitize=address
+INCLUDE_MAC = -I/opt/homebrew/opt/readline/include
 LIBS_MAC = -L/opt/homebrew/opt/readline/lib -lreadline -L./libft/compiled -lft -lprintf
-CFLAGS = -Wall -Wextra -g3
+CFLAGS = -Wall -Wextra -g3 #-fsanitize=address
 LIBS = -lreadline -L./libft/compiled -lft -lprintf
 LIBFT_A		=	libft/libft/libft.a
 PRINTF_A	=	libft/printf/libprintf.a
@@ -49,6 +49,11 @@ $(LIBFT_A):
 $(PRINTF_A):
 	echo "test2"
 	@$(MAKE) all -C ./libft
+
+mac: $(OBJ)
+	@$(CC) $(CFLAGS) $(INCLUDE_MAC) $(OBJ)  -o $(NAME) $(LIBS_MAC)
+	@echo "$(CC) $(CFLAGS) \$$(OBJ)  -o $(NAME) $(LIBS)"
+	@echo "\n$(GREEN)\t$(NAME) compiled successfully$(RESET)\n"
 
 clean:
 	@$(MAKE) -C ./libft clean
