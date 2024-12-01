@@ -1,2 +1,7 @@
+*.txt
+*.out
+**.txt
+**.out
+tests/**
 *.o
 minishell
