@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:37:23 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/11 11:46:50 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:49:54 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*get_home(t_minishell *minishell)
 	if (home_line < 0)
 		return (NULL);
 	temp = ft_strdup(minishell->env[home_line]);
+	perror(temp);
 	i = 0;
 	while (temp[i] && temp[i] != '=')
 		i++;

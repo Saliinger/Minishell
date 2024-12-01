@@ -5,41 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 12:33:57 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/14 00:12:02 by ekrebs           ###   ########.fr       */
+/*   Created: 2024/11/04 16:14:31 by ekrebs            #+#    #+#             */
+/*   Updated: 2024/11/30 03:16:47 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
+#include "../../include/minishell.h"
 
-/**
- * brief : saves STDIN & STDOUT in std_fds
- * 
- */
-static int	save_std_fds(int *std_fds)
+int	init_t_infos(t_command_exec *cmds, t_infos *i)
 {
-	std_fds[IN] = dup(STDIN_FILENO);
-	std_fds[OUT] = dup(STDOUT_FILENO);
-	if (std_fds[IN] == -1 || std_fds[OUT] == -1)
-		return (perror("minishell"), ERR_PRIM);
-	print_std_fds(std_fds, "SAVED STD IN(0) & OUT(1)");
-	return (EXIT_SUCCESS);
-}
-
-/**
- * brief : restores the STDIN & STDOUT via dup2 according to those in std_fds
- * 
- */
-int	restore_std_fds(int *std_fds)
-{
-	print_std_fds(std_fds, "before restore");
-	if(dup2(std_fds[IN], STDIN_FILENO) == -1)
-		return (perror("minishellx"), ERR_PRIM);
-	if(dup2(std_fds[OUT], STDOUT_FILENO) == -1)
-		return (perror("minishello"), ERR_PRIM);
-	//ft_close(&std_fds[IN]);
-	//ft_close(&std_fds[OUT]);
-	print_std_fds(std_fds, "after restore");
+	i->pids_llist = NULL;
+	i->last_pid = -1;
+	i->last_cmd_type = -1;
+	i->cmd_count = count_cmds(cmds);
+	i->pipes = NULL;
 	return (EXIT_SUCCESS);
 }
 
@@ -54,31 +34,26 @@ int	restore_std_fds(int *std_fds)
  * to do : the signals must be reset to default at the start of ft_exec, set back to custom right after
  * 
  **/
-int	ft_exec(t_command **old_t_cmd, t_minishell *m)
+int	ft_exec(t_command **old, t_minishell *m)
 {
-	t_command_exec	*new_t_cmd;
 	int				cmd_exit_status;
-	int				std_fds[2];
+	t_command_exec	*new;
+	t_infos			i;
 
-	std_fds[0] = -1;
-	std_fds[1] = -1;
-	new_t_cmd = NULL;
-	if (!old_t_cmd || !m)
-		return (dprintf(STDERR_FILENO,"minishell: %s: %s: parsing failure\n", __FILE__, __FUNCTION__), ERR);
-	if (parsing_restruct(old_t_cmd, &new_t_cmd) <= -1)
-		return (dprintf(STDERR_FILENO,"minishell: %s: %s: parsing_restruct failure\n", __FILE__, __FUNCTION__), ERR);
-	if (save_std_fds(std_fds) == -1)
-		return (ERR_PRIM);
-	// if (set_signals_to_default() == -1)
-	// 	return (ERR_PRIM);
 	cmd_exit_status = 0;
-	cmd_exit_status = exec_cmds(new_t_cmd, m, std_fds);
-	// if (set_signals_to_minishell() == -1)
-	// 	return (ERR_PRIM);
-	if (restore_std_fds(std_fds) == -1)
+	parsing_restruct(old, &new);
+	if (init_t_infos(new, &i))
+		return (printerr("%s: %d: error: failed reparsing", __FILE__, __LINE__), ERR_PRIM);
+	if (resolve_all_heredocs(new, m) != EXIT_SUCCESS)
+		return (print_cmd_node(new, "err resolving heredocs"), printerr("%s: %d: error resovling the heredocs", __FILE__, __LINE__), ERR);
+	//print_cmd_nodes(new, "resolved heredocs");
+	if (create_all_pipes(i.cmd_count, &i.pipes) != EXIT_SUCCESS)
+		return (printerr("%s: %d: err piping.\n", __FILE__, __LINE__));	
+	cmd_exit_status = exec_loop(&new, m, &i);
+ 	//free_t_command_exec(&new);
+	if (set_signals_to_minishell() == -1)
+		return (printerr("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
+	if (restore_std_fds(m->std_fds) == -1)
 		return (ERR_PRIM);
-	free_t_command_exec(&new_t_cmd);
-	dprintf(STDERR_FILENO, "\nThe deed is done. Leaving ft_exec.\n\texit status : %d\n", cmd_exit_status);
-	print_std_fds(std_fds, "at closing time");
 	return (cmd_exit_status);
 }

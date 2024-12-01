@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:22:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/13 17:37:22 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 03:29:51 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 # include "structure.h"
 # include "signals.h"
 # include "enum.h"
+# include "heredoc.h"
+# include "utils.h"
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
+
 
 // FREE
 void		free_minishell(t_minishell *minishell);
@@ -37,16 +44,8 @@ void		builtin_slector(t_command *cmd, t_minishell *m);
 void		old_ft_exec(t_command *command, t_minishell *minishell);
 void		ft_extern(t_command *command, t_minishell *minishell);
 
-// PARSING
-t_command	*command_init(char *in);
-t_command	*parsing(char *str, t_minishell *minishell);
-t_command	*trim(char *in, char *in_command, bool builtin, int id);
-bool		input_checker(char *in);
-t_redir		*extract_redir(char **in);
-char		**clean_arg(char **arg, t_minishell *minishell);
 
-// Divider for parsing
-int			check_pipe(char *in);
+int	ft_minishell(t_minishell *minishell);
 
 // UTILS
 char		*display_prompt(char *prompt, t_minishell *minishell);
@@ -70,7 +69,7 @@ int			get_env_var(t_minishell *minishell, char *var, int len);
 // Debug
 void		ft_print(char **s, int i);
 void		ft_print_redir(t_redir *list);
-void		print_command(t_command *command);
+void		print_command(t_command *command, char *name);
 
 #endif
 

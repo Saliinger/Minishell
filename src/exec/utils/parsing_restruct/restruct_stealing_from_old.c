@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 01:30:18 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/10/31 22:14:39 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 23:07:48 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ static t_command_exec *allocate_t_command_exec_node(void)
 	c->cmd_args = NULL;
 	c->cmd_id = -1;
 	c->redir_files_llist = NULL;
-	c->pipe_fds[0] = -1;
-	c->pipe_fds[1] = -1;
 	c->redir_fds[0] = -1;
 	c->redir_fds[1] = -1;
 	c->last_heredoc_str = NULL;

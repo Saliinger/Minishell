@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   free_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:52 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/27 12:35:53 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/13 17:25:10 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // this function will free command at the end of use
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-static void	free_arg(t_command *command)
+static void	free_arg(char **arg)
 {
 	int	i;
 
 	i = 0;
-	while (command->arg[i])
+	while (arg[i])
 	{
-		free(command->arg[i]);
+		free(arg[i]);
 		i++;
 	}
-	free(command->arg);
+	free(arg);
 }
 
-void	free_redir(t_redir *head)
+static void	free_redir(t_redir *head)
 {
 	t_redir	*next;
 
@@ -38,29 +38,29 @@ void	free_redir(t_redir *head)
 		free(head);
 		head = next;
 	}
-	if (next)
-	{
-		free(next->redir);
-		free(next);
-	}
 }
 
 void	free_command(t_command *command)
 {
 	if (!command)
 		return ;
-	if (command->in)
+    if (command->command)
+        free(command->command);
+    if (command->in)
 	{
 		free(command->in);
 		command->in = NULL;
 	}
 	if (command->arg)
-		free_arg(command);
-	if (command->subcommand)
-	{
+		free_arg(command->arg);
+    if (command->clean_arg)
+        free_arg(command->clean_arg);
+    if (command->redirection)
+        free_redir(command->redirection);
+    if (command->subcommand)
 		free_command(command->subcommand);
-		command->subcommand = NULL;
-	}
-	free(command);
-	command = NULL;
+    if (command) {
+        free(command);
+        command = NULL;
+    }
 }

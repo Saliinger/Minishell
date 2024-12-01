@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_handler.c                                   :+:      :+:    :+:   */
+/*   ft_string.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 12:35:07 by anoukan           #+#    #+#             */
-/*   Updated: 2024/08/27 12:35:08 by anoukan          ###   ########.fr       */
+/*   Created: 2023/11/14 12:58:29 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/28 15:00:28 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "printerr.h"
 
-void	sighandler(int sig)
+int	ft_pr_string(char *str)
 {
-	if (sig == SIGINT)
-	{
-		printf("\n");
-		signal(SIGINT, sighandler);
-	}
+	if (str)
+		return (ft_pr_putstr(str));
+	else
+		return (ft_pr_putstr("(null)"));
 }

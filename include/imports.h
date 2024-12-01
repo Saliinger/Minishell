@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   imports.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:07:37 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/08 00:41:40 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/28 17:09:56 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,9 @@
 # include <stdio.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include "display.h"
+# include "exec.h"
+
+int	printerr(const char *format, ...);
 
 #endif

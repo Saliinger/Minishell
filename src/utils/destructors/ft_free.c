@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:20 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/11 11:44:47 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/13 17:25:05 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 void	free_env(char **env)
 {
@@ -22,9 +22,7 @@ void	free_env(char **env)
 		free(env[i]);
 		i++;
 	}
-	if (env)
-		free(env);
-	env = NULL;
+    free(env);
 }
 
 void	free_minishell(t_minishell *minishell)

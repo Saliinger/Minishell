@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   change_exit_code.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42mulhouse.fr>    +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:55:03 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/29 09:56:21 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/28 23:33:56 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-//void	change_exit_code(t_minishell *minishell, int exit_code)
-//{
-//
-//}
+// void	change_exit_code(t_minishell *minishell, int exit_code)
+// {
+
+// }

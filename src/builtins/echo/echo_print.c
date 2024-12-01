@@ -1,17 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo_print.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 21:50:14 by anoukan           #+#    #+#             */
+/*   Updated: 2024/11/30 16:11:25 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 
-void echo_print(char **arg, bool eof)
+static void print_line(char *line)
 {
-    size_t i;
-
+    int i;
     i = 0;
-    while (arg[i])
+    while (line[i])
     {
-        printf("%s", arg[i]);
-        if (arg[i + 1])
-            printf(" ");
+        if (!(line[i] == '\'' || line[i] == '\"'))
+            printf("%c", line[i]);
         i++;
     }
-    if (eof == true)
-        printf("\n");
+}
+
+void	echo_print(char **arg, bool eof, int i)
+{
+	while (arg[i])
+	{
+        print_line(arg[i]);
+		if (arg[i + 1])
+			printf(" ");
+		i++;
+	}
+	if (eof == true)
+		printf("\n");
 }

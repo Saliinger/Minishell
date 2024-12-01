@@ -36,21 +36,24 @@ int	ft_split_free(char **dest)
 	int	i;
 
 	i = 0;
-	while (dest[i])
-	{
-		free(dest[i]);
-		i++;
-	}
-	free(dest);
+    if (dest)
+    {
+        while (dest[i])
+        {
+            free(dest[i]);
+            i++;
+        }
+        free(dest);
+    }
 	return (0);
 }
 
-void	ft_split_write_word(char *dest, const char *src, int start, int end)
+void	ft_split_write_word(char *dest, const char *src, int start, int len)
 {
 	int	i;
 
 	i = 0;
-	while (src[start + i] && i < end)
+	while (i < len && src[start + i])
 	{
 		dest[i] = src[start + i];
 		i++;

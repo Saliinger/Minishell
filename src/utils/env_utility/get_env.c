@@ -17,8 +17,6 @@ int	get_env_var(t_minishell *minishell, char *var, int len)
 	int	i;
 
 	i = 0;
-	len--;
-	var++;
 	while (minishell->env[i])
 	{
 		if (ft_strncmp(minishell->env[i], var, len) == 0)

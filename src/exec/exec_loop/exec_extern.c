@@ -6,21 +6,23 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:27:58 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/13 17:26:07 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/30 00:30:33 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/exec.h"
+#include "../../../include/exec.h"
 
 /**
  * brief : adds the new child to known pids
  * 
  */
-static int	parent(t_command_exec *c, t_pids_info *p, pid_t child_pid)
+static int	parent(t_command_exec *cmd, t_infos *i, pid_t child_pid)
 {
-    (void) c;
-	p->pids_list = pids_addfront(p->pids_list, child_pid);
-	if (!p->pids_list)
+	if (cmd->cmd_id == MINISHELL_ID)
+		if (set_signals_to_ignore() == -1)
+			return (printerr("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
+	i->pids_llist = pids_addfront(i->pids_llist, child_pid);
+	if (!i->pids_llist)
 		return (ERR);
 	return (EXIT_SUCCESS);
 }
@@ -29,10 +31,20 @@ static int	parent(t_command_exec *c, t_pids_info *p, pid_t child_pid)
  * brief : exeve the command in c, with the env in m
  * 
  */
-static int	child(t_command_exec *c, t_minishell *m, t_pids *pids)
+static int	child(t_command_exec *c, t_minishell *m, t_infos *inf)
 {
-	execve_command(c, m, pids);
-	return (ERR);
+	int err;
+
+	err = 0;
+	err += ft_close_saved_std_fds(m->std_fds);
+	if (err)
+		return(printerr("%s: %d: err closing the std fds\n", __FILE__, __LINE__), ERR);
+	err += apply_redirections(c, inf);
+	err += ft_close_pipes(inf->cmd_count -1, &inf->pipes);
+	if (err)
+		return(printerr("%s: %d: err redir\n", __FILE__, __LINE__), ERR);
+	execve_command(c, m, inf);
+	return (printerr("%s: err What the hell have you done ?\n", __FUNCTION__));
 }
 
 /**
@@ -43,21 +55,20 @@ static int	child(t_command_exec *c, t_minishell *m, t_pids *pids)
  * 
  *  
  */
-pid_t	exec_extern(t_command_exec *cmds, t_minishell *m, t_pids_info *p, t_cmd_type *last_cmd_type)
+pid_t	exec_extern(t_command_exec *cmd, t_minishell *m, t_infos *inf)
 {
 	pid_t	pid;
 
-	*last_cmd_type = CMD_EXTERN;
+	inf->last_cmd_type = CMD_EXTERN;
 	pid = fork();
 	if (pid == -1)
-		return (free_pids(p->pids_list), perror("minishell"), ERR_PRIM);
+		return (perror("minishell00"), ERR_PRIM);
 	if (pid == 0)
 	{
-		if (child(cmds, m, p->pids_list) == ERR)
-			return (free_pids(p->pids_list), dprintf(STDERR_FILENO,"in %s: %s: at line %d child error:\n", __FILE__, __FUNCTION__, __LINE__ ), ERR_CHILD);
+		if (child(cmd, m, inf) == ERR)
+			return (printerr("in %s: %s: child error:\n", __FILE__, __FUNCTION__ ), ERR);
 	}
-	else
-		if (parent(cmds, p, pid) == ERR)
-			return (free_pids(p->pids_list), dprintf(STDERR_FILENO,"in %s: %s: at line %d parent error:\n", __FILE__, __FUNCTION__, __LINE__ ), ERR_PARENT);
+	else if (parent(cmd, inf, pid) == ERR)
+			return (printerr("in %s: %s: parent error:\n", __FILE__, __FUNCTION__ ), ERR);
 	return (pid);
 }

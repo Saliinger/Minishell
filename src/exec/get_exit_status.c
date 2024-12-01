@@ -6,51 +6,65 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 15:38:41 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/13 17:11:11 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/30 03:36:34 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
-
 /**
- * brief : this version waits for any child to die, if the last child died, returns it's exit status
+ * brief : this version waits for any child to die, if the last child died, returns by pointer it's exit status
  * 
  */
-static int	wait_get_child_err(pid_t last_child_pid, int *err_child)
+static int	wait_get_child_err(pid_t last_child_pid, int *last_child_exit_status, bool *jump_sigint)
 {
-	pid_t	waited_pid;
+	pid_t	got_pid;
 	int		status;
 
-	waited_pid = wait(&status);
-	if (waited_pid == -1)
-		return (perror("minishell"), ERR_PRIM);
-	if (waited_pid == last_child_pid && WIFEXITED(status))
+	status = 0;
+	got_pid = wait(&status);
+	if (got_pid == -1)
+			return (perror("wait"), ERR_PRIM);
+	if (got_pid == last_child_pid && WIFEXITED(status))
+		*last_child_exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
 	{
-		if (WEXITSTATUS(status) == ERR_CHILD)
-			*err_child = ERR_LAST_CHILD;
+		if (got_pid == last_child_pid)
+		{
+			*last_child_exit_status = 128 + WTERMSIG(status);
+			if (WTERMSIG(status) == SIGQUIT)
+				write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
+		}
+		if (WTERMSIG(status) == SIGINT && *jump_sigint)
+		{
+			write(STDOUT_FILENO, "\n", 1);
+			*jump_sigint = false;
+		}
 	}
-	else if (waited_pid == last_child_pid && WIFSIGNALED(status))
-		*err_child = 127 + WTERMSIG(status);
 	return (EXIT_SUCCESS);
 }
 
 /**
  * brief : waits for all children to die, returns the exit status of the last child
- * returns 127 + SIG num if child killed by signal
+ * returns 128 + SIG num if child killed by signal.
  * 
  */
 static int	wait_children (t_pids *pids, pid_t last_child_pid)
 {
-	int	err;
-	int	err_last_child;
-	int	nb_children;
+	int		err;
+	int		err_last_child;
+	int		nb_children;
+	bool	jump_sigint;
 
 	err = 0;
+	err_last_child = 0;
+	jump_sigint = true;
 	nb_children = pids_size(pids);
 	while (nb_children > 0)
 	{
-		err = wait_get_child_err(last_child_pid, &err_last_child);
+		err = wait_get_child_err(last_child_pid, &err_last_child, &jump_sigint);
 		nb_children--;
+		if (err)
+			return (printerr("%s: %d: err", __FILE__, __LINE__), err);
 	}
 	if (err)
 		return (err);
@@ -64,25 +78,22 @@ static int	wait_children (t_pids *pids, pid_t last_child_pid)
  * :info: children have already exited sinc execve_command left them no choice 
  * 
  */
-static int	parent_waits(t_pids_info p)
+static int	parent_waits(t_pids **pids_list, pid_t last_pid, int last_cmd_type)
 {
 	int		exit_status;
 
 	exit_status = 0;
-	if (p.last_pid != 0)
+	if (last_pid > 0)
 	{
-		exit_status = wait_children(p.pids_list, p.last_pid);
+		exit_status = wait_children(pids_list[0], last_pid);
 		if (exit_status == -1)
-			return (ERR_PRIM);
-		if (exit_status)
-			return (free_pids(p.pids_list), exit_status);
-		/* testme : not sure if needed since I count on dup2 the std_fds anyway
-		err += ft_close(&c->infile_fd);	//fixme : If think this should go to wait_children, but idk how to link the pid & the in/out files fd yet => include the pid to each cmd node ?
-		err += ft_close(&c->outfile_fd); //fixme
-		if (err)
-			return (perror(NULL), free_pids(pids), ERR_PARENT); */
+			return (free_pids(pids_list), printerr("%s: %d: err: exit_status =  %d", __FILE__, __LINE__, exit_status), ERR_PRIM);
+		if (exit_status >= 0)
+			return (free_pids(pids_list), exit_status);
 	}
-	return (free_pids(p.pids_list), EXIT_SUCCESS);
+	else if (last_cmd_type != CMD_BUILTIN)
+		return (free_pids(pids_list), printerr("%s: %d: err: last_pid = %d", __FILE__, __LINE__, last_pid), ERR);
+	return (free_pids(pids_list), EXIT_SUCCESS);
 }
 
 /**
@@ -92,21 +103,20 @@ static int	parent_waits(t_pids_info p)
  * (CMD_BUILTIN) will check if should wait for potential children (p.pids_list), then return the builtin_exit_status 
  * (CMD_EXTREN) should wait for children (p.pids_list), extracting ir from last child created (p.pid_last)
  */
-int	get_exit_status(t_cmd_type last_cmd_type, t_pids_info externs_pids_infos, int builtin_exit_status)
+int	get_exit_status(t_minishell *m, t_infos *inf)
 {
 	int	exit_status;
 
-	if (last_cmd_type == CMD_BUILTIN)
-	{
-		parent_waits(externs_pids_infos);
-		exit_status = builtin_exit_status;
-	}
-	else if (last_cmd_type == CMD_EXTERN)
-	{
-		exit_status = parent_waits(externs_pids_infos);
-	}
+	exit_status = 0;
+	if (set_signals_to_ignore() == -1)
+	 	return (printerr("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
+	ft_close_pipes(inf->cmd_count - 1, &inf->pipes);
+	if (inf->last_cmd_type == CMD_BUILTIN)
+		parent_waits(&inf->pids_llist, inf->last_pid, inf->last_cmd_type);
+	else if (inf->last_cmd_type == CMD_EXTERN)
+		m->exit_status[0] = parent_waits(&inf->pids_llist, inf->last_pid, inf->last_cmd_type);
 	else
-		return(dprintf(STDERR_FILENO,"minishell: %s: %s: exec failure", __FILE__, __FUNCTION__), ERR_ARGS);
-	return (exit_status);
+		return(free_t_infos(inf), printerr("minishell: %s: %s: exec failure", __FILE__, __FUNCTION__), ERR);
+	return (free_t_infos(inf), exit_status);
 }
 

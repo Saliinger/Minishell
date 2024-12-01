@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:50 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/29 09:59:27 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 04:03:22 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,22 @@
 # define PATH "/bin/"
 
 // Define ID
-# define ECHO_ID 1
-# define CD_ID 2
-# define PWD_ID 3
-# define EXPORT_ID 4
-# define UNSET_ID 5
-# define ENV_ID 6
-# define EXIT_ID 7
-# define NB_BUILTINS 8
+# define ECHO_ID		1
+# define CD_ID			2
+# define PWD_ID			3
+# define EXPORT_ID		4
+# define UNSET_ID		5
+# define ENV_ID			6
+# define EXIT_ID		7
+# define BUILTIN_ID_MIN	1
+# define BUILTIN_ID_MAX	10
+
 # define HD_ID 9
 # define EXPAND_ID 10
+# define MINISHELL_ID 16
+
+# define HEREDOC_FILENO -42
+# define HEREDOC_QUOTES_FILENO -4242
 
 # include "imports.h"
 
@@ -56,7 +62,7 @@ typedef struct s_command
 	char				**arg;
 	char				**clean_arg;
 	int					id;
-	struct s_command	*subcommand;
+	struct s_command	*subcommand; 
 	bool				builtin;
 	bool				pipe;
 	int					pipe_position;
@@ -70,9 +76,11 @@ typedef struct s_command
 typedef struct s_minishell
 {
 	char				**env;
+	int					std_fds[2];
+	int					*exit_status;		//don't free me.
 	char				**hidden_env;
+	char				**hidden_path;
 	char				**paths;
-	char				*builtins_paths[NB_BUILTINS];
 	char				*pwd;
 	char				*old_pwd;
 	int					res_last_command;

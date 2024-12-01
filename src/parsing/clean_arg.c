@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:13:49 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/29 09:41:42 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:46:59 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*extract_env(int var_line, char **env)
 	start = 0;
 	while (env[var_line] && env[var_line][start] != '=')
 		start++;
-	if(env[var_line][start] == '=')
+	if (env[var_line][start] == '=')
 		start++;
 	len = ft_strlen(env[var_line]) - start;
 	res = (char *)malloc(sizeof(char) * (len + 1));
@@ -54,7 +54,7 @@ static char	*extract_env(int var_line, char **env)
 	return (res);
 }
 
-static char *add_line(char *in, t_minishell *minishell)
+static char	*add_line(char *in, t_minishell *minishell)
 {
 	int		var_line;
 	char	*line;

@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 22:32:43 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/13 17:46:15 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/28 04:41:57 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_std_fds(int *fds, char *display_name)
 	dprintf(STDERR_FILENO, "\n\tstd_fds\n");
 	while(i < 2)
 	{
-		dprintf(STDERR_FILENO, "\t\t[%d] %d\n", i, fds[i]);
+		dprintf(STDERR_FILENO, "\t\t[%d]: %d\n", i, fds[i]);
 		i++;
 	}
 }

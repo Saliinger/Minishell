@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:13 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/11 15:57:16 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:49:56 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ char	*get_path(char *in, t_minishell *minishell)
 	{
 		res = get_home(minishell);
 		if (!res)
-			printf("Error: Home is not set\n");
+			perror("Error: Home is not set\n");
 		return (res);
 	}
-	if (is_symlink(in))
+//	if (is_symlink(in))
 		res = path_constructor(minishell, in);
-	else
-		res = ft_strdup(in);
+//	else
+//		res = ft_strdup(in);
 	return (res);
 }
 

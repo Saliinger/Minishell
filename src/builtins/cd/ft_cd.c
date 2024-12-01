@@ -6,29 +6,29 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:29:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/12 11:13:40 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:49:49 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int	ft_cd(t_command *command, t_minishell *minishell)
+int	ft_cd(t_command_exec *command, t_minishell *minishell)
 {
 	int		error;
 	char	*path;
 
-	path = get_path(command->arg[1], minishell);
+	path = get_path(command->cmd_args[1], minishell);
+	printerr("path: %s\n", path);
 	if (!path)
 		return (1);
 	error = chdir(path);
 	if (error == 0)
 	{
-		printf("Changed dir to %s\n", path);
+		printerr("Changed dir to %s\n", path);
 		change_pwd(minishell, path);
 	}
 	else
-		printf("Error changing directory");
-	if (path)
-		free(path);
+		printerr("Error changing directory\n");
+	free(path);
 	return (0);
 }

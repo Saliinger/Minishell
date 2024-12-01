@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 13:21:21 by anoukan           #+#    #+#             */
-/*   Updated: 2024/10/27 13:21:22 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:47:07 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	check_pipe(char *in)
 			return (i);
 		if (in[i] == '"')
 		{
-			while (in[i] != '"')
+			while (in[i] && in[i] != '"')
 				i++;
 		}
 		if (in[i] == '\'')
 		{
-			while (in[i] != '\'')
+			while (in[i] && in[i] != '\'')
 				i++;
 		}
 		i++;

@@ -12,6 +12,8 @@
 
 #include "../../../include/minishell.h"
 
+// add create pwd and set oldpwd
+
 int	change_pwd(t_minishell *minishell, char *in)
 {
 	int		pwd_line;

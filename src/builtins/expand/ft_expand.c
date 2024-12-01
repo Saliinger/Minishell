@@ -6,37 +6,38 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:13 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/11 01:44:17 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:50:23 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
+
 // need to print the env var
 
-int	ft_expand(t_command *command, t_minishell *minishell)
+int	ft_expand(t_command_exec *command, t_minishell *minishell)
 {
-	char	*arg;
-	int		g;
-	int		len;
+	int		i;
+	char	*temp;
+	int		temp_len;
 	int		line;
 
-	arg = command->arg[0];
-	arg++;
-	len = ft_strlen(command->arg[0]);
-	line = get_env_var(minishell, arg, len - 1);
-	if (line >= 0)
+	i = 0;
+	while (command->cmd_args[i])
 	{
-		g = 0;
-		while (minishell->env[line][g] != '=')
-			g++;
-		g++;
-		while (minishell->env[line][g])
+		temp = ft_strdup(command->cmd_args[i] + 1);
+		temp_len = ft_strlen(temp);
+		line = get_env_var(minishell, temp, temp_len);
+		if (line == -1)
+			fprintf(stderr, "var doesn't exist");
+		else
 		{
-			ft_putchar_fd(minishell->env[line][g], 1);
-			g++;
+			printf("%s", minishell->env[line] + temp_len + 1);
+			if (command->cmd_args[i + 1])
+				printf(" ");
 		}
+		free(temp);
+		i++;
 	}
-
-	ft_putchar_fd('\n', 1);
+	printf("\n");
 	return (0);
 }

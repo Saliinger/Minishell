@@ -13,6 +13,7 @@
 // display env variable
 
 #include "../../../include/minishell.h"
+
 int	ft_env(t_minishell *minishell)
 {
 	int	i;

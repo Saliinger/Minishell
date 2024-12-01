@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:28:37 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/08 15:31:47 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:50:07 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,27 @@
 
 int	check_flag(char **arg)
 {
-	int	n;
+	int		n;
 	size_t	i;
 	size_t	j;
 
 	n = 0;
-	i = 1;
+	i = 0;
 	while (arg[i])
 	{
-        j = 0;
-        if (arg[i][j] == '-')
-        {
-            j++;
-            while (arg[i][j] == 'n')
-                j++;
-            if (j != ft_strlen(arg[i]))
+		j = 0;
+		if (arg[i][j] == '-' && arg[i][j + 1] == 'n')
+		{
+			j++;
+			while (arg[i][j] == 'n')
+				j++;
+			if (j == ft_strlen(arg[i]))
+				n++;
+			else
                 return (n);
-            else n++;
-        }
+		}
+        else
+            break ;
 		i++;
 	}
 	return (n);
