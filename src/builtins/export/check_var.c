@@ -5,23 +5,23 @@ bool check_var_equals(char *in)
     int nbr = 0;
     int i = 0;
 
-    while (in[i] != '\"')
+    while (in[i] && in[i] != '\"' && in[i] != '\'')
     {
         if (in[i] == '=')
             nbr++;
         i++;
     }
-    if (nbr > 1)
+    if (nbr > 1 || nbr == 0)
         return (false);
     else
-        return (true);
+        return (printf("TRUE 1\n"), true);
 }
 
 bool check_var_name(char *in)
 {
     int i = 0;
 
-    if (!ft_isalpha(in[i]) && in[i] != '_')
+    if (!ft_isalpha(in[i]) || in[i] != '_')
         return (false);
     else
         i++;
@@ -32,7 +32,7 @@ bool check_var_name(char *in)
         else
             i++;
     }
-    return (true);
+    return (printf("TRUE 2\n"), true);
 }
 
 // var need to have =
