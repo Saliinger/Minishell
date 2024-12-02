@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 21:48:22 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/01 19:44:08 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_command	*parsing(char *str, t_minishell *minishell)
 			return (NULL);
 		temp = temp->subcommand;
 	}
-    printf("cmd: %s\n", current->clean_arg[0]);
+    printf("\ncmd: %s\n", current->clean_arg[0]);
 	if (current)
 		return (current);
 	else

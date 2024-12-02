@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:10 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/30 03:32:17 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/01 19:29:12 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ int	main(int ac, char **av, char **env)
 	t_minishell	*minishell;
 	char		buffer[4096 + 1];
 
+	set_signals_to_minishell();
 	(void)av;
 	if (ac > 1)
 		return (printerr("err: case not asked by subject\n."), 1);
-	set_signals_to_minishell();
+	exit_status = 0;
 	minishell = init(env, getcwd(buffer, 4096), &exit_status);
 	if (!minishell)
 		return (1);

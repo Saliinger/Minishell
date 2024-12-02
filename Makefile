@@ -1,11 +1,26 @@
 NAME 		=	minishell
 CC = cc
-CFLAGS = -Wall -Wextra -g3 #-fsanitize=address
+
+CFLAGS =	-Wall \
+			-Wextra \
+			-g3 \
+
+#-fsanitize=address
+
 LIBFT_A		=	libft/libft/libft.a
 PRINTF_A	=	libft/printf/libprintf.a
 LIBS = -L./libft/compiled -lft -lprintf -lreadline
-VALGRIND = valgrind --trace-children=yes --track-fds=yes --leak-check=full --show-leak-kinds=all \
---gen-suppressions=yes --suppressions="./.valgrind.supp"
+
+VALGRIND = valgrind					\
+--trace-children=yes				\
+--track-fds=yes						\
+--leak-check=full					\
+--show-leak-kinds=all				\
+--suppressions="./.valgrind.supp"	\
+--track-origins=yes					\
+-s									\
+
+#--gen-suppressions=yes 
 
 INCLUDE_MAC = -I/opt/homebrew/opt/readline/include
 LIBS_MAC = -L/opt/homebrew/opt/readline/lib -lreadline -L./libft/compiled -lft -lprintf
@@ -114,9 +129,9 @@ test: project_re
 	clear
 	./$(NAME) || lldb $(NAME)
 
-lldb:
+lldb: all
 	lldb $(NAME)
 
-valgrind:
+valgrind: all
 	clear
 	$(VALGRIND) ./$(NAME)
