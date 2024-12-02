@@ -40,7 +40,7 @@ OBJ_MAC = $(SRC:.c=.mac.o)  # macOS-specific object files
 %.mac.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE_MAC)
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re libft mac
 
 all: $(LIBFT_A) $(PRINTF_A) $(NAME)
 
@@ -59,14 +59,14 @@ $(PRINTF_A):
 	@$(MAKE) all -C ./libft
 
 mac: $(LIBFT_A) $(PRINTF_A) $(OBJ_MAC)
-	@$(CC) $(CFLAGS_MAC) $(OBJ_MAC) -o $(NAME) $(LIBS_MAC)
+	@$(CC) $(CFLAGS) $(OBJ_MAC) -o $(NAME) $(LIBS_MAC)
 	@echo "$(CC) $(CFLAGS_MAC) \$$(OBJ_MAC) -o $(NAME) $(LIBS_MAC)"
 	@echo "\n$(GREEN)\t$(NAME) compiled successfully on macOS$(RESET)\n"
 
 
 clean:
 	@$(MAKE) -C ./libft clean
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(OBJ_MAC)
 	clear
 
 fclean: clean

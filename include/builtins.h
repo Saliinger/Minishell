@@ -54,7 +54,7 @@ char    **new_env(t_minishell *minishell, int *to_remove, int nbr_of_line);
 // EXPORT
 int		ft_export(t_command_exec *command, t_minishell *minishell);
 int     create_var(t_minishell *minishell, char *var);
-int     delete_var(t_minishell *minishell, char *var);
+int     delete_var(t_minishell *minishell, int line);
 bool check_var_equals(char *in);
 bool check_var_name(char *in);
 

@@ -36,12 +36,12 @@ char *check_var(char *var)
 {
     char *ex_var;
 
+    if (check_var_equals(var) == false)
+        return (printf("var equals err\n"), NULL);
     ex_var = extract_var(var);
     printf("ex var: %s\n", ex_var);
     if (check_var_name(ex_var) == false)
         return (printf("var name err\n"), free(ex_var), NULL);
-    if (check_var_equals(var) == false)
-        return (printf("var equals err\n"), free(ex_var), NULL);
     return (ex_var);
 }
 
@@ -53,14 +53,14 @@ int manage_var(t_minishell *minishell, char *var)
     char *ex_var;
 
     ex_var = check_var(var);
-    if (!ex_var)
+    if (ex_var == NULL)
         return (1);
     line = get_env_var(minishell, ex_var, ft_strlen(ex_var));
     if (line == -1)
         error += create_var(minishell, var);
     else
     {
-        error += delete_var(minishell, var);
+        error += delete_var(minishell, line);
         error += create_var(minishell, var);
     }
     return (error);
@@ -71,7 +71,7 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
     int i = 1;
     int error = 0;
 
-	if (nbr_of_line(command->cmd_args) >= 1 - 1)
+	if (nbr_of_line(command->cmd_args) > 1)
     {
         while(command->cmd_args[i])
         {
