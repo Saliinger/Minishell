@@ -39,6 +39,10 @@ static void	ft_split_write_extend(size_t *i, size_t *j, const char *s, char c)
 	}
 }
 
+// case to handle
+// echo yolol="echo $PWD"
+//
+
 static int	ft_split_write(char **dest, char const *s, char c)
 {
 	size_t	i;

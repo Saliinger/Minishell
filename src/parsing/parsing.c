@@ -28,11 +28,9 @@ t_command	*parsing(char *str, t_minishell *minishell)
 		temp = temp->subcommand;
 	}
     printf("\ncmd: %s\n", current->clean_arg[0]);
-	if (current)
-		return (current);
-	else
-		printf("loli said: bitch it's not working\n");
-	return (NULL);
+    if (current)
+        return (current);
+    return (NULL);
 }
 
 // need to add free command for l28
