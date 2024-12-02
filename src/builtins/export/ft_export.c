@@ -71,6 +71,7 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
     int i = 1;
     int error = 0;
 
+    ft_print(command->cmd_args, 0);
 	if (nbr_of_line(command->cmd_args) > 1)
     {
         while(command->cmd_args[i])

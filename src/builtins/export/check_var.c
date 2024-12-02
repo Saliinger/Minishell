@@ -5,13 +5,15 @@ bool check_var_equals(char *in)
     int nbr = 0;
     int i = 0;
 
+    printf("in: %s\n", in);
     while (in[i] && in[i] != '\"')
     {
         if (in[i] == '=')
             nbr++;
         i++;
     }
-    if (nbr < 1)
+    printf("nbr: %d\n", nbr);
+    if (nbr == 0 || nbr > 1)
         return (false);
     else
         return (true);
