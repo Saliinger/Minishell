@@ -14,30 +14,59 @@
 
 static void	ft_split_write_extend(size_t *i, size_t *j, const char *s, char c)
 {
-	*j = 0;
-	if (s[*i] == '\"')
-	{
-		(*j)++;
-		while (s[*i + *j] && s[*i + *j] != '\"')
-			(*j)++;
-		if (s[*i + *j] == '\"')
-			(*j)++;
-	}
-	else if (s[*i] == '\'')
-	{
-		(*j)++;
-		while (s[*i + *j] && s[*i + *j] != '\'')
-			(*j)++;
-		if (s[*i + *j] == '\'')
-			(*j)++;
-	}
-	else
-	{
-		while (s[*i + *j] && s[*i + *j] != c && s[*i + *j] != '\"' && s[*i
-				+ *j] != '\'')
-			(*j)++;
-	}
+    *j = 0;
+    while (s[*i + *j] && s[*i + *j] != c)
+    {
+        if (s[*i + *j] == '\"' || s[*i + *j] == '\'')
+        {
+
+            if (s[*i + *j] == '\"') {
+                (*j)++;
+                while (s[*i + *j] && s[*i + *j] != '\"')
+                    (*j)++;
+            }
+            if (s[*i + *j] == '\'') {
+                (*j)++;
+                while (s[*i + *j] && s[*i + *j] != '\'')
+                    (*j)++;
+            }
+        }
+        else
+            (*j)++;
+    }
 }
+
+//static void	ft_split_write_extend(size_t *i, size_t *j, const char *s, char c)
+//{
+//	*j = 0;
+//	if (s[*i] == '\"')
+//	{
+//		(*j)++;
+//		while (s[*i + *j] && s[*i + *j] != '\"')
+//			(*j)++;
+//		if (s[*i + *j] == '\"')
+//			(*j)++;
+//	}
+//	else if (s[*i] == '\'')
+//	{
+//		(*j)++;
+//		while (s[*i + *j] && s[*i + *j] != '\'')
+//			(*j)++;
+//		if (s[*i + *j] == '\'')
+//			(*j)++;
+//	}
+//	else
+//	{
+//		while (s[*i + *j] && s[*i + *j] != c && s[*i + *j] != '\"' && s[*i
+//				+ *j] != '\'')
+//			(*j)++;
+//        if (s[*i + *j] == '\"' || s[*i + *j] == '\'')
+//        {
+//            while (s[*i + *j] && s[*i + *j] != '\"' && s[*i + *j] != '\'')
+//                (*j)++;
+//        }
+//	}
+//}
 
 // case to handle
 // echo yolol="echo $PWD"

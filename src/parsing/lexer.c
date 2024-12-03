@@ -118,6 +118,6 @@ char	**relexer(char **in)
 			res = add_line(res, in[i]);
 		i++;
 	}
-    free_env(in);
+    //free_env(in);
 	return (res);
 }
