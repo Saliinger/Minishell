@@ -39,6 +39,7 @@ SRC =	$(wildcard $(SRCD)/*.c)				\
 		$(wildcard $(UTILSD)/*.c)			\
 		$(wildcard $(UTILSD)/*/*.c)			\
 		$(wildcard $(PARSD)/*.c)			\
+		$(wildcard $(PARSD)/*/*.c)			\
 		$(wildcard $(SIGD)/*.c)				\
 		$(wildcard $(EXED)/*.c)				\
 		$(wildcard $(EXED)/*/*.c)			\

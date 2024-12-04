@@ -45,7 +45,7 @@ static void	process_input_line(char *line, t_minishell *m)
 	c = parsing(line, m);
 	if (PARSING_LEAK_TRACKING)
 	{
-        ft_print(c->clean_arg, 0);
+        ft_print(c->arg, 0);
 		free_command(c);
 		printerr("%s\n\tPARSING_LEAK_TRACKING: ON !%s\n\t\toutput is now %p. (destroyed via free_t_command).\n\n", AINSI_BLUE, AINSI_RESET, c);
 	}
