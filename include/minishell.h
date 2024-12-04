@@ -61,7 +61,7 @@ size_t		ft_countword(const char *s, char c);
 int			ft_split_free(char **dest);
 void		ft_split_write_word(char *dest, const char *src, int start,
 				int end);
-char		**split_element(char const *s, char c);
+char		**split_element(char *s, char c);
 
 // ENV_UTILITY
 int			get_env_var(t_minishell *minishell, char *var, int len);

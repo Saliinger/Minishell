@@ -19,8 +19,6 @@ t_command	*parsing(char *str, t_minishell *minishell)
 
     (void)minishell;
 	current = command_init(str);
-    if (current)
-        free(str);
     temp = current;
 	while (temp)
 	{
@@ -33,6 +31,8 @@ t_command	*parsing(char *str, t_minishell *minishell)
         //temp->clean_arg = remove_quote(temp->arg);
 //		if (!temp->clean_arg)
 //			return (NULL);
+        fprintf(stderr,"this is the args\n");
+        ft_print(temp->arg, 0);
 		temp = temp->subcommand;
 	}
     if (current)

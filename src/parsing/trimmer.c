@@ -67,7 +67,7 @@ static void	init_command_arg(t_command *command, char *in)
 	else
 	{
 		command->subcommand = NULL;
-		command->arg = split_element(in, ' ');
+		command->arg = split_element(ft_strdup(in), ' ');
         if (!command->arg)
             return (command->arg = NULL, free_command(command));
 	}
@@ -83,10 +83,7 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->in = ft_strdup(in);
     command->pipe_position = check_pipe(in);
 	init_command_arg(command, in);
-	if (builtin == true)
-		command->command = ft_strdup(in_command);
-	else
-		command->command = in_command;
+    command->command = ft_strdup(in_command);
 	command->builtin = builtin;
 	command->id = id;
 	command->pid = -1;
@@ -96,5 +93,7 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->infile_fd = -1;
 	command->clean_arg = NULL;
     command->redirection = NULL;
+    free(in);
+    free(in_command);
 	return (command);
 }
