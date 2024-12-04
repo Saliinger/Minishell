@@ -12,6 +12,9 @@
 
 #include "../../../include/minishell.h"
 
+// export != env = trie ordre alphabetique
+// affiche var pas initialise
+
 char *extract_var(char *in)
 {
     char *res;

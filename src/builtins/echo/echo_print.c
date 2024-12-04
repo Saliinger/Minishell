@@ -18,8 +18,7 @@ static void print_line(char *line)
     i = 0;
     while (line[i])
     {
-        if (!(line[i] == '\'' || line[i] == '\"'))
-            printf("%c", line[i]);
+        printf("%c", line[i]);
         i++;
     }
 }

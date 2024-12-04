@@ -37,6 +37,8 @@ static char	**add_line(char **in, char *to_add)
 		i++;
 	}
 	dup[i] = NULL;
+    if (in)
+        free_env(in);
 	return (dup);
 }
 
@@ -118,6 +120,6 @@ char	**relexer(char **in)
 			res = add_line(res, in[i]);
 		i++;
 	}
-    //free_env(in);
+    free_env(in);
 	return (res);
 }

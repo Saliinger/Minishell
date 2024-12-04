@@ -27,6 +27,7 @@ static t_minishell	*init(char **env, char *pwd, int *adr_int)
 	// minishell->hd[0] = NULL;
 	minishell->std_fds[0] = -1;
 	minishell->std_fds[1] = -1;
+    minishell->paths = NULL;
 	minishell->exit_status = adr_int;
 	minishell->hidden_env = NULL;
 	return (minishell);
