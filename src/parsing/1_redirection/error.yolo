@@ -1,0 +1,112 @@
+~/Developer/Minishell$ slkdfj | ls<<slkjf>slkdfkjM<<slkjfd
+this is the args
+slkdfj
+this is the args
+ls
+<<
+slkjf
+>
+slkdfkjM
+<<
+slkjfd
+==45885== Invalid read of size 8
+==45885==    at 0x109BC0: free_redir (free_command.c:37)
+==45885==    by 0x109C90: free_command (free_command.c:56)
+==45885==    by 0x109CAD: free_command (free_command.c:58)
+==45885==    by 0x10941C: process_input_line (ft_minishell.c:49)
+==45885==    by 0x1094D7: ft_minishell (ft_minishell.c:71)
+==45885==    by 0x109673: main (main.c:54)
+
+
+==45885==  Address 0x4b1e4a8 is 8 bytes inside a block of size 24 free'd
+==45885==    at 0x4842F6C: free (vg_replace_malloc.c:755)
+==45885==    by 0x109BD7: free_redir (free_command.c:38)
+==45885==    by 0x109C90: free_command (free_command.c:56)
+==45885==    by 0x109CAD: free_command (free_command.c:58)
+==45885==    by 0x10941C: process_input_line (ft_minishell.c:49)
+==45885==    by 0x1094D7: ft_minishell (ft_minishell.c:71)
+==45885==    by 0x109673: main (main.c:54)
+
+
+
+==45885==  Block was alloc'd at
+==45885==    at 0x484079B: malloc (vg_replace_malloc.c:380)
+==45885==    by 0x10CA8D: add_node (move_redir.c:20)
+==45885==    by 0x10CC4D: extract_redir (move_redir.c:64)
+==45885==    by 0x10B4A8: parsing (parsing.c:27)
+==45885==    by 0x10940C: process_input_line (ft_minishell.c:45)
+==45885==    by 0x1094D7: ft_minishell (ft_minishell.c:71)
+==45885==    by 0x109673: main (main.c:54)
+
+
+
+==45885==
+==45885== Invalid free() / delete / delete[] / realloc()
+==45885==    at 0x4842F6C: free (vg_replace_malloc.c:755)
+==45885==    by 0x109BCB: free_redir (free_command.c:37)
+==45885==    by 0x109C90: free_command (free_command.c:56)
+==45885==    by 0x109CAD: free_command (free_command.c:58)
+==45885==    by 0x10941C: process_input_line (ft_minishell.c:49)
+==45885==    by 0x1094D7: ft_minishell (ft_minishell.c:71)
+==45885==    by 0x109673: main (main.c:54)
+
+
+
+==45885==  Address 0x4b1e500 is 0 bytes inside a block of size 6 free'd
+==45885==    at 0x4842F6C: free (vg_replace_malloc.c:755)
+==45885==    by 0x109BCB: free_redir (free_command.c:37)
+==45885==    by 0x109C90: free_command (free_command.c:56)
+==45885==    by 0x109CAD: free_command (free_command.c:58)
+==45885==    by 0x10941C: process_input_line (ft_minishell.c:49)
+==45885==    by 0x1094D7: ft_minishell (ft_minishell.c:71)
+==45885==    by 0x109673: main (main.c:54)
+
+
+==45885==  Block was alloc'd at
+==45885==    at 0x484079B: malloc (vg_replace_malloc.c:380)
+==45885==    by 0x11244D: ft_strdup (ft_strdup.c:25)
+==45885==    by 0x10CAA4: add_node (move_redir.c:23)
+==45885==    by 0x10CC4D: extract_redir (move_redir.c:64)
+==45885==    by 0x10B4A8: parsing (parsing.c:27)
+==45885==    by 0x10940C: process_input_line (ft_minishell.c:45)
+==45885==    by 0x1094D7: ft_minishell (ft_minishell.c:71)
+==45885==    by 0x109673: main (main.c:54)
+
+
+==45885==
+==45885== Invalid free() / delete / delete[] / realloc()
+==45885==    at 0x4842F6C: free (vg_replace_malloc.c:755)
+==45885==    by 0x109BD7: free_redir (free_command.c:38)
+==45885==    by 0x109C90: free_command (free_command.c:56)
+==45885==    by 0x109CAD: free_command (free_command.c:58)
+==45885==    by 0x10941C: process_input_line (ft_minishell.c:49)
+==45885==    by 0x1094D7: ft_minishell (ft_minishell.c:71)
+==45885==    by 0x109673: main (main.c:54)
+
+
+==45885==  Address 0x4b1e4a0 is 0 bytes inside a block of size 24 free'd
+==45885==    at 0x4842F6C: free (vg_replace_malloc.c:755)
+==45885==    by 0x109BD7: free_redir (free_command.c:38)
+==45885==    by 0x109C90: free_command (free_command.c:56)
+==45885==    by 0x109CAD: free_command (free_command.c:58)
+==45885==    by 0x10941C: process_input_line (ft_minishell.c:49)
+==45885==    by 0x1094D7: ft_minishell (ft_minishell.c:71)
+==45885==    by 0x109673: main (main.c:54)
+
+
+==45885==  Block was alloc'd at
+==45885==    at 0x484079B: malloc (vg_replace_malloc.c:380)
+==45885==    by 0x10CA8D: add_node (move_redir.c:20)
+==45885==    by 0x10CC4D: extract_redir (move_redir.c:64)
+==45885==    by 0x10B4A8: parsing (parsing.c:27)
+==45885==    by 0x10940C: process_input_line (ft_minishell.c:45)
+==45885==    by 0x1094D7: ft_minishell (ft_minishell.c:71)
+==45885==    by 0x109673: main (main.c:54)
+==45885==
+==45885==
+==45885== More than 10000000 total errors detected.  I'm not reporting any more.
+==45885== Final error counts will be inaccurate.  Go fix your program!
+==45885== Rerun with --error-limit=no to disable this cutoff.  Note
+==45885== that errors may occur in your program without prior warning from
+==45885== Valgrind, because errors are no longer being displayed.
+==45885==
