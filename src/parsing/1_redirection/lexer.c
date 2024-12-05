@@ -12,35 +12,36 @@
 
 #include "../../../include/minishell.h"
 
-static char	**add_line(char **in, char *to_add)
+static char **add_line(char **in, char *to_add)
 {
-	char	**dup;
-	int		lines;
-	int		i;
+    char **dup;
+    int lines;
+    int i;
 
     lines = nbr_of_line(in);
-	dup = (char **)malloc(sizeof(char *) * (lines + 2));
-	if (!dup)
-		return (free_env(in), NULL);
-	i = 0;
-	while (in[i])
-	{
-		dup[i] = ft_strdup(in[i]);
+    dup = (char **)malloc(sizeof(char *) * (lines + 2));
+    if (!dup)
+        return (free_env(in), NULL);
+    i = 0;
+    while (in[i])
+    {
+        dup[i] = ft_strdup(in[i]);
         if (!dup[i])
-            return (free_env(dup), free_env(in), NULL);
-		i++;
-	}
-	if (to_add)
-	{
-		dup[i] = ft_strdup(to_add);
+            return (dup[i] = NULL, free_env(dup), free_env(in), NULL);
+        i++;
+    }
+    if (to_add)
+    {
+        dup[i] = ft_strdup(to_add);
         if (!dup[i])
-            return (free_env(dup), free_env(in), NULL);
-		i++;
-	}
-	dup[i] = NULL;
+            return (dup[i] = NULL, free_env(dup), free_env(in), NULL);
+        i++;
+    }
+    dup[i] = NULL;
     free_env(in);
-	return (dup);
+    return (dup);
 }
+
 
 static char	*get_part(char *in, int start, int len)
 {
@@ -114,28 +115,21 @@ char **redir_special(char *in)
 {
     int end = 0;
     int len = ft_strlen(in);
-    char **res = (char **)malloc(sizeof(char *) * 3); // Array for two strings + NULL
+    char **res = (char **)malloc(sizeof(char *) * 3);
 
     if (!res)
         return (NULL);
-
-    // Find the position of the first '<' or '>'
     while (in[end] && in[end] != '<' && in[end] != '>')
         end++;
-
-    // Allocate and copy the first part
     res[0] = (char *)malloc(sizeof(char) * (end + 1));
     if (!res[0])
         return (free_env(res), NULL);
     ft_strlcpy(res[0], in, end + 1);
-
-    // Allocate and copy the second part
     res[1] = (char *)malloc(sizeof(char) * (len - end + 1));
     if (!res[1])
         return (free_env(res), NULL);
     ft_strlcpy(res[1], in + end, len - end + 1);
-
-    res[2] = NULL; // Null-terminate the array
+    res[2] = NULL;
     return (res);
 }
 
@@ -174,7 +168,6 @@ char	**relexer(char **in)
         {
             if (check_redir(in[i]))
             {
-                // remove the command until first redir
                 line = redir_special(in[i]);
                 res = add_line(res, line[0]);
                 if (!res)
@@ -192,8 +185,6 @@ char	**relexer(char **in)
             }
             else
                 res = add_line(res, in[i]);
-            if (!res)
-                return (free_env(in), NULL);
         }
 		i++;
 	}

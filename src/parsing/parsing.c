@@ -25,11 +25,10 @@ t_command	*parsing(char *str, t_minishell *minishell)
         temp->redirection = extract_redir(temp->arg);
 		temp->clean_arg = clean_arg(temp->arg, minishell);
         temp->clean_arg = expand_in(temp->clean_arg, minishell);
-        temp->clean_arg = remove_quote(temp->arg);
+//        temp->clean_arg = remove_quote(temp->arg);
 		if (!temp->clean_arg || !temp->arg)
 			return (free_command(current) , NULL);
-        fprintf(stderr,"this is the args\n");
-        ft_print(temp->arg, 0);
+        ft_print(temp->clean_arg, 0);
 		temp = temp->subcommand;
 	}
     return (current);

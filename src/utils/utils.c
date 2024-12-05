@@ -71,6 +71,7 @@ void	ft_print(char **s, int i)
 		fprintf(stderr, "Error: NULL pointer passed to ft_print.\n");
 		return ;
 	}
+    printf("this is the args \n" );
 	while (s[i])
 	{
 		printf("%s\n", s[i]);
