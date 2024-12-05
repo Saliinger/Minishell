@@ -60,7 +60,6 @@ static char	*expanded(t_minishell *minishell, char *var, int *start, char *new_a
         k++;
     }
     *start += var_name_len + 1;
-    fprintf(stderr,"extend: %s\nres: %s\n", extend, res);
     return (res);
 }
 
@@ -93,7 +92,6 @@ char	**expand_in(char **arg, t_minishell *minishell)
         new_arg[i] = NULL;
         while (arg[i][j])
         {
-            fprintf(stderr, "arg[%d][%d]: %c\nnew_arg[%d]: %s\n", i, j, arg[i][j], i,new_arg[i]);
             if (arg[i][j] == '\"' || arg[i][j] == '\'')
             {
                 fprintf(stderr, "1\n");
@@ -109,14 +107,12 @@ char	**expand_in(char **arg, t_minishell *minishell)
             }
             else if (arg[i][j] == '$' && status >= 0)
             {
-                fprintf(stderr, "2\n");
                 new_arg[i] = expanded(minishell, arg[i], &j, new_arg[i]);
                 if (!new_arg[i])
                     return (free_env(new_arg), NULL);
             }
             else
             {
-                fprintf(stderr, "3\n");
                 if (!new_arg[i])
                     new_arg[i] = ft_strdup("");
                 if (!new_arg[i])
