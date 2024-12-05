@@ -31,7 +31,7 @@ static int	get_line(char **line, char *prompt, t_minishell *m)
 
 #define ON	true
 #define OFF	false
-#define PARSING_LEAK_TRACKING ON
+#define PARSING_LEAK_TRACKING OFF
 
 /**
  * brief : adds the line to history, parses it,
