@@ -94,7 +94,6 @@ char	**expand_in(char **arg, t_minishell *minishell)
         {
             if (arg[i][j] == '\"' || arg[i][j] == '\'')
             {
-                fprintf(stderr, "1\n");
                 if (!new_arg[i])
                     new_arg[i] = ft_strdup("");
                 if (!new_arg[i])
