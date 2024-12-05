@@ -25,7 +25,7 @@ t_command	*parsing(char *str, t_minishell *minishell)
         temp->redirection = extract_redir(temp->arg);
 		temp->clean_arg = clean_arg(temp->arg, minishell);
         temp->clean_arg = expand_in(temp->clean_arg, minishell);
-//        temp->clean_arg = remove_quote(temp->arg);
+        temp->clean_arg = remove_quote(temp->clean_arg);
 		if (!temp->clean_arg || !temp->arg)
 			return (free_command(current) , NULL);
         ft_print(temp->clean_arg, 0);

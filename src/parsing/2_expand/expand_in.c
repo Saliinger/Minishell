@@ -63,7 +63,7 @@ static char	*expanded(t_minishell *minishell, char *var, int *start, char *new_a
     return (res);
 }
 
-int in_quote(int status, char type)
+static int in_quote(int status, char type)
 {
     if (type == '\"' && status == 0)
         return (1);
