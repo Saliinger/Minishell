@@ -31,9 +31,10 @@ static void	free_redir(t_redir *head)
 {
 	t_redir	*next;
 
-	next = head;
+
 	while (head)
 	{
+        next = head->next;
 		free(head->redir);
 		free(head);
 		head = next;

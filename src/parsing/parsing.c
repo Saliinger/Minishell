@@ -22,21 +22,17 @@ t_command	*parsing(char *str, t_minishell *minishell)
 	while (temp)
 	{
         temp->arg = relexer(temp->arg);
-        if (!temp->arg)
-            return (free_command(current), NULL);
         temp->redirection = extract_redir(temp->arg);
 		temp->clean_arg = clean_arg(temp->arg, minishell);
-        //temp->clean_arg = expand_in(temp->clean_arg, minishell);
-        //temp->clean_arg = remove_quote(temp->arg);
-//		if (!temp->clean_arg)
-//			return (NULL);
+        temp->clean_arg = expand_in(temp->clean_arg, minishell);
+        temp->clean_arg = remove_quote(temp->arg);
+		if (!temp->clean_arg || !temp->arg)
+			return (free_command(current) , NULL);
         fprintf(stderr,"this is the args\n");
         ft_print(temp->arg, 0);
 		temp = temp->subcommand;
 	}
-    if (current)
-        return (current);
-    return (NULL);
+    return (current);
 }
 
 // need to add free command for l28

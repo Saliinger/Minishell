@@ -53,7 +53,9 @@ t_redir	*extract_redir(char **in)
 	t_redir			*redir_list;
 	t_enum_redir	type;
 
-	redir_list = NULL;
+    if(!in)
+        return (NULL);
+    redir_list = NULL;
 	i = 0;
 	while (in[i])
 	{
