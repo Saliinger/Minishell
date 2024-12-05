@@ -37,8 +37,6 @@ int	nbr_of_line(char **env)
 	int	i;
 
 	i = 0;
-	if (!env)
-		return (0);
 	while (env[i])
 		i++;
 	return (i);
@@ -70,9 +68,10 @@ void	ft_print(char **s, int i)
 {
 	if (!s)
 	{
-		printf("Error: NULL pointer passed to ft_print.\n");
+		fprintf(stderr, "Error: NULL pointer passed to ft_print.\n");
 		return ;
 	}
+    printf("this is the args \n" );
 	while (s[i])
 	{
 		printf("%s\n", s[i]);

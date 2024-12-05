@@ -30,6 +30,8 @@ bool		input_checker(char *in);
 t_redir		*extract_redir(char **in);
 char		**clean_arg(char **arg, t_minishell *minishell);
 
+char *add_char(char *s, char c);
+
 char    **remove_quote(char **arg);
 
 // Divider for parsing

@@ -84,12 +84,10 @@ bool	forbiden_checker(char *in, char c)
 	i = 0;
 	while (in[i])
 	{
-		if (in[i] == '\"' && extend_forbiden_checker(in, c, '\"', &i) == false)
-			continue ;
-		else
-			return (false);
-		if (in[i] == '\'' && extend_forbiden_checker(in, c, '\'', &i) == false)
-			continue ;
+		if (in[i] != '\"' && extend_forbiden_checker(in, c, '\"', &i))
+		    return (false);
+		if (in[i] != '\'' && extend_forbiden_checker(in, c, '\'', &i))
+            return (false);
 		else if (in[i] == c)
 			return (false);
 		i++;

@@ -4,8 +4,7 @@ CC = cc
 CFLAGS =	-Wall \
 			-Wextra \
 			-g3 \
-
-#-fsanitize=address
+			-fsanitize=address
 
 LIBFT_A		=	libft/libft/libft.a
 PRINTF_A	=	libft/printf/libprintf.a
@@ -39,6 +38,7 @@ SRC =	$(wildcard $(SRCD)/*.c)				\
 		$(wildcard $(UTILSD)/*.c)			\
 		$(wildcard $(UTILSD)/*/*.c)			\
 		$(wildcard $(PARSD)/*.c)			\
+		$(wildcard $(PARSD)/*/*.c)			\
 		$(wildcard $(SIGD)/*.c)				\
 		$(wildcard $(EXED)/*.c)				\
 		$(wildcard $(EXED)/*/*.c)			\

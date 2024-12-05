@@ -18,20 +18,20 @@ t_command	*parsing(char *str, t_minishell *minishell)
 	t_command	*temp;
 
 	current = command_init(str);
-	temp = current;
+    temp = current;
 	while (temp)
 	{
+        temp->arg = relexer(temp->arg);
+        temp->redirection = extract_redir(temp->arg);
 		temp->clean_arg = clean_arg(temp->arg, minishell);
-        temp->clean_arg = remove_quote(temp->arg);
-        //temp->clean_arg = expand_in(temp->clean_arg, minishell);
-		if (!temp->clean_arg)
-			return (NULL);
+        temp->clean_arg = expand_in(temp->clean_arg, minishell);
+        temp->clean_arg = remove_quote(temp->clean_arg);
+		if (!temp->clean_arg || !temp->arg)
+			return (free_command(current) , NULL);
+        ft_print(temp->clean_arg, 0);
 		temp = temp->subcommand;
 	}
-    printf("\ncmd: %s\n", current->clean_arg[0]);
-    if (current)
-        return (current);
-    return (NULL);
+    return (current);
 }
 
 // need to add free command for l28

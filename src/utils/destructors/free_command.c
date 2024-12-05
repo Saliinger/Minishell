@@ -31,9 +31,10 @@ static void	free_redir(t_redir *head)
 {
 	t_redir	*next;
 
-	next = head;
+
 	while (head)
 	{
+        next = head->next;
 		free(head->redir);
 		free(head);
 		head = next;
@@ -47,10 +48,7 @@ void	free_command(t_command *command)
     if (command->command)
         free(command->command);
     if (command->in)
-	{
 		free(command->in);
-		command->in = NULL;
-	}
 	if (command->arg)
 		free_arg(command->arg);
     if (command->clean_arg)

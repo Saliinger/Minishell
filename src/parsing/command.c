@@ -16,57 +16,44 @@ static char	*extract_command(char *line)
 {
 	char	*command;
 	int		i;
+    int     j;
 
 	i = 0;
-	while (line[i] && line[i] != ' ' && line[i] != '\t')
-		i++;
-	command = (char *)malloc(sizeof(char) * (i + 1));
-	if (!command)
-		return (NULL);
-	i = 0;
-	while (line[i] && line[i] != ' ')
-	{
-		command[i] = line[i];
-		i++;
-	}
-	command[i] = '\0';
+    while(line[i] && (line[i] == ' ' || line[i] == '\t' || line[i] == '\n'))
+        i++;
+    if (!line[i])
+        return (NULL);
+    j = 0;
+    while (line[i + j] && line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+        j++;
+    command = (char *)malloc(sizeof(char) * j + 1);
+    if (!command)
+        return (NULL);
+    ft_strlcpy(command, line + i, j);
 	return (command);
-}
-
-static int exclude(char *in)
-{
-	int		j;
-
-	j = 0;
-	while (in[j] && (in[j] == '\n' || in[j] == '\t' || in[j] == ' '
-			|| in[j] == '\"'))
-		j++;
-	return (j);
 }
 
 t_command	*command_init(char *in)
 {
 	char	*line;
 
-	line = in + exclude(in);
+	line = extract_command(in);
 	if (!line)
 		return (free(in), NULL);
 	if (checker_command(line, ECHO))
-		return ( trim(in, ECHO, true, ECHO_ID));
+		return ( free(line), trim(in, ft_strdup(ECHO), true, ECHO_ID));
 	else if (checker_command(line, CD))
-		return ( trim(in, CD, true, CD_ID));
+		return ( free(line), trim(in, ft_strdup(CD), true, CD_ID));
 	else if (checker_command(line, PWD))
-		return ( trim(in, PWD, true, PWD_ID));
+		return ( free(line), trim(in, ft_strdup(PWD), true, PWD_ID));
 	else if (checker_command(line, EXPORT))
-		return ( trim(in, EXPORT, true, EXPORT_ID));
+		return ( free(line), trim(in, ft_strdup(EXPORT), true, EXPORT_ID));
 	else if (checker_command(line, UNSET))
-		return ( trim(in, UNSET, true, UNSET_ID));
+		return ( free(line), trim(in, ft_strdup(UNSET), true, UNSET_ID));
 	else if (checker_command(line, ENV))
-		return ( trim(in, ENV, true, ENV_ID));
+		return (free(line),  trim(in, ft_strdup(ENV), true, ENV_ID));
 	else if (checker_command(line, EXIT))
-		return ( trim(in, EXIT, true, EXIT_ID));
-	else if (checker_command(line, EXPAND))
-		return ( trim(in, EXPAND, true, EXPAND_ID));
+		return ( free(line), trim(in, ft_strdup(EXIT), true, EXIT_ID));
 	else
-		return (trim(in, extract_command(line), false, -1));
+		return (trim(in, line, false, -1));
 }

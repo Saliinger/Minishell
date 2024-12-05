@@ -5,3 +5,5 @@
 tests/**
 *.o
 minishell
+
+./minishell_tester
