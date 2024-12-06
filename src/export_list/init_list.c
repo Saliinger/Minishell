@@ -45,7 +45,7 @@ t_export_list **init_export_list(char **env)
     *init = NULL;
     while (env[i])
     {
-        if (add_node_export(init, get_name(env[i]), get_value(env[i])) == 1)
+        if (add_node_export(init, get_name_env(env[i]), get_value_env(env[i])) == 1)
             return(NULL); // add free export list
         i++;
     }

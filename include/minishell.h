@@ -78,6 +78,9 @@ void print_export_list(t_export_list **list);
 void merge_sort(t_export_list **head_ref);
 char *get_name_env(char *var);
 char *get_value_env(char *var);
+int modify_value(t_export_list **lst, char *name, char *value);
+t_export_list *find_export_node(char *name, t_export_list **lst);
+int delete_export_node(t_export_list **lst, char *name);
 
 #endif
 

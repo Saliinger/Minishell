@@ -57,11 +57,11 @@ void	free_minishell(t_minishell *minishell)
 		free_env(minishell->hidden_env);
 	if (minishell->hidden_env)
 		free_env(minishell->hidden_env);
-	if (minishell->hd)
-		free_env(minishell->hd);
+//	if (minishell->hd)
+//		free_env(minishell->hd);
     if (minishell->exportList)
         free_export_list(minishell->exportList);
-    minishell = NULL;
+    free(minishell);
 }
 
 

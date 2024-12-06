@@ -15,74 +15,81 @@
 // export != env = trie ordre alphabetique
 // affiche var pas initialise
 
-char *extract_var(char *in)
+bool check_name(char *name)
 {
-    char *res;
     int i = 0;
 
-    int len = 0;
-    while(in[len] != '=')
-        len++;
-    res = (char *) malloc(sizeof(char) * len + 1);
-    if (!res)
-        return (NULL);
-    while (len > i)
+    if (ft_isalnum(name[i])|| name[i] == '_')
+        i++;
+    while (name[i])
     {
-        res[i] = in[i];
+        if (!ft_isalpha(name[i]) || name[i] ==  '_')
+            return (false);
         i++;
     }
-    res[i] = '\0';
-    return (res);
+    return (true);
 }
 
-char *check_var(char *var)
+bool var_exist(char *name, t_minishell *minishell)
 {
-    char *ex_var;
+    int line;
 
-    if (check_var_equals(var) == false)
-        return (printf("var equals err\n"), NULL);
-    ex_var = extract_var(var);
-    printf("ex var: %s\n", ex_var);
-    if (check_var_name(ex_var) == false)
-        return (printf("var name err\n"), free(ex_var), NULL);
-    return (ex_var);
+    line = get_env_var(minishell, name, ft_strlen(name));
+    if (line  == -1)
+        return (false);
+    return (true);
 }
 
-int manage_var(t_minishell *minishell, char *var)
+int export_handler(char *line, char *name, char *value, t_minishell *minishell)
 {
-
-    int line = 0;
-    int error = 0;
-    char *ex_var;
-
-    ex_var = check_var(var);
-    if (ex_var == NULL)
-        return (1);
-    line = get_env_var(minishell, ex_var, ft_strlen(ex_var));
-    if (line == -1)
-        error += create_var(minishell, var);
+    if (value)
+    {
+        if (var_exist(name, minishell))
+        {
+            modify_value(minishell->exportList, name, value);
+            delete_var(minishell, get_env_var(minishell, name, ft_strlen(name)));
+            create_var(minishell, line);
+        }
+        else
+        {
+            add_node_export(minishell->exportList, name, value);
+            create_var(minishell, line);
+        }
+    }
     else
     {
-        error += delete_var(minishell, line);
-        error += create_var(minishell, var);
+        add_node_export(minishell->exportList, name, value);
     }
-    return (error);
+    merge_sort(minishell->exportList);
+    return (0);
 }
 
 int	ft_export(t_command_exec *command, t_minishell *minishell)
 {
     int i = 1;
-    int error = 0;
+    char *name;
+    char *value;
 
     ft_print(command->cmd_args, 0);
-    if (nbr_of_line(command->cmd_args) > 1) {
-        while (command->cmd_args[i]) {
-            error = manage_var(minishell, command->cmd_args[i]);
-            if (error >= 1) {
-                perror("issue while creating the var\n");
-                return (1);
+    if (nbr_of_line(command->cmd_args) > 1)
+    {
+        while (command->cmd_args[i])
+        {
+            name = get_name_env(command->cmd_args[i]);
+            if (!check_name(name)) {
+                free(name);
+                i++;
             }
-            i++;
+            else
+            {
+                value = get_value_env(command->cmd_args[i]);
+                if (!value)
+                    // add var only to the export list
+                    export_handler(command->cmd_args[i], name, NULL, minishell);
+                else
+                    // add var to the export list && minishell->env
+                    export_handler(command->cmd_args[i], name, value, minishell);
+            }
         }
     }
     else
