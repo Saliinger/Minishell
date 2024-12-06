@@ -29,7 +29,7 @@ static char	*extract_command(char *line)
     command = (char *)malloc(sizeof(char) * j + 1);
     if (!command)
         return (NULL);
-    ft_strlcpy(command, line + i, j);
+    ft_strlcpy(command, line + i, j + 1);
 	return (command);
 }
 
