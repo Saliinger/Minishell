@@ -15,7 +15,6 @@ char *get_name_env(char *var)
     if (!name)
         return (NULL);
     ft_strlcpy(name, var, i);
-    printf("name: %s\n", name);
     return (name);
 }
 
