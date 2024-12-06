@@ -32,7 +32,6 @@ static t_minishell	*init(char **env, char *pwd, int *adr_int)
 	minishell->hidden_env = NULL;
     minishell->exportList = init_export_list(minishell->env);
     merge_sort(minishell->exportList);
-    print_export_list(minishell->exportList);
 	return (minishell);
 }
 
