@@ -75,13 +75,10 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
     int error = 0;
 
     ft_print(command->cmd_args, 0);
-	if (nbr_of_line(command->cmd_args) > 1)
-    {
-        while(command->cmd_args[i])
-        {
+    if (nbr_of_line(command->cmd_args) > 1) {
+        while (command->cmd_args[i]) {
             error = manage_var(minishell, command->cmd_args[i]);
-            if (error >= 1)
-            {
+            if (error >= 1) {
                 perror("issue while creating the var\n");
                 return (1);
             }
@@ -89,6 +86,6 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
         }
     }
     else
-        ft_env(minishell);
+        print_export_list(minishell->exportList);
     return (0);
 }

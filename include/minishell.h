@@ -71,6 +71,11 @@ void		ft_print(char **s, int i);
 void		ft_print_redir(t_redir *list);
 void		print_command(t_command *command, char *name);
 
+// export list
+int add_node_export(t_export_list **list, char *name, char *value);
+t_export_list **init_export_list(char **env);
+void print_export_list(t_export_list **list);
+
 #endif
 
 // get current dir si il n'y a pas d'env au debut

@@ -30,8 +30,8 @@ static t_minishell	*init(char **env, char *pwd, int *adr_int)
     minishell->paths = NULL;
 	minishell->exit_status = adr_int;
 	minishell->hidden_env = NULL;
-    minishell->exportList = (t_export_list **) malloc(sizeof(t_export_list *));
-    *minishell->exportList = NULL;
+    minishell->exportList = init_export_list(minishell->env);
+    print_export_list(minishell->exportList);
 	return (minishell);
 }
 

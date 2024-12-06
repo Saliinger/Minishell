@@ -31,7 +31,7 @@ static int	get_line(char **line, char *prompt, t_minishell *m)
 
 #define ON	true
 #define OFF	false
-#define PARSING_LEAK_TRACKING OFF
+#define PARSING_LEAK_TRACKING ON
 
 /**
  * brief : adds the line to history, parses it,
@@ -45,7 +45,6 @@ static void	process_input_line(char *line, t_minishell *m)
 	c = parsing(line, m);
 	if (PARSING_LEAK_TRACKING)
 	{
-
 		free_command(c);
 		printerr("%s\n\tPARSING_LEAK_TRACKING: ON !%s\n\t\toutput is now %p. (destroyed via free_t_command).\n\n", AINSI_BLUE, AINSI_RESET, c);
 	}

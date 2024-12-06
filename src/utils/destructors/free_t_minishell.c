@@ -41,14 +41,15 @@ void	ft_free_nullterm_tab(char ***ptab)
  */
 static void	free_mini_elems(t_minishell *m)
 {
-	ft_free_nullterm_tab(&m->env);
-	ft_free_nullterm_tab(&m->hidden_env);
-	ft_close_saved_std_fds(m->std_fds);
-	//ft_free_nullterm_tab(&m->hidden_path); // am I even needed ?
-	//ft_free_nullterm_tab(&m->paths);
-	ft_free((void **) &m->pwd);
-	ft_free((void **) &m->old_pwd);
-	//ft_free_nullterm_tab(&m->hd);
+//	ft_free_nullterm_tab(&m->env);
+//	ft_free_nullterm_tab(&m->hidden_env);
+//	ft_close_saved_std_fds(m->std_fds);
+//	//ft_free_nullterm_tab(&m->hidden_path); // am I even needed ?
+//	//ft_free_nullterm_tab(&m->paths);
+//	ft_free((void **) &m->pwd);
+//	ft_free((void **) &m->old_pwd);
+//	//ft_free_nullterm_tab(&m->hd);
+    free_minishell(m);
 }
 
 /**

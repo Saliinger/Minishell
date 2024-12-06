@@ -45,6 +45,7 @@ SRC =	$(wildcard $(SRCD)/*.c)				\
     	$(wildcard $(EXED)/*/*/*.c)	   		\
 		$(wildcard $(BINS)/*.c)				\
 		$(wildcard $(BINS)/*/*.c)			\
+		$(wildcard $(SRCD)/export_list/*.c)
 
 OBJ = $(SRC:.c=.o)
 

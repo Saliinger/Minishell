@@ -7,6 +7,8 @@ static char *get_name(char *var)
 
     while (var[i] && var[i] != '=')
         i++;
+    if (var[i] == '=')
+        i++;
     name = (char *) malloc(sizeof(char) * i + 1);
     if (!name)
         return (NULL);
@@ -34,11 +36,18 @@ static char *get_value(char *var)
     return (value);
 }
 
-void init_export_list(char **env, t_export_list **list)
+t_export_list **init_export_list(char **env)
 {
-    t_export_list *head;
     int i = 0;
+    t_export_list **init;
 
-    head = *list;
-
+    init = (t_export_list **) malloc(sizeof(t_export_list));
+    *init = NULL;
+    while (env[i])
+    {
+        if (add_node_export(init, get_name(env[i]), get_value(env[i])) == 1)
+            return(NULL); // add free export list
+        i++;
+    }
+    return(init);
 }

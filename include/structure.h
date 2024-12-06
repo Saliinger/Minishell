@@ -78,7 +78,6 @@ typedef struct s_command
 
 typedef struct s_export_list
 {
-    int index;
     char *name;
     char                    *value;
     struct s_export_list *next;

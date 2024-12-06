@@ -26,13 +26,29 @@ void	free_env(char **env)
     env = NULL;
 }
 
+void free_export_list(t_export_list **list)
+{
+    t_export_list *temp;
+
+    while(*list)
+    {
+        temp = (*list)->next;
+        free((*list)->name);
+        free((*list)->value);
+        free((*list));
+        *list = temp;
+    }
+    free(list);
+}
+
 void	free_minishell(t_minishell *minishell)
 {
-	if (!minishell)
-	{
-		minishell = NULL;
-		return ;
-	}
+     if (minishell->pwd) {
+         printf("pwd: %s\n", minishell->pwd);
+         free(minishell->pwd);
+     }
+    if (minishell->old_pwd)
+		free(minishell->old_pwd);
 	if (minishell->env)
 		free_env(minishell->env);
 	if (minishell->paths)
@@ -43,11 +59,9 @@ void	free_minishell(t_minishell *minishell)
 		free_env(minishell->hidden_env);
 	if (minishell->hd)
 		free_env(minishell->hd);
-	minishell = NULL;
+    if (minishell->exportList)
+        free_export_list(minishell->exportList);
+    minishell = NULL;
 }
 
-// if (minishell->pwd)
-//	printf("pwd: %s\n", minishell->pwd);
-// free(minishell->pwd);
-// if (minishell->old_pwd)
-//		free(minishell->old_pwd);
+

@@ -2,12 +2,13 @@
 
 void print_export_list(t_export_list **list)
 {
-    t_export_list *head;
-
-    head = *list;
-    while (head)
+    t_export_list *current = *list;
+    while (current)
     {
-        printf("declare -x %s=\"%s\"", head->name, head->value);
-        head = head->next;
+        if (current->value)
+            printf("declare -x %s=\"%s\"\n", current->name, current->value);
+        else
+            printf("declare -x %s\n", current->name);
+        current = current->next;
     }
 }
