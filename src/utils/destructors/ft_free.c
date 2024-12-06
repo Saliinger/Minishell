@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:20 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/13 17:25:05 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/06 22:59:47 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,30 @@ void	free_env(char **env)
 		free(env[i]);
 		i++;
 	}
-    free(env);
-    env = NULL;
+	free(env);
+	env = NULL;
 }
 
-void free_export_list(t_export_list **list)
+void	free_export_list(t_export_list **list)
 {
-    t_export_list *temp;
+	t_export_list	*temp;
 
-    while(*list)
-    {
-        temp = (*list)->next;
-        free((*list)->name);
-        free((*list)->value);
-        free((*list));
-        *list = temp;
-    }
-    free(list);
+	while (*list)
+	{
+		temp = (*list)->next;
+		free((*list)->name);
+		free((*list)->value);
+		free((*list));
+		*list = temp;
+	}
+	free(list);
 }
 
 void	free_minishell(t_minishell *minishell)
 {
-     if (minishell->pwd)
-         free(minishell->pwd);
-    if (minishell->old_pwd)
+	if (minishell->pwd)
+		free(minishell->pwd);
+	if (minishell->old_pwd)
 		free(minishell->old_pwd);
 	if (minishell->env)
 		free_env(minishell->env);
@@ -55,11 +55,9 @@ void	free_minishell(t_minishell *minishell)
 		free_env(minishell->hidden_env);
 	if (minishell->hidden_env)
 		free_env(minishell->hidden_env);
-//	if (minishell->hd)
-//		free_env(minishell->hd);
-    if (minishell->exportList)
-        free_export_list(minishell->exportList);
-    free(minishell);
+	//	if (minishell->hd)
+	//		free_env(minishell->hd);
+	if (minishell->exportList)
+		free_export_list(minishell->exportList);
+	free(minishell);
 }
-
-

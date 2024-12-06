@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:28:37 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 21:50:07 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/06 22:59:57 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int	check_flag(char **arg)
 			if (j == ft_strlen(arg[i]))
 				n++;
 			else
-                return (n);
+				return (n);
 		}
-        else
-            break ;
+		else
+			break ;
 		i++;
 	}
 	return (n);

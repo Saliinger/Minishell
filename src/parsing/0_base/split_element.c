@@ -6,48 +6,47 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:24:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 21:52:53 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/06 23:07:25 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-static int in_quote(int status, char type)
+static int	in_quote(int status, char type)
 {
-    if (type == '\"' && status == 0)
-        return (1);
-    else if (type == '\'' && status == 0)
-        return (-1);
-    else if ((type == '\"' && status == 1) || (type == '\'' && status == -1))
-        return (0);
-    return (status);
+	if (type == '\"' && status == 0)
+		return (1);
+	else if (type == '\'' && status == 0)
+		return (-1);
+	else if ((type == '\"' && status == 1) || (type == '\'' && status == -1))
+		return (0);
+	return (status);
 }
 
 static void	ft_split_write_extend(size_t *i, size_t *j, const char *s, char c)
 {
-    int status = 0;
+	int	status;
 
-    *j = 0;
-    while (s[*i + *j] && s[*i + *j] != c && s[*i + *j] != '\t' && s[*i + *j] != '\n')
-    {
-        if (s[*i + *j] == '\"' || s[*i + *j] == '\'')
-        {
-            status = in_quote(status, s[*i + *j]);
-            (*j)++;
-            while (status != 0)
-            {
-                status = in_quote(status, s[*i + *j]);
-                (*j)++;
-            }
-        }
-        else
-            (*j)++;
-    }
+	status = 0;
+	*j = 0;
+	while (s[*i + *j] && s[*i + *j] != c && s[*i + *j] != '\t' && s[*i
+			+ *j] != '\n')
+	{
+		if (s[*i + *j] == '\"' || s[*i + *j] == '\'')
+		{
+			status = in_quote(status, s[*i + *j]);
+			(*j)++;
+			while (status != 0)
+			{
+				status = in_quote(status, s[*i + *j]);
+				(*j)++;
+			}
+		}
+		else
+			(*j)++;
+	}
 }
 
-// case to handle
-// echo yolol="echo $PWD"
-//
 
 static int	ft_split_write(char **dest, char const *s, char c)
 {
@@ -89,7 +88,7 @@ char	**split_element(char *s, char c)
 	if (!dest)
 		return (free(s), NULL);
 	if (ft_split_write(dest, s, c))
-        return (free(s), NULL);
-    free(s);
+		return (free(s), NULL);
+	free(s);
 	return (dest);
 }

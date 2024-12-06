@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:28 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 21:49:22 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/06 23:03:56 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ bool	forbiden_checker(char *in, char c)
 	while (in[i])
 	{
 		if (in[i] != '\"' && extend_forbiden_checker(in, c, '\"', &i))
-		    return (false);
+			return (false);
 		if (in[i] != '\'' && extend_forbiden_checker(in, c, '\'', &i))
-            return (false);
+			return (false);
 		else if (in[i] == c)
 			return (false);
 		i++;

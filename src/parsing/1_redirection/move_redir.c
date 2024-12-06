@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:50:21 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 21:47:44 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/06 23:01:57 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ t_redir	*extract_redir(char **in)
 	t_redir			*redir_list;
 	t_enum_redir	type;
 
-    if(!in)
-        return (NULL);
-    redir_list = NULL;
+	if (!in)
+		return (NULL);
+	redir_list = NULL;
 	i = 0;
 	while (in[i])
 	{

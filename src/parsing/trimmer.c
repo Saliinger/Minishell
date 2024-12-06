@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:12 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 21:48:50 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/06 23:01:15 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,21 @@ static void	init_command_arg(t_command *command, char *in)
 	if (command->pipe_position > 0)
 	{
 		command->pipe = true;
-		command->arg = split_element(cut_first_cmd(in, command->pipe_position), ' ');
-        if (!command->arg)
-            return (free_command(command));
+		command->arg = split_element(cut_first_cmd(in, command->pipe_position),
+				' ');
+		if (!command->arg)
+			return (free_command(command));
 		command->subcommand = command_init(remove_first_cmd(in,
 					command->pipe_position));
-        if (!command->subcommand)
-            return (free_command(command));
+		if (!command->subcommand)
+			return (free_command(command));
 	}
 	else
 	{
 		command->subcommand = NULL;
 		command->arg = split_element(ft_strdup(in), ' ');
-        if (!command->arg)
-            return (command->arg = NULL, free_command(command));
+		if (!command->arg)
+			return (command->arg = NULL, free_command(command));
 	}
 }
 
@@ -81,9 +82,9 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	if (!command)
 		return (NULL);
 	command->in = ft_strdup(in);
-    command->pipe_position = check_pipe(in);
+	command->pipe_position = check_pipe(in);
 	init_command_arg(command, in);
-    command->command = ft_strdup(in_command);
+	command->command = ft_strdup(in_command);
 	command->builtin = builtin;
 	command->id = id;
 	command->pid = -1;
@@ -92,8 +93,8 @@ t_command	*trim(char *in, char *in_command, bool builtin, int id)
 	command->outfile_fd = -1;
 	command->infile_fd = -1;
 	command->clean_arg = NULL;
-    command->redirection = NULL;
-    free(in);
-    free(in_command);
+	command->redirection = NULL;
+	free(in);
+	free(in_command);
 	return (command);
 }

@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:38:37 by anoukan           #+#    #+#             */
-/*   Updated: 2024/09/09 15:38:38 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/06 23:05:58 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ size_t	ft_countword(const char *s, char c)
 	j = 1;
 	while (s[i])
 	{
-		if ((s[i] == c || s[i] == '\0') == 1 && (s[i + 1] == '\0' || \
-			s[i + 1] == c) == 0)
+		if ((s[i] == c || s[i] == '\0') == 1 && (s[i + 1] == '\0' || s[i
+					+ 1] == c) == 0)
 		{
 			j++;
 		}
@@ -36,15 +36,15 @@ int	ft_split_free(char **dest)
 	int	i;
 
 	i = 0;
-    if (dest)
-    {
-        while (dest[i])
-        {
-            free(dest[i]);
-            i++;
-        }
-        free(dest);
-    }
+	if (dest)
+	{
+		while (dest[i])
+		{
+			free(dest[i]);
+			i++;
+		}
+		free(dest);
+	}
 	return (0);
 }
 

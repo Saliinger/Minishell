@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:10 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/01 19:29:12 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/06 22:59:01 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static t_minishell	*init(char **env, char *pwd, int *adr_int)
 	// minishell->hd[0] = NULL;
 	minishell->std_fds[0] = -1;
 	minishell->std_fds[1] = -1;
-    minishell->paths = NULL;
+	minishell->paths = NULL;
 	minishell->exit_status = adr_int;
 	minishell->hidden_env = NULL;
-    minishell->exportList = init_export_list(minishell->env);
-    merge_sort(minishell->exportList);
+	minishell->exportList = init_export_list(minishell->env);
+	merge_sort(minishell->exportList);
 	return (minishell);
 }
 
