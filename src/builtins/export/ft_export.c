@@ -30,35 +30,48 @@ bool check_name(char *name)
     return (true);
 }
 
-bool var_exist(char *name, t_minishell *minishell)
+int var_exist(char *name, t_minishell *minishell)
 {
     int line;
+    t_export_list *tmp;
 
     line = get_env_var(minishell, name, ft_strlen(name));
-    if (line  == -1)
-        return (false);
-    return (true);
+    tmp = find_export_node(name, minishell->exportList);
+    printf("1\n");
+    if (line == -1 && !tmp)
+        return (0);
+    else if (line == -1)
+        return (1);
+    return (2);
 }
 
 int export_handler(char *line, char *name, char *value, t_minishell *minishell)
 {
-    if (value)
+    int status;
+
+    status = var_exist(name, minishell);
+    if (status == 0)
     {
-        if (var_exist(name, minishell))
+        add_node_export(minishell->exportList, name, value);
+        if (value)
+            create_var(minishell, line);
+    }
+    else if (status == 1)
+    {
+        if (value)
         {
             modify_value(minishell->exportList, name, value);
-            delete_var(minishell, get_env_var(minishell, name, ft_strlen(name)));
-            create_var(minishell, line);
-        }
-        else
-        {
-            add_node_export(minishell->exportList, name, value);
             create_var(minishell, line);
         }
     }
     else
     {
-        add_node_export(minishell->exportList, name, value);
+        if (value)
+        {
+            modify_value(minishell->exportList, name, value);
+            delete_var(minishell, get_env_var(minishell, name, ft_strlen(name)));
+            create_var(minishell, line);
+        }
     }
     merge_sort(minishell->exportList);
     return (0);
@@ -76,19 +89,16 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
         while (command->cmd_args[i])
         {
             name = get_name_env(command->cmd_args[i]);
-            if (!check_name(name)) {
+            if (!check_name(name))
+            {
                 free(name);
                 i++;
             }
             else
             {
                 value = get_value_env(command->cmd_args[i]);
-                if (!value)
-                    // add var only to the export list
-                    export_handler(command->cmd_args[i], name, NULL, minishell);
-                else
-                    // add var to the export list && minishell->env
-                    export_handler(command->cmd_args[i], name, value, minishell);
+                export_handler(command->cmd_args[i], name, value, minishell);
+                i++;
             }
         }
     }

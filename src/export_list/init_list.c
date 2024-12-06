@@ -9,10 +9,13 @@ char *get_name_env(char *var)
         i++;
     if (var[i] == '=')
         i++;
+    if (i == ft_strlen(var))
+        return (ft_strdup(var));
     name = (char *) malloc(sizeof(char) * i + 1);
     if (!name)
         return (NULL);
     ft_strlcpy(name, var, i);
+    printf("name: %s\n", name);
     return (name);
 }
 
@@ -32,7 +35,7 @@ char *get_value_env(char *var)
     value = (char *) malloc(sizeof(char) * len + 1);
     if (!value)
         return (NULL);
-    ft_strlcpy(value, var + i, len);
+    ft_strlcpy(value, var + i, len + 1);
     return (value);
 }
 
