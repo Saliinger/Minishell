@@ -43,10 +43,8 @@ void free_export_list(t_export_list **list)
 
 void	free_minishell(t_minishell *minishell)
 {
-     if (minishell->pwd) {
-         printf("pwd: %s\n", minishell->pwd);
+     if (minishell->pwd)
          free(minishell->pwd);
-     }
     if (minishell->old_pwd)
 		free(minishell->old_pwd);
 	if (minishell->env)
