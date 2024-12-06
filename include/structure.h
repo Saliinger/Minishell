@@ -76,6 +76,13 @@ typedef struct s_command
 	int					outfile_fd;
 }						t_command;
 
+typedef struct s_export_list
+{
+    int index;
+    char *name;
+    char *value;
+}               t_export_list;
+
 typedef struct s_minishell
 {
 	char				**env;
@@ -88,6 +95,7 @@ typedef struct s_minishell
 	char				*old_pwd;
 	int					res_last_command;
 	char				**hd;
+    t_export_list       **exportList;
 }						t_minishell;
 
 #endif
