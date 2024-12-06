@@ -12,28 +12,24 @@
 
 #include "../../../include/minishell.h"
 
+
 int	ft_unset(t_command_exec *command, t_minishell *minishell)
 {
-	int		*to_remove;
-	int		nbr_of_var;
-	int		j;
-	char	*temp;
-	int		temp_len;
+    int i = 0;
+    int line = 0;
 
-	nbr_of_var = count_var(command->cmd_args + 1);
-	to_remove = (int *)malloc(sizeof(int) * nbr_of_var);
-	if (!to_remove)
-		return (1);
-	j = 0;
-	while (command->cmd_args[j + 1])
-	{
-		temp = ft_strdup(command->cmd_args[j + 1]);
-		temp_len = ft_strlen(temp);
-		to_remove[j] = get_env_var(minishell, temp, temp_len);
-		free(temp);
-		j++;
-	}
-	minishell->env = new_env(minishell, to_remove, j);
-	free(to_remove);
+    if(nbr_of_line(command->cmd_args) > 1)
+    {
+        while (command->cmd_args[i])
+        {
+            line = get_env_var(minishell, command->cmd_args[i], ft_strlen(command->cmd_args[i]));
+            if (line != -1)
+            {
+                delete_var(minishell, line);
+                delete_export_node(minishell->exportList, command->cmd_args[i]);
+            }
+            i++;
+        }
+    }
 	return (0);
 }
