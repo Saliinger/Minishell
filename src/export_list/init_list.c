@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-static char *get_name(char *var)
+char *get_name_env(char *var)
 {
     int i = 0;
     char *name;
@@ -16,7 +16,7 @@ static char *get_name(char *var)
     return (name);
 }
 
-static char *get_value(char *var)
+char *get_value_env(char *var)
 {
     int i = 0;
     int len = 0;
