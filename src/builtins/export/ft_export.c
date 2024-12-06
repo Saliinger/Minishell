@@ -12,18 +12,16 @@
 
 #include "../../../include/minishell.h"
 
-// export != env = trie ordre alphabetique
-// affiche var pas initialise
-
 bool check_name(char *name)
 {
     int i = 0;
 
-    if (ft_isalnum(name[i])|| name[i] == '_')
-        i++;
+    if (!ft_isalpha(name[i]) && name[i] != '_')
+        return (false);
+    i++;
     while (name[i])
     {
-        if (!ft_isalpha(name[i]) || name[i] ==  '_')
+        if (!ft_isalnum(name[i]) && name[i] != '_')
             return (false);
         i++;
     }
