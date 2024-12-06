@@ -75,6 +75,7 @@ void		print_command(t_command *command, char *name);
 int add_node_export(t_export_list **list, char *name, char *value);
 t_export_list **init_export_list(char **env);
 void print_export_list(t_export_list **list);
+void merge_sort(t_export_list **head_ref);
 
 #endif
 
