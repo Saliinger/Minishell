@@ -4,7 +4,7 @@ CC = cc
 CFLAGS =	-Wall \
 			-Wextra \
 			-g3 \
-			-fsanitize=address
+			#-fsanitize=address
 
 LIBFT_A		=	libft/libft/libft.a
 PRINTF_A	=	libft/printf/libprintf.a

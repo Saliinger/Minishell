@@ -80,7 +80,8 @@ typedef struct s_export_list
 {
     int index;
     char *name;
-    char *value;
+    char                    *value;
+    struct s_export_list *next;
 }               t_export_list;
 
 typedef struct s_minishell
