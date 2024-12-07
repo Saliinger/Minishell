@@ -12,150 +12,125 @@
 
 #include "../../../include/minishell.h"
 
-int	get_var_name(char *arg)
-{
-	int	len;
+// return $ if $
+// $? = exit value
+// $PWD => env var
+// $yolo => doesn't exist so skip it
 
-	len = 0;
-	if (arg[len] == '$')
-		len++;
-    if (arg[len] == '?')
-        return (2);
-    while (arg[len] && (ft_isalpha(arg[len]) || ft_isdigit(arg[len])
-			|| arg[len] == '_'))
-		len++;
-	return (len);
+static int check_nbr_var(char *line)
+{
+    int i = 0;
+    int status = 0;
+    int nbr = 0;
+
+    status = 0;
+    while (line[i])
+    {
+        status = in_quote(status, line[i]);
+        if (line[i] == '$' && status >= 0)
+            nbr++;
+        i++;
+    }
+    return (nbr);
 }
 
-char *clean_name(char *var)
+char *add_expand(char *s, char *to_add)
 {
-    int len = 0;
     char *res;
+    int i;
 
-    len = get_var_name(var);
-    res = (char *) malloc(sizeof(char) * len + 1);
-    ft_strlcpy(res, var, len + 1);
+    i = 0;
+    res = ft_strdup("");
+    while (s[i])
+    {
+        res = add_char(res, s[i]);
+        i++;
+    }
+    i = 0;
+    if (to_add)
+    {
+        while (to_add[i]) {
+            res = add_char(res, to_add[i]);
+            i++;
+        }
+    }
+    free(s);
     return (res);
 }
 
-static char	*expanded(t_minishell *minishell, char *var, int *start,
-		char *new_arg)
+char *expand(t_minishell *minishell, char *name)
 {
-	char	*res;
-	char	*var_name;
-	char	*extend;
-	int		line;
-	int		k;
+    char *res;
+    t_export_list *data;
+    int *exit;
 
-	k = 0;
-	var_name = clean_name(var + *start);
-    if (!var_name)
-		return (ft_strdup(""), NULL);
-	line = get_env_var(minishell, var_name + 1, ft_strlen(var_name) - 1);
-	if (line == -1)
-	{
-        res = ft_strdup("");
-        while (*start > k)
-        {
-            res = add_char(res, var[k]);
-            k++;
-        }
-        *start += ft_strlen(var_name);
-        if (var_name[1] == '?' && ft_strlen(var_name) == 2)
-        {
-            k = 0;
-            int *code = minishell->exit_status;
-            char *exit_code = ft_itoa(*code);
-
-            while (exit_code[k])
-            {
-                res = add_char(res, exit_code[k]);
-                k++;
-            }
-        }
-		return (free(var_name), res);
-	}
-    free(var_name);
-	extend = minishell->env[line] + ft_strlen(var_name) + 2;
-	res = ft_strdup("");
-	if (!new_arg)
-	{
-		while (*start > k)
-		{
-			res = add_char(res, var[k]);
-			k++;
-		}
-	}
-	else
-	{
-		while (new_arg[k])
-		{
-			res = add_char(res, new_arg[k]);
-			k++;
-		}
-		free(new_arg);
-	}
-	k = 0;
-	while (extend[k])
-	{
-		res = add_char(res, extend[k]);
-		k++;
-	}
-	*start += ft_strlen(var_name) + 2;
-	return (res);
+    data = find_export_node(name + 1, minishell->exportList);
+    if (data)
+        res = ft_strdup(data->value);
+    else if (ft_strlen(name) == 1 && *name == '$')
+        res = ft_strdup("$");
+    else if (ft_strlen(name) == 2 && name[ft_strlen(name)] == '?')
+    {
+        exit = minishell->exit_status;
+        res = ft_itoa(*exit);
+    }
+    else
+        return (NULL);
+    return (res);
 }
+
+char    *new_line(t_minishell  *minishell, char *line)
+{
+    int i;
+    int status;
+    char *res;
+    char    *name;
+    char    *extend;
+
+    i = 0;
+    res = ft_strdup("");
+    status = 0;
+    while (line[i])
+    {
+        status = in_quote(status, line[i]);
+        if (line[i] == '$' && status >= 0)
+        {
+            name = clean_name(line + i);
+            i += ft_strlen(name);
+            extend = expand(minishell, name);
+            res = add_expand(res, extend);
+        }
+        else
+        {
+            res = add_char(res, line[i]);
+            i++;
+        }
+    }
+    return (res);
+}
+
 
 char	**expand_in(char **arg, t_minishell *minishell)
 {
 	int		i;
-	int		j;
-	int		status;
-	char	**new_arg;
+	char	**res;
+    char    *to_add;
 
-	new_arg = (char **)malloc(sizeof(char *) * (nbr_of_line(arg) + 1));
-	if (!new_arg)
-		return (NULL);
 	i = 0;
+    res = (char **) malloc(sizeof(char *));
+    *res = NULL;
 	while (arg[i])
 	{
-		j = 0;
-		status = 0;
-		new_arg[i] = NULL;
-		while (arg[i][j])
-		{
-			if (arg[i][j] == '\"' || arg[i][j] == '\'')
-			{
-				if (!new_arg[i])
-					new_arg[i] = ft_strdup("");
-				if (!new_arg[i])
-					return (ft_free_tab(new_arg), NULL);
-				status = in_quote(status, arg[i][j]);
-				new_arg[i] = add_char(new_arg[i], arg[i][j]);
-				if (!new_arg[i])
-					return (ft_free_tab(new_arg), NULL);
-				j++;
-			}
-			else if (arg[i][j] == '$' && arg[i][j + 1] && status >= 0)
-			{
-				new_arg[i] = expanded(minishell, arg[i], &j, new_arg[i]);
-				if (!new_arg[i])
-					return (ft_free_tab(new_arg), NULL);
-			}
-			else
-			{
-				if (!new_arg[i])
-					new_arg[i] = ft_strdup("");
-				if (!new_arg[i])
-					return (ft_free_tab(new_arg), NULL);
-				new_arg[i] = add_char(new_arg[i], arg[i][j]);
-				if (!new_arg[i])
-					return (ft_free_tab(new_arg), NULL);
-				j++;
-			}
-		}
-		i++;
+        if (check_nbr_var(arg[i]) > 0)
+        {
+            to_add = new_line(minishell, arg[i]);
+            res = add_line(res, to_add);
+            free(to_add);
+        }
+        else
+            res = add_line(res, arg[i]);
+        i++;
 	}
-	new_arg[i] = NULL;
 	ft_free_tab(arg);
-	return (new_arg);
+	return (res);
 }

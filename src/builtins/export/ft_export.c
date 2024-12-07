@@ -36,7 +36,6 @@ int	var_exist(char *name, t_minishell *minishell)
 
 	line = get_env_var(minishell, name, ft_strlen(name));
 	tmp = find_export_node(name, minishell->exportList);
-	printf("1\n");
 	if (line == -1 && !tmp)
 		return (0);
 	else if (line == -1)
@@ -89,7 +88,6 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
         while (command->cmd_args[i])
         {
             name = get_name_env(command->cmd_args[i]);
-            fprintf(stderr, "name: %s\n", name);
 			if (!check_name(name))
 			{
                 printerr("bash: export: `%s': not a valid identifier", name);

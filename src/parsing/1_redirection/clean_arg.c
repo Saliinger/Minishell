@@ -35,44 +35,7 @@ static int	count_line(char **arg)
 	return (nbr_line);
 }
 
-static char	*extract_env(int var_line, char **env)
-{
-	char	*res;
-	int		len;
-	int		start;
-
-	start = 0;
-	while (env[var_line] && env[var_line][start] != '=')
-		start++;
-	if (env[var_line][start] == '=')
-		start++;
-	len = ft_strlen(env[var_line]) - start;
-	res = (char *)malloc(sizeof(char) * (len + 1));
-	if (!res)
-		return (NULL);
-	res = ft_strdup(env[var_line] + start);
-	return (res);
-}
-
-static char	*add_line(char *in, t_minishell *minishell)
-{
-	int		var_line;
-	char	*line;
-
-	if (in[0] == '$')
-	{
-		var_line = get_env_var(minishell, in, ft_strlen(in));
-		if (var_line >= 0)
-			line = extract_env(var_line, minishell->env);
-		else
-			line = ft_strdup(in);
-	}
-	else
-		line = ft_strdup(in);
-	return (line);
-}
-
-char	**clean_arg(char **arg, t_minishell *minishell)
+char	**clean_arg(char **arg)
 {
 	char	**res;
 	int		i;
@@ -91,7 +54,7 @@ char	**clean_arg(char **arg, t_minishell *minishell)
 			i++;
 		while (i > 0 && is_redirection(arg[i - 1]))
 			i++;
-		res[j] = add_line(arg[i], minishell);
+		res[j] = ft_strdup(arg[i]);
 		j++;
 		i++;
 	}

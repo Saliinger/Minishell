@@ -28,9 +28,10 @@ t_command	*parsing(char *str, t_minishell *minishell);
 t_command	*trim(char *in, char *in_command, bool builtin, int id);
 bool		input_checker(char *in);
 t_redir		*extract_redir(char **in);
-char		**clean_arg(char **arg, t_minishell *minishell);
+char		**clean_arg(char **arg);
 
 char *add_char(char *s, char c);
+char *clean_name(char *var);
 
 char    **remove_quote(char **arg);
 

@@ -33,3 +33,29 @@ char	*add_char(char *s, char c)
 	free(s);
 	return (res);
 }
+
+static int	get_var_name(char *arg)
+{
+	int	len;
+
+	len = 0;
+	if (arg[len] == '$')
+		len++;
+    if (arg[len] == '?')
+        return (2);
+    while (arg[len] && (ft_isalpha(arg[len]) || ft_isdigit(arg[len])
+			|| arg[len] == '_'))
+		len++;
+	return (len);
+}
+
+char *clean_name(char *var)
+{
+    int len = 0;
+    char *res;
+
+    len = get_var_name(var);
+    res = (char *) malloc(sizeof(char) * len + 1);
+    ft_strlcpy(res, var, len + 1);
+    return (res);
+}

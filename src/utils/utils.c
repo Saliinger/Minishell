@@ -36,7 +36,9 @@ int	nbr_of_line(char **env)
 {
 	int	i;
 
-	i = 0;
+    if (!env)
+        return (0);
+    i = 0;
 	while (env[i])
 		i++;
 	return (i);
@@ -102,3 +104,38 @@ int	in_quote(int status, char type)
 		return (0);
 	return (status);
 }
+
+char **add_line(char **tab, char *to_add)
+{
+    char **res;
+    int i;
+    int tab_size;
+
+    if (!tab || !to_add)
+        return (NULL);
+    tab_size = nbr_of_line(tab);
+    res = (char **)malloc(sizeof(char *) * (tab_size + 2));
+    if (!res)
+        return (ft_free_tab(tab), NULL);
+    i = 0;
+    while (tab[i])
+    {
+        res[i] = ft_strdup(tab[i]);
+        if (!res[i])
+        {
+            ft_free_tab(res);
+            return (NULL);
+        }
+        i++;
+    }
+    res[i] = ft_strdup(to_add);
+    if (!res[i])
+    {
+        ft_free_tab(res);
+        return (NULL);
+    }
+    res[i + 1] = NULL;
+    ft_free_tab(tab);
+    return (res);
+}
+
