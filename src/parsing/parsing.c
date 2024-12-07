@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/06 23:01:11 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/07 10:48:49 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_command	*parsing(char *str, t_minishell *minishell)
 		temp->clean_arg = remove_quote(temp->clean_arg);
 		if (!temp->clean_arg || !temp->arg)
 			return (free_command(current), NULL);
-        ft_print(temp->arg, 0);
 		temp = temp->subcommand;
 	}
 	return (current);

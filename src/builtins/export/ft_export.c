@@ -22,7 +22,7 @@ bool	check_name(char *name)
 	i++;
 	while (name[i])
 	{
-		if (!ft_isalnum(name[i]) && name[i] != '_')
+		if (!ft_isdigit(name[i]) && !ft_isalpha(name[i]) && name[i] != '_')
 			return (false);
 		i++;
 	}
@@ -84,23 +84,28 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
 	char	*value;
 
 	i = 1;
-	ft_print(command->cmd_args, 0);
 	if (nbr_of_line(command->cmd_args) > 1)
 	{
-		while (command->cmd_args[i])
-		{
-			name = get_name_env(command->cmd_args[i]);
+        while (command->cmd_args[i])
+        {
+            name = get_name_env(command->cmd_args[i]);
+            fprintf(stderr, "name: %s\n", name);
 			if (!check_name(name))
 			{
+                printerr("bash: export: `%s': not a valid identifier", name);
 				free(name);
-				i++;
+                return (1);
 			}
-			else
-			{
-				value = get_value_env(command->cmd_args[i]);
-				export_handler(command->cmd_args[i], name, value, minishell);
-				i++;
-			}
+            free(name);
+            i++;
+        }
+        i = 1;
+		while (command->cmd_args[i])
+		{
+            name = get_name_env(command->cmd_args[i]);
+            value = get_value_env(command->cmd_args[i]);
+            export_handler(command->cmd_args[i], name, value, minishell);
+            i++;
 		}
 	}
 	else

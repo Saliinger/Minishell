@@ -29,7 +29,6 @@ t_export_list	*find_export_node(char *name, t_export_list **lst)
 	to_find = *lst;
 	while (to_find)
 	{
-		printf("Comparing '%s' with '%s'\n", name, to_find->name);
 		if (ft_strcmp2(name, to_find->name) == 0)
 			return (to_find);
 		to_find = to_find->next;

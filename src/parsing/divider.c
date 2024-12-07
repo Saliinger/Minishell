@@ -16,11 +16,15 @@ int	check_pipe(char *in)
 {
 	int	i;
 	int	flag;
+    int str_len;
 
 	i = 0;
 	flag = 0;
-	while (in[i])
+    str_len = ft_strlen(in);
+    while (i < str_len && in[i])
 	{
+        if (in[i] == '|')
+			return (i);
         if (in[i] == '\'' || in[i] == '\"')
         {
             flag = in_quote(flag, in[i]);
@@ -31,10 +35,10 @@ int	check_pipe(char *in)
                 flag = in_quote(flag, in[i]);
                 i++;
             }
+            i++;
         }
-        if (in[i] == '|')
-			return (i);
-		i++;
+        else
+		    i++;
 	}
 	return (0);
 }

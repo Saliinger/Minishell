@@ -101,10 +101,12 @@ static char	**get_redir(char *in)
 bool	check_redir(char *in)
 {
 	int	i;
+    int status;
 
 	i = 0;
 	while (in[i])
 	{
+        status = in_quote(status, in[i]);
 		if (in[i] == '<' || in[i] == '>')
 			return (true);
 		i++;

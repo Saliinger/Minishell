@@ -18,17 +18,16 @@ int	ft_cd(t_command_exec *command, t_minishell *minishell)
 	char	*path;
 
 	path = get_path(command->cmd_args[1], minishell);
-	printerr("path: %s\n", path);
 	if (!path)
 		return (1);
 	error = chdir(path);
 	if (error == 0)
-	{
-		printerr("Changed dir to %s\n", path);
 		change_pwd(minishell, path);
-	}
 	else
-		printerr("Error changing directory\n");
+        printerr("No such file\n");
 	free(path);
-	return (0);
+	return (error);
 }
+
+
+// add security check if the dir exist + check the right

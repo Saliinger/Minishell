@@ -61,7 +61,6 @@ static int	init_path(char *current_path, char **in_cut, t_minishell *minishell)
 		temp = get_current_path(minishell);
 		temp_size = ft_strlen(temp);
 		ft_strlcpy(current_path, temp, temp_size + 1);
-		fprintf(stderr, "%s\n", current_path);
 		free(temp);
 		return (0);
 	}
