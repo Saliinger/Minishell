@@ -91,3 +91,14 @@ void	ft_print_redir(t_redir *list)
 		list = list->next;
 	}
 }
+
+int	in_quote(int status, char type)
+{
+	if (type == '\"' && status == 0)
+		return (1);
+	else if (type == '\'' && status == 0)
+		return (-1);
+	else if ((type == '\"' && status == 1) || (type == '\'' && status == -1))
+		return (0);
+	return (status);
+}

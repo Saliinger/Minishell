@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:59:26 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/06 22:59:27 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/07 10:41:54 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**remove_env(char **env, int to_delete)
 	len = nbr_of_line(env) - 1;
 	res = (char **)malloc(sizeof(char *) * len + 1);
 	if (!res)
-		return (free_env(env), NULL);
+		return (ft_free_tab(env), NULL);
 	while (env[j])
 	{
 		if (j == to_delete)
@@ -37,7 +37,7 @@ char	**remove_env(char **env, int to_delete)
 		}
 	}
 	res[i] = NULL;
-	free_env(env);
+	ft_free_tab(env);
 	return (res);
 }
 
@@ -63,7 +63,7 @@ char	**add_env(char **env, char *to_add)
 		i++;
 	}
 	res[i] = NULL;
-	free_env(env);
+	ft_free_tab(env);
 	return (res);
 }
 

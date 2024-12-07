@@ -36,7 +36,7 @@ int	ft_split_free(char **dest)
 	int	i;
 
 	i = 0;
-	if (dest)
+	if (dest && *dest)
 	{
 		while (dest[i])
 		{

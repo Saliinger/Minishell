@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:02:11 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/06 23:02:13 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/07 10:41:54 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,6 @@ static char	*expanded(t_minishell *minishell, char *var, int *start,
 	return (res);
 }
 
-static int	in_quote(int status, char type)
-{
-	if (type == '\"' && status == 0)
-		return (1);
-	else if (type == '\'' && status == 0)
-		return (-1);
-	else if ((type == '\"' && status == 1) || (type == '\'' && status == -1))
-		return (0);
-	return (status);
-}
-
 char	**expand_in(char **arg, t_minishell *minishell)
 {
 	int		i;
@@ -117,34 +106,34 @@ char	**expand_in(char **arg, t_minishell *minishell)
 				if (!new_arg[i])
 					new_arg[i] = ft_strdup("");
 				if (!new_arg[i])
-					return (free_env(new_arg), NULL);
+					return (ft_free_tab(new_arg), NULL);
 				status = in_quote(status, arg[i][j]);
 				new_arg[i] = add_char(new_arg[i], arg[i][j]);
 				if (!new_arg[i])
-					return (free_env(new_arg), NULL);
+					return (ft_free_tab(new_arg), NULL);
 				j++;
 			}
 			else if (arg[i][j] == '$' && status >= 0)
 			{
 				new_arg[i] = expanded(minishell, arg[i], &j, new_arg[i]);
 				if (!new_arg[i])
-					return (free_env(new_arg), NULL);
+					return (ft_free_tab(new_arg), NULL);
 			}
 			else
 			{
 				if (!new_arg[i])
 					new_arg[i] = ft_strdup("");
 				if (!new_arg[i])
-					return (free_env(new_arg), NULL);
+					return (ft_free_tab(new_arg), NULL);
 				new_arg[i] = add_char(new_arg[i], arg[i][j]);
 				if (!new_arg[i])
-					return (free_env(new_arg), NULL);
+					return (ft_free_tab(new_arg), NULL);
 				j++;
 			}
 		}
 		i++;
 	}
 	new_arg[i] = NULL;
-	free_env(arg);
+	ft_free_tab(arg);
 	return (new_arg);
 }

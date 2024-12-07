@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:51:50 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/06 23:01:40 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/07 10:41:54 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,24 @@ static char	**add_line(char **in, char *to_add)
 	lines = nbr_of_line(in);
 	dup = (char **)malloc(sizeof(char *) * (lines + 2));
 	if (!dup)
-		return (free_env(in), NULL);
+		return (ft_free_tab(in), NULL);
 	i = 0;
 	while (in[i])
 	{
 		dup[i] = ft_strdup(in[i]);
 		if (!dup[i])
-			return (dup[i] = NULL, free_env(dup), free_env(in), NULL);
+			return (dup[i] = NULL, ft_free_tab(dup), ft_free_tab(in), NULL);
 		i++;
 	}
 	if (to_add)
 	{
 		dup[i] = ft_strdup(to_add);
 		if (!dup[i])
-			return (dup[i] = NULL, free_env(dup), free_env(in), NULL);
+			return (dup[i] = NULL, ft_free_tab(dup), ft_free_tab(in), NULL);
 		i++;
 	}
 	dup[i] = NULL;
-	free_env(in);
+	ft_free_tab(in);
 	return (dup);
 }
 
@@ -112,29 +112,28 @@ bool	check_redir(char *in)
 	return (false);
 }
 
-char	**redir_special(char *in)
-{
-	int		end;
-	int		len;
-	char	**res;
+char	**redir_special(char *in) {
+    int end;
+    int len;
+    char **res;
 
-	end = 0;
-	len = ft_strlen(in);
-	res = (char **)malloc(sizeof(char *) * 3);
-	if (!res)
-		return (NULL);
-	while (in[end] && in[end] != '<' && in[end] != '>')
-		end++;
-	res[0] = (char *)malloc(sizeof(char) * (end + 1));
-	if (!res[0])
-		return (free_env(res), NULL);
-	ft_strlcpy(res[0], in, end + 1);
-	res[1] = (char *)malloc(sizeof(char) * (len - end + 1));
-	if (!res[1])
-		return (free_env(res), NULL);
-	ft_strlcpy(res[1], in + end, len - end + 1);
-	res[2] = NULL;
-	return (res);
+    end = 0;
+    len = ft_strlen(in);
+    res = (char **) malloc(sizeof(char *) * 3);
+    if (!res)
+        return (NULL);
+    while (in[end] && in[end] != '<' && in[end] != '>')
+        end++;
+    res[0] = (char *) malloc(sizeof(char) * (end + 1));
+    if (!res[0])
+        return (ft_free_tab(res), NULL);
+    ft_strlcpy(res[0], in, end + 1);
+    res[1] = (char *) malloc(sizeof(char) * (len - end + 1));
+    if (!res[1])
+        return (ft_free_tab(res), NULL);
+    ft_strlcpy(res[1], in + end, len - end + 1);
+    res[2] = NULL;
+    return (res);
 }
 
 char	**relexer(char **in)
@@ -144,11 +143,12 @@ char	**relexer(char **in)
 	char	**special;
 	int		i;
 	int		k;
+    int     status = 0;
 
 	i = 0;
 	res = (char **)malloc(sizeof(char *));
 	if (!res)
-		return (free_env(in), NULL);
+		return (ft_free_tab(in), NULL);
 	*res = NULL;
 	while (in[i])
 	{
@@ -157,15 +157,15 @@ char	**relexer(char **in)
 		{
 			line = get_redir(in[i]);
 			if (!line)
-				return (free_env(in), NULL);
+				return (ft_free_tab(in), NULL);
 			while (line[k])
 			{
 				res = add_line(res, line[k]);
 				if (!res)
-					return (free_env(in), NULL);
+					return (ft_free_tab(in), NULL);
 				k++;
 			}
-			free_env(line);
+			ft_free_tab(line);
 		}
 		else
 		{
@@ -174,23 +174,26 @@ char	**relexer(char **in)
 				line = redir_special(in[i]);
 				res = add_line(res, line[0]);
 				if (!res)
-					return (free_env(in), NULL);
+					return (ft_free_tab(in), NULL);
 				special = get_redir(line[1]);
 				while (special[k])
 				{
 					res = add_line(res, special[k]);
 					if (!res)
-						return (free_env(in), NULL);
+						return (ft_free_tab(in), NULL);
 					k++;
 				}
-				free_env(line);
-				free_env(special);
+				ft_free_tab(line);
+				ft_free_tab(special);
 			}
 			else
 				res = add_line(res, in[i]);
 		}
 		i++;
 	}
-	free_env(in);
+	ft_free_tab(in);
 	return (res);
 }
+
+
+// add in quote checker it messed up the parsing

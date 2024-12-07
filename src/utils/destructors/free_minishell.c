@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   free_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:20 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/06 22:59:47 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/07 10:41:54 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-
-void	free_env(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		free(env[i]);
-		i++;
-	}
-	free(env);
-	env = NULL;
-}
 
 void	free_export_list(t_export_list **list)
 {
@@ -48,15 +34,15 @@ void	free_minishell(t_minishell *minishell)
 	if (minishell->old_pwd)
 		free(minishell->old_pwd);
 	if (minishell->env)
-		free_env(minishell->env);
+		ft_free_tab(minishell->env);
 	if (minishell->paths)
-		free_env(minishell->paths);
+		ft_free_tab(minishell->paths);
 	if (minishell->hidden_env)
-		free_env(minishell->hidden_env);
+		ft_free_tab(minishell->hidden_env);
 	if (minishell->hidden_env)
-		free_env(minishell->hidden_env);
+		ft_free_tab(minishell->hidden_env);
 	//	if (minishell->hd)
-	//		free_env(minishell->hd);
+	//		ft_free_tab(minishell->hd);
 	if (minishell->exportList)
 		free_export_list(minishell->exportList);
 	free(minishell);

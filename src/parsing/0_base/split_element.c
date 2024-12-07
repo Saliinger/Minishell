@@ -12,17 +12,6 @@
 
 #include "../../../include/minishell.h"
 
-static int	in_quote(int status, char type)
-{
-	if (type == '\"' && status == 0)
-		return (1);
-	else if (type == '\'' && status == 0)
-		return (-1);
-	else if ((type == '\"' && status == 1) || (type == '\'' && status == -1))
-		return (0);
-	return (status);
-}
-
 static void	ft_split_write_extend(size_t *i, size_t *j, const char *s, char c)
 {
 	int	status;
@@ -36,7 +25,7 @@ static void	ft_split_write_extend(size_t *i, size_t *j, const char *s, char c)
 		{
 			status = in_quote(status, s[*i + *j]);
 			(*j)++;
-			while (status != 0)
+			while (s[*i + *j] && status != 0)
 			{
 				status = in_quote(status, s[*i + *j]);
 				(*j)++;

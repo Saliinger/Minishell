@@ -14,19 +14,6 @@
 
 #include "../../../include/minishell.h"
 
-static void	free_arg(char **arg)
-{
-	int	i;
-
-	i = 0;
-	while (arg[i])
-	{
-		free(arg[i]);
-		i++;
-	}
-	free(arg);
-}
-
 static void	free_redir(t_redir *head)
 {
 	t_redir	*next;
@@ -49,9 +36,9 @@ void	free_command(t_command *command)
 	if (command->in)
 		free(command->in);
 	if (command->arg)
-		free_arg(command->arg);
+		ft_free_tab(command->arg);
 	if (command->clean_arg)
-		free_arg(command->clean_arg);
+		ft_free_tab(command->clean_arg);
 	if (command->redirection)
 		free_redir(command->redirection);
 	if (command->subcommand)

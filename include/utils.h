@@ -32,4 +32,5 @@ void	free_t_minishell(t_minishell **ms);
 void	ft_free_t_redir(t_redir **r);
 void	free_t_infos(t_infos *i);
 void	ft_free_tab(char **tab);
+int	in_quote(int status, char type);
 #endif

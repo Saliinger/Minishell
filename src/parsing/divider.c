@@ -21,18 +21,19 @@ int	check_pipe(char *in)
 	flag = 0;
 	while (in[i])
 	{
-		if (flag == 0 && in[i] == '|')
+        if (in[i] == '\'' || in[i] == '\"')
+        {
+            flag = in_quote(flag, in[i]);
+            if (in[i] == '\'' || in[i] == '\"')
+                i++;
+            while (in[i] && flag != 0)
+            {
+                flag = in_quote(flag, in[i]);
+                i++;
+            }
+        }
+        if (in[i] == '|')
 			return (i);
-		if (in[i] == '"')
-		{
-			while (in[i] && in[i] != '"')
-				i++;
-		}
-		if (in[i] == '\'')
-		{
-			while (in[i] && in[i] != '\'')
-				i++;
-		}
 		i++;
 	}
 	return (0);
