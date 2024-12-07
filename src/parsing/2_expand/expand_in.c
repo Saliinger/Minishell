@@ -64,20 +64,26 @@ char *expand(t_minishell *minishell, char *name)
     t_export_list *data;
     int *exit;
 
-    data = find_export_node(name + 1, minishell->exportList);
-    if (data)
-        res = ft_strdup(data->value);
-    else if (ft_strlen(name) == 1 && *name == '$')
-        res = ft_strdup("$");
-    else if (ft_strlen(name) == 2 && name[ft_strlen(name)] == '?')
+    if (name[0] == '$' && name[1] == '?' && name[2] == '\0') // Check for "$?" specifically
     {
         exit = minishell->exit_status;
-        res = ft_itoa(*exit);
+        res = ft_itoa(*exit); // Convert exit status to string
+    }
+    else if (ft_strlen(name) == 1 && *name == '$')
+    {
+        res = ft_strdup("$"); // Handle "$" case
     }
     else
-        return (NULL);
+    {
+        data = find_export_node(name + 1, minishell->exportList);
+        if (data)
+            res = ft_strdup(data->value); // Expand environment variable
+        else
+            return (NULL); // Variable not found, return NULL
+    }
     return (res);
 }
+
 
 char    *new_line(t_minishell  *minishell, char *line)
 {
