@@ -17,6 +17,11 @@ int	ft_cd(t_command_exec *command, t_minishell *minishell)
 	int		error;
 	char	*path;
 
+    if (nbr_of_line(command->cmd_args) > 2)
+    {
+        printerr("cd: Too many argument\n");
+        return (1);
+    }
 	path = get_path(command->cmd_args[1], minishell);
 	if (!path)
 		return (1);

@@ -17,7 +17,7 @@ static void	remove_path(char *dest)
 	int	len;
 
 	len = ft_strlen(dest);
-	while (dest[len] != '/')
+	while (dest[len] && dest[len] != '/')
 	{
 		dest[len] = '\0';
 		len--;
@@ -43,39 +43,74 @@ static void	add_path(char *dest, char *to_add)
 	dest[j] = '\0';
 }
 
-static int	init_path(char *current_path, char **in_cut, t_minishell *minishell)
+
+// init path handle the start of the path that we wan't to go to ~ / or nothing
+static int	init_path(char *in, t_minishell *minishell, char **new_in)
 {
-	size_t	temp_size;
 	char	*temp;
 
-	if (*in_cut[0] == '~')
+    if (!in)
+        return (0);
+    if (*in == '~' || *in == '/')
 	{
 		temp = get_home(minishell);
-		temp_size = ft_strlen(temp);
-		ft_strlcpy(current_path, temp, temp_size);
+        if (*in != '~' && ft_strncmp(temp, in, ft_strlen(temp)) != 0)
+            *new_in = ft_strjoin(temp, in);
+        else if (ft_strncmp(temp, in, ft_strlen(temp)) != 0)
+            *new_in = ft_strjoin(temp, in + 1);
+        else
+            *new_in = ft_strdup(in);
 		free(temp);
-		return (1);
+   		return (1);
 	}
-	else
+    else
 	{
 		temp = get_current_path(minishell);
-		temp_size = ft_strlen(temp);
-		ft_strlcpy(current_path, temp, temp_size + 1);
+        if (ft_strncmp(temp, in, ft_strlen(temp)) != 0)
+        {
+            if (*in != '/')
+                temp = ft_strjoin_frees1(temp, "/");
+            *new_in = ft_strjoin(temp, in);
+        }
+        else
+            *new_in = ft_strdup(in);
 		free(temp);
 		return (0);
 	}
 }
 
+bool check_dot(char *in)
+{
+    int i = 0;
+    int nbr = 0;
+
+    if (!in)
+        return (0);
+    while (in[i])
+    {
+        if (in[i] == '.')
+            nbr++;
+        while (in[i] == '.')
+            i++;
+        i++;
+    }
+    return (nbr);
+}
+
 char	*path_constructor(t_minishell *minishell, char *in)
 {
 	char	*res;
+    char    *new_in;
 	char	current_path[PATH_MAX];
 	int		i;
 	int		j;
 	char	**in_cut;
 
-	in_cut = ft_split(in, '/');
-	i = init_path(current_path, in_cut, minishell);
+    new_in = NULL;
+    i = init_path(in, minishell, &new_in);
+    if (!check_dot(new_in))
+        return (new_in);
+    in_cut = ft_split(new_in, '/');
 	while (in_cut[i])
 	{
 		j = 0;
@@ -93,6 +128,8 @@ char	*path_constructor(t_minishell *minishell, char *in)
 		i++;
 	}
 	res = ft_strdup(current_path);
+    ft_free_tab(in_cut);
+    free(new_in);
 	return (res);
 }
 

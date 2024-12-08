@@ -12,8 +12,6 @@
 
 #include "../../../include/minishell.h"
 
-// add create pwd and set oldpwd
-
 int	change_pwd(t_minishell *minishell, char *in)
 {
 	int		pwd_line;
@@ -42,6 +40,3 @@ int	change_pwd(t_minishell *minishell, char *in)
 	minishell->env[pwd_line] = ft_strjoin("PWD=", path);
 	return (0);
 }
-
-
-// add to change it in export list

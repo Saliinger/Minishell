@@ -14,21 +14,14 @@
 
 char	*get_home(t_minishell *minishell)
 {
-	int		home_line;
-	char	*home;
-	char	*temp;
-	int		i;
+    t_export_list *home;
+    char *line;
 
-	home_line = get_env_var(minishell, "HOME", 4);
-	if (home_line < 0)
-		return (NULL);
-	temp = ft_strdup(minishell->env[home_line]);
-	i = 0;
-	while (temp[i] && temp[i] != '=')
-		i++;
-	if (temp[i] == '=')
-		i++;
-	home = ft_strdup(temp + i);
-	free(temp);
-	return (home);
+    home = find_export_node("HOME", minishell->exportList);
+    if (home)
+    {
+        line = ft_strdup(home->value);
+        return (line);
+    }
+    return (NULL);
 }
