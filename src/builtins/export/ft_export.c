@@ -90,7 +90,7 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
             name = get_name_env(command->cmd_args[i]);
 			if (!check_name(name))
 			{
-                printerr("bash: export: `%s': not a valid identifier", name);
+                printerr("bash: export: `%s': not a valid identifier\n", name);
 				free(name);
                 return (1);
 			}
