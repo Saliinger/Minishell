@@ -21,7 +21,7 @@ int	modify_value(t_export_list **lst, char *name, char *value)
 	{
 		if (tmp->value)
 			free(tmp->value);
-		tmp->value = value;
+		tmp->value = ft_strdup(value);
 	}
 	else
 		return (1);
