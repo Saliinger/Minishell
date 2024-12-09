@@ -134,6 +134,7 @@ char	**relexer(char **in)
     int i = 0;
 
     res = (char **) malloc(sizeof(char *));
+    *res = NULL;
     while (in[i])
     {
         if (check_redir(in[i]) > 0)

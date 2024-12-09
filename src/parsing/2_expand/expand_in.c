@@ -12,11 +12,6 @@
 
 #include "../../../include/minishell.h"
 
-// return $ if $
-// $? = exit value
-// $PWD => env var
-// $yolo => doesn't exist so skip it
-
 static int check_nbr_var(char *line)
 {
     int i = 0;
@@ -64,22 +59,20 @@ char *expand(t_minishell *minishell, char *name)
     t_export_list *data;
     int *exit;
 
-    if (name[0] == '$' && name[1] == '?' && name[2] == '\0') // Check for "$?" specifically
+    if (name[0] == '$' && name[1] == '?' && name[2] == '\0')
     {
         exit = minishell->exit_status;
-        res = ft_itoa(*exit); // Convert exit status to string
+        res = ft_itoa(*exit);
     }
     else if (ft_strlen(name) == 1 && *name == '$')
-    {
-        res = ft_strdup("$"); // Handle "$" case
-    }
+        res = ft_strdup("$");
     else
     {
         data = find_export_node(name + 1, minishell->exportList);
         if (data)
-            res = ft_strdup(data->value); // Expand environment variable
+            res = ft_strdup(data->value);
         else
-            return (NULL); // Variable not found, return NULL
+            return (NULL);
     }
     return (res);
 }

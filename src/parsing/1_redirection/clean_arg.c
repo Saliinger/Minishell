@@ -46,6 +46,7 @@ char	**clean_arg(char **arg)
 	j = 0;
 	nbr_line = count_line(arg);
 	res = (char **)malloc(sizeof(char *) * (nbr_line + 1));
+    *res = NULL;
 	if (!res)
 		return (NULL);
 	while (j < nbr_line)
@@ -59,5 +60,6 @@ char	**clean_arg(char **arg)
 		i++;
 	}
 	res[j] = NULL;
+    ft_free_tab(arg);
 	return (res);
 }
