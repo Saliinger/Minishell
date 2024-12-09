@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:13:49 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 21:46:59 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/09 18:27:07 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**clean_arg(char **arg)
 	j = 0;
 	nbr_line = count_line(arg);
 	res = (char **)malloc(sizeof(char *) * (nbr_line + 1));
-    *res = NULL;
+	*res = NULL;
 	if (!res)
 		return (NULL);
 	while (j < nbr_line)
@@ -60,6 +60,6 @@ char	**clean_arg(char **arg)
 		i++;
 	}
 	res[j] = NULL;
-    ft_free_tab(arg);
+	ft_free_tab(arg);
 	return (res);
 }

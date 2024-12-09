@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:23:53 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/28 17:14:03 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/09 18:34:51 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	nbr_of_line(char **env)
 {
 	int	i;
 
-    if (!env)
-        return (0);
-    i = 0;
+	if (!env)
+		return (0);
+	i = 0;
 	while (env[i])
 		i++;
 	return (i);
@@ -73,7 +73,7 @@ void	ft_print(char **s, int i)
 		fprintf(stderr, "Error: NULL pointer passed to ft_print.\n");
 		return ;
 	}
-    printf("this is the args \n" );
+	printf("this is the args \n");
 	while (s[i])
 	{
 		printf("%s\n", s[i]);
@@ -105,37 +105,36 @@ int	in_quote(int status, char type)
 	return (status);
 }
 
-char **add_line(char **tab, char *to_add)
+char	**add_line(char **tab, char *to_add)
 {
-    char **res;
-    int i;
-    int tab_size;
+	char	**res;
+	int		i;
+	int		tab_size;
 
-    if (!tab || !to_add)
-        return (NULL);
-    tab_size = nbr_of_line(tab);
-    res = (char **)malloc(sizeof(char *) * (tab_size + 2));
-    if (!res)
-        return (ft_free_tab(tab), NULL);
-    i = 0;
-    while (tab[i])
-    {
-        res[i] = ft_strdup(tab[i]);
-        if (!res[i])
-        {
-            ft_free_tab(res);
-            return (NULL);
-        }
-        i++;
-    }
-    res[i] = ft_strdup(to_add);
-    if (!res[i])
-    {
-        ft_free_tab(res);
-        return (NULL);
-    }
-    res[i + 1] = NULL;
-    ft_free_tab(tab);
-    return (res);
+	if (!tab || !to_add)
+		return (NULL);
+	tab_size = nbr_of_line(tab);
+	res = (char **)malloc(sizeof(char *) * (tab_size + 2));
+	if (!res)
+		return (ft_free_tab(tab), NULL);
+	i = 0;
+	while (tab[i])
+	{
+		res[i] = ft_strdup(tab[i]);
+		if (!res[i])
+		{
+			ft_free_tab(res);
+			return (NULL);
+		}
+		i++;
+	}
+	res[i] = ft_strdup(to_add);
+	if (!res[i])
+	{
+		ft_free_tab(res);
+		return (NULL);
+	}
+	res[i + 1] = NULL;
+	ft_free_tab(tab);
+	return (res);
 }
-

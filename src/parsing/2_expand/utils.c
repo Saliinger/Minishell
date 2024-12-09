@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:04:25 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/06 23:04:26 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/09 18:34:23 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,22 @@ static int	get_var_name(char *arg)
 	len = 0;
 	if (arg[len] == '$')
 		len++;
-    if (arg[len] == '?')
-        return (2);
-    while (arg[len] && (ft_isalpha(arg[len]) || ft_isdigit(arg[len])
+	if (arg[len] == '?')
+		return (2);
+	while (arg[len] && (ft_isalpha(arg[len]) || ft_isdigit(arg[len])
 			|| arg[len] == '_'))
 		len++;
 	return (len);
 }
 
-char *clean_name(char *var)
+char	*clean_name(char *var)
 {
-    int len = 0;
-    char *res;
+	int		len;
+	char	*res;
 
-    len = get_var_name(var);
-    res = (char *) malloc(sizeof(char) * len + 1);
-    ft_strlcpy(res, var, len + 1);
-    return (res);
+	len = 0;
+	len = get_var_name(var);
+	res = (char *)malloc(sizeof(char) * len + 1);
+	ft_strlcpy(res, var, len + 1);
+	return (res);
 }

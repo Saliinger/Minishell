@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:29:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 21:49:49 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/09 18:38:01 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,3 @@ int	ft_cd(t_command_exec *command, t_minishell *minishell)
 	free(path);
     return (0);
 }
-
-
-// add security check if the dir exist + check the right

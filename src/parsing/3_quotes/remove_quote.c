@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:02:35 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/07 10:41:54 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/09 18:36:03 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**remove_quote(char **arg)
 
 	i = 0;
 	res = (char **)malloc(sizeof(char *) * (nbr_of_line(arg) + 1));
-    *res = NULL;
+	*res = NULL;
 	if (!res)
 		return (ft_free_tab(arg), NULL);
 	while (arg[i])

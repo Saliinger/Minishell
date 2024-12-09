@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:34:56 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/30 00:52:40 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/09 18:35:19 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char *get_prompt_pwd(char *pwd, char *user)
 	home_prefix = ft_strjoin("/home/", user);
     if (ft_strncmp(home_prefix, pwd, prefix_len) == 0)
 	{
-		simplified_pwd = ft_strjoin("~", &pwd[prefix_len]); // Replace prefix with "~"
+		simplified_pwd = ft_strjoin("~", &pwd[prefix_len]);
         return (free(home_prefix), simplified_pwd);
     }
     return (free(home_prefix), ft_strdup(pwd));
