@@ -12,6 +12,31 @@
 
 #include "../../../include/minishell.h"
 
+// delte pwd get the new one
+// old pwd = pwd before deletw
+
+static int undpate_pwd(t_minishell *minishell, char *path, int oldpwd_line, int pwd_line)
+{
+    int error;
+
+    error = 0;
+    free(minishell->old_pwd);
+	minishell->old_pwd = ft_strdup(minishell->pwd);
+    if (!minishell->old_pwd)
+        return (1);
+    free(minishell->env[oldpwd_line]);
+	minishell->env[oldpwd_line] = ft_strjoin("OLDPWD=", minishell->old_pwd);
+	free(minishell->pwd);
+	minishell->pwd = ft_strdup(path);
+    if (!minishell->pwd)
+        return (1);
+    free(minishell->env[pwd_line]);
+	minishell->env[pwd_line] = ft_strjoin("PWD=", path);
+    error += modify_value(minishell->exportList, "PWD", minishell->pwd);
+    error += modify_value(minishell->exportList, "OLDPWD", minishell->old_pwd);
+    return (error);
+}
+
 int	change_pwd(t_minishell *minishell, char *in)
 {
 	int		pwd_line;
@@ -30,13 +55,5 @@ int	change_pwd(t_minishell *minishell, char *in)
 	}
 	else
 		path = in;
-	free(minishell->old_pwd);
-	minishell->old_pwd = ft_strdup(minishell->pwd);
-	free(minishell->env[oldpwd_line]);
-	minishell->env[oldpwd_line] = ft_strjoin("OLDPWD=", minishell->old_pwd);
-	free(minishell->pwd);
-	minishell->pwd = ft_strdup(path);
-	free(minishell->env[pwd_line]);
-	minishell->env[pwd_line] = ft_strjoin("PWD=", path);
-	return (0);
+	return (undpate_pwd(minishell, path, oldpwd_line, pwd_line));
 }

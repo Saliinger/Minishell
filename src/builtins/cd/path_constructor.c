@@ -17,12 +17,20 @@ static void	remove_path(char *dest)
 	int	len;
 
 	len = ft_strlen(dest);
-	while (dest[len] && dest[len] != '/')
-	{
-		dest[len] = '\0';
+	if (len == 0)
+		return; // Nothing to remove
+
+	// Move backward until finding a '/' or reaching the beginning
+	while (len > 0 && dest[len - 1] != '/')
 		len--;
-	}
+
+	// If `len` is 0, it means we are at the root `/`
+	if (len == 0)
+		dest[0] = '\0'; // Reset dest to an empty string
+	else
+		dest[len - 1] = '\0'; // Remove the last segment
 }
+
 
 static void	add_path(char *dest, char *to_add)
 {
@@ -61,7 +69,6 @@ static int	init_path(char *in, t_minishell *minishell, char **new_in)
         else
             *new_in = ft_strdup(in);
 		free(temp);
-   		return (1);
 	}
     else
 	{
@@ -75,8 +82,8 @@ static int	init_path(char *in, t_minishell *minishell, char **new_in)
         else
             *new_in = ft_strdup(in);
 		free(temp);
-		return (0);
 	}
+    return (0);
 }
 
 bool check_dot(char *in)
@@ -114,7 +121,7 @@ char	*path_constructor(t_minishell *minishell, char *in)
 	while (in_cut[i])
 	{
 		j = 0;
-		if (ft_strlen(in_cut[i]) <= 3)
+		if (ft_strlen(in_cut[i]) <= 3 && in_cut[i][j] == '.')
 		{
 			while (in_cut[i][j] && in_cut[i][j] == '.')
 				j++;

@@ -16,7 +16,6 @@ char	*get_path(char *in, t_minishell *minishell)
 {
 	char	*res;
 
-
 	if (!in || (ft_strlen(in) == 1 && *in == '~') || (ft_strlen(in) == 1 && *in == '/'))
 	{
 		res = get_home(minishell);
@@ -25,6 +24,5 @@ char	*get_path(char *in, t_minishell *minishell)
 	}
     else
         res = path_constructor(minishell, in);
-    fprintf(stderr, "res: %s\n", res);
     return (res);
 }

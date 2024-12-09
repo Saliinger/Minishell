@@ -18,20 +18,24 @@ int	ft_cd(t_command_exec *command, t_minishell *minishell)
 	char	*path;
 
     if (nbr_of_line(command->cmd_args) > 2)
-    {
-        printerr("cd: Too many argument\n");
-        return (1);
-    }
-	path = get_path(command->cmd_args[1], minishell);
+        return (0);
+    path = get_path(command->cmd_args[1], minishell);
 	if (!path)
 		return (1);
 	error = chdir(path);
 	if (error == 0)
-		change_pwd(minishell, path);
+    {
+        error = change_pwd(minishell, path);
+        if (error != 0)
+            printerr("cd: Fail to change PWD and OLDPWD\n");
+    }
 	else
+    {
         printerr("No such file\n");
+        return (1);
+    }
 	free(path);
-	return (error);
+    return (0);
 }
 
 
