@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:20 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/07 10:41:54 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 17:30:58 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ void	free_minishell(t_minishell *minishell)
 		ft_free_tab(minishell->hidden_env);
 	if (minishell->hidden_env)
 		ft_free_tab(minishell->hidden_env);
-	//	if (minishell->hd)
-	//		ft_free_tab(minishell->hd);
 	if (minishell->exportList)
 		free_export_list(minishell->exportList);
 	free(minishell);
 }
+
+//	if (minishell->hd)
+//		ft_free_tab(minishell->hd);

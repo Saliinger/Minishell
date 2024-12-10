@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 15:43:54 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 18:20:16 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <sys/stat.h>
 
 // CD
-int		ft_cd(t_command_exec *command, t_minishell *minishell);
+void	ft_cd(t_command_exec *command, t_minishell *minishell);
 char	*get_path(char *in, t_minishell *minishell);
 char	*get_home(t_minishell *minishell);
 char	*path_constructor(t_minishell *minishell, char *in);
@@ -31,32 +31,28 @@ void	remove_path(char *dest);
 void	add_path(char *dest, char *to_add);
 
 // ECHO
-int		ft_echo(t_command_exec *command);
-void	echo_print(char **arg, bool eof, int i);
+void	ft_echo(t_command_exec *command);
+int		echo_print(char **arg, bool eof, int i);
 int		check_flag(char **arg);
 
 // ENV
-int		ft_env(t_minishell *minishell);
+void	ft_env(t_minishell *minishell);
 
 // EXIT
-int		ft_exit(t_minishell *minishell, t_command_exec *command, bool fail);
+void	ft_exit(t_minishell *minishell, t_command_exec *command, bool fail);
 
 // EXPAND
-int		ft_expand(t_command_exec *command, t_minishell *minishell);
+void	ft_expand(t_command_exec *command, t_minishell *minishell);
 
 // PWD
-int		ft_pwd(t_minishell *minishell);
+void	ft_pwd(t_minishell *minishell);
 
 // UNSET
-int		ft_unset(t_command_exec *command, t_minishell *minishell);
-int		count_var(char **var);
-char	**new_env(t_minishell *minishell, int *to_remove, int nbr_of_line);
+void	ft_unset(t_command_exec *command, t_minishell *minishell);
 
 // EXPORT
-int		ft_export(t_command_exec *command, t_minishell *minishell);
+void	ft_export(t_command_exec *command, t_minishell *minishell);
 int		create_var(t_minishell *minishell, char *var);
 int		delete_var(t_minishell *minishell, int line);
-bool	check_var_equals(char *in);
-bool	check_var_name(char *in);
 
 #endif

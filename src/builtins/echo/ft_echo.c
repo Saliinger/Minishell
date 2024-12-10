@@ -6,22 +6,23 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:00 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/06 23:00:03 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 18:20:35 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int	ft_echo(t_command_exec *command)
+void	ft_echo(t_command_exec *command)
 {
 	int		i;
 	char	**cmd;
+	int		error;
 
 	cmd = command->cmd_args + 1;
 	i = check_flag(cmd);
 	if (i > 0)
-		echo_print(cmd, false, i);
+		error = echo_print(cmd, false, i);
 	else
-		echo_print(cmd, true, i);
-	return (0);
+		error = echo_print(cmd, true, i);
+	exit (error);
 }

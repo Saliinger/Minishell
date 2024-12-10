@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:23:53 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/09 18:34:51 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 17:34:09 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,50 +92,4 @@ void	ft_print_redir(t_redir *list)
 		i++;
 		list = list->next;
 	}
-}
-
-int	in_quote(int status, char type)
-{
-	if (type == '\"' && status == 0)
-		return (1);
-	else if (type == '\'' && status == 0)
-		return (-1);
-	else if ((type == '\"' && status == 1) || (type == '\'' && status == -1))
-		return (0);
-	return (status);
-}
-
-char	**add_line(char **tab, char *to_add)
-{
-	char	**res;
-	int		i;
-	int		tab_size;
-
-    if (!tab)
-        tab_size = 0;
-    else
-	    tab_size = nbr_of_line(tab);
-	res = (char **)malloc(sizeof(char *) * (tab_size + 2));
-	if (!res)
-		return (ft_free_tab(tab), NULL);
-	i = 0;
-    if (tab) {
-        while (tab[i]) {
-            res[i] = ft_strdup(tab[i]);
-            if (!res[i]) {
-                ft_free_tab(res);
-                return (NULL);
-            }
-            i++;
-        }
-    }
-	res[i] = ft_strdup(to_add);
-	if (!res[i])
-	{
-		ft_free_tab(res);
-		return (NULL);
-	}
-	res[i + 1] = NULL;
-	ft_free_tab(tab);
-	return (res);
 }

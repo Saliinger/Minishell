@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:16 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 15:49:34 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 18:16:38 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,16 @@ int	var_exist(char *name, t_minishell *minishell)
 	return (2);
 }
 
-int	export_handler(char *line, char *name, char *value, t_minishell *minishell)
+static void	manage_export(t_minishell *minishell, char *name, char *value,
+		char *line)
+{
+	modify_value(minishell->exportList, name, value);
+	delete_var(minishell, get_env_var(minishell, name, ft_strlen(name)));
+	create_var(minishell, line);
+}
+
+static void	export_handler(char *line, char *name, char *value,
+		t_minishell *minishell)
 {
 	int	status;
 
@@ -65,18 +74,12 @@ int	export_handler(char *line, char *name, char *value, t_minishell *minishell)
 	else
 	{
 		if (value)
-		{
-			modify_value(minishell->exportList, name, value);
-			delete_var(minishell, get_env_var(minishell, name,
-					ft_strlen(name)));
-			create_var(minishell, line);
-		}
+			manage_export(minishell, name, value, line);
 	}
 	merge_sort(minishell->exportList);
-	return (0);
 }
 
-int	ft_export(t_command_exec *command, t_minishell *minishell)
+void	ft_export(t_command_exec *command, t_minishell *minishell)
 {
 	int		i;
 	char	*name;
@@ -89,8 +92,11 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
 		{
 			name = get_name_env(command->cmd_args[i]);
 			if (!check_name(name))
-				return (printerr("bash: export: `%s': not a valid identifier\n",
-						name), free(name), 1);
+			{
+				printerr("bash: export: `%s': not a valid identifier\n", name);
+				free(name);
+				exit(1);
+			}
 			free(name);
 			i++;
 		}
@@ -105,5 +111,5 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
 	}
 	else
 		print_export_list(minishell->exportList);
-	return (0);
+	exit(0);
 }

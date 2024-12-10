@@ -6,33 +6,38 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 21:50:14 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/06 23:00:00 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 18:22:06 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-static void	print_line(char *line)
+static int	print_line(char *line)
 {
-	int	i;
+	size_t	len;
 
-	i = 0;
-	while (line[i])
-	{
-		printf("%c", line[i]);
-		i++;
-	}
+	len = 0;
+	len = printf("%s", line);
+	if (len != ft_strlen(line))
+		return (1);
+	return (0);
 }
 
-void	echo_print(char **arg, bool eof, int i)
+int	echo_print(char **arg, bool eof, int i)
 {
+	int	error;
+
+	error = 0;
 	while (arg[i])
 	{
-		print_line(arg[i]);
+		error = print_line(arg[i]);
 		if (arg[i + 1])
 			printf(" ");
 		i++;
 	}
 	if (eof == true)
 		printf("\n");
+	if (error)
+		return (1);
+	return (0);
 }
