@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 15:43:54 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/11 00:26:34 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 
 # include "imports.h"
 # include "structure.h"
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdio.h>
-# include <sys/stat.h>
 
 // CD
 int		ft_cd(t_command_exec *command, t_minishell *minishell);
@@ -49,14 +45,9 @@ int		ft_pwd(t_minishell *minishell);
 
 // UNSET
 int		ft_unset(t_command_exec *command, t_minishell *minishell);
-int		count_var(char **var);
-char	**new_env(t_minishell *minishell, int *to_remove, int nbr_of_line);
 
 // EXPORT
 int		ft_export(t_command_exec *command, t_minishell *minishell);
 int		create_var(t_minishell *minishell, char *var);
 int		delete_var(t_minishell *minishell, int line);
-bool	check_var_equals(char *in);
-bool	check_var_name(char *in);
-
 #endif

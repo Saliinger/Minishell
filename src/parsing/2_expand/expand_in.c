@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:02:11 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 12:52:19 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/11 00:17:26 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ char	*expand(t_minishell *minishell, char *name)
 		else
 			return (NULL);
 	}
+	free(name);
 	return (res);
 }
 
