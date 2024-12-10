@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:09 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 12:50:56 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 15:37:33 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ static bool	check_arg(char *s)
 	return (true);
 }
 
+int	ft_exit_extend(int exit_code, t_minishell *minishell, t_command_exec *cmd)
+{
+	free_minishell(minishell);
+	free_t_command_exec(&cmd);
+	exit(exit_code);
+}
+
 int	ft_exit(t_minishell *minishell, t_command_exec *command, bool fail)
 {
 	int	exit_code;
@@ -35,30 +42,18 @@ int	ft_exit(t_minishell *minishell, t_command_exec *command, bool fail)
 		printerr("bash: exit: too many arguments\n");
 		exit(1);
 	}
-	free_minishell(minishell);
 	if (nbr_of_line(command->cmd_args) == 2
 		&& check_arg(command->cmd_args[1]) == true)
 	{
-		free_t_command_exec(&command);
 		printerr(" numeric argument required\n");
-		exit(255);
+		ft_exit_extend(255, minishell, command);
 	}
 	else if (command->cmd_args[1] && fail == false)
-	{
-		exit_code = atoi(command->cmd_args[1]);
-		free_t_command_exec(&command);
-		exit(exit_code);
-	}
+		ft_exit_extend(atoi(command->cmd_args[1]), minishell, command);
 	else if (fail == true)
-	{
-		free_t_command_exec(&command);
-		exit(EXIT_FAILURE);
-	}
+		ft_exit_extend(EXIT_FAILURE, minishell, command);
 	else
-	{
-		free_t_command_exec(&command);
-		exit(EXIT_SUCCESS);
-	}
+		ft_exit_extend(EXIT_SUCCESS, minishell, command);
 }
 
 // add error 255 if word as arg if 3 arg return 1
