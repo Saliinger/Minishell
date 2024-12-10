@@ -73,7 +73,6 @@ void	extend_get_redir(char *line, int *start, int *end)
 		while (line[*start + *end] && (line[*start + *end] == '<' || line[*start
 					+ *end] == '>'))
 			(*end)++;
-		return ;
 	}
 	else if (line[*start + *end] == '\'' || line[*start + *end] == '\"')
 	{
@@ -84,7 +83,6 @@ void	extend_get_redir(char *line, int *start, int *end)
 			status = in_quote(status, line[*start + *end]);
 			(*end)++;
 		}
-		return ;
 	}
 	else
 	{
@@ -94,7 +92,6 @@ void	extend_get_redir(char *line, int *start, int *end)
 			status = in_quote(status, line[*start + *end]);
 			(*end)++;
 		}
-		return ;
 	}
 }
 
