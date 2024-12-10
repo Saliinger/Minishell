@@ -6,24 +6,33 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:16 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 15:49:34 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 18:16:38 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-bool	check_name(char *name)
+bool	check_name(char **arg)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	*name;
 
 	i = 0;
-	if (!ft_isalpha(name[i]) && name[i] != '_')
-		return (false);
-	i++;
-	while (name[i])
+	while (arg[i])
 	{
-		if (!ft_isdigit(name[i]) && !ft_isalpha(name[i]) && name[i] != '_')
-			return (false);
+		j = 0;
+		name = get_name_env(arg[i]);
+		if (!ft_isalpha(name[i]) && name[i] != '_')
+			return (free(name), false);
+		i++;
+		while (name[j])
+		{
+			if (!ft_isdigit(name[j]) && !ft_isalpha(name[j]) && name[j] != '_')
+				return (free(name), false);
+			j++;
+		}
+		free(name);
 		i++;
 	}
 	return (true);
@@ -43,7 +52,16 @@ int	var_exist(char *name, t_minishell *minishell)
 	return (2);
 }
 
-int	export_handler(char *line, char *name, char *value, t_minishell *minishell)
+static void	manage_export(t_minishell *minishell, char *name, char *value,
+		char *line)
+{
+	modify_value(minishell->exportList, name, value);
+	delete_var(minishell, get_env_var(minishell, name, ft_strlen(name)));
+	create_var(minishell, line);
+}
+
+static void	export_handler(char *line, char *name, char *value,
+		t_minishell *minishell)
 {
 	int	status;
 
@@ -65,15 +83,9 @@ int	export_handler(char *line, char *name, char *value, t_minishell *minishell)
 	else
 	{
 		if (value)
-		{
-			modify_value(minishell->exportList, name, value);
-			delete_var(minishell, get_env_var(minishell, name,
-					ft_strlen(name)));
-			create_var(minishell, line);
-		}
+			manage_export(minishell, name, value, line);
 	}
 	merge_sort(minishell->exportList);
-	return (0);
 }
 
 int	ft_export(t_command_exec *command, t_minishell *minishell)
@@ -85,21 +97,15 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
 	i = 1;
 	if (nbr_of_line(command->cmd_args) > 1)
 	{
-		while (command->cmd_args[i])
-		{
-			name = get_name_env(command->cmd_args[i]);
-			if (!check_name(name))
-				return (printerr("bash: export: `%s': not a valid identifier\n",
-						name), free(name), 1);
-			free(name);
-			i++;
-		}
+		if (!check_name(command->cmd_args + 1))
+			return (1);
 		i = 1;
 		while (command->cmd_args[i])
 		{
 			name = get_name_env(command->cmd_args[i]);
 			value = get_value_env(command->cmd_args[i]);
 			export_handler(command->cmd_args[i], name, value, minishell);
+			free(name);
 			i++;
 		}
 	}
