@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:02:11 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/09 18:34:12 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 12:52:19 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ char	**expand_in(char **arg, t_minishell *minishell)
 	char	*to_add;
 
 	i = 0;
-    res = NULL;
-    while (i < nbr_of_line(arg))
+	res = NULL;
+	while (i < nbr_of_line(arg))
 	{
 		if (check_nbr_var(arg[i]) > 0)
 		{

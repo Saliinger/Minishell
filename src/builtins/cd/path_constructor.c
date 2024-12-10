@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:37:06 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 21:50:02 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 12:51:47 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,14 @@ static void	remove_path(char *dest)
 
 	len = ft_strlen(dest);
 	if (len == 0)
-		return; // Nothing to remove
-
-	// Move backward until finding a '/' or reaching the beginning
+		return ;
 	while (len > 0 && dest[len - 1] != '/')
 		len--;
-
-	// If `len` is 0, it means we are at the root `/`
 	if (len == 0)
-		dest[0] = '\0'; // Reset dest to an empty string
+		dest[0] = '\0';
 	else
-		dest[len - 1] = '\0'; // Remove the last segment
+		dest[len - 1] = '\0';
 }
-
 
 static void	add_path(char *dest, char *to_add)
 {
@@ -51,73 +46,74 @@ static void	add_path(char *dest, char *to_add)
 	dest[j] = '\0';
 }
 
-
 // init path handle the start of the path that we wan't to go to ~ / or nothing
 static int	init_path(char *in, t_minishell *minishell, char **new_in)
 {
 	char	*temp;
 
-    if (!in)
-        return (0);
-    if (*in == '~' || *in == '/')
+	if (!in)
+		return (0);
+	if (*in == '~' || *in == '/')
 	{
 		temp = get_home(minishell);
-        if (*in != '~' && ft_strncmp(temp, in, ft_strlen(temp)) != 0)
-            *new_in = ft_strjoin(temp, in);
-        else if (ft_strncmp(temp, in, ft_strlen(temp)) != 0)
-            *new_in = ft_strjoin(temp, in + 1);
-        else
-            *new_in = ft_strdup(in);
+		if (*in != '~' && ft_strncmp(temp, in, ft_strlen(temp)) != 0)
+			*new_in = ft_strjoin(temp, in);
+		else if (ft_strncmp(temp, in, ft_strlen(temp)) != 0)
+			*new_in = ft_strjoin(temp, in + 1);
+		else
+			*new_in = ft_strdup(in);
 		free(temp);
 	}
-    else
+	else
 	{
 		temp = get_current_path(minishell);
-        if (ft_strncmp(temp, in, ft_strlen(temp)) != 0)
-        {
-            if (*in != '/')
-                temp = ft_strjoin_frees1(temp, "/");
-            *new_in = ft_strjoin(temp, in);
-        }
-        else
-            *new_in = ft_strdup(in);
+		if (ft_strncmp(temp, in, ft_strlen(temp)) != 0)
+		{
+			if (*in != '/')
+				temp = ft_strjoin_frees1(temp, "/");
+			*new_in = ft_strjoin(temp, in);
+		}
+		else
+			*new_in = ft_strdup(in);
 		free(temp);
 	}
-    return (0);
+	return (0);
 }
 
-bool check_dot(char *in)
+bool	check_dot(char *in)
 {
-    int i = 0;
-    int nbr = 0;
+	int	i;
+	int	nbr;
 
-    if (!in)
-        return (0);
-    while (in[i])
-    {
-        if (in[i] == '.')
-            nbr++;
-        while (in[i] == '.')
-            i++;
-        i++;
-    }
-    return (nbr);
+	i = 0;
+	nbr = 0;
+	if (!in)
+		return (0);
+	while (in[i])
+	{
+		if (in[i] == '.')
+			nbr++;
+		while (in[i] == '.')
+			i++;
+		i++;
+	}
+	return (nbr);
 }
 
 char	*path_constructor(t_minishell *minishell, char *in)
 {
 	char	*res;
-    char    *new_in;
+	char	*new_in;
 	char	current_path[PATH_MAX];
 	int		i;
 	int		j;
 	char	**in_cut;
 
-    new_in = NULL;
-    i = init_path(in, minishell, &new_in);
-    if (!check_dot(new_in))
-        return (new_in);
-    in_cut = ft_split(new_in, '/');
+	new_in = NULL;
+	i = init_path(in, minishell, &new_in);
+	if (!check_dot(new_in))
+		return (new_in);
+	in_cut = ft_split(new_in, '/');
 	while (in_cut[i])
 	{
 		j = 0;
@@ -135,8 +131,8 @@ char	*path_constructor(t_minishell *minishell, char *in)
 		i++;
 	}
 	res = ft_strdup(current_path);
-    ft_free_tab(in_cut);
-    free(new_in);
+	ft_free_tab(in_cut);
+	free(new_in);
 	return (res);
 }
 

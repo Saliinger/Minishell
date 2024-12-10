@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:37:23 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 21:49:54 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 12:51:24 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 char	*get_home(t_minishell *minishell)
 {
-    t_export_list *home;
-    char *line;
+	t_export_list	*home;
+	char			*line;
 
-    home = find_export_node("HOME", minishell->exportList);
-    if (home)
-    {
-        line = ft_strdup(home->value);
-        return (line);
-    }
-    return (NULL);
+	home = find_export_node("HOME", minishell->exportList);
+	if (home)
+	{
+		line = ft_strdup(home->value);
+		return (line);
+	}
+	return (NULL);
 }

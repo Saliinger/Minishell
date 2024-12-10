@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:58:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/07 10:48:49 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 12:46:50 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,3 @@ t_command	*parsing(char *str, t_minishell *minishell)
 	}
 	return (current);
 }
-
-// need to add free command for l28

@@ -6,20 +6,20 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:39:03 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 21:49:52 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 12:51:22 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-static char *no_pwd(void)
+static char	*no_pwd(void)
 {
-    char buffer[PATH_MAX];
-    char *temp;
+	char	buffer[PATH_MAX];
+	char	*temp;
 
-    getcwd(buffer, PATH_MAX);
-    temp = ft_strdup(buffer);
-    return temp;
+	getcwd(buffer, PATH_MAX);
+	temp = ft_strdup(buffer);
+	return (temp);
 }
 
 char	*get_current_path(t_minishell *minishell)

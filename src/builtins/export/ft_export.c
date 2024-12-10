@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:16 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/09 18:37:20 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 12:50:38 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,25 +85,25 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
 	i = 1;
 	if (nbr_of_line(command->cmd_args) > 1)
 	{
-        while (command->cmd_args[i])
-        {
-            name = get_name_env(command->cmd_args[i]);
-			if (!check_name(name))
-			{
-                printerr("bash: export: `%s': not a valid identifier\n", name);
-				free(name);
-                return (1);
-			}
-            free(name);
-            i++;
-        }
-        i = 1;
 		while (command->cmd_args[i])
 		{
-            name = get_name_env(command->cmd_args[i]);
-            value = get_value_env(command->cmd_args[i]);
-            export_handler(command->cmd_args[i], name, value, minishell);
-            i++;
+			name = get_name_env(command->cmd_args[i]);
+			if (!check_name(name))
+			{
+				printerr("bash: export: `%s': not a valid identifier\n", name);
+				free(name);
+				return (1);
+			}
+			free(name);
+			i++;
+		}
+		i = 1;
+		while (command->cmd_args[i])
+		{
+			name = get_name_env(command->cmd_args[i]);
+			value = get_value_env(command->cmd_args[i]);
+			export_handler(command->cmd_args[i], name, value, minishell);
+			i++;
 		}
 	}
 	else
