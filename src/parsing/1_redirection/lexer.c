@@ -71,7 +71,7 @@ void	extend_get_redir(char *line, int *start, int *end)
 	{
 		(*end)++;
 		while (line[*start + *end] && (line[*start + *end] == '<' || line[*start
-				+ *end] == '>'))
+					+ *end] == '>'))
 			(*end)++;
 		return ;
 	}
@@ -89,7 +89,7 @@ void	extend_get_redir(char *line, int *start, int *end)
 	else
 	{
 		while (line[*start + *end] && line[*start + *end] != '<' && line[*start
-			+ *end] != '>' && status == 0)
+				+ *end] != '>' && status == 0)
 		{
 			status = in_quote(status, line[*start + *end]);
 			(*end)++;
