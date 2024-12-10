@@ -6,13 +6,13 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:26 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 18:18:12 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/06 23:00:56 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void	ft_unset(t_command_exec *command, t_minishell *minishell)
+int	ft_unset(t_command_exec *command, t_minishell *minishell)
 {
 	int	i;
 	int	line;
@@ -33,5 +33,5 @@ void	ft_unset(t_command_exec *command, t_minishell *minishell)
 			i++;
 		}
 	}
-	exit(0);
+	return (0);
 }

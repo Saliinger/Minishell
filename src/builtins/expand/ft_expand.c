@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:13 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 18:20:47 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/11/29 21:50:23 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // need to print the env var
 
-void	ft_expand(t_command_exec *command, t_minishell *minishell)
+int	ft_expand(t_command_exec *command, t_minishell *minishell)
 {
 	int		i;
 	char	*temp;
@@ -39,5 +39,5 @@ void	ft_expand(t_command_exec *command, t_minishell *minishell)
 		i++;
 	}
 	printf("\n");
-	exit(0);
+	return (0);
 }

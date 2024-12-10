@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:09 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 18:11:14 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 15:48:23 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	check_arg(char *s)
 	return (true);
 }
 
-static void	ft_exit_extend(int exit_code, t_minishell *minishell,
+static int	ft_exit_extend(int exit_code, t_minishell *minishell,
 		t_command_exec *cmd)
 {
 	free_minishell(minishell);
@@ -34,18 +34,18 @@ static void	ft_exit_extend(int exit_code, t_minishell *minishell,
 	exit(exit_code);
 }
 
-void	ft_exit(t_minishell *minishell, t_command_exec *command, bool fail)
+int	ft_exit(t_minishell *minishell, t_command_exec *command, bool fail)
 {
 	if (nbr_of_line(command->cmd_args) >= 3)
 	{
 		printerr("bash: exit: too many arguments\n");
-		ft_exit_extend(1, minishell, command);
+		return (1);
 	}
 	if (nbr_of_line(command->cmd_args) == 2
 		&& check_arg(command->cmd_args[1]) == true)
 	{
 		printerr(" numeric argument required\n");
-		ft_exit_extend(2, minishell, command);
+		ft_exit_extend(255, minishell, command);
 	}
 	else if (command->cmd_args[1] && fail == false)
 		ft_exit_extend(atoi(command->cmd_args[1]), minishell, command);
