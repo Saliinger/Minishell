@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:09 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 15:37:58 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 15:39:56 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static int	ft_exit_extend(int exit_code, t_minishell *minishell, t_command_exec 
 
 int	ft_exit(t_minishell *minishell, t_command_exec *command, bool fail)
 {
-	int	exit_code;
-
 	if (nbr_of_line(command->cmd_args) >= 3)
 	{
 		printerr("bash: exit: too many arguments\n");
