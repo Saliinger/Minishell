@@ -56,9 +56,9 @@ OBJ_MAC = $(SRC:.c=.mac.o)  # macOS-specific object files
 %.mac.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE_MAC)
 
-.PHONY: all clean fclean re libft mac
+.PHONY: all clean fclean re libft mac clone
 
-all: $(LIBFT_A) $(PRINTF_A) $(NAME)
+all: clone $(LIBFT_A) $(PRINTF_A) $(NAME)
 
 
 $(NAME): $(OBJ) 
@@ -136,3 +136,16 @@ lldb: all
 valgrind: all
 	clear
 	$(VALGRIND) ./$(NAME)
+
+
+REPO_URL := https://github.com/Saliinger/libft.git
+CLONE_DIR := libft
+
+# Clone target
+clone:
+	@if [ ! -d "$(CLONE_DIR)" ]; then \
+		echo "Cloning repository..."; \
+		git clone $(REPO_URL) $(CLONE_DIR); \
+	else \
+		echo "Repository already cloned."; \
+	fi
