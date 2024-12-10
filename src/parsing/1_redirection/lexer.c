@@ -26,7 +26,7 @@ int	check_redir(char *in)
         status = in_quote(status, in[i]);
 		if ((in[i] == '<' || in[i] == '>') && status == 0)
 			nbr++;
-        while (in[i] == '<' || in[i] == '>')
+        while (in[i] && (in[i] == '<' || in[i] == '>'))
             i++;
 		i++;
 	}
@@ -102,9 +102,7 @@ static char **get_redir(char *line)
     int end = 0;
     char *to_add;
 
-    res = (char **)malloc(sizeof(char *) * (check_redir(line) * 2 + 2));
-    if (!res)
-        return (NULL);
+    res = NULL;
     while (line[start])
     {
         extend_get_redir(line, &start, &end);
@@ -129,12 +127,12 @@ static char **get_redir(char *line)
 
 char	**relexer(char **in)
 {
-	char **res = NULL;
+	char **res;
     char **to_add;
-    int i = 0;
+    int i;
 
-    res = (char **) malloc(sizeof(char *));
-    *res = NULL;
+    i = 0;
+    res = NULL;
     while (in[i])
     {
         if (check_redir(in[i]) > 0)

@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <stdio.h>
 
 char	*get_name_env(char *var)
 {
-	int		i;
+	size_t		i;
 	char	*name;
 
 	i = 0;
@@ -33,8 +34,8 @@ char	*get_name_env(char *var)
 
 char	*get_value_env(char *var)
 {
-	int		i;
-	int		len;
+	size_t		i;
+	size_t		len;
 	char	*value;
 
 	i = 0;
@@ -57,7 +58,7 @@ char	*get_value_env(char *var)
 // add free list on return NULL
 t_export_list	**init_export_list(char **env)
 {
-	int				i;
+	size_t				i;
 	t_export_list	**init;
 
 	i = 0;

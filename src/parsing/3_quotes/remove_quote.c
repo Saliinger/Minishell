@@ -21,7 +21,6 @@ char	**remove_quote(char **arg)
 
 	i = 0;
 	res = (char **)malloc(sizeof(char *) * (nbr_of_line(arg) + 1));
-	*res = NULL;
 	if (!res)
 		return (ft_free_tab(arg), NULL);
 	while (arg[i])

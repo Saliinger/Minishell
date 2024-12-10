@@ -25,6 +25,7 @@ void	free_export_list(t_export_list **list)
 		*list = temp;
 	}
 	free(list);
+	list = NULL;
 }
 
 void	free_minishell(t_minishell *minishell)

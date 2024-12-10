@@ -118,9 +118,8 @@ char	**expand_in(char **arg, t_minishell *minishell)
 	char	*to_add;
 
 	i = 0;
-	res = (char **)malloc(sizeof(char *));
-	*res = NULL;
-	while (arg[i])
+    res = NULL;
+    while (i < nbr_of_line(arg))
 	{
 		if (check_nbr_var(arg[i]) > 0)
 		{
