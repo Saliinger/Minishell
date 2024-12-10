@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:59 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 15:32:05 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 15:43:54 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 // CD
 int		ft_cd(t_command_exec *command, t_minishell *minishell);
-bool	is_symlink(const char *path);
 char	*get_path(char *in, t_minishell *minishell);
 char	*get_home(t_minishell *minishell);
 char	*path_constructor(t_minishell *minishell, char *in);

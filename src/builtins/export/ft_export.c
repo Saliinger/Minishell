@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:16 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 12:50:38 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 15:49:34 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,8 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
 		{
 			name = get_name_env(command->cmd_args[i]);
 			if (!check_name(name))
-			{
-				printerr("bash: export: `%s': not a valid identifier\n", name);
-				free(name);
-				return (1);
-			}
+				return (printerr("bash: export: `%s': not a valid identifier\n",
+						name), free(name), 1);
 			free(name);
 			i++;
 		}
