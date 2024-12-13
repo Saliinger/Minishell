@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:13:47 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/10/21 19:36:15 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 08:06:16 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  */
 int	ft_dup2(int fd, int fd2)
 {
-	int err;
+	int	err;
 
 	err = dup2(fd, fd2);
 	if (err == -1)
@@ -29,6 +29,7 @@ int	ft_dup2(int fd, int fd2)
 	}
 	return (EXIT_SUCCESS);
 }
+
 /**
  * brief : Duplicate FD, returning a new file descriptor on the same file.
  * 
@@ -36,7 +37,7 @@ int	ft_dup2(int fd, int fd2)
  */
 int	ft_dup(int fd)
 {
-	int duped_fd;
+	int	duped_fd;
 
 	duped_fd = dup(fd);
 	if (duped_fd == -1)
@@ -44,5 +45,5 @@ int	ft_dup(int fd)
 		perror("minishell");
 		return (ERR_PRIM);
 	}
-	return(duped_fd);
+	return (duped_fd);
 }

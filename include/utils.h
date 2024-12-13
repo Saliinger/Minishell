@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 04:48:42 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/12/10 11:55:56 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/11 00:14:36 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_minishell		t_minishell;
 typedef struct s_command_exec	t_command_exec;
 typedef struct s_infos			t_infos;
 
-//int								ft_strcmp(char *s1, char *s2);
+int								ft_strcmp(char *s1, char *s2);
 
 void							ft_free(void **add);
 void							ft_free_nullterm_tab(char ***ptab);

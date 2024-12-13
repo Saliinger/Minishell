@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:53 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 18:26:31 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 07:41:41 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,25 @@ static int	open_as_last_redir_in(t_redir *rd, int *fds_last_redir)
 	if (rd->type == R_IN_FILE)
 	{
 		if (ft_close(&fds_last_redir[IN]) == -1)
-			return (perror("minishell06"), ERR_PRIM);
-		fds_last_redir[IN] = open(rd->redir, O_RDONLY); //maybe try access first for specific errors
+			return (perror("minishell rd in"), ERR_PRIM);
+		fds_last_redir[IN] = open(rd->redir, O_RDONLY);
 		if (fds_last_redir[IN] == -1)
-			return (perror("minishell07"), ERR_PRIM); //kill me later
+			return (perror("minishellrd in"), ERR_PRIM);
 	}
 	else if (rd->type == R_IN_HEREDOC || rd->type == R_IN_HEREDOC_Q)
 	{
 		if (ft_close(&fds_last_redir[IN]) == -1)
-			return (perror("minishell06"), ERR_PRIM);
+			return (perror("minishell rd in"), ERR_PRIM);
 		if (rd->type == R_IN_HEREDOC)
 			fds_last_redir[IN] = HEREDOC_FILENO;
 		else if (rd->type == R_IN_HEREDOC_Q)
 			fds_last_redir[IN] = HEREDOC_QUOTES_FILENO;
 	}
 	else
-		return (printerr("minishell: in %s, %s: erreur opening redir fds in\n", __FILE__, __FUNCTION__), ERR);
+		return (printerr("minishell: in %s, %s: err opening redir fds in\n", \
+												__FILE__, __FUNCTION__), ERR);
 	return (EXIT_SUCCESS);
-} 
+}
 
 /**
  * brief : 
@@ -60,21 +61,24 @@ static int	open_as_last_redir_out(t_redir *rd, int *fds_last_redir)
 	if (rd->type == R_OUT_FILE_TRUNC)
 	{
 		if (ft_close(&fds_last_redir[OUT]) == -1)
-			return (perror("minishell08"), ERR_PRIM);
-		fds_last_redir[OUT] = open(rd->redir, O_WRONLY | O_CREAT | O_TRUNC, 0644); //maybe try access first for specific errors
+			return (perror("minishell rd out"), ERR_PRIM);
+		fds_last_redir[OUT] = open(rd->redir, O_WRONLY \
+												| O_CREAT | O_TRUNC, 0644);
 		if (fds_last_redir[OUT] == -1)
-			return (perror("minishell09"), ERR_PRIM); //kill me later
+			return (perror("minishell rd out"), ERR_PRIM);
 	}
 	else if (rd->type == R_OUT_FILE_APPEND)
 	{
 		if (ft_close(&fds_last_redir[OUT]) == -1)
-			return (perror("minishell10"), ERR_PRIM);
-		fds_last_redir[OUT] = open(rd->redir, O_WRONLY | O_CREAT | O_APPEND, 0644); //maybe try access first for specific errors
+			return (perror("minishell rd out"), ERR_PRIM);
+		fds_last_redir[OUT] = open(rd->redir, O_WRONLY \
+												| O_CREAT | O_APPEND, 0644);
 		if (fds_last_redir[OUT] == -1)
-			return (perror("minishell11"), ERR_PRIM); //kill me later
+			return (perror("minishell rd out"), ERR_PRIM);
 	}
 	else
-		return (printerr("minishell: in %s, %s: erreur opening redir fds out\n", __FILE__, __FUNCTION__), ERR);
+		return (printerr("minishell: in %s, %s: err open redir fds out\n", \
+												__FILE__, __FUNCTION__), ERR);
 	return (EXIT_SUCCESS);
 }
 
@@ -94,7 +98,8 @@ static int	open_cmd_fd(t_redir *rd, int *fds_last_redir)
 	type = rd->type;
 	if (type == ERR)
 		return (printerr("minishell: %s: ambigious redirect\n", rd->redir), 1);
-	else if (type == R_IN_FILE || type == R_IN_HEREDOC || type == R_IN_HEREDOC_Q)
+	else if (type == R_IN_FILE || type == R_IN_HEREDOC \
+													|| type == R_IN_HEREDOC_Q)
 	{
 		if (open_as_last_redir_in(rd, fds_last_redir) == -1)
 			return (ERR_PRIM);
@@ -105,20 +110,24 @@ static int	open_cmd_fd(t_redir *rd, int *fds_last_redir)
 			return (ERR_PRIM);
 	}
 	else
-		return (printerr("minishell: in %s, %s: erreur opening redir fds type\n", __FILE__, __FUNCTION__), ERR);
+		return (printerr("minishell: in %s, %s: err open redir fds type\n", \
+												__FILE__, __FUNCTION__), ERR);
 	return (EXIT_SUCCESS);
 }
 
 //cat <pd >am_i_created_now <ill
 /**
- * brief : for this cmd, opens each of its fds contained in the linked list c->redirection
- * does it correctly, based on their type. stops at the first bad redir (illegal path or permission denied).
+ * brief : for this cmd, opens each of its fds contained in the 
+ * 												linked list c->redirection
+ * does it correctly, based on their type. stops at the first bad redir 
+ * 										(illegal path or permission denied).
  *
  * closes them except the last ones opened IN and OUT :
  * puts the last opened fd redirection IN in fds_last_redir[IN]
  * puts the last opened fd redirection OUT in fds_last_redir[OUT]
  * 
- * :note: if `No such file or directory` || `permission denied`, says it and returns 1 
+ * :note: if `No such file or directory` || `permission denied`, 
+ * 													says it and returns 1 
  */
 int	open_cmd_fds(t_command_exec *cmd, int *fds_last_redir)
 {

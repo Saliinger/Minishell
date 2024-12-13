@@ -6,23 +6,22 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:27:56 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/30 00:31:49 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 07:18:16 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
 
 /**
- * brief : execs the builtin cmd (aka function) and returns its exit status if it posses one, else 0;
+ * brief : execs the builtin cmd (aka function) and returns its 
+ * 											exit status if it posses one, else 0;
  * 
  */
 int	exec_builtin(t_command_exec *c, t_minishell *m, t_infos *i)
 {
 	int	exit_status;
 
-	i->last_cmd_type = CMD_BUILTIN;
-	if (apply_redirections(c, i))
-		printerr("%s: %d: err applying redir\n", __FILE__, __LINE__);
+	(void) i;
 	exit_status = 0;
 	if (c->cmd_id == ECHO_ID)
 		exit_status = ft_echo(c);
@@ -38,9 +37,5 @@ int	exec_builtin(t_command_exec *c, t_minishell *m, t_infos *i)
 		exit_status = ft_env(m);
 	else if (c->cmd_id == EXIT_ID)
 		exit_status = ft_exit(m, c, false);
-//    else if (c->cmd_id == EXPAND_ID)
-//		exit_status = ft_expand(c, m);
-	if (restore_std_fds(m->std_fds) == -1)
-		printerr("%s: %d: err restore std fds", __FILE__, __LINE__);
 	return (exit_status);
 }

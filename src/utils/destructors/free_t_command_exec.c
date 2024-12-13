@@ -31,7 +31,7 @@ static void	free_t_cmd_exec_data_fields(t_command_exec *cmd)
  */
 void	free_t_command_exec_node(t_command_exec **c)
 {
-	if(!c || !*c)
+	if (!c || !*c)
 		return ;
 	free_t_cmd_exec_data_fields(*c);
 	ft_free((void **) c);
@@ -39,7 +39,8 @@ void	free_t_command_exec_node(t_command_exec **c)
 
 /**
  * 
- * brief : frees the struct but not it's data fields (since t_exec_comands is a repackage of t_commands data fields)
+ * brief : frees the struct but not it's data fields 
+ * (since t_exec_comands is a repackage of t_commands data fields)
  * 
  * 
  */

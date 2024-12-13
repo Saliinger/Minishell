@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 20:43:39 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/29 05:55:43 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/11 01:28:16 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ void	print_display_name(char *display_name)
 void	print_cmd_nodes(t_command_exec *c, char *display_name)
 {
 	print_display_name(display_name);
-	print_body(c);
+	if (c)
+		print_body(c);
+	else
+		printf("!c\n");
 	return ;
 }

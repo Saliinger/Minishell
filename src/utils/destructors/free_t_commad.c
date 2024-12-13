@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 18:45:19 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/10/23 16:54:09 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 07:55:58 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	free_data_fields(t_command *cmd)
 
 /**
  * in : c is &cmds, where cmds is a t_command *cmds
- * brief : for each node, frees the elements of the node of the linked list, then frees the node;
+ * brief : for each node, frees the elements of the node of 
+ * 										the linked list, then frees the node;
  * sets the cmds to NULL
  * 
  */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:10 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/06 22:59:01 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/13 08:05:32 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ static t_minishell	*init(char **env, char *pwd, int *adr_int)
 	minishell->pwd = ft_strdup(pwd);
 	minishell->old_pwd = ft_strdup(pwd);
 	minishell->res_last_command = 0;
-	// minishell->hd = (char **)malloc(sizeof(char *));
-	// minishell->hd[0] = NULL;
 	minishell->std_fds[0] = -1;
 	minishell->std_fds[1] = -1;
 	minishell->paths = NULL;
@@ -43,10 +41,13 @@ int	main(int ac, char **av, char **env)
 	t_minishell	*minishell;
 	char		buffer[4096 + 1];
 
-	set_signals_to_minishell();
+	if (set_signals_to_ignore() == -1)
+		return (printerr("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
 	(void)av;
-	if (ac > 1)
-		return (printerr("err: case not asked by subject\n."), 1);
+	if (ac > 1 || (isatty(STDIN_FILENO) == false) \
+										|| (isatty(STDOUT_FILENO) == false))
+		return (write(STDERR_FILENO, \
+								"err: case not asked by subject.\n", 32), 1);
 	exit_status = 0;
 	minishell = init(env, getcwd(buffer, 4096), &exit_status);
 	if (!minishell)
@@ -54,7 +55,9 @@ int	main(int ac, char **av, char **env)
 	if (save_std_fds(minishell->std_fds) == -1)
 		return (ERR_PRIM);
 	ft_minishell(minishell);
-	clear_history();
+	if (ft_close_saved_std_fds(minishell->std_fds) == -1)
+		return (ERR_PRIM);
+	rl_clear_history();
 	free_t_minishell(&minishell);
 	return (exit_status);
 }
