@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 20:13:52 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/12/13 08:54:23 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 09:21:31 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "minishell.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <unistd.h>
 
 typedef struct s_minishell	t_minishell;
 typedef struct s_command	t_command;
