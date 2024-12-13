@@ -12,13 +12,13 @@
 
 #include "../../../include/minishell.h"
 
-int	ft_echo(t_command *command)
+int	ft_echo(t_command_exec *command)
 {
 	int		i;
 	char	**cmd;
 	int		error;
 
-	cmd = command->clean_arg + 1;
+	cmd = command->cmd_args + 1;
 	i = check_flag(cmd);
 	if (i > 0)
 		error = echo_print(cmd, false, i);

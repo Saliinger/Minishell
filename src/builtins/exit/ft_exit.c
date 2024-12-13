@@ -26,33 +26,33 @@ static bool	check_arg(char *s)
 	return (true);
 }
 
-static void	ft_exit_extend(int exit_code, t_minishell *minishell,
-		t_command *cmd)
+static void	ft_exit_extend(int exit_code)
 {
-	free_minishell(minishell);
-	free_command(cmd);
+	safe_malloc(0, NUKE);
     exit(exit_code);
 }
 
-void	ft_exit(t_minishell *minishell, t_command *command, bool fail)
+int	ft_exit(t_minishell *minishell, t_command_exec *command, bool fail)
 {
-	if (nbr_of_line(command->clean_arg) >= 3)
+	(void)minishell;
+	if (nbr_of_line(command->cmd_args) >= 3)
 	{
 		printerr("bash: exit: too many arguments\n");
-		ft_exit_extend(1, minishell, command);
+		ft_exit_extend(1);
 	}
-	if (nbr_of_line(command->clean_arg) == 2
-		&& check_arg(command->clean_arg[1]) == true)
+	if (nbr_of_line(command->cmd_args) == 2
+		&& check_arg(command->cmd_args[1]) == true)
 	{
 		printerr(" numeric argument required\n");
-		ft_exit_extend(2, minishell, command);
+		ft_exit_extend(2);
 	}
-	else if (command->clean_arg[1] && fail == false)
-		ft_exit_extend(atoi(command->clean_arg[1]), minishell, command);
+	else if (command->cmd_args[1] && fail == false)
+		ft_exit_extend(atoi(command->cmd_args[1]));
 	else if (fail == true)
-		ft_exit_extend(EXIT_FAILURE, minishell, command);
+		ft_exit_extend(EXIT_FAILURE);
 	else
-		ft_exit_extend(EXIT_SUCCESS, minishell, command);
+		ft_exit_extend(EXIT_SUCCESS);
+	return (0);
 }
 
 // add error 255 if word as arg if 3 arg return 1

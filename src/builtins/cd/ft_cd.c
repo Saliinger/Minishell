@@ -12,14 +12,14 @@
 
 #include "../../../include/minishell.h"
 
-int	ft_cd(t_command *command, t_minishell *minishell)
+int	ft_cd(t_command_exec *command, t_minishell *minishell)
 {
 	int		error;
 	char	*path;
 
-	if (nbr_of_line(command->clean_arg) > 2)
+	if (nbr_of_line(command->cmd_args) > 2)
 		return (printerr("cd: too many arguments\n"), minishell->exit_status[0] = 1, 1);
-	path = command->clean_arg[1];
+	path = command->cmd_args[1];
 	if (!path)
 		return (minishell->exit_status[0] = 1, 1);
 	error = chdir(path);
