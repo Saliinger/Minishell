@@ -20,7 +20,6 @@ t_command	*parsing(char *str, t_minishell *minishell)
     str = tiny_expand(str, minishell);
     current = command_init(str);
 	temp = current;
-	ft_print(current->arg, 0);
 	while (temp)
 	{
 		temp->arg = relexer(temp->arg);

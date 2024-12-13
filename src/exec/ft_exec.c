@@ -49,7 +49,7 @@ int	ft_exec(t_command **old, t_minishell *m)
 		return (print_cmd_node(new, "err resolving heredocs"), \
 					printerr("%s: %d: error resovling the heredocs", \
 													__FILE__, __LINE__), ERR);
-	print_cmd_nodes(new, "resolved heredocs");
+	//print_cmd_nodes(new, "resolved heredocs");
 	if (create_all_pipes(i.cmd_count, &i.pipes) != EXIT_SUCCESS)
 		return (printerr("%s: %d: err piping.\n", __FILE__, __LINE__));
 	exit_status = exec_loop(&new, m, &i);
