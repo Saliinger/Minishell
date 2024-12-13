@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:34:56 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/09 18:35:19 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/13 10:19:16 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,13 @@ static char *get_prompt_pwd(char *pwd, char *user)
     return (free(home_prefix), ft_strdup(pwd));
 }
 
-char	*display_prompt(char *prompt, t_minishell *minishell)
+char	*display_prompt(t_minishell *minishell)
 {
 	char	*pwd;
 	char	*usr;
 	char	*name;
 	char	*res;
 
-	if (prompt)
-		free(prompt);
 	usr = getenv("LOGNAME");
 	name = getenv("NAME");
 	pwd = get_prompt_pwd(minishell->pwd, usr);
