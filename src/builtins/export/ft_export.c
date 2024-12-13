@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:16 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 18:16:38 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/13 10:14:19 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,22 @@ bool	check_name(char **arg)
 	char	*name;
 
 	i = 0;
-	while (arg[i])
+	while (arg && arg[i])
 	{
 		j = 0;
 		name = get_name_env(arg[i]);
 		if (!ft_isalpha(name[i]) && name[i] != '_')
 			return (free(name), false);
 		i++;
-		while (name[j])
+		while (name && name[j])
 		{
 			if (!ft_isdigit(name[j]) && !ft_isalpha(name[j]) && name[j] != '_')
 				return (free(name), false);
 			j++;
 		}
 		free(name);
-		i++;
+		if (name[i])
+			i++;
 	}
 	return (true);
 }
