@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:39:30 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/12/13 08:54:09 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 18:11:17 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,13 @@ int	exec_loop(t_command_exec **cmds, t_minishell *m, t_infos *i)
 		is_piped = false;
 	while (c)
 	{
-		err = open_cmd_fds(c, c->redir_fds);
-		if (err)
-			return (err);
-		if (c->cmd_args && c->cmd_args[0])
-			exec(c, m, i, is_piped);
 		next = c->next;
+		err = open_cmd_fds(c, c->redir_fds);
+		if (!err)
+		{
+			if (c->cmd_args && c->cmd_args[0])
+				exec(c, m, i, is_piped);
+		}
 		free_t_command_exec_node(&c);
 		c = next;
 	}

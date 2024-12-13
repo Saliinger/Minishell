@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:53 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/12/13 07:41:41 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 18:01:56 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ static int	open_as_last_redir_in(t_redir *rd, int *fds_last_redir)
 	if (rd->type == R_IN_FILE)
 	{
 		if (ft_close(&fds_last_redir[IN]) == -1)
-			return (perror("minishell rd in"), ERR_PRIM);
+			return (ERR_PRIM);
 		fds_last_redir[IN] = open(rd->redir, O_RDONLY);
 		if (fds_last_redir[IN] == -1)
-			return (perror("minishellrd in"), ERR_PRIM);
+			return (ERR_PRIM);
 	}
 	else if (rd->type == R_IN_HEREDOC || rd->type == R_IN_HEREDOC_Q)
 	{
 		if (ft_close(&fds_last_redir[IN]) == -1)
-			return (perror("minishell rd in"), ERR_PRIM);
+			return (ERR_PRIM);
 		if (rd->type == R_IN_HEREDOC)
 			fds_last_redir[IN] = HEREDOC_FILENO;
 		else if (rd->type == R_IN_HEREDOC_Q)
@@ -61,20 +61,20 @@ static int	open_as_last_redir_out(t_redir *rd, int *fds_last_redir)
 	if (rd->type == R_OUT_FILE_TRUNC)
 	{
 		if (ft_close(&fds_last_redir[OUT]) == -1)
-			return (perror("minishell rd out"), ERR_PRIM);
+			return (ERR_PRIM);
 		fds_last_redir[OUT] = open(rd->redir, O_WRONLY \
 												| O_CREAT | O_TRUNC, 0644);
 		if (fds_last_redir[OUT] == -1)
-			return (perror("minishell rd out"), ERR_PRIM);
+			return (ERR_PRIM);
 	}
 	else if (rd->type == R_OUT_FILE_APPEND)
 	{
 		if (ft_close(&fds_last_redir[OUT]) == -1)
-			return (perror("minishell rd out"), ERR_PRIM);
+			return (ERR_PRIM);
 		fds_last_redir[OUT] = open(rd->redir, O_WRONLY \
 												| O_CREAT | O_APPEND, 0644);
 		if (fds_last_redir[OUT] == -1)
-			return (perror("minishell rd out"), ERR_PRIM);
+			return (ERR_PRIM);
 	}
 	else
 		return (printerr("minishell: in %s, %s: err open redir fds out\n", \
