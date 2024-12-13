@@ -79,6 +79,7 @@ char	*get_res(char *new_in, char **in_cut, char *current_path)
 	res = ft_strdup(current_path);
 	ft_free_tab(in_cut);
 	free(new_in);
+	return (0);
 }
 
 char	*path_constructor(t_minishell *minishell, char *in)
@@ -109,8 +110,3 @@ char	*path_constructor(t_minishell *minishell, char *in)
 	res = get_res(new_in, in_cut, current_path);
 	return (res);
 }
-
-// ../
-// ./
-//
-// all the function need to write in the dest

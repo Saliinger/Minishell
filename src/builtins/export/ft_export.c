@@ -3,38 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:16 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/13 10:30:01 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/10 18:16:38 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-bool	check_name(char **arg)
+bool	check_name(char *name)
 {
-	int		i;
-	int		j;
-	char	*name;
+	int	i;
 
 	i = 0;
-	while (arg && arg[i])
+	if (!ft_isalpha(name[i]) && name[i] != '_')
+		return (false);
+	i++;
+	while (name[i])
 	{
-		j = 0;
-		name = get_name_env(arg[i]);
-		if (!ft_isalpha(name[i]) && name[i] != '_')
-			return (free(name), false);
+		if (!ft_isdigit(name[i]) && !ft_isalpha(name[i]) && name[i] != '_')
+			return (false);
 		i++;
-		while (name && name[j])
-		{
-			if (!ft_isdigit(name[j]) && !ft_isalpha(name[j]) && name[j] != '_')
-				return (free(name), false);
-			j++;
-		}
-		free(name);
-		if (arg[i])
-			i++;
 	}
 	return (true);
 }
@@ -89,28 +79,37 @@ static void	export_handler(char *line, char *name, char *value,
 	merge_sort(minishell->exportList);
 }
 
-int	ft_export(t_command_exec *command, t_minishell *minishell)
+int	ft_export(t_command*command, t_minishell *minishell)
 {
 	int		i;
 	char	*name;
 	char	*value;
 
 	i = 1;
-	if (nbr_of_line(command->cmd_args) > 1)
+	if (nbr_of_line(command->clean_arg) > 1)
 	{
-		if (!check_name(command->cmd_args + 1))
-			return (1);
-		i = 1;
-		while (command->cmd_args[i])
+		while (command->clean_arg[i])
 		{
-			name = get_name_env(command->cmd_args[i]);
-			value = get_value_env(command->cmd_args[i]);
-			export_handler(command->cmd_args[i], name, value, minishell);
+			name = get_name_env(command->clean_arg[i]);
+			if (!check_name(name))
+			{
+				printerr("bash: export: `%s': not a valid identifier\n", name);
+				free(name);
+                return (minishell->exit_status[0] = 1, 1);
+			}
 			free(name);
+			i++;
+		}
+		i = 1;
+		while (command->clean_arg[i])
+		{
+			name = get_name_env(command->clean_arg[i]);
+			value = get_value_env(command->clean_arg[i]);
+			export_handler(command->clean_arg[i], name, value, minishell);
 			i++;
 		}
 	}
 	else
 		print_export_list(minishell->exportList);
-	return (0);
+    return(0);
 }

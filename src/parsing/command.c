@@ -26,7 +26,9 @@ static char	*extract_command(char *line)
 	j = 0;
 	while (line[i + j] && line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
 		j++;
-	command = (char *)safe_malloc(sizeof(char) * j + 1, ALLOC_COMMAND);
+	command = (char *)malloc(sizeof(char) * j + 1);
+	if (!command)
+		return (NULL);
 	ft_strlcpy(command, line + i, j + 1);
 	return (command);
 }
@@ -37,21 +39,21 @@ t_command	*command_init(char *in)
 
 	line = extract_command(in);
 	if (!line)
-		return (NULL);
+		return (free(in), NULL);
 	if (checker_command(line, ECHO))
-		return (trim(in, safe_strdup(ECHO, ALLOC_COMMAND), true, ECHO_ID));
+		return (free(line), trim(in, ft_strdup(ECHO), true, ECHO_ID));
 	else if (checker_command(line, CD))
-		return (trim(in, safe_strdup(CD, ALLOC_COMMAND), true, CD_ID));
+		return (free(line), trim(in, ft_strdup(CD), true, CD_ID));
 	else if (checker_command(line, PWD))
-		return (trim(in, safe_strdup(PWD, ALLOC_COMMAND), true, PWD_ID));
+		return (free(line), trim(in, ft_strdup(PWD), true, PWD_ID));
 	else if (checker_command(line, EXPORT))
-		return (trim(in, safe_strdup(EXPORT, ALLOC_COMMAND), true, EXPORT_ID));
+		return (free(line), trim(in, ft_strdup(EXPORT), true, EXPORT_ID));
 	else if (checker_command(line, UNSET))
-		return ( trim(in, safe_strdup(UNSET, ALLOC_COMMAND), true, UNSET_ID));
+		return (free(line), trim(in, ft_strdup(UNSET), true, UNSET_ID));
 	else if (checker_command(line, ENV))
-		return (trim(in, safe_strdup(ENV, ALLOC_COMMAND), true, ENV_ID));
+		return (free(line), trim(in, ft_strdup(ENV), true, ENV_ID));
 	else if (checker_command(line, EXIT))
-		return ( trim(in, safe_strdup(EXIT, ALLOC_COMMAND), true, EXIT_ID));
+		return (free(line), trim(in, ft_strdup(EXIT), true, EXIT_ID));
 	else
 		return (trim(in, line, false, -1));
 }
