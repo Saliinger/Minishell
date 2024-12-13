@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 02:17:28 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/12/13 07:37:17 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 20:40:49 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static int	resolve_heredoc(t_command_exec *cmd, t_minishell *m, t_redir *rd)
 	err = 0;
 	ft_free((void **) &cmd->last_heredoc_str);
 	cmd->last_heredoc_str = heredoc(rd->redir, m);
+	if (!cmd->cmd_args || ! cmd->cmd_args[0])
+		cmd->cmd_id = HEREDOC_FILENO;
 	if (err)
 		return (ERR);
 	return (EXIT_SUCCESS);

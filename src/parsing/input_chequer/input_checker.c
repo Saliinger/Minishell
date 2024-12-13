@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@42mulhouse.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:58:21 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/11 17:58:21 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/13 20:05:32 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ bool input_checker(t_minishell *minishell, char *command)
     || !check_end(command, '<')
     || !quote_checker(command, '\"')
     || !quote_checker(command, '\''))
-        return (minishell->exit_status[0] = 2, false);
+        return (minishell->exit_status = 2, false);
     return (true);
 }

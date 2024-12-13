@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:16 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 18:16:38 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/13 20:05:27 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	ft_export(t_command_exec *command, t_minishell *minishell)
 			{
 				printerr("bash: export: `%s': not a valid identifier\n", name);
 				free(name);
-                return (minishell->exit_status[0] = 1, 1);
+                return (minishell->exit_status = 1, 1);
 			}
 			free(name);
 			i++;

@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 15:38:41 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/12/13 08:54:04 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 21:08:31 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static int	parent_waits(t_pids **pids_list, pid_t last_pid, int last_cmd_type)
 	else if (last_cmd_type != CMD_BUILTIN)
 		return (free_pids(pids_list), \
 					printerr("%s:%d: err: last_pid= %d", \
-											__FILE__, __LINE__, last_pid), ERR);
+											__FILE__, __LINE__, last_pid), EXIT_SUCCESS);
 	return (free_pids(pids_list), EXIT_SUCCESS);
 }
 
@@ -121,11 +121,11 @@ int	get_exit_status(t_infos *inf)
 	ft_close_pipes(inf->cmd_count - 1, &inf->pipes);
 	if (inf->last_cmd_type == CMD_BUILTIN)
 		parent_waits(&inf->pids_llist, inf->last_pid, inf->last_cmd_type);
-	else if (inf->last_cmd_type == CMD_EXTERN)
+	else //if (inf->last_cmd_type == CMD_EXTERN)
 		exit_status = parent_waits(&inf->pids_llist, \
 											inf->last_pid, inf->last_cmd_type);
-	else
-		return (free_t_infos(inf), printerr("minishell: %s: %s: exec failure", \
-												__FILE__, __FUNCTION__), ERR);
+	// else
+	// 	return (free_t_infos(inf), printerr("minishell: %s: %s: exec failure", \
+	// 											__FILE__, __FUNCTION__), 42);
 	return (free_t_infos(inf), exit_status);
 }

@@ -6,13 +6,13 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:32:10 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/13 08:05:32 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 20:02:11 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static t_minishell	*init(char **env, char *pwd, int *adr_int)
+static t_minishell	*init(char **env, char *pwd)
 {
 	t_minishell	*minishell;
 
@@ -26,7 +26,7 @@ static t_minishell	*init(char **env, char *pwd, int *adr_int)
 	minishell->std_fds[0] = -1;
 	minishell->std_fds[1] = -1;
 	minishell->paths = NULL;
-	minishell->exit_status = adr_int;
+	minishell->exit_status = 0;
 	minishell->hidden_env = NULL;
 	minishell->exportList = init_export_list(minishell->env);
 	merge_sort(minishell->exportList);
@@ -49,7 +49,7 @@ int	main(int ac, char **av, char **env)
 		return (write(STDERR_FILENO, \
 								"err: case not asked by subject.\n", 32), 1);
 	exit_status = 0;
-	minishell = init(env, getcwd(buffer, 4096), &exit_status);
+	minishell = init(env, getcwd(buffer, 4096));
 	if (!minishell)
 		return (1);
 	if (save_std_fds(minishell->std_fds) == -1)
@@ -58,6 +58,7 @@ int	main(int ac, char **av, char **env)
 	if (ft_close_saved_std_fds(minishell->std_fds) == -1)
 		return (ERR_PRIM);
 	rl_clear_history();
+	exit_status = minishell->exit_status;
 	free_t_minishell(&minishell);
 	return (exit_status);
 }

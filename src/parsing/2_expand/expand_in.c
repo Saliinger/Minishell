@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_in.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:02:11 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/10 12:52:19 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/13 20:10:45 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,10 @@ char	*expand(t_minishell *minishell, char *name)
 {
 	char			*res;
 	t_export_list	*data;
-	int				*exit;
 
 	if (name[0] == '$' && name[1] == '?' && name[2] == '\0')
 	{
-		exit = minishell->exit_status;
-		res = ft_itoa(*exit);
+		res = ft_itoa(minishell->exit_status);
 	}
 	else if (ft_strlen(name) == 1 && *name == '$')
 		res = safe_strdup("$", ALLOC_COMMAND);

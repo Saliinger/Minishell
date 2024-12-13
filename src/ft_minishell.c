@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 03:21:06 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/12/13 08:53:13 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 20:04:56 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static int	get_line(char **line, char *prompt, t_minishell *m)
 	if (g_sig == SIGINT)
 	{
 		g_sig = 0;
-		m->exit_status[0] = 130;
+		m->exit_status = 130;
 	}
 	if (*line == NULL)
 		return (free(prompt), EXIT_EOF);
 	else if ((*line)[0] == '\0')
 	{
-		m->exit_status[0] = 0;
+		m->exit_status = 0;
 	}
 	else
 		add_history(*line);
@@ -55,7 +55,7 @@ static void	process_input_line(char **line, t_minishell *m)
 										AINSI_BLUE, AINSI_RESET, c);
 	}
 	else
-		m->exit_status[0] = ft_exec(&c, m);
+		m->exit_status = ft_exec(&c, m);
 }
 
 int	ft_minishell(t_minishell *m)
@@ -75,6 +75,6 @@ int	ft_minishell(t_minishell *m)
 		else if (*line)
 			process_input_line(&line, m);
 		if (restore_std_fds(m->std_fds) == -1)
-			return (m->exit_status[0] = ERR);
+			return (m->exit_status = ERR);
 	}
 }

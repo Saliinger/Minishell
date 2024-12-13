@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:53 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/12/13 18:01:56 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 20:33:49 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static int	open_cmd_fd(t_redir *rd, int *fds_last_redir)
 
 	type = rd->type;
 	if (type == ERR)
-		return (printerr("minishell: %s: ambigious redirect\n", rd->redir), 1);
+		return (printerr("minishell: %s: err redirect\n", rd->redir), 1);
 	else if (type == R_IN_FILE || type == R_IN_HEREDOC \
 													|| type == R_IN_HEREDOC_Q)
 	{

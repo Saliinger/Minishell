@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:39:30 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/12/13 18:11:17 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 21:00:56 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static bool	is_builtin(int id)
 {
+	if (id == HEREDOC_FILENO)
+		return (true);
 	if (id >= BUILTIN_ID_MIN)
 	{
 		if (id <= BUILTIN_ID_MAX)
@@ -29,7 +31,7 @@ static bool	is_builtin(int id)
 
 static bool	is_extern(int id)
 {
-	if (id == 0 || id == MINISHELL_ID)
+	if (id == 0 || id == MINISHELL_ID || id == HEREDOC_FILENO)
 		return (true);
 	return (false);
 }
@@ -49,9 +51,9 @@ static void	exec(t_command_exec *c, t_minishell *m, t_infos *i, bool is_piped)
 		if (apply_redirections(c, i))
 		{
 			printerr("%s: %d: err applying redir\n", __FILE__, __LINE__);
-			m->exit_status[0] = 1;
+			m->exit_status = 1;
 		}
-		m->exit_status[0] = exec_builtin(c, m, i);
+		m->exit_status = exec_builtin(c, m, i);
 	}
 	else if (is_piped == true || is_extern(c->cmd_id))
 		i->last_pid = exec_extern(c, m, i);
@@ -59,12 +61,12 @@ static void	exec(t_command_exec *c, t_minishell *m, t_infos *i, bool is_piped)
 	{
 		printerr("minishell: %s: %d: parsing err: unknown type ? = %d \n", \
 												__FILE__, __LINE__, c->cmd_id);
-		m->exit_status[0] = 1;
+		m->exit_status = 1;
 	}
 	if (restore_std_fds(m->std_fds) == -1)
 	{
 		printerr("%s: %d: err restore std fds\n", __FILE__, __LINE__);
-		m->exit_status[0] = 1;
+		m->exit_status = 1;
 	}
 }
 
@@ -94,10 +96,13 @@ int	exec_loop(t_command_exec **cmds, t_minishell *m, t_infos *i)
 	{
 		next = c->next;
 		err = open_cmd_fds(c, c->redir_fds);
+		i->last_cmd_type = CMD_BUILTIN;
 		if (!err)
 		{
-			if (c->cmd_args && c->cmd_args[0])
+			if ((c->cmd_args && c->cmd_args[0]) || c->cmd_id == HEREDOC_FILENO)
 				exec(c, m, i, is_piped);
+			else
+				m->exit_status = 1;
 		}
 		free_t_command_exec_node(&c);
 		c = next;

@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:14:31 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/12/13 08:52:23 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 20:29:34 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,9 @@ int	ft_exec(t_command **old, t_minishell *m)
 		return (printerr("%s: %d: error: failed reparsing", \
 											__FILE__, __LINE__), ERR_PRIM);
 	if (resolve_all_heredocs(new, m) != EXIT_SUCCESS)
-		return (print_cmd_node(new, "err resolving heredocs"), \
-					printerr("%s: %d: error resovling the heredocs", \
+		return ( printerr("%s: %d: error resovling the heredocs", \
 													__FILE__, __LINE__), ERR);
-	//print_cmd_nodes(new, "resolved heredocs");
+	print_cmd_nodes(new, "resolved heredocs");
 	if (create_all_pipes(i.cmd_count, &i.pipes) != EXIT_SUCCESS)
 		return (printerr("%s: %d: err piping.\n", __FILE__, __LINE__));
 	exit_status = exec_loop(&new, m, &i);

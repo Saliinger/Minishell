@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:50 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 04:03:22 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 20:03:15 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_minishell
     t_export_list       **env_node;
 	char				**hidden_env;
 	int					std_fds[2];
-	int					*exit_status;		//don't free me.
+	int					exit_status;
 	char				**hidden_path;
 	char				**paths;
 	char				*pwd;
