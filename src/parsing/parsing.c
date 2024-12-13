@@ -20,13 +20,17 @@ t_command	*parsing(char *str, t_minishell *minishell)
     str = tiny_expand(str, minishell);
     current = command_init(str);
 	temp = current;
+	ft_print(current->arg, 0);
 	while (temp)
 	{
 		temp->arg = relexer(temp->arg);
 		temp->redirection = extract_redir(temp->arg);
 		temp->clean_arg = clean_arg(temp->arg);
-		temp->clean_arg = expand_in(temp->clean_arg, minishell);
-		temp->clean_arg = remove_quote(temp->clean_arg);
+		if (temp->clean_arg)
+		{
+			temp->clean_arg = expand_in(temp->clean_arg, minishell);
+			temp->clean_arg = remove_quote(temp->clean_arg);
+		}
 		temp = temp->subcommand;
 	}
     return (current);
