@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:54:16 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/13 10:14:19 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 10:30:01 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	check_name(char **arg)
 			j++;
 		}
 		free(name);
-		if (name[i])
+		if (arg[i])
 			i++;
 	}
 	return (true);
