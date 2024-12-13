@@ -26,5 +26,5 @@ int	ft_env(t_minishell *minishell)
 		printf("%s\n", minishell->env[i]);
 		i++;
 	}
-    exit(0);
+    return(0);
 }

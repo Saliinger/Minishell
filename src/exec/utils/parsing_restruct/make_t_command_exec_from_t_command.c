@@ -43,6 +43,8 @@ static int	copy_command_args(char **old_args, char ***new_args)
 	int	i;
 
 	i = 0;
+	if (!old_args)
+		return (EXIT_SUCCESS);
 	while (old_args[i])
 		i++;
 	*new_args = malloc((i + 1) * sizeof(char *));

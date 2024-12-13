@@ -24,5 +24,5 @@ int	ft_echo(t_command_exec *command)
 		error = echo_print(cmd, false, i);
 	else
 		error = echo_print(cmd, true, i);
-	exit (error);
+	return (error);
 }
