@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 03:19:46 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 05:00:11 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 07:28:03 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	index_nodes(t_command_exec *c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (c)

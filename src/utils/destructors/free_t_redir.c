@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:45:03 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/10/31 15:02:02 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 07:58:29 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	ft_free(void **add)
  */
 void	ft_free_t_redir(t_redir **r)
 {
-	t_redir *tmp;
-	t_redir *rd;
+	t_redir	*tmp;
+	t_redir	*rd;
 
 	if (!r || !*r)
 		return ;

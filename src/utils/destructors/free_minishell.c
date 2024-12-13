@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:35:20 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/07 10:41:54 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/13 08:01:12 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	free_minishell(t_minishell *minishell)
 		ft_free_tab(minishell->hidden_env);
 	if (minishell->hidden_env)
 		ft_free_tab(minishell->hidden_env);
-	//	if (minishell->hd)
-	//		ft_free_tab(minishell->hd);
 	if (minishell->exportList)
 		free_export_list(minishell->exportList);
 	free(minishell);

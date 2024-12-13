@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 04:53:58 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/28 23:44:04 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 08:10:16 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <readline/history.h>
 # include "imports.h"
 
-typedef struct s_command_exec t_command_exec;
-typedef struct s_redir t_redir;
+typedef struct	s_command_exec t_command_exec;
+typedef struct	s_redir t_redir;
 
 void	print_cmd_node(t_command_exec *c, char *display_name);
 void	print_cmd_nodes(t_command_exec *c, char *display_name);

@@ -29,16 +29,6 @@
 }
 
 {
-   <supp definite: readline malloc suppression>
-   Memcheck:Leak
-   match-leak-kinds: definite
-   fun:malloc
-	...
-   fun:readline
-	...
-}
-
-{
    <supp reachable: add_history malloc reachable>
    Memcheck:Leak
    match-leak-kinds: reachable

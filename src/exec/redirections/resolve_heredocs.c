@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 02:17:28 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/11/29 00:57:38 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 07:37:17 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,16 @@
 
 /**
  * brief :  resolves this heredoc and puts it in cmd->last_heredoc_str.
- * frees cmd->last_heredoc_str and sets this heredoc instead if was already occupied.
+ * frees cmd->last_heredoc_str and sets this heredoc
+ * 											 instead if was already occupied.
  */
 static int	resolve_heredoc(t_command_exec *cmd, t_minishell *m, t_redir *rd)
 {
 	int		err;
-	bool	does_it_expand;
 
 	err = 0;
-	if (rd->type == R_IN_HEREDOC)
-		does_it_expand = true;
-	if (rd->type == R_IN_HEREDOC_Q)
-		does_it_expand = false;
 	ft_free((void **) &cmd->last_heredoc_str);
-	cmd->last_heredoc_str = heredoc(rd->redir, m, does_it_expand, &err);
+	cmd->last_heredoc_str = heredoc(rd->redir, m);
 	if (err)
 		return (ERR);
 	return (EXIT_SUCCESS);
@@ -44,16 +40,12 @@ static int	resolve_node_heredocs(t_command_exec *cmd, t_minishell *m)
 
 	rd = cmd->redir_files_llist;
 	err = 0;
-	while(rd)
+	while (rd)
 	{
 		if (rd->type == R_IN_HEREDOC || rd->type == R_IN_HEREDOC_Q)
 			err = resolve_heredoc(cmd, m, rd);
 		if (err)
-		{
-			printerr("failed resolving this heredoc : \n");
-			//print_redir(rd);
-			return (ERR);
-		}
+			return (printerr("failed resolving a heredoc.\n"), ERR);
 		rd = rd->next;
 	}
 	return (EXIT_SUCCESS);
@@ -68,19 +60,13 @@ int	resolve_all_heredocs(t_command_exec *cmds, t_minishell *m)
 {
 	int		err;
 
-	if (set_signals_to_heredoc() == -1)
-	 	return (printerr("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
-	while(cmds)
+	while (cmds)
 	{
 		err = resolve_node_heredocs(cmds, m);
 		if (err)
-		{
-			print_cmd_node(cmds, "failed resolving this node's heredocs\n");
-			return (ERR);
-		}
+			return (printerr("failed resolving this cmd %d's heredocs\n", \
+															cmds->index), ERR);
 		cmds = cmds->next;
 	}
-	if (set_signals_to_minishell() == -1)
-	 	return (printerr("%s: %d: err", __FILE__, __LINE__), ERR_PRIM);
 	return (EXIT_SUCCESS);
 }

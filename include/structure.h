@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:06:50 by anoukan           #+#    #+#             */
-/*   Updated: 2024/11/29 04:03:22 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 08:18:19 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_command
 	char				**arg;
 	char				**clean_arg;
 	int					id;
-	struct s_command	*subcommand; 
+	struct s_command	*subcommand;
 	bool				builtin;
 	bool				pipe;
 	int					pipe_position;
@@ -78,16 +78,16 @@ typedef struct s_command
 
 typedef struct s_export_list
 {
-    char *name;
-    char                    *value;
-    struct s_export_list *next;
-}               t_export_list;
+	char					*name;
+	char					*value;
+	struct s_export_list	*next;
+}	t_export_list;
 
 typedef struct s_minishell
 {
 	char				**env;
 	int					std_fds[2];
-	int					*exit_status;		//don't free me.
+	int					*exit_status;
 	char				**hidden_env;
 	char				**hidden_path;
 	char				**paths;
@@ -95,7 +95,7 @@ typedef struct s_minishell
 	char				*old_pwd;
 	int					res_last_command;
 	char				**hd;
-    t_export_list       **exportList;
+	t_export_list		**exportList;
 }						t_minishell;
 
 #endif
