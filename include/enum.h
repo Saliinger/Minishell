@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:07:08 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/13 08:16:44 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/12/13 09:26:51 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 typedef enum e_redir
 {
-	R_IN_FILE= 1,
+	R_IN_FILE= 2,
 	R_IN_HEREDOC,
 	R_IN_HEREDOC_Q,
 	R_OUT_FILE_TRUNC,
