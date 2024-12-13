@@ -6,7 +6,7 @@
 /*   By: ekrebs <ekrebs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:22:20 by ekrebs            #+#    #+#             */
-/*   Updated: 2024/12/13 08:18:55 by ekrebs           ###   ########.fr       */
+/*   Updated: 2024/11/29 01:21:39 by ekrebs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <signal.h>
 # include <unistd.h>
 
-# define NO_SIG 0
+#define NO_SIG 0
 
 extern volatile sig_atomic_t	g_sig;
 

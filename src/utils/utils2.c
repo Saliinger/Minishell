@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:33:22 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/11 00:25:28 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 17:43:43 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,21 @@ int	in_quote(int status, char type)
 	return (status);
 }
 
-static void	copy_tab(char **tab, char **res, char *to_add)
+static void	copy_tab(char **tab, char **res, char *to_add, enum e_action action)
 {
 	int	i;
 
 	i = 0;
 	while (tab[i])
 	{
-		res[i] = ft_strdup(tab[i]);
+		res[i] = safe_strdup(tab[i], action);
 		i++;
 	}
-	res[i] = ft_strdup(to_add);
+	res[i] = safe_strdup(to_add, action);
 	res[i + 1] = NULL;
 }
 
-char	**add_line(char **tab, char *to_add)
+char	** add_line(char **tab, char *to_add, enum e_action action)
 {
 	char	**res;
 	int		i;
@@ -47,18 +47,16 @@ char	**add_line(char **tab, char *to_add)
 		tab_size = 0;
 	else
 		tab_size = nbr_of_line(tab);
-	res = (char **)malloc(sizeof(char *) * (tab_size + 2));
+	res = (char **)safe_malloc(sizeof(char *) * (tab_size + 2), action);
 	if (!res)
 		return (ft_free_tab(tab), NULL);
 	i = 0;
 	if (tab)
-		copy_tab(tab, res, to_add);
+		copy_tab(tab, res, to_add, action);
 	else
 	{
-		res[i] = ft_strdup(to_add);
-		if (!res[i])
-			return (ft_free_tab(res), NULL);
+		res[i] = safe_strdup(to_add, action);
 		res[i + 1] = NULL;
 	}
-	return (ft_free_tab(tab), res);
+	return (res);
 }

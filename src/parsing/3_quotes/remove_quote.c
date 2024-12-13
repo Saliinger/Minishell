@@ -20,16 +20,12 @@ char	**remove_quote(char **arg)
 	int		status;
 
 	i = 0;
-	res = (char **)malloc(sizeof(char *) * (nbr_of_line(arg) + 1));
-	if (!res)
-		return (ft_free_tab(arg), NULL);
+	res = (char **)safe_malloc(sizeof(char *) * (nbr_of_line(arg) + 1), ALLOC_COMMAND);
 	while (arg[i])
 	{
 		j = 0;
 		status = 0;
-		res[i] = ft_strdup("");
-		if (!res[i])
-			return (ft_free_tab(res), ft_free_tab(arg), NULL);
+		res[i] = safe_strdup("", ALLOC_COMMAND);
 		while (arg[i][j])
 		{
 			if ((arg[i][j] == '\'' || arg[i][j] == '\"') && status == 0)
@@ -54,6 +50,5 @@ char	**remove_quote(char **arg)
 		i++;
 	}
 	res[i] = NULL;
-	ft_free_tab(arg);
 	return (res);
 }

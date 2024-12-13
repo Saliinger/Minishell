@@ -17,10 +17,10 @@ static void	add_node(t_enum_redir type, char *str, t_redir **head)
 	t_redir	*new;
 	t_redir	*temp;
 
-	new = (t_redir *)malloc(sizeof(t_redir));
+	new = (t_redir *)safe_malloc(sizeof(t_redir), ALLOC_COMMAND);
 	if (!new)
 		return ;
-	new->redir = ft_strdup(str);
+	new->redir = safe_strdup(str, ALLOC_COMMAND);
 	new->type = type;
 	new->next = NULL;
 	if (!*head)
@@ -37,13 +37,13 @@ static void	add_node(t_enum_redir type, char *str, t_redir **head)
 static t_enum_redir	get_redir_type(char *str)
 {
 	if (!ft_strncmp(str, ">>", 2))
-		return (R_OUT_FILE_APPEND);
+		return (R_APPEND);
 	else if (!ft_strncmp(str, ">", 1))
-		return (R_OUT_FILE_TRUNC);
+		return (R_OUTPUT);
 	else if (!ft_strncmp(str, "<<", 2))
-		return (R_IN_HEREDOC);
+		return (R_HEREDOC);
 	else if (!ft_strncmp(str, "<", 1))
-		return (R_IN_FILE);
+		return (R_INPUT);
 	return (R_INVALID);
 }
 

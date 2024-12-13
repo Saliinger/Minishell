@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:02:11 by anoukan           #+#    #+#             */
-/*   Updated: 2024/12/11 00:17:26 by anoukan          ###   ########.fr       */
+/*   Updated: 2024/12/10 12:52:19 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*add_expand(char *s, char *to_add)
 	int		i;
 
 	i = 0;
-	res = ft_strdup("");
+	res = safe_strdup("", ALLOC_COMMAND);
 	while (s[i])
 	{
 		res = add_char(res, s[i]);
@@ -53,7 +53,6 @@ char	*add_expand(char *s, char *to_add)
 			i++;
 		}
 	}
-	free(s);
 	return (res);
 }
 
@@ -66,19 +65,18 @@ char	*expand(t_minishell *minishell, char *name)
 	if (name[0] == '$' && name[1] == '?' && name[2] == '\0')
 	{
 		exit = minishell->exit_status;
-		res = ft_itoa(*exit);
+		res = ft_itoa_safe(*exit);
 	}
 	else if (ft_strlen(name) == 1 && *name == '$')
-		res = ft_strdup("$");
+		res = safe_strdup("$", ALLOC_COMMAND);
 	else
 	{
 		data = find_export_node(name + 1, minishell->exportList);
 		if (data)
-			res = ft_strdup(data->value);
+			res = safe_strdup(data->value, ALLOC_COMMAND);
 		else
 			return (NULL);
 	}
-	free(name);
 	return (res);
 }
 
@@ -91,7 +89,7 @@ char	*new_line(t_minishell *minishell, char *line)
 	char	*extend;
 
 	i = 0;
-	res = ft_strdup("");
+	res = safe_strdup("", ALLOC_COMMAND);
 	status = 0;
 	while (line[i])
 	{
@@ -125,13 +123,11 @@ char	**expand_in(char **arg, t_minishell *minishell)
 		if (check_nbr_var(arg[i]) > 0)
 		{
 			to_add = new_line(minishell, arg[i]);
-			res = add_line(res, to_add);
-			free(to_add);
+			res = add_line(res, to_add, ALLOC_COMMAND);
 		}
 		else
-			res = add_line(res, arg[i]);
+			res = add_line(res, arg[i], ALLOC_COMMAND);
 		i++;
 	}
-	ft_free_tab(arg);
 	return (res);
 }
